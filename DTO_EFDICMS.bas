@@ -111,6 +111,9 @@ Public CamposD500 As CamposRegD500
 Public CamposD510 As CamposRegD510
 Public CamposD530 As CamposRegD530
 Public CamposD590 As CamposRegD590
+Public CamposD700 As CamposRegD700
+Public CamposD730 As CamposRegD730
+Public CamposD731 As CamposRegD731
 Public CamposD990 As CamposRegD990
 
 
@@ -558,7 +561,7 @@ Public Type CamposReg0500
     DT_ALT As String
     COD_NAT_CC As String
     IND_CTA As String
-    NÍVEL As String
+    Nï¿½VEL As String
     COD_CTA As String
     NOME_CTA As String
         
@@ -2124,6 +2127,79 @@ Public Type CamposRegD590
     
 End Type
 
+Public Type CamposRegD700
+
+    REG As String
+    Arquivo As String
+    CHV_REG As String
+    CHV_PAI As String
+    CHV_PAI_Fiscal As String
+    CHV_PAI_CONTRIBUICOES As String    
+    IND_OPER As String
+    IND_EMIT As String
+    COD_PART As String
+    COD_MOD As String
+    COD_SIT As String
+    SER As String
+    NUM_DOC As String
+    DT_DOC As String
+    DT_E_S As String
+    VL_DOC As String
+    VL_DESC As String
+    VL_SERV As String
+    VL_SERV_NT As String
+    VL_TERC As String
+    VL_DA As String
+    VL_BC_ICMS As String
+    VL_ICMS As String
+    COD_INF As String
+    VL_PIS As String
+    VL_COFINS As String
+    CHV_DOCE As String
+    FIN_DOCE As String
+    TIP_FAT As String
+    COD_MOD_DOC_REF As String
+    CHV_DOCE_REF As String
+    HASH_DOC_REF As String
+    SER_DOC_REF As String
+    NUM_DOC_REF As String
+    MES_DOC_REF As String
+    COD_MUN_DEST As String
+    DED As String
+
+End Type
+
+Public Type CamposRegD730
+
+    REG As String
+    Arquivo As String
+    CHV_REG As String
+    CHV_PAI As String
+    CHV_PAI_Fiscal As String
+    CHV_PAI_CONTRIBUICOES As String    
+    CST_ICMS As String
+    CFOP As String
+    ALIQ_ICMS As String
+    VL_OPR As String
+    VL_BC_ICMS As String
+    VL_ICMS As String
+    VL_RED_BC As String
+    COD_OBS As String
+
+End Type
+
+Public Type CamposRegD731
+
+    REG As String
+    Arquivo As String
+    CHV_REG As String
+    CHV_PAI As String
+    CHV_PAI_Fiscal As String
+    CHV_PAI_CONTRIBUICOES As String    
+    VL_FCP_OP As String
+
+End Type
+
 Public Type CamposRegD990
     
     REG As String
@@ -2304,11 +2380,11 @@ Public Type CamposRegE210
     VL_RESSARC_ST As String
     VL_OUT_CRED_ST As String
     VL_AJ_CREDITOS_ST As String
-    VL_RETENÇAO_ST As String
+    VL_RETENï¿½AO_ST As String
     VL_OUT_DEB_ST As String
     VL_AJ_DEBITOS_ST As String
     VL_SLD_DEV_ANT_ST As String
-    VL_DEDUÇÕES_ST As String
+    VL_DEDUï¿½ï¿½ES_ST As String
     VL_ICMS_RECOL_ST As String
     VL_SLD_CRED_ST_TRANSPORTAR As String
     DEB_ESP_ST As String
@@ -3317,7 +3393,7 @@ Public Type CamposReg1391
     PERDA As String
     CONS As String
     SAI_ANI_HID As String
-    SAÍDAS As String
+    SAï¿½DAS As String
     ESTQ_FIN As String
     ESTQ_INI_MEL As String
     PROD_DIA_MEL As String
