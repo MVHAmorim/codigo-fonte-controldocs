@@ -20,7 +20,7 @@ Dim Status As String
         Exit Sub
     End If
     
-    'Registra acionamento de botão do usuário
+    'Registra acionamento de botï¿½o do usuï¿½rio
     Call RegistrarAcionamento(control.id)
     
     'Verifica quantiade de acionamentos para envio dos dados
@@ -93,7 +93,7 @@ Dim Status As String
         Case "btnAutenticarUsuario"
             If EmailAssinante <> "" And Not Funcoes.ValidarEmail(EmailAssinante) Then
                 Call FuncoesControlDocs.ResetarAssinatura
-                MsgBox "Informe um e-mail válido para autenticar sua assinatura.", vbExclamation, "Email não informado ou inválido"
+                MsgBox "Informe um e-mail vï¿½lido para autenticar sua assinatura.", vbExclamation, "Email nï¿½o informado ou invï¿½lido"
                 relGestaoAssinatura.Range("email_cliente").Activate
                 GoTo Sair:
             End If
@@ -353,7 +353,7 @@ Dim Status As String
                 Call Util.FiltrarRegistros(regD100, regD190, "CHV_REG", "CHV_PAI_FISCAL")
                 GoTo Sair:
             
-            'Filtros D101 Contribuições
+            'Filtros D101 Contribuiï¿½ï¿½es
             Case "btnListarRegD101ContrD100"
                 Call Util.FiltrarRegistros(regD101_Contr, regD100, "CHV_PAI_FISCAL", "CHV_REG")
                 GoTo Sair:
@@ -450,7 +450,19 @@ Dim Status As String
                 If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:
                 Call FuncoesXML.ImportarXMLsC100("Arquivo")
                 GoTo Sair:
+
+            Case "btnImportarLoteD700"
+                If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:                
+                Dim ImportadorNFComLote As New AssistenteImportacaoNFCom
+                Call ImportadorNFComLote.ImportarNFCom("Lote")
+                GoTo Sair:
                 
+            Case "btnImportarArquivoD700"
+                If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:
+                Dim ImportadorNFComArq As New AssistenteImportacaoNFCom
+                Call ImportadorNFComArq.ImportarNFCom("Arquivo")
+                GoTo Sair:
+
             Case "btnImportarLoteC800Fiscal"
                 If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:
                 Call FuncoesXML.ImportarRegistrosCFeXML("Lote")
@@ -645,11 +657,11 @@ Dim Status As String
         
     Else
         
-        Msg = "O seu nível de assinatura não dá acesso a esta funcionalidade." & vbCrLf & vbCrLf
-        Msg = Msg & "Com o plano Básico, você desbloqueia o acesso aos recursos para trabalhar com os arquivos do SPED Fiscal." & vbCrLf & vbCrLf
+        Msg = "O seu nï¿½vel de assinatura nï¿½o dï¿½ acesso a esta funcionalidade." & vbCrLf & vbCrLf
+        Msg = Msg & "Com o plano Bï¿½sico, vocï¿½ desbloqueia o acesso aos recursos para trabalhar com os arquivos do SPED Fiscal." & vbCrLf & vbCrLf
         Msg = Msg & "Clique em SIM para fazer o upgrade do seu plano agora mesmo!"
         
-        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessário Upgrade de Plano")
+        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessï¿½rio Upgrade de Plano")
         If vbResult = vbYes Then Call FuncoesLinks.AbrirUrl(urlAssinaturaEmpresarialMensal)
         
         GoTo Sair:
@@ -808,11 +820,11 @@ Dim Status As String
         
     Else
         
-        Msg = "O seu nível de assinatura não dá acesso a esta funcionalidade." & vbCrLf & vbCrLf
-        Msg = Msg & "Com o plano Plus, você desbloqueia o acesso aos recursos para trabalhar com os arquivos do SPED Contribuições." & vbCrLf & vbCrLf
+        Msg = "O seu nï¿½vel de assinatura nï¿½o dï¿½ acesso a esta funcionalidade." & vbCrLf & vbCrLf
+        Msg = Msg & "Com o plano Plus, vocï¿½ desbloqueia o acesso aos recursos para trabalhar com os arquivos do SPED Contribuiï¿½ï¿½es." & vbCrLf & vbCrLf
         Msg = Msg & "Clique em SIM para fazer o upgrade do seu plano agora mesmo!"
         
-        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessário Upgrade de Plano")
+        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessï¿½rio Upgrade de Plano")
         If vbResult = vbYes Then Call FuncoesLinks.AbrirUrl(urlAssinaturaEmpresarialMensal)
         GoTo Sair:
         
@@ -820,7 +832,7 @@ Dim Status As String
     
     If NivelPlano >= 3 Then
         
-'##----->> Botões de acesso aos Relatórios Inteligentes
+'##----->> Botï¿½es de acesso aos Relatï¿½rios Inteligentes
         If control.id Like "btnAssistenteFiscal*" Or control.id Like "btnAssistenteApuracao*" _
             Or control.id Like "btnDivergencias*" Or control.id Like "btnMapa*" Then
             'Or control.id Like "btnTributacao*"
@@ -841,7 +853,7 @@ Dim Status As String
         
         Select Case control.id
             
-'##----->> Funcionalidades do Assistente de Apuração do ICMS
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o do ICMS
             Case "btnGerarRelatorioICMS"
                 Call FuncoesAssistentesInteligentes.GerarRelatorioApuracaoICMS
                 GoTo Sair:
@@ -900,7 +912,7 @@ Dim Status As String
                 Call Util.FiltrarRegistros(assApuracaoICMS, regC101, "CHV_PAI_FISCAL", "CHV_PAI_FISCAL")
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Apuração do IPI
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o do IPI
             Case "btnGerarRelatorioIPI"
                 Call FuncoesAssistentesInteligentes.GerarRelatorioApuracaoIPI
                 GoTo Sair:
@@ -945,7 +957,7 @@ Dim Status As String
                 Call Util.FiltrarRegistros(assApuracaoIPI, relInteligenteDivergencias, Array("CHV_NFE", "CFOP"), Array("CHV_NFE", "CFOP_SPED"))
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Apuração do PIS e COFINS
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o do PIS e COFINS
             Case "btnGerarRelatorioPISCOFINS"
                 Call FuncoesAssistentesInteligentes.GerarRelatorioApuracaoPISCOFINS
                 GoTo Sair:
@@ -991,7 +1003,7 @@ Dim Status As String
                 Call Util.FiltrarRegistros(assApuracaoPISCOFINS, relInteligenteDivergencias, "CHV_NFE", "CHV_NFE")
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Divergências de Notas
+'##----->> Funcionalidades do Assistente de Divergï¿½ncias de Notas
             Case "btnGerarRelatorioDivergenciasNotas"
                 Call DivergenciasNotas.GerarComparativoXMLSPED
                 GoTo Sair:
@@ -1020,7 +1032,7 @@ Dim Status As String
                 Call Util.FiltrarRegistros(relDivergenciasNotas, relDivergenciasProdutos, "CHV_NFE", "CHV_NFE")
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Divergências de Produtos
+'##----->> Funcionalidades do Assistente de Divergï¿½ncias de Produtos
             Case "btnGerarRelatorioDivergenciasProdutos"
                 Call DivergenciasProd.GerarComparativoXMLSPED
                 GoTo Sair:
@@ -1045,18 +1057,18 @@ Dim Status As String
                 Call Util.FiltrarRegistros(relDivergenciasProdutos, relDivergenciasNotas, "CHV_NFE", "CHV_NFE")
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Tributação do ICMS
+'##----->> Funcionalidades do Assistente de Tributaï¿½ï¿½o do ICMS
                 
             Case "btnImportarTributacaoICMS"
                 Call Assistente.Tributario.ICMS.ImportarTributacaoICMS
                 GoTo Sair:
                 
             Case "btnExportarTributacaoICMS"
-                Call Util.ExportarDadosRelatorio(assTributacaoICMS, "Tributação ICMS")
+                Call Util.ExportarDadosRelatorio(assTributacaoICMS, "Tributaï¿½ï¿½o ICMS")
                 GoTo Sair:
                 
             Case "btnGerarModTributacaoICMS"
-                Call Util.GerarModeloRelatorio(assTributacaoICMS, "Tributação ICMS")
+                Call Util.GerarModeloRelatorio(assTributacaoICMS, "Tributaï¿½ï¿½o ICMS")
                 GoTo Sair:
                 
             Case "btnGerarRelatorioTributacaoICMS"
@@ -1085,18 +1097,18 @@ Dim Status As String
                 
 
 
-'##----->> Funcionalidades do Assistente de Tributação do IPI
+'##----->> Funcionalidades do Assistente de Tributaï¿½ï¿½o do IPI
                 
             Case "btnImportarTributacaoIPI"
                 Call Assistente.Tributario.IPI.ImportarTributacaoIPI
                 GoTo Sair:
                 
             Case "btnExportarTributacaoIPI"
-                Call Util.ExportarDadosRelatorio(assTributacaoIPI, "Tributação PIS-COFINS")
+                Call Util.ExportarDadosRelatorio(assTributacaoIPI, "Tributaï¿½ï¿½o PIS-COFINS")
                 GoTo Sair:
                 
             Case "btnGerarModTributacaoIPI"
-                Call Util.GerarModeloRelatorio(assTributacaoIPI, "Tributação PIS-COFINS")
+                Call Util.GerarModeloRelatorio(assTributacaoIPI, "Tributaï¿½ï¿½o PIS-COFINS")
                 GoTo Sair:
                 
             Case "btnGerarRelatorioTributacaoIPI"
@@ -1124,18 +1136,18 @@ Dim Status As String
                 GoTo Sair:
                 
                 
-'##----->> Funcionalidades do Assistente de Tributação do PIS/COFINS
+'##----->> Funcionalidades do Assistente de Tributaï¿½ï¿½o do PIS/COFINS
                 
             Case "btnImportarTributacaoPISCOFINS"
                 Call Assistente.Tributario.PIS_COFINS.ImportarTributacaoPISCOFINS
                 GoTo Sair:
                 
             Case "btnExportarTributacaoPISCOFINS"
-                Call Util.ExportarDadosRelatorio(assTributacaoPISCOFINS, "Tributação PIS-COFINS")
+                Call Util.ExportarDadosRelatorio(assTributacaoPISCOFINS, "Tributaï¿½ï¿½o PIS-COFINS")
                 GoTo Sair:
                 
             Case "btnGerarModTributacaoPISCOFINS"
-                Call Util.GerarModeloRelatorio(assTributacaoPISCOFINS, "Tributação PIS-COFINS")
+                Call Util.GerarModeloRelatorio(assTributacaoPISCOFINS, "Tributaï¿½ï¿½o PIS-COFINS")
                 GoTo Sair:
                 
             Case "btnGerarRelatorioTributacaoPISCOFINS"
@@ -1174,12 +1186,12 @@ Dim Status As String
                 Call FuncoesAssistentesInteligentes.AtualizarRegistrosTributacao
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Apuração de Assistente de Custos e Preços
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o de Assistente de Custos e Preï¿½os
             Case "btnGerarCustosPrecos"
                 Call FuncoesAssistentesInteligentes.GerarRelatorioCustosPrecos
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Apuração de Estoque
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o de Estoque
             Case "btnGerarEstoque"
                 Call FuncoesAssistentesInteligentes.GerarRelatorioEstoque
                 GoTo Sair:
@@ -1200,7 +1212,7 @@ Dim Status As String
                 Call FuncoesAssistentesInteligentes.AtualizarRegistrosEstoque
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Apuração de Contas
+'##----->> Funcionalidades do Assistente de Apuraï¿½ï¿½o de Contas
             Case "btnImportarC140Lote"
                 If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:
                 Call FuncoesXML.ImportarRegistrosC140eFilhos("Lote")
@@ -1228,7 +1240,7 @@ Dim Status As String
                 GoTo Sair:
             
 
-'##----->> Funcionalidades do Assistente de Inventário
+'##----->> Funcionalidades do Assistente de Inventï¿½rio
             Case "btnImportarInventario"
                 If Not Funcoes.CarregarDadosContribuinte Then GoTo Sair:
                 Call FuncoesAssistentesInteligentes.ImportarInventarioFisico
@@ -1260,7 +1272,7 @@ Dim Status As String
                 Call FuncoesFiltragem.FiltrarInconsistencias(ActiveSheet)
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Analista de Apuração do ICMS
+'##----->> Funcionalidades do Analista de Apuraï¿½ï¿½o do ICMS
             Case "btnGerarAnaliseICMS"
                 Call AnalistaICMS.GerarResumoApuracaoICMS
                 GoTo Sair:
@@ -1269,7 +1281,7 @@ Dim Status As String
                 Call AnalistaICMS.FiltrarRegistros
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Analista de Apuração do PIS e COFINS
+'##----->> Funcionalidades do Analista de Apuraï¿½ï¿½o do PIS e COFINS
             Case "btnGerarAnalisePISCOFINS"
                 Call AnalistaPISCOFINS.GerarResumoApuracaoPISCOFINS
                 GoTo Sair:
@@ -1282,11 +1294,11 @@ Dim Status As String
         
     Else
         
-        Msg = "O seu nível de assinatura não dá acesso a esta funcionalidade." & vbCrLf & vbCrLf
-        Msg = Msg & "Com o plano Premium, você desbloqueia o acesso a todas as nossas funcionalidades de relatórios inteligentes e maximiza sua produtividade." & vbCrLf & vbCrLf
+        Msg = "O seu nï¿½vel de assinatura nï¿½o dï¿½ acesso a esta funcionalidade." & vbCrLf & vbCrLf
+        Msg = Msg & "Com o plano Premium, vocï¿½ desbloqueia o acesso a todas as nossas funcionalidades de relatï¿½rios inteligentes e maximiza sua produtividade." & vbCrLf & vbCrLf
         Msg = Msg & "Clique em SIM para fazer o upgrade do seu plano agora mesmo!"
         
-        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessário Upgrade de Plano")
+        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessï¿½rio Upgrade de Plano")
         If vbResult = vbYes Then Call FuncoesLinks.AbrirUrl(urlAssinaturaEmpresarialMensal)
         GoTo Sair:
         
@@ -1294,7 +1306,7 @@ Dim Status As String
         
     If NivelPlano >= 4 Then
         
-'##----->> Botões de acesso aos recursos do plano Enterprise
+'##----->> Botï¿½es de acesso aos recursos do plano Enterprise
         Select Case True
         
             Case control.id Like "btnOportunidades*", control.id Like "btnInventario*", control.id Like "btnExclusao*"
@@ -1334,17 +1346,17 @@ Dim Status As String
                 Call Oportunidades.GerarRelatorioOportunidades(False, "PISCOFINS")
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente Analítico de Movimentação de Estoque
+'##----->> Funcionalidades do Assistente Analï¿½tico de Movimentaï¿½ï¿½o de Estoque
             Case "btnGerarAnaliseEstoque"
                 Call Estoque.GerarRelatorioMovimentacaoEstoque
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Auditor de Inventário
+'##----->> Funcionalidades do Auditor de Inventï¿½rio
             Case "btnGerarSaldoInventario"
                 Call Inventario.GerarRelatorioSaldoInventario
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Recuperação do ICMS-ST
+'##----->> Funcionalidades do Assistente de Recuperaï¿½ï¿½o do ICMS-ST
             Case "btnGerarRelatorioExclusaoICMSST"
                 Call ExclusaoICMSST.GerarRelatorioRecuperacaoICMSST
                 GoTo Sair:
@@ -1357,7 +1369,7 @@ Dim Status As String
                 Call ExclusaoICMSST.AtualizarRegistros
                 GoTo Sair:
                 
-'##----->> Funcionalidades do Assistente de Recuperação do ICMS
+'##----->> Funcionalidades do Assistente de Recuperaï¿½ï¿½o do ICMS
             Case "btnGerarRelatorioExclusaoICMS"
                 Call ExclusaoICMS.GerarRelatorioExclusaoICMS
                 GoTo Sair:
@@ -1374,11 +1386,11 @@ Dim Status As String
         
     Else
         
-        Msg = "O seu nível de assinatura não dá acesso a esta funcionalidade." & vbCrLf & vbCrLf
-        Msg = Msg & "Com o plano Enterprise, você desbloqueia o acesso a todas as nossas funcionalidades para maximizar sua produtividade, diversificar seus serviços e aumentar sua lucratividade." & vbCrLf & vbCrLf
+        Msg = "O seu nï¿½vel de assinatura nï¿½o dï¿½ acesso a esta funcionalidade." & vbCrLf & vbCrLf
+        Msg = Msg & "Com o plano Enterprise, vocï¿½ desbloqueia o acesso a todas as nossas funcionalidades para maximizar sua produtividade, diversificar seus serviï¿½os e aumentar sua lucratividade." & vbCrLf & vbCrLf
         Msg = Msg & "Clique em SIM para fazer o upgrade do seu plano agora mesmo!"
         
-        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessário Upgrade de Plano")
+        vbResult = MsgBox(Msg, vbExclamation + vbYesNo, "Necessï¿½rio Upgrade de Plano")
         If vbResult = vbYes Then Call FuncoesLinks.AbrirUrl(urlAssinaturaEmpresarialMensal)
         GoTo Sair:
         
@@ -1405,28 +1417,28 @@ Dim Msg As String
         Select Case True
         
             Case Status = ""
-                Msg = "Assinatura não identificada!" & vbCrLf & vbCrLf
-                Msg = Msg & "Por favor, faça a autenticação para continuar aproveitando uma rotina mais rápida, prática e segura."
-                Call Util.MsgAlerta(Msg, "Assinatura Não Identificada")
+                Msg = "Assinatura nï¿½o identificada!" & vbCrLf & vbCrLf
+                Msg = Msg & "Por favor, faï¿½a a autenticaï¿½ï¿½o para continuar aproveitando uma rotina mais rï¿½pida, prï¿½tica e segura."
+                Call Util.MsgAlerta(Msg, "Assinatura Nï¿½o Identificada")
         
             Case Status = "INACTIVE"
                 Msg = "Assinatura Inativa!" & vbCrLf & vbCrLf
-                Msg = Msg & "A sua assinatura está inativa, renove sua assinatura para continuar aproveitando uma rotina mais rápida, prática e segura."
+                Msg = Msg & "A sua assinatura estï¿½ inativa, renove sua assinatura para continuar aproveitando uma rotina mais rï¿½pida, prï¿½tica e segura."
                 Call Util.MsgAlerta(Msg, "Assinatura Inativa")
         
             Case Status = "DELAYED"
                 Msg = "Assinatura Atrasada!" & vbCrLf & vbCrLf
-                Msg = Msg & "A sua assinatura está atrasada, renove sua assinatura para continuar aproveitando uma rotina mais rápida, prática e segura."
+                Msg = Msg & "A sua assinatura estï¿½ atrasada, renove sua assinatura para continuar aproveitando uma rotina mais rï¿½pida, prï¿½tica e segura."
                 Call Util.MsgAlerta(Msg, "Assinatura Atrasada")
             
             Case Status = "FINISH"
                 Msg = "Assinatura Finalizada!" & vbCrLf & vbCrLf
-                Msg = Msg & "A sua assinatura está finalizada, renove sua assinatura para continuar aproveitando uma rotina mais rápida, prática e segura."
+                Msg = Msg & "A sua assinatura estï¿½ finalizada, renove sua assinatura para continuar aproveitando uma rotina mais rï¿½pida, prï¿½tica e segura."
                 Call Util.MsgAlerta(Msg, "Assinatura Inativa")
             
             Case Status Like "CANCELLED"
                 Msg = "Assinatura Cancelada!" & vbCrLf & vbCrLf
-                Msg = Msg & "A sua assinatura está Cancelada, faça a renovação para continuar aproveitando uma rotina mais rápida, prática e segura."
+                Msg = Msg & "A sua assinatura estï¿½ Cancelada, faï¿½a a renovaï¿½ï¿½o para continuar aproveitando uma rotina mais rï¿½pida, prï¿½tica e segura."
                 Call Util.MsgAlerta(Msg, "Assinatura Cancelada")
             
         End Select

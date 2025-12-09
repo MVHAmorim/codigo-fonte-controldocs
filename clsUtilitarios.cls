@@ -13,10 +13,10 @@ Option Base 1
 Public Sub DesabilitarControles()
     
     With Application
-        .ScreenUpdating = False     'Desabilita a atualização de tela
+        .ScreenUpdating = False     'Desabilita a atualizaï¿½ï¿½o de tela
         .DisplayAlerts = False      'Desabilita as mensagens de alerta
         .EnableEvents = False       'Desativa os eventos especiais
-        .Calculation = xlManual     'Habilita o cálculo manual na planilha
+        .Calculation = xlManual     'Habilita o cï¿½lculo manual na planilha
     End With
     
 End Sub
@@ -26,8 +26,8 @@ Public Sub HabilitarControles()
     With Application
         .EnableEvents = True        'Reativa os eventos especiais
         .DisplayAlerts = True       'Reabilita as mensagens de alerta
-        .ScreenUpdating = True      'Reabilita a atualização de tela
-        .Calculation = xlAutomatic  'Habilita o cálculo automático na planilha
+        .ScreenUpdating = True      'Reabilita a atualizaï¿½ï¿½o de tela
+        .Calculation = xlAutomatic  'Habilita o cï¿½lculo automï¿½tico na planilha
         .ActiveSheet.Calculate      'Calcula a planilha ativa
     End With
     
@@ -62,7 +62,7 @@ Dim Resposta As VbMsgBoxResult
             
             Case Confirmacao = True
                 Resposta = MsgBox("Tem certeza que deseja apagar TODOS os dados da planilha?" & vbCrLf & _
-                                  "Essa operação NÃO pode ser desfeita.", vbExclamation + vbYesNo, "Deletar Dados")
+                                  "Essa operaï¿½ï¿½o Nï¿½O pode ser desfeita.", vbExclamation + vbYesNo, "Deletar Dados")
                 
                 If Resposta = vbYes Then .Rows(LinhaInicial & ":" & Rows.Count).ClearContents
                 
@@ -107,7 +107,7 @@ Dim Resposta As VbMsgBoxResult
                     
             Case Confirmacao = True
                 Resposta = MsgBox("Tem certeza que deseja apagar TODOS os dados da planilha?" & vbCrLf & _
-                                  "Essa operação NÃO pode ser desfeita.", vbCritical + vbYesNo, "Deletar Dados")
+                                  "Essa operaï¿½ï¿½o Nï¿½O pode ser desfeita.", vbCritical + vbYesNo, "Deletar Dados")
                 
                 If Resposta = vbYes Then .Rows(LinhaInicial & ":" & Rows.Count).ClearContents
             
@@ -367,7 +367,7 @@ Public Function ValidarEmissao(ByVal Emissao As Variant) As String
     
     Select Case Emissao
         Case "0"
-            ValidarEmissao = "Própria"
+            ValidarEmissao = "Prï¿½pria"
         
         Case "1"
             ValidarEmissao = "Terceiros"
@@ -514,7 +514,7 @@ End Function
 
 Public Function TratarAcentuacao(ByVal Texto As String)
     
-    'MAIÚSCULAS
+    'MAIï¿½SCULAS
     Texto = Replace(Texto, "ï¿½", "A")
     Texto = Replace(Texto, "ï¿½", "E")
     Texto = Replace(Texto, "ï¿½", "I")
@@ -530,7 +530,7 @@ Public Function TratarAcentuacao(ByVal Texto As String)
     
     Texto = Replace(Texto, "ï¿½", "C")
 
-    'minúsculas
+    'minï¿½sculas
     Texto = Replace(Texto, "ï¿½", "a")
     Texto = Replace(Texto, "ï¿½", "e")
     Texto = Replace(Texto, "ï¿½", "i")
@@ -552,7 +552,7 @@ End Function
 
 Public Function ImportarJson(ByVal Arq As String)
 
-    ' Leia o conteúdo do arquivo usando a codificação UTF-8
+    ' Leia o conteï¿½do do arquivo usando a codificaï¿½ï¿½o UTF-8
     With CreateObject("ADODB.Stream")
     
         .Open
@@ -586,7 +586,7 @@ End Function
 
 Public Function ImportarConteudo(ByVal Arq As String)
 
-    ' Leia o conteúdo do arquivo usando a codificação UTF-8
+    ' Leia o conteï¿½do do arquivo usando a codificaï¿½ï¿½o UTF-8
     With CreateObject("ADODB.Stream")
     
         .Open
@@ -921,7 +921,7 @@ On Error GoTo Tratar:
                 If CNPJContribuinte <> CNPJEmit Then
                     
                     .vNF = 0
-                    .StatusSPED = "NÃO LANÇAR"
+                    .StatusSPED = "Nï¿½O LANï¿½AR"
                     .OBSERVACOES = "NF CANCELADA"
                     
                 ElseIf CNPJContribuinte = CNPJEmit Then
@@ -942,7 +942,7 @@ On Error GoTo Tratar:
                 If CNPJContribuinte <> CNPJEmit Then
                 
                     .vNF = 0
-                    .StatusSPED = "NÃO LANÇAR"
+                    .StatusSPED = "Nï¿½O LANï¿½AR"
                     .OBSERVACOES = "NF DENEGADA"
                     
                 ElseIf CNPJContribuinte = CNPJEmit Then
@@ -958,7 +958,7 @@ On Error GoTo Tratar:
                 
                     If tpNF = "Entrada" Then
                         .StatusSPED = "MANIFESTAR NF"
-                        .OBSERVACOES = "DEVOLUÇÃO DE FORNECEDOR"
+                        .OBSERVACOES = "DEVOLUï¿½ï¿½O DE FORNECEDOR"
                     End If
                 
                 ElseIf CNPJContribuinte = CNPJEmit Then
@@ -967,7 +967,7 @@ On Error GoTo Tratar:
 '                        .CNPJPart = CNPJContribuinte
 '                        .RazaoPart = RazaoContribuinte
                         .UF = UF
-                        .OBSERVACOES = "ENTRADA PRÓPRIA"
+                        .OBSERVACOES = "ENTRADA PRï¿½PRIA"
                         
                     End If
                 
@@ -1021,7 +1021,7 @@ Dim subpasta As Folder
                 
     Set pasta = fso.GetFolder(Caminho)
     For Each Arquivo In pasta.Files
-        Call Util.AntiTravamento(a, 100, "Listando XMLS para importação, por favor aguarde", arrXMLs.Count, Comeco)
+        Call Util.AntiTravamento(a, 100, "Listando XMLS para importaï¿½ï¿½o, por favor aguarde", arrXMLs.Count, Comeco)
         If VBA.LCase(Arquivo.Path) Like "*.xml" Then arrXMLs.Add Arquivo.Path
     Next Arquivo
     
@@ -1103,7 +1103,7 @@ End Function
 '    If Len(Titulo) > 0 Then
 '        fd.Title = Titulo
 '    Else
-'        fd.Title = "Selecione a pasta onde os arquivos XML estão armazenados"
+'        fd.Title = "Selecione a pasta onde os arquivos XML estï¿½o armazenados"
 '    End If
 '
 '    If fd.Show = -1 Then
@@ -1246,7 +1246,7 @@ Tratar:
 End Function
 
 Public Function ValidarCRT(ByVal CRT As String) As String
-    If CRT = "1" Then ValidarCRT = "SIM" Else ValidarCRT = "NÃO"
+    If CRT = "1" Then ValidarCRT = "SIM" Else ValidarCRT = "Nï¿½O"
 End Function
 
 Public Function ValidarPercentual(ByRef NFe As IXMLDOMNode, ByVal Tag As String)
@@ -1262,7 +1262,7 @@ Public Function ValidarTag(ByRef NFe As IXMLDOMNode, ByVal Tag As String) As Str
 End Function
 
 Public Function VerificarDicionario(ByRef Dicionario As Dictionary, ByVal Chave As Variant, ByVal Posicao As Byte) As Variant
-    If Dicionario.Exists(Chave) Then VerificarDicionario = Dicionario(Chave)(Posicao) Else VerificarDicionario = "Chave do dicionário Inexistente"
+    If Dicionario.Exists(Chave) Then VerificarDicionario = Dicionario(Chave)(Posicao) Else VerificarDicionario = "Chave do dicionï¿½rio Inexistente"
 End Function
 
 Public Function GuardarEnderecosArrayList(ByVal Extensao As String, ByRef arrXMLs As ArrayList) As Boolean
@@ -1328,7 +1328,7 @@ Dim Estimativa As Double
     If Inicio > 0 Then Decorrido = Timer - Inicio
     If Decorrido > 0 Then
         Estimativa = (Decorrido / a) * (totArqs - a)
-        Msg = Msg & " - Tempo estimado para conclusão: " & VBA.Format(Estimativa / 86400, "hh:mm:ss")
+        Msg = Msg & " - Tempo estimado para conclusï¿½o: " & VBA.Format(Estimativa / 86400, "hh:mm:ss")
     End If
     
     If a Mod Intervalo = 0 Then
@@ -1346,11 +1346,11 @@ End Function
 
 Function ConverterPeriodoData(ByVal Periodo As String) As Date
 
-  ' Converte o período "MM/AAAA" para uma data.
+  ' Converte o perï¿½odo "MM/AAAA" para uma data.
   Dim DataInicial As Date
   DataInicial = DateSerial(Right(Periodo, 4), Left(Periodo, 2), 1)
 
-  ' Calcula o último dia do mês.
+  ' Calcula o ï¿½ltimo dia do mï¿½s.
   ConverterPeriodoData = DateSerial(Year(DataInicial), Month(DataInicial) + 1, 0)
 
 End Function
@@ -1414,7 +1414,7 @@ End Function
 
 Public Function DefinirCodificacao(ByVal Arq As String, ByVal Encoding As String) As String
 
-    ' Leia o conteúdo do arquivo usando a codificação UTF-8
+    ' Leia o conteï¿½do do arquivo usando a codificaï¿½ï¿½o UTF-8
     With CreateObject("ADODB.Stream")
     
         .Open
@@ -1437,7 +1437,7 @@ Dim i As Long
 Dim Campos As Variant, Dados
 Dim arrDados As New ArrayList
     
-    'Definindo o intervalo com células visíveis
+    'Definindo o intervalo com cï¿½lulas visï¿½veis
     UltLin = Util.UltimaLinha(Plan, "A")
     UltCol = Plan.Cells(LinT, 1).END(xlToRight).Column
     
@@ -1448,7 +1448,7 @@ Dim arrDados As New ArrayList
             
         On Error GoTo 0
         
-        'Coletando todas as informações das linhas visíveis
+        'Coletando todas as informaï¿½ï¿½es das linhas visï¿½veis
         For Each Area In Intervalo.Areas
             For Each Linha In Area.Rows
                 Campos = Linha
@@ -1548,7 +1548,7 @@ Dim Campos As Variant
         VersaoFiscal = VBA.Format(Campos(2), "000")
         
     ElseIf IsDate(Util.FormatarData(Campos(6))) And IsDate(Util.FormatarData(Campos(7))) Then
-        VerificarTipoSPED = "Contribuições"
+        VerificarTipoSPED = "Contribuiï¿½ï¿½es"
         VersaoContribuicoes = VBA.Format(Campos(2), "000")
         
     End If
@@ -1662,7 +1662,7 @@ Dim b As Long
     'Definie o intervalo de dados
     Set Dados = Util.DefinirIntervalo(Plan, 4, 3)
     
-    'Sai da função caso não existam dados a processar
+    'Sai da funï¿½ï¿½o caso nï¿½o existam dados a processar
     If Dados Is Nothing Then GoTo Sair:
     
     b = 0
@@ -1674,7 +1674,7 @@ Dim b As Long
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            'Seleciona os campos escolhidos pelo usuário
+            'Seleciona os campos escolhidos pelo usuï¿½rio
             For Each Campo In CamposSelecionados
             
                 chvDoc = Campos(dicTitulos(Campo))
@@ -1692,7 +1692,7 @@ Dim b As Long
     Next Linha
     
 Sair:
-    'Retorna os dados filtraos para o usuário
+    'Retorna os dados filtraos para o usuï¿½rio
     Set CarregarChavesEmitentes = arrRegistros
     
 End Function
@@ -1755,32 +1755,32 @@ Dim Campos As Variant
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            'Carrega os campos chave do registro de tributação do item
+            'Carrega os campos chave do registro de tributaï¿½ï¿½o do item
             COD_ITEM = Campos(dicTitulos("COD_ITEM"))
             COD_BARRA = Campos(dicTitulos("COD_BARRA"))
             COD_NCM = Campos(dicTitulos("COD_NCM"))
             Cfop = Campos(dicTitulos("CFOP"))
             UF = Campos(dicTitulos("UF"))
             
-            'Define chave de tributação da operação
+            'Define chave de tributaï¿½ï¿½o da operaï¿½ï¿½o
             If tpTributacao = "COD_NCM" Then
                 
-                'Cria a chave de tributação por NCM
+                'Cria a chave de tributaï¿½ï¿½o por NCM
                 Chave = COD_NCM & UF & Cfop
                 
             ElseIf tpTributacao = "COD_BARRA" Then
                 
-                'Cria a chave de tributação por COD_BARRA
+                'Cria a chave de tributaï¿½ï¿½o por COD_BARRA
                 Chave = COD_BARRA & UF & Cfop
                 
             Else
                 
-                'Cria a chave de tributação geral
+                'Cria a chave de tributaï¿½ï¿½o geral
                 Chave = COD_ITEM & UF & Cfop
                 
             End If
             
-            'Armazena a tributação da operação
+            'Armazena a tributaï¿½ï¿½o da operaï¿½ï¿½o
             dicDados(Chave) = Campos
             
          End If
@@ -1894,7 +1894,7 @@ Dim i As Integer
             If Campos(i) <> "" Then Campos(i) = VBA.Format(fnExcel.FormatarData(Campos(i)), "ddmmyyyy")
         End If
         
-        'Identificando e tratando os dados de alíquota
+        'Identificando e tratando os dados de alï¿½quota
         If VBA.InStr(1, Titulos(i - 1), "ALIQ_") > 0 Then
             If Campos(i) <> "" Then Campos(i) = fnSPED.FormatarPercentuais(Campos(i))
         End If
@@ -1910,8 +1910,8 @@ Dim i As Integer
             If Campos(i) <> "" Then Campos(i) = fnExcel.FormatarValores(Campos(i), True, 2)
         End If
         
-        'Or Campos(i) Like "* – *"
-        'Verifica se exitem enumerações e as retira
+        'Or Campos(i) Like "* ï¿½ *"
+        'Verifica se exitem enumeraï¿½ï¿½es e as retira
         If (VBA.InStr(1, Campos(i), " - ") > 0) And VBA.InStr(1, Titulos(i - 1), "TXT") = 0 And Titulos(i - 1) <> "CHV_REG" And Titulos(i - 1) <> "CHV_PAI_FISCAL" And Titulos(i - 1) <> "CHV_PAI_CONTRIBUICOES" Then
             Campos(i) = ValidacoesSPED.Fiscal.Enumeracoes.RemoverEnumeracoes(Campos(i), Titulos(i - 1))
         End If
@@ -2218,7 +2218,7 @@ Dim i As Integer
     If Util.UltimaLinha(PlanDest, "A") > 3 Then
         Call Application.GoTo(PlanDest.[C3], True)
     Else
-        Call Util.MsgAlerta("Não existem dados filtrados na planilha de destino.", "Filtragem sem Dados")
+        Call Util.MsgAlerta("Nï¿½o existem dados filtrados na planilha de destino.", "Filtragem sem Dados")
     End If
     
 End Function
@@ -2532,16 +2532,16 @@ Dim ChavesReferenciadas As Variant
 Dim dicTitulos As New Dictionary
 Dim Campos As Variant, Chave
     
-    'Carrega os títulos da planilha selecionada
+    'Carrega os tï¿½tulos da planilha selecionada
     Set dicTitulos = Util.MapearTitulos(Plan, 3)
     
-    'Percorre os registros e faz verificações para atualizar
+    'Percorre os registros e faz verificaï¿½ï¿½es para atualizar
     For Each Chave In dicDados.Keys()
         
         'Carrega os campos do registro atual
         Campos = dicDados(Chave)
         
-        'Verifica se a nota está cancelada
+        'Verifica se a nota estï¿½ cancelada
         If Not arrCanceladas Is Nothing Then
             If arrCanceladas.contains(Campos(dicTitulos("Chave de Acesso"))) Then
                 Campos(dicTitulos("Valor")) = 0
@@ -2557,11 +2557,11 @@ Dim Campos As Variant, Chave
                 Select Case True
                     
                     Case UBound(ChavesReferenciadas) > 0
-                        Campos(dicTitulos("Observações")) = _
+                        Campos(dicTitulos("Observaï¿½ï¿½es")) = _
                             "CHAVES REFERENCIADAS: " & VBA.Join(ChavesReferenciadas, ", ")
                     
                     Case UBound(ChavesReferenciadas) = 0
-                        Campos(dicTitulos("Observações")) = _
+                        Campos(dicTitulos("Observaï¿½ï¿½es")) = _
                             "CHAVE REFERENCIADA: " & VBA.Join(ChavesReferenciadas)
                             
                 End Select
@@ -2626,7 +2626,7 @@ Dim CNPJ As String
         Chave = VBA.Replace(Chave, CNPJ, CNPJEmit)
         Chave = VBA.Left(Chave, 43)
         
-        'Loop reverso na chave, começando do último dígito
+        'Loop reverso na chave, comeï¿½ando do ï¿½ltimo dï¿½gito
         For i = Len(Chave) To 1 Step -1
             soma = soma + (Mid(Chave, i, 1) * Peso)
             Peso = Peso + 1
@@ -2693,7 +2693,7 @@ Dim CHV_REG As String
             
             For Each InconsistenciaIgnorada In dicInconsistenciasIgnoradas(CHV_REG)
                 
-                If InconsistenciaIgnorada = INCONSISTENCIA Or InconsistenciaIgnorada = "O XML dessa operação não foi importado" Then
+                If InconsistenciaIgnorada = INCONSISTENCIA Or InconsistenciaIgnorada = "O XML dessa operaï¿½ï¿½o nï¿½o foi importado" Then
                     Exit Function
                 End If
                 
@@ -2741,13 +2741,13 @@ Dim Tamanho As Integer
 Dim Base As Integer
 Dim PosicaoDigito As Integer
 
-    ' Remove caracteres não numéricos
+    ' Remove caracteres nï¿½o numï¿½ricos
     IE = ApenasNumeros(IE)
 
-    ' Remove zeros à esquerda se necessário
+    ' Remove zeros ï¿½ esquerda se necessï¿½rio
     IE = VBA.LTrim(Str(Val(IE)))
 
-    'Define tamanho e base dependendo do comprimento da inscrição estadual
+    'Define tamanho e base dependendo do comprimento da inscriï¿½ï¿½o estadual
     Tamanho = VBA.Len(IE)
     If Tamanho = 8 Then
         Peso = Array(7, 6, 5, 4, 3, 2)
@@ -2760,7 +2760,7 @@ Dim PosicaoDigito As Integer
     
     Base = UBound(Peso)
     
-    ' Calcula o dígito verificador
+    ' Calcula o dï¿½gito verificador
     soma = 0
     For i = 1 To Base
         soma = soma + CInt(VBA.Mid(IE, i, 1)) * Peso(i)
@@ -2773,13 +2773,13 @@ Dim PosicaoDigito As Integer
         Digito = 10 - resto
     End If
 
-    ' Compara o dígito verificador calculado com o dígito informado na inscrição
+    ' Compara o dï¿½gito verificador calculado com o dï¿½gito informado na inscriï¿½ï¿½o
     PosicaoDigito = Base
     If Digito = CInt(VBA.Mid(IE, PosicaoDigito, 1)) Then
         ValidarIEBahia = IE
     Else
         If VBA.Left(IE, 1) = "0" Then
-            ' Tenta novamente sem o zero à esquerda se a primeira tentativa falhar
+            ' Tenta novamente sem o zero ï¿½ esquerda se a primeira tentativa falhar
             ValidarIEBahia = ValidarIEBahia(Mid(IE, 2))
         Else
             ValidarIEBahia = ""
@@ -2873,14 +2873,14 @@ Dim arrPermitidos As New ArrayList
         
         Caractere = Mid(Texto, i, 1)
         
-        ' Verifica se o caractere está na lista de caracteres permitidos
+        ' Verifica se o caractere estï¿½ na lista de caracteres permitidos
         If arrPermitidos.contains(Caractere) Then
             TextoLimpo = TextoLimpo & Caractere
         End If
         
     Next i
     
-    'Remover espaços duplicados
+    'Remover espaï¿½os duplicados
     TextoLimpo = RemoverQuebrasLinhaEspacosDuplicados(TextoLimpo)
     
     If LimiteCaracteres > 0 Then TextoLimpo = VBA.Left(TextoLimpo, LimiteCaracteres)
@@ -2896,8 +2896,8 @@ Dim CaracteresPermitidos As String, Caractere$
 Dim i As Integer
 
     CaracteresPermitidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" & _
-                           "áéíóúãõâêîôûàèìòùäëïöüçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÄËÏÖÜÇ " & _
-                           "!@#$%¨&*()_+=-[]{};:'<>,.?/`~^"
+                           "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " & _
+                           "!@#$%ï¿½&*()_+=-[]{};:'<>,.?/`~^"
         
     For i = 1 To VBA.Len(CaracteresPermitidos)
     
@@ -2918,7 +2918,7 @@ Dim TextoLimpo As String
     TextoLimpo = Replace(TextoLimpo, Chr(10), " ")
     TextoLimpo = Replace(TextoLimpo, Chr(13), " ")
     
-    ' Substitui múltiplos espaços por um único espaço
+    ' Substitui mï¿½ltiplos espaï¿½os por um ï¿½nico espaï¿½o
     Do While InStr(TextoLimpo, "  ") > 0
         TextoLimpo = Replace(TextoLimpo, "  ", " ")
     Loop
@@ -2938,7 +2938,7 @@ Dim dicTitulos As New Dictionary
     TitulosParaRemover = Array("INCONSISTENCIA", "SUGESTAO", "REG", "ARQUIVO", "CHV_REG", "CHV_PAI_FISCAL")
     For Each Titulo In TitulosParaRemover
         
-        'Verifica existência do campo e o remove e o remove caso exista
+        'Verifica existï¿½ncia do campo e o remove e o remove caso exista
         If dicTitulos.Exists(Titulo) Then Call dicTitulos.Remove(Titulo)
         
     Next Titulo
@@ -2988,7 +2988,7 @@ Dim dicTitulos As New Dictionary
     Plan.Rows("1:2").Delete
     
     On Error Resume Next
-    'Remove as colunas desnecessárias
+    'Remove as colunas desnecessï¿½rias
     Plan.Columns(dicTitulos("SUGESTAO")).Delete
     Plan.Columns(dicTitulos("INCONSISTENCIA")).Delete
     Plan.Columns(dicTitulos("CHV_PAI_FISCAL")).Delete
@@ -3017,11 +3017,11 @@ Dim digito1 As String
 Dim digito2 As String
 Dim i As Integer
     
-    'Pesos para o cálculo dos dígitos
+    'Pesos para o cï¿½lculo dos dï¿½gitos
     pesos1 = Array(5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
     pesos2 = Array(6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
     
-    'Remover caracteres não numéricos do CNPJ base e do estabelecimento
+    'Remover caracteres nï¿½o numï¿½ricos do CNPJ base e do estabelecimento
     CNPJBase = Replace(CNPJBase, ".", "")
     CNPJBase = Replace(CNPJBase, "-", "")
     CNPJBase = Replace(CNPJBase, "/", "")
@@ -3030,16 +3030,16 @@ Dim i As Integer
     estabelecimento = Replace(estabelecimento, "-", "")
     estabelecimento = Replace(estabelecimento, "/", "")
     
-    'Verificar se o CNPJ base tem 8 dígitos e o estabelecimento tem 4 dígitos
+    'Verificar se o CNPJ base tem 8 dï¿½gitos e o estabelecimento tem 4 dï¿½gitos
     If Len(CNPJBase) <> 8 Or Len(estabelecimento) <> 4 Then
-        GerarCNPJCompleto = "CNPJ Base ou Estabelecimento inválido"
+        GerarCNPJCompleto = "CNPJ Base ou Estabelecimento invï¿½lido"
         Exit Function
     End If
     
     'Concatenar CNPJ base com o estabelecimento
     cnpjCompleto = CNPJBase & estabelecimento
     
-    'Cálculo do primeiro dígito verificador
+    'Cï¿½lculo do primeiro dï¿½gito verificador
     soma = 0
     For i = 1 To 12
         soma = soma + CInt(Mid(cnpjCompleto, i, 1)) * pesos1(i)
@@ -3053,7 +3053,7 @@ Dim i As Integer
         digito1 = CStr(11 - resto)
     End If
     
-    'Cálculo do segundo dígito verificador
+    'Cï¿½lculo do segundo dï¿½gito verificador
     soma = 0
     cnpjCompleto = cnpjCompleto & digito1
     For i = 1 To 13
@@ -3066,7 +3066,7 @@ Dim i As Integer
         digito2 = CStr(11 - resto)
     End If
     
-    'Retornar o CNPJ completo com os dígitos verificadores
+    'Retornar o CNPJ completo com os dï¿½gitos verificadores
     GerarCNPJCompleto = Left(cnpjCompleto, 12) & digito1 & digito2
     
 End Function
@@ -3360,7 +3360,7 @@ End Function
 
 Public Sub MsgAlerta_AusenciaDados(Optional Msg As String = "")
     
-    If Msg = "" Then Msg = "Para utilizar essa função é necessário haver dados na planilha."
+    If Msg = "" Then Msg = "Para utilizar essa funï¿½ï¿½o ï¿½ necessï¿½rio haver dados na planilha."
     Call MsgAlerta(Msg, "Registro sem dados informados")
     
 End Sub
@@ -3488,7 +3488,7 @@ Dim Msg As String
         Msg = "Esta pasta de trabalho nunca foi salva." & vbCrLf & _
         Msg = Msg & "Por favor, salve-a manualmente com um nome e local antes de continuar."
         
-        Call MsgAviso(Msg, "Ação Necessária")
+        Call MsgAviso(Msg, "Aï¿½ï¿½o Necessï¿½ria")
                 
     Else
         
@@ -3498,8 +3498,8 @@ Dim Msg As String
             
             ThisWorkbook.Save
             If Err.Number <> 0 Then
-                MsgBox "Não foi possível salvar automaticamente a pasta de trabalho no local: " & ThisWorkbook.FullName & vbCrLf & _
-                       "Verifique permissões ou se o arquivo está em uso." & vbCrLf & vbCrLf & _
+                MsgBox "Nï¿½o foi possï¿½vel salvar automaticamente a pasta de trabalho no local: " & ThisWorkbook.FullName & vbCrLf & _
+                       "Verifique permissï¿½es ou se o arquivo estï¿½ em uso." & vbCrLf & vbCrLf & _
                        "Erro VBA: " & Err.Description, vbCritical, "Falha ao Salvar Automaticamente"
                 Err.Clear
                 
@@ -3517,6 +3517,23 @@ Dim Msg As String
             
         End If
         
+    End If
+    
+End Function
+
+Public Function NomeArquivo(ByVal CaminhoCompleto As String) As String
+    ' Extrai apenas o nome do arquivo de um caminho completo (ex: C:\Temp\Nota.xml -> Nota.xml)
+    Dim PosicaoBarra As Integer
+    
+    If CaminhoCompleto = "" Then Exit Function
+    
+    ' Procura a Ãºltima barra invertida na string
+    PosicaoBarra = InStrRev(CaminhoCompleto, "\")
+    
+    If PosicaoBarra > 0 Then
+        NomeArquivo = Mid(CaminhoCompleto, PosicaoBarra + 1)
+    Else
+        NomeArquivo = CaminhoCompleto
     End If
     
 End Function
