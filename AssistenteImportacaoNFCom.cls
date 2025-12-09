@@ -277,3 +277,33 @@ TratarErro:
     ' Aqui poderia ter um Log de Erros
     Debug.Print "Erro em AssistenteImportacaoNFCom.ProcessarNFCom: " & Err.Description
 End Sub
+
+' Método de controle para Importação em Lote via Interface
+Public Sub ImportarNFCom(ByVal tpImportacao As String)
+    Dim XML As Variant
+    Dim Doce As DOMDocument60
+    Dim b As Long, Comeco As Double
+    Dim ExpReg As New ExportadorRegistros
+
+    Call ProcessarDocumentos.CarregarXMLS(tpImportacao)
+    ' Se a importação for por arquivo avulso, adicionar aos documentos listados
+    If tpImportacao = "Arquivo" Then DocsFiscais.arrNFCom.addRange DocsFiscais.arrTodos
+
+    If DocsFiscais.arrNFCom.Count = 0 Then Exit Sub
+
+    Call Util.AtualizarBarraStatus("Iniciando importação de NFCom...")
+    b = 0: Comeco = Timer
+
+    For Each XML In DocsFiscais.arrNFCom
+        Call Util.AntiTravamento(b, 10, "Importando NFCom " & b + 1, DocsFiscais.arrNFCom.Count, Comeco)
+        Set Doce = fnXML.RemoverNamespaces(XML)
+        If Not Doce Is Nothing Then ProcessarNFCom Doce
+        b = b + 1
+    Next XML
+
+    ' Exportar para Excel
+    Call ExpReg.ExportarRegistros("D700", "D730", "D731")
+
+    Call Util.MsgInformativa("Importação NFCom concluída!", "Sucesso", Now)
+    Call Util.AtualizarBarraStatus(False)
+End Sub

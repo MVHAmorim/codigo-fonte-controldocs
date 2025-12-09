@@ -5,7 +5,7 @@ Public DocsFiscais As DocumentosFiscais
 
 Type DocumentosFiscais
     
-    'Declarações
+    'DeclaraÃ§Ãµes
     arrSPEDs As New ArrayList
     arrSPEDFiscal As New ArrayList
     arrSPEDsInvalidos As New ArrayList
@@ -13,6 +13,7 @@ Type DocumentosFiscais
     
     'Documentos
     arrNFeNFCe As New ArrayList
+    arrNFCom As New ArrayList
     arrCTe As New ArrayList
     arrCFe As New ArrayList
     arrNFSe As New ArrayList

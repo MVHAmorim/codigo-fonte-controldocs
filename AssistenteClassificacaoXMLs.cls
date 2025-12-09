@@ -87,6 +87,9 @@ Private Function ClassificarXML(ByRef Doce As DOMDocument60, ByVal Arquivo As St
             Case fnXML.ValidarProtocoloCancelamento(Doce)
                 If Not .arrProtocolos.contains(Arquivo) Then .arrProtocolos.Add Arquivo
                 
+            Case fnXML.ValidarTag(Doce, "//mod") = "62"
+                If Not .arrNFCom.contains(Arquivo) Then .arrNFCom.Add Arquivo
+
             Case Else
                 If Not .arrDocsInvalidos.contains(Arquivo) Then .arrDocsInvalidos.Add Arquivo
                 

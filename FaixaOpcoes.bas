@@ -16,8 +16,8 @@ Sub InicializarFaixaPersonalizada(ribbon As IRibbonUI)
 End Sub
 
 Sub ForcarErro()
-    ' Força um erro personalizado com código de erro 9999
-    Err.Raise 9999, "ForcarErro", "Este é um erro forçado para testar a rotina"
+    ' Forï¿½a um erro personalizado com cï¿½digo de erro 9999
+    Err.Raise 9999, "ForcarErro", "Este ï¿½ um erro forï¿½ado para testar a rotina"
 End Sub
 
 Sub RecarregarRibbon()
@@ -94,7 +94,7 @@ Sub getClique(control As IRibbonControl, ByRef Check)
         Case (control.id = "chIgnoreQtdUnidXML")
             ConfiguracoesControlDocs.Range("IgnorarQtdUnidXML").value = Check
         
-        'TODO: CRIAR CHECKBOX PARA IMPORTAR APENAS NOTAS DE EMISSÃO PRÓPRIA NOS XMLS
+        'TODO: CRIAR CHECKBOX PARA IMPORTAR APENAS NOTAS DE EMISSï¿½O PRï¿½PRIA NOS XMLS
         
     End Select
     
@@ -135,9 +135,9 @@ Exit Sub
 
 Tratar:
 
-MsgBox "O registro informado está inválido!" & vbCrLf & _
+MsgBox "O registro informado estï¿½ invï¿½lido!" & vbCrLf & _
        "Por favor verifique o registro digitado e tente novamente.", _
-       vbExclamation, "Registro Inválido"
+       vbExclamation, "Registro Invï¿½lido"
     
 End Sub
 
@@ -167,7 +167,7 @@ Dim nReg As String
                 If control.Tag = "CadContrib" Then visible = True
                 
             Case (.CodeName = "Divergencias")
-                If control.Tag = "Divergências Fiscais" Then visible = True
+                If control.Tag = "Divergï¿½ncias Fiscais" Then visible = True
                 
             Case (.CodeName = "relICMS")
                 If control.Tag = "Livro ICMS" Then visible = True
@@ -179,16 +179,16 @@ Dim nReg As String
                 If control.Tag = "Livro PIS-COFINS" Then visible = True
                 
             Case (.CodeName = "Autenticacao")
-                If control.Tag = "Autenticação" Then visible = True
+                If control.Tag = "Autenticaï¿½ï¿½o" Then visible = True
             
             Case (.CodeName = "Correlacoes")
-                If control.Tag = "Correlação Produtos" Then visible = True
+                If control.Tag = "Correlaï¿½ï¿½o Produtos" Then visible = True
                 
             Case (.CodeName = "Tributacao")
                 If control.Tag = "btnImportarItensSPED" Then visible = True
                 
             Case (.CodeName = "assApuracaoICMS")
-                If control.Tag = "Análise Produtos" Then visible = True
+                If control.Tag = "Anï¿½lise Produtos" Then visible = True
                 
             Case (.CodeName = "assApuracaoPISCOFINS")
                 If control.Tag = "Assistente de PIS e COFINS" Then visible = True
@@ -197,16 +197,16 @@ Dim nReg As String
                 If control.Tag = "Assistente de Divergencias" Then visible = True
                 
             Case (.CodeName = "assTributacaoICMS")
-                If control.Tag = "Assistente de Tributação ICMS" Then visible = True
+                If control.Tag = "Assistente de Tributaï¿½ï¿½o ICMS" Then visible = True
                 
             Case (.CodeName = "relInteligenteTribIPI")
-                If control.Tag = "Assistente de Tributação ICMS" Then visible = True
+                If control.Tag = "Assistente de Tributaï¿½ï¿½o ICMS" Then visible = True
                 
             Case (.CodeName = "relInteligenteTribPISCOFINS")
-                If control.Tag = "Assistente de Tributação ICMS" Then visible = True
+                If control.Tag = "Assistente de Tributaï¿½ï¿½o ICMS" Then visible = True
                 
             Case (.CodeName = "relCustosPrecos")
-                If control.Tag = "Assistente de Custos e Preços" Then visible = True
+                If control.Tag = "Assistente de Custos e Preï¿½os" Then visible = True
                 
             Case (.CodeName = "relInteligenteEstoque")
                 If control.Tag = "Assistente de Estoque" Then visible = True
@@ -214,8 +214,8 @@ Dim nReg As String
             Case (.CodeName = "relInteligenteContas")
                 If control.Tag = "Assistente de Contas" Then visible = True
                 
-            Case (.CodeName = "relInventário")
-                If control.Tag = "Assistente de Inventário" Then visible = True
+            Case (.CodeName = "relInventï¿½rio")
+                If control.Tag = "Assistente de Inventï¿½rio" Then visible = True
                 
             Case .CodeName Like "*_Contr"
                 nReg = VBA.Mid(.CodeName, 4, 4)
@@ -381,8 +381,13 @@ End Sub
 Sub VerificarUUID(control As IRibbonControl, ByRef value)
 
 Dim Uuid As String
-
+    
     Uuid = FuncoesControlDocs.ObterUuidComputador()
     If Uuid = "8A1DD300-CCB5-11EC-B9D4-478D28DC6B00" Then value = True
     
+End Sub
+
+Public Sub btnImportarNFCom_Click(control As IRibbonControl)
+    Dim nAssistente As New AssistenteImportacaoNFCom
+    Call nAssistente.ImportarNFCom("Arquivo")
 End Sub
