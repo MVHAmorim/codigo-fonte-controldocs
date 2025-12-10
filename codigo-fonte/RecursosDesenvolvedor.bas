@@ -135,7 +135,7 @@ Dim caminhoPasta As String
 Dim caminhoInicial As String
     
     ' Defina aqui o caminho padrão que você deseja usar
-    caminhoInicial = "E:\Projetos\ControlDocs\"
+    caminhoInicial = "E:\Projetos\ControlDocs\.export-controldocs"
     
     ' Solicitar ao usuário que selecione a pasta de destino
     With Application.FileDialog(msoFileDialogFolderPicker)
@@ -175,7 +175,7 @@ Dim caminhoInicial As String
 Dim componente As VBComponent
 
     ' Defina aqui o caminho padrão que você deseja usar
-    caminhoInicial = "E:\Projetos\ControlDocs\"
+    caminhoInicial = "E:\Projetos\ControlDocs\codigo-fonte"
         
     ' Solicitar ao usuário que selecione a pasta de origem
     With Application.FileDialog(msoFileDialogFolderPicker)
@@ -239,7 +239,7 @@ Dim conteudoModulos As String
 Dim conteudoClasses As String
     
     ' Defina aqui o caminho padrão que você deseja usar
-    caminhoInicial = "E:\Projetos\ControlDocs\"
+    caminhoInicial = "E:\Projetos\ControlDocs\.export-controldocs"
     
     ' Solicitar ao usuário que selecione a pasta de destino
     With Application.FileDialog(msoFileDialogFolderPicker)
