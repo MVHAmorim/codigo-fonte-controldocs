@@ -319,42 +319,9 @@ Public Sub CarregarDadosRegistroC010(ParamArray CamposChave() As Variant)
     Set dtoTitSPED.tC010 = Util.MapearTitulos(regC010, 3)
 End Sub
 
-Public Sub CarregarDadosRegistroC100(ParamArray CamposChave() As Variant)
-    Dim Linha As Variant
-    Dim Campos As Variant
-    
-    dtoRegSPED.rC100.RemoveAll
-    
-    For Each Linha In DocsFiscais.arrSPED
-        If VBA.Left(Linha, 6) = "|C100|" Then
-            Campos = VBA.Split(Linha, "|")
-            Call ExtrairDadosRegistroC100_Especifico(Campos)
-        End If
-    Next Linha
-    
+Public Sub CarregarDadosRegistroC100()
     Set dtoTitSPED.tC100 = Util.MapearTitulos(regC100, 3)
-End Sub
-
-Private Sub ExtrairDadosRegistroC100_Especifico(ByVal Campos As Variant)
-    Dim IND_OPER As String, IND_EMIT As String, COD_MOD As String, SER As String, NUM_DOC As String, CHV_NFE As String
-    Dim Chave As String
-    
-    IND_OPER = Campos(2)
-    IND_EMIT = Campos(3)
-    COD_MOD = Campos(5)
-    SER = Campos(7)
-    NUM_DOC = Campos(8)
-    CHV_NFE = Campos(9)
-    
-    If CHV_NFE <> "" And Len(CHV_NFE) = 44 Then
-        Chave = CHV_NFE
-    Else
-        Chave = IND_OPER & IND_EMIT & COD_MOD & "S" & Util.NormalizarNumeracao(SER) & "_N" & Util.NormalizarNumeracao(NUM_DOC)
-    End If
-    
-    If Not dtoRegSPED.rC100.Exists(Chave) Then
-        dtoRegSPED.rC100.Add Chave, Campos
-    End If
+    Set dtoRegSPED.rC100 = ExtrairDadosRegistroC100_Especifico(regC100)
 End Sub
 
 Public Sub CarregarDadosRegistroC101(ParamArray CamposChave() As Variant)
@@ -2350,4 +2317,43 @@ Dim b As Long
 
     Set ExtrairDadosRegistro = dicDados
 
+End Function
+
+Private Function ExtrairDadosRegistroC100_Especifico(ByVal Plan As Worksheet) As Dictionary
+    Dim dicDados As New Dictionary
+    Dim dicTitulos As Dictionary
+    Dim Dados As Range, Linha As Range
+    Dim Campos As Variant
+    Dim vOper As String, vEmit As String, vChave As String, vMod As String, vSer As String, vNum As String
+    Dim sSerie As String, sNum As String
+    Dim ChaveFinal As String
+    
+    Set dicTitulos = Util.MapearTitulos(Plan, 3)
+    Set Dados = Util.DefinirIntervalo(Plan, 4, 3)
+    
+    For Each Linha In Dados.Rows
+        Campos = Application.Index(Linha.Value2, 1, 0)
+        
+        If Util.ChecarCamposPreenchidos(Campos) Then
+            vOper = VBA.Split(Campos(dicTitulos("IND_OPER")), " ")(0)
+            vEmit = VBA.Split(Campos(dicTitulos("IND_EMIT")), " ")(0)
+            vChave = VBA.CStr(Campos(dicTitulos("CHV_NFE")))
+            vMod = VBA.CStr(Campos(dicTitulos("COD_MOD")))
+            vSer = VBA.CStr(Campos(dicTitulos("SER")))
+            vNum = VBA.CStr(Campos(dicTitulos("NUM_DOC")))
+            
+            If VBA.Len(vChave) = 44 Then
+                ChaveFinal = Util.UnirCampos(vOper, vEmit, vChave)
+            Else
+                sSerie = Util.NormalizarNumeracao(vSer)
+                sNum = Util.NormalizarNumeracao(vNum)
+                ChaveFinal = vOper & vEmit & vMod & "S" & sSerie & "_N" & sNum
+                ChaveFinal = VBA.Replace(ChaveFinal, " ", "")
+            End If
+            
+            If Not dicDados.Exists(ChaveFinal) Then dicDados.Add ChaveFinal, Campos
+        End If
+    Next Linha
+    
+    Set ExtrairDadosRegistroC100_Especifico = dicDados
 End Function
