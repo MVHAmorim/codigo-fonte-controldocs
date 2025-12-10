@@ -3537,3 +3537,11 @@ Public Function NomeArquivo(ByVal CaminhoCompleto As String) As String
     End If
     
 End Function
+
+Public Function NormalizarNumeracao(ByVal Valor As Variant) As String
+    If IsNumeric(Valor) And Not IsEmpty(Valor) Then
+        NormalizarNumeracao = CStr(CDbl(Valor))
+    Else
+        NormalizarNumeracao = VBA.Trim(CStr(Valor))
+    End If
+End Function
