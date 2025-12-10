@@ -1,0 +1,25 @@
+Attribute VB_Name = "DTO_DadosXML"
+'@Folder("DTO")
+Option Explicit
+
+Public DadosXML As InformacoesXML
+
+Public Type InformacoesXML
+    
+    Periodo As String
+    Arquivo As String
+    COD_MOD As String
+    CNPJ_EMITENTE As String
+    CNPJ_DESTINATARIO As String
+    CNPJ_ESTABELECIMENTO As String
+    TIPO_NF As String
+    TIPO_EMISSAO As String
+    
+End Type
+
+Public Function ResetarDadosXML()
+    
+    Dim CamposVazios As InformacoesXML
+    LSet DadosXML = CamposVazios
+    
+End Function
