@@ -320,8 +320,41 @@ Public Sub CarregarDadosRegistroC010(ParamArray CamposChave() As Variant)
 End Sub
 
 Public Sub CarregarDadosRegistroC100(ParamArray CamposChave() As Variant)
-    Call CarregarDadosRegistro(dtoRegSPED.rC100, regC100, CamposChave)
+    Dim Linha As Variant
+    Dim Campos As Variant
+    
+    dtoRegSPED.rC100.RemoveAll
+    
+    For Each Linha In DocsFiscais.arrSPED
+        If VBA.Left(Linha, 6) = "|C100|" Then
+            Campos = VBA.Split(Linha, "|")
+            Call ExtrairDadosRegistroC100_Especifico(Campos)
+        End If
+    Next Linha
+    
     Set dtoTitSPED.tC100 = Util.MapearTitulos(regC100, 3)
+End Sub
+
+Private Sub ExtrairDadosRegistroC100_Especifico(ByVal Campos As Variant)
+    Dim IND_OPER As String, IND_EMIT As String, COD_MOD As String, SER As String, NUM_DOC As String, CHV_NFE As String
+    Dim Chave As String
+    
+    IND_OPER = Campos(2)
+    IND_EMIT = Campos(3)
+    COD_MOD = Campos(5)
+    SER = Campos(7)
+    NUM_DOC = Campos(8)
+    CHV_NFE = Campos(9)
+    
+    If CHV_NFE <> "" And Len(CHV_NFE) = 44 Then
+        Chave = CHV_NFE
+    Else
+        Chave = IND_OPER & IND_EMIT & COD_MOD & "S" & Util.NormalizarNumeracao(SER) & "_N" & Util.NormalizarNumeracao(NUM_DOC)
+    End If
+    
+    If Not dtoRegSPED.rC100.Exists(Chave) Then
+        dtoRegSPED.rC100.Add Chave, Campos
+    End If
 End Sub
 
 Public Sub CarregarDadosRegistroC101(ParamArray CamposChave() As Variant)

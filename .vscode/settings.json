@@ -1,0 +1,14 @@
+{
+    "[vb]": {
+        "files.encoding": "windows1252"
+    },
+    "[vba]": {
+        "files.encoding": "windows1252"
+    },
+    "files.associations": {
+        "*.bas": "vba",
+        "*.cls": "vba",
+        "*.frm": "vba",
+        "*.ctl": "vba"
+    }
+}
