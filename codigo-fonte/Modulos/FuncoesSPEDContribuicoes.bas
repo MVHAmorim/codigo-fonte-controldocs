@@ -184,6 +184,7 @@ Dim Comeco As Double
                 If VBA.Trim(Registro) <> "" And Registro Like "*|*" And VBA.Len(Registro) > 6 Then
                     Campos = VBA.Split(Registro, "|")
                     nReg = Campos(1)
+                    'If nReg = "C175" Then Stop
                     If dicLayoutContribuicoes.Exists(nReg & "_Contr") Then nReg = nReg & "_Contr"
                     If dicLayoutContribuicoes.Exists(nReg & "_INI") Then nReg = nReg & "_INI"
                     
@@ -206,10 +207,13 @@ Dim Comeco As Double
         b = 0
         For Each Chave In dicRegistros.Keys()
             Call Util.AntiTravamento(b, 10, "Exportando dados do período " & PeriodoArq & " para o Excel")
+            
+            If VBA.IsEmpty(Chave) Then GoTo Prx:
             Set arrDados = dicRegistros(Chave)
-            On Error Resume Next
+            'On Error Resume Next
                 Call Util.ExportarDadosArrayList(Worksheets(Chave), arrDados)
-            On Error GoTo 0
+            'On Error GoTo 0
+Prx:
         Next Chave
         
     Next PeriodoArq
@@ -322,7 +326,7 @@ Dim UltLin As Long
                                         
                     .CHV_REG = Campos(dicTitulos("CHV_REG"))
                     .IND_ATIV = Campos(dicTitulos("IND_ATIV"))
-                    .Arquivo = Campos(dicTitulos("ARQUIVO"))
+                    .ARQUIVO = Campos(dicTitulos("ARQUIVO"))
                     .CNPJ = Campos(dicTitulos("CNPJ"))
                     .TIPO_ESCRIT = VBA.Left(VBA.Replace(Campos(dicTitulos("TIPO_ESCRIT")), "'", ""), 1)
                     .DT_INI = VBA.Format(Campos(dicTitulos("DT_INI")), "yyyymm")

@@ -34,13 +34,13 @@ Dim Campos
         .CHV_PAI = ""
         
         If .CNPJ <> "" Then
-            .Arquivo = Util.FormatarTexto(VBA.Format(.DT_INI, "mm/yyyy") & "-" & VBA.Replace(.CNPJ, "'", "") & VBA.Replace(.CPF, "'", ""))
+            .ARQUIVO = Util.FormatarTexto(VBA.Format(.DT_INI, "mm/yyyy") & "-" & VBA.Replace(.CNPJ, "'", "") & VBA.Replace(.CPF, "'", ""))
         Else
-            .Arquivo = Util.FormatarTexto(VBA.Format(.DT_INI, "mm/yyyy") & "-" & VBA.Replace(.CPF, "'", ""))
+            .ARQUIVO = Util.FormatarTexto(VBA.Format(.DT_INI, "mm/yyyy") & "-" & VBA.Replace(.CPF, "'", ""))
         End If
         
-        .CHV_REG = fnSPED.GerarChaveRegistro(.Arquivo)
-        dicDados(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .COD_VER, .COD_FIN, .DT_INI, .DT_FIN, .Nome, _
+        .CHV_REG = fnSPED.GerarChaveRegistro(.ARQUIVO)
+        dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .COD_VER, .COD_FIN, .DT_INI, .DT_FIN, .Nome, _
                                    .CNPJ, .CPF, .UF, .IE, .COD_MUN, .IM, .SUFRAMA, .IND_PERFIL, .IND_ATIV)
         
     End With

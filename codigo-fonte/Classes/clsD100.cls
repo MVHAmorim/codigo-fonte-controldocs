@@ -38,7 +38,7 @@ Dim arrChaves As New ArrayList
 Dim Dados As Variant, Intervalo
 Dim i As Long, UltLin As Long
 Dim Cels As Range, Cel As Range
-Dim Arquivo As String
+Dim ARQUIVO As String
 
     Intervalo = regD100.Range("A3:" & Util.ConverterNumeroColuna(regD100.Range("A3").END(xlToRight).Column) & "3")
     UltLin = regD100.Range("A" & Rows.Count).END(xlUp).Row
@@ -94,7 +94,7 @@ Dim dicDadosD200 As New Dictionary
 Dim dicDadosD201 As New Dictionary
 Dim dicDadosD205 As New Dictionary
 Dim Campos As Variant, CamposDic, CamposD190
-Dim CHV_REG As String, Arquivo$, NUM_DOC_INI$, NUM_DOC_FIN$, Chave$
+Dim CHV_REG As String, ARQUIVO$, NUM_DOC_INI$, NUM_DOC_FIN$, Chave$
 Dim VL_DOC As Double, VL_ICMS#
 Dim i As Long
     
@@ -122,7 +122,7 @@ Dim i As Long
         With CamposD200
             
             CHV_REG = Campos(dicTitulosD100("CHV_REG"))
-            Arquivo = Campos(dicTitulosD100("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosD100("ARQUIVO"))
             .REG = "D200"
             .COD_MOD = Campos(dicTitulosD100("COD_MOD"))
             .COD_SIT = Campos(dicTitulosD100("COD_SIT"))
@@ -170,8 +170,8 @@ Dim i As Long
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
             'fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .CFOP, .DT_REF)
 
-            Call IncuirRegistroD201(CDbl(.VL_DOC), VL_ICMS, dicDadosD201, Arquivo, dicTitulosD201)
-            Call IncuirRegistroD205(CDbl(.VL_DOC), VL_ICMS, dicDadosD205, Arquivo, dicTitulosD205)
+            Call IncuirRegistroD201(CDbl(.VL_DOC), VL_ICMS, dicDadosD201, ARQUIVO, dicTitulosD201)
+            Call IncuirRegistroD205(CDbl(.VL_DOC), VL_ICMS, dicDadosD205, ARQUIVO, dicTitulosD205)
             
             
             Chave = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
@@ -192,7 +192,7 @@ Dim i As Long
                 
             End If
                         
-            Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI, "", .COD_MOD, .COD_SIT, Util.FormatarTexto(.SER), Util.FormatarTexto(.SUB), _
+            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", .COD_MOD, .COD_SIT, Util.FormatarTexto(.SER), Util.FormatarTexto(.SUB), _
                  Util.FormatarTexto(.NUM_DOC_INI), Util.FormatarTexto(.NUM_DOC_FIN), .Cfop, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
             
             dicDadosD200(Chave) = Campos
@@ -216,7 +216,7 @@ Dim i As Long
 End Function
 
 Public Sub IncuirRegistroD201(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD201 As Dictionary, _
-    ByVal Arquivo As String, ByRef dicTitulosD201 As Dictionary)
+    ByVal ARQUIVO As String, ByRef dicTitulosD201 As Dictionary)
     
 Dim Campos As Variant, dicCampos
 Dim i As Byte
@@ -241,7 +241,7 @@ Dim i As Byte
             
         End If
         
-        Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI, "", Util.FormatarTexto(.CST_PIS), _
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", Util.FormatarTexto(.CST_PIS), _
             CDbl(.VL_ITEM), CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), CDbl(.VL_PIS), .COD_CTA)
             
         dicDadosD201(.CHV_REG) = Campos
@@ -251,7 +251,7 @@ Dim i As Byte
 End Sub
 
 Public Sub IncuirRegistroD205(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD205 As Dictionary, _
-    ByVal Arquivo As String, ByRef dicTitulosD205 As Dictionary)
+    ByVal ARQUIVO As String, ByRef dicTitulosD205 As Dictionary)
     
 Dim Campos As Variant, dicCampos
 Dim i As Byte
@@ -276,7 +276,7 @@ Dim i As Byte
             
         End If
         
-        Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI, "", Util.FormatarTexto(.CST_COFINS), _
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", Util.FormatarTexto(.CST_COFINS), _
             CDbl(.VL_ITEM), CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA)
             
         dicDadosD205(.CHV_REG) = Campos
@@ -370,20 +370,20 @@ Dim i As Byte
     With CamposD101_Contr
         
         .REG = "D101"
-        .Arquivo = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
+        .ARQUIVO = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
         .IND_NAT_FRT = ""
         .VL_ITEM = Campos(dtoTitSPED.tD100("VL_DOC") - i)
-        .CST_PIS = ExtrairCST_PIS_COFINS_AquisicaoFrete(.Arquivo)
+        .CST_PIS = ExtrairCST_PIS_COFINS_AquisicaoFrete(.ARQUIVO)
         .NAT_BC_CRED = ""
         .VL_BC_PIS = VBA.Round(.VL_ITEM - Campos(dtoTitSPED.tD100("VL_ICMS") - i), 2)
-        .ALIQ_PIS = ExtrairALIQ_PIS_AquisicaoFrete(.Arquivo)
+        .ALIQ_PIS = ExtrairALIQ_PIS_AquisicaoFrete(.ARQUIVO)
         .VL_PIS = VBA.Round(.VL_BC_PIS * .ALIQ_PIS, 2)
         .COD_CTA = fnExcel.FormatarTexto(Campos(dtoTitSPED.tD100("COD_CTA") - i))
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD100("CHV_REG") - i)
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_CONTRIBUICOES, .CST_PIS, .ALIQ_PIS, .COD_CTA)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
             .CST_PIS, .NAT_BC_CRED, CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), CDbl(.VL_PIS), .COD_CTA)
             
         dtoRegSPED.rD101_Contr(.CHV_REG) = Campos
@@ -401,20 +401,20 @@ Dim i As Byte
     With CamposD105
         
         .REG = "D105"
-        .Arquivo = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
+        .ARQUIVO = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
         .IND_NAT_FRT = ""
         .VL_ITEM = Campos(dtoTitSPED.tD100("VL_DOC") - i)
-        .CST_COFINS = ExtrairCST_PIS_COFINS_AquisicaoFrete(.Arquivo)
+        .CST_COFINS = ExtrairCST_PIS_COFINS_AquisicaoFrete(.ARQUIVO)
         .NAT_BC_CRED = ""
         .VL_BC_COFINS = VBA.Round(.VL_ITEM - Campos(dtoTitSPED.tD100("VL_ICMS") - i), 2)
-        .ALIQ_COFINS = ExtrairALIQ_COFINS_AquisicaoFrete(.Arquivo)
+        .ALIQ_COFINS = ExtrairALIQ_COFINS_AquisicaoFrete(.ARQUIVO)
         .VL_COFINS = VBA.Round(.VL_BC_COFINS * .ALIQ_COFINS, 2)
         .COD_CTA = fnExcel.FormatarTexto(Campos(dtoTitSPED.tD100("COD_CTA") - i))
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD100("CHV_REG") - i)
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_CONTRIBUICOES, .CST_COFINS, .ALIQ_COFINS, .COD_CTA)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
             .CST_COFINS, .NAT_BC_CRED, CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA)
             
         dtoRegSPED.rD105(.CHV_REG) = Campos
@@ -423,13 +423,13 @@ Dim i As Byte
     
 End Sub
 
-Private Function ExtrairCST_PIS_COFINS_AquisicaoFrete(ByVal Arquivo As String) As String
+Private Function ExtrairCST_PIS_COFINS_AquisicaoFrete(ByVal ARQUIVO As String) As String
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
         
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)
@@ -446,13 +446,13 @@ Dim COD_INC_TRIB As String
     
 End Function
 
-Private Function ExtrairALIQ_PIS_AquisicaoFrete(ByVal Arquivo As String) As Double
+Private Function ExtrairALIQ_PIS_AquisicaoFrete(ByVal ARQUIVO As String) As Double
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
         
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)
@@ -469,13 +469,13 @@ Dim COD_INC_TRIB As String
     
 End Function
 
-Private Function ExtrairALIQ_COFINS_AquisicaoFrete(ByVal Arquivo As String) As Double
+Private Function ExtrairALIQ_COFINS_AquisicaoFrete(ByVal ARQUIVO As String) As Double
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
         
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)

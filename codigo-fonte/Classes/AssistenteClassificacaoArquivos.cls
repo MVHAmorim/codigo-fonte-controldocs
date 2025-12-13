@@ -112,14 +112,14 @@ End Function
 Private Function CriarScriptPowerShell_ListarPastas(ByVal CaminhoArquivoPaths As String, ByVal CaminhoArquivoSaida As String) As String
 
 Dim objFSO As New FileSystemObject
-Dim Arquivo As Object
+Dim ARQUIVO As Object
 Dim ScriptPath As String
 Dim ScriptContent As String
     
     ScriptPath = objFSO.GetSpecialFolder(2) & "\" & objFSO.GetTempName & ".ps1"
-    Set Arquivo = objFSO.CreateTextFile(ScriptPath, True)
+    Set ARQUIVO = objFSO.CreateTextFile(ScriptPath, True)
     
-    With Arquivo
+    With ARQUIVO
         
         .WriteLine "# Ler o arquivo de paths com Windows-1252 (ANSI)" & vbCrLf
         .WriteLine "$path = Get-Content -Path '" & CaminhoArquivoPaths & "' -Encoding 'Default'" & vbCrLf
@@ -136,7 +136,7 @@ Dim ScriptContent As String
     End With
     
     Set objFSO = Nothing
-    Set Arquivo = Nothing
+    Set ARQUIVO = Nothing
     
     CriarScriptPowerShell_ListarPastas = ScriptPath
     
@@ -146,12 +146,12 @@ Private Function CriarScriptPowerShell_ListarArquivos(ByVal CaminhoArquivoPaths 
     
 Dim objFSO As New FileSystemObject
 Dim Script As String
-Dim Arquivo As Object
+Dim ARQUIVO As Object
     
     Script = objFSO.GetSpecialFolder(2) & "\" & objFSO.GetTempName & ".ps1"
     
-    Set Arquivo = objFSO.CreateTextFile(Script, True)
-    With Arquivo
+    Set ARQUIVO = objFSO.CreateTextFile(Script, True)
+    With ARQUIVO
                 
         .WriteLine "# Ler o arquivo de paths com Windows-1252 (ANSI)"
         .WriteLine "$paths = Get-Content -Path '" & CaminhoArquivoPaths & "' -Encoding 'Default'"
@@ -190,13 +190,13 @@ End Sub
 Private Sub DeletarArquivosTemporarios(ByVal Arquivos As Variant)
 
 Dim objFSO As New FileSystemObject
-Dim Arquivo As Variant
+Dim ARQUIVO As Variant
     
     On Error Resume Next
         
-        For Each Arquivo In Arquivos
+        For Each ARQUIVO In Arquivos
             
-            If objFSO.FileExists(Arquivo) Then objFSO.DeleteFile Arquivo
+            If objFSO.FileExists(ARQUIVO) Then objFSO.DeleteFile ARQUIVO
             
         Next
         

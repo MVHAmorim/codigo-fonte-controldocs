@@ -61,15 +61,15 @@ Private Sub GerarRegistrosSPED(ByRef CTe As DOMDocument60)
     
     With assImportacao
         
-        If Not dtoRegSPED.r0000.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0000(CTe)
-        If Not dtoRegSPED.r0000_Contr.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0000_Contr(CTe)
-        If Not dtoRegSPED.r0001.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0001
-        If Not dtoRegSPED.r0005.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0005(CTe)
-        If Not dtoRegSPED.r0100.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0100
-        If Not dtoRegSPED.r0110.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0110
-        If Not dtoRegSPED.r0140.Exists(DadosXML.Arquivo & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistro0140(CTe)
-        If Not dtoRegSPED.rD001.Exists(DadosXML.Arquivo) Then Call .CriarRegistroD001
-        If Not dtoRegSPED.rD010.Exists(DadosXML.Arquivo & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistroD010
+        If Not dtoRegSPED.r0000.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0000(CTe)
+        If Not dtoRegSPED.r0000_Contr.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0000_Contr(CTe)
+        If Not dtoRegSPED.r0001.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0001
+        If Not dtoRegSPED.r0005.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0005(CTe)
+        If Not dtoRegSPED.r0100.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0100
+        If Not dtoRegSPED.r0110.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0110
+        If Not dtoRegSPED.r0140.Exists(DadosXML.ARQUIVO & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistro0140(CTe)
+        If Not dtoRegSPED.rD001.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistroD001
+        If Not dtoRegSPED.rD010.Exists(DadosXML.ARQUIVO & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistroD010
         
         Call ProcessarXML(CTe)
         
@@ -115,9 +115,9 @@ Dim i As Long
     With CamposD100
         
         .REG = Campos(dtoTitSPED.tD100("REG"))
-        .Arquivo = Campos(dtoTitSPED.tD100("ARQUIVO"))
+        .ARQUIVO = Campos(dtoTitSPED.tD100("ARQUIVO"))
         .CHV_REG = Campos(dtoTitSPED.tD100("CHV_REG"))
-        .CHV_PAI_Fiscal = Campos(dtoTitSPED.tD100("CHV_PAI_FISCAL"))
+        .CHV_PAI_FISCAL = Campos(dtoTitSPED.tD100("CHV_PAI_FISCAL"))
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD100("CHV_PAI_CONTRIBUICOES"))
         .IND_OPER = Campos(dtoTitSPED.tD100("IND_OPER"))
         .IND_EMIT = Campos(dtoTitSPED.tD100("IND_EMIT"))
@@ -157,7 +157,7 @@ Dim Chave  As String
     With CamposD100
         
         .REG = "D100"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .COD_MOD = fnXML.ValidarTag(CTe, "//mod")
         .COD_PART = assImportacao.ExtrairCodigoParticipante()
         .COD_SIT = EnumContribuicoes.ValidarEnumeracao_COD_SIT(fnSPED.GerarCodigoSituacao(fnXML.ValidarSituacao(ValidarTag(CTe, "//cStat"))))
@@ -179,7 +179,7 @@ Dim Chave  As String
         .COD_CTA = ""
         .COD_MUN_ORIG = ValidarTag(CTe, "//cMunIni")
         .COD_MUN_DEST = ValidarTag(CTe, "//cMunFim")
-        .CHV_PAI_Fiscal = assImportacao.ExtrairChaveRegD001()
+        .CHV_PAI_FISCAL = assImportacao.ExtrairChaveRegD001()
         .CHV_PAI_CONTRIBUICOES = assImportacao.ExtrairChaveRegD010()
         
         If .COD_PART <> "" Then .COD_PART = Util.FormatarTexto(.COD_PART)
@@ -207,7 +207,7 @@ Dim Chave  As String
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .IND_OPER, .IND_EMIT, .COD_PART, .COD_MOD, .SER, .SUB, .NUM_DOC, .CHV_CTE)
         Chave = Util.UnirCampos(.IND_OPER, .IND_EMIT, .CHV_CTE)
         
-        Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_OPER, _
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_OPER, _
             .IND_EMIT, Util.FormatarTexto(.COD_PART), .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC, .CHV_CTE, _
             .DT_DOC, .DT_A_P, .TP_CTe, .CHV_CTE_REF, CDbl(.VL_DOC), CDbl(.VL_DESC), .IND_FRT, CDbl(.VL_SERV), _
             CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_NT), .COD_INF, .COD_CTA, .COD_MUN_ORIG, .COD_MUN_DEST)
@@ -231,15 +231,15 @@ Dim total As Double
         If Not dtoRegSPED.rD101.Exists(CamposD100.CHV_REG) Then
             
             .REG = "D101"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .VL_FCP_UF_DEST = fnXML.ValidarValores(CTe, "//ICMSTot/vFCPUFDest")
             .VL_ICMS_UF_DEST = fnXML.ValidarValores(CTe, "//ICMSTot/vICMSUFDest")
             .VL_ICMS_UF_REM = fnXML.ValidarValores(CTe, "//ICMSTot/vICMSUFRemet")
-            .CHV_PAI_Fiscal = CamposD100.CHV_REG
+            .CHV_PAI_FISCAL = CamposD100.CHV_REG
             .CHV_PAI_CONTRIBUICOES = ""
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "D101")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
                 CDbl(.VL_FCP_UF_DEST), CDbl(.VL_ICMS_UF_DEST), CDbl(.VL_ICMS_UF_REM))
             
             total = CDbl(.VL_FCP_UF_DEST) + CDbl(.VL_ICMS_UF_DEST) + CDbl(.VL_ICMS_UF_REM)
@@ -302,20 +302,20 @@ Dim i As Byte
     With CamposD101_Contr
         
         .REG = "D101"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .IND_NAT_FRT = ""
         .VL_ITEM = Campos(dtoTitSPED.tD100("VL_DOC") - i)
-        .CST_PIS = assImportacao.ExtrairCST_PIS_COFINS_AquisicaoFrete(.Arquivo)
+        .CST_PIS = assImportacao.ExtrairCST_PIS_COFINS_AquisicaoFrete(.ARQUIVO)
         .NAT_BC_CRED = ""
         .VL_BC_PIS = .VL_ITEM
-        .ALIQ_PIS = assImportacao.ExtrairALIQ_PIS_AquisicaoFrete(.Arquivo)
+        .ALIQ_PIS = assImportacao.ExtrairALIQ_PIS_AquisicaoFrete(.ARQUIVO)
         .VL_PIS = VBA.Round(.VL_BC_PIS * .ALIQ_PIS, 2)
         .COD_CTA = fnExcel.FormatarTexto(Campos(dtoTitSPED.tD100("COD_CTA") - i))
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD100("CHV_REG") - i)
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_CONTRIBUICOES, .CST_PIS, .ALIQ_PIS, .COD_CTA)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
             .CST_PIS, .NAT_BC_CRED, CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), CDbl(.VL_PIS), .COD_CTA)
             
         dtoRegSPED.rD101_Contr(.CHV_REG) = Campos
@@ -333,20 +333,20 @@ Dim i As Byte
     With CamposD105
         
         .REG = "D105"
-        .Arquivo = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
+        .ARQUIVO = Campos(dtoTitSPED.tD100("ARQUIVO") - i)
         .IND_NAT_FRT = ""
         .VL_ITEM = Campos(dtoTitSPED.tD100("VL_DOC") - i)
-        .CST_COFINS = assImportacao.ExtrairCST_PIS_COFINS_AquisicaoFrete(.Arquivo)
+        .CST_COFINS = assImportacao.ExtrairCST_PIS_COFINS_AquisicaoFrete(.ARQUIVO)
         .NAT_BC_CRED = ""
         .VL_BC_COFINS = .VL_ITEM
-        .ALIQ_COFINS = assImportacao.ExtrairALIQ_COFINS_AquisicaoFrete(.Arquivo)
+        .ALIQ_COFINS = assImportacao.ExtrairALIQ_COFINS_AquisicaoFrete(.ARQUIVO)
         .VL_COFINS = VBA.Round(.VL_BC_COFINS * .ALIQ_COFINS, 2)
         .COD_CTA = fnExcel.FormatarTexto(Campos(dtoTitSPED.tD100("COD_CTA") - i))
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD100("CHV_REG") - i)
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_CONTRIBUICOES, .CST_COFINS, .ALIQ_COFINS, .COD_CTA)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI_CONTRIBUICOES, .IND_NAT_FRT, CDbl(.VL_ITEM), _
             .CST_COFINS, .NAT_BC_CRED, CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA)
             
         dtoRegSPED.rD105(.CHV_REG) = Campos
@@ -356,7 +356,7 @@ Dim i As Byte
 End Sub
 
 Public Sub CriarRegistroD200(ByRef CTe As IXMLDOMNode, ByRef dicDadosD200 As Dictionary, ByRef dicTitulosD200 As Dictionary, _
-    ByRef dicDadosD201 As Dictionary, ByRef dicDadosD205 As Dictionary, ByVal Arquivo As String, ByVal CHV_PAI As String)
+    ByRef dicDadosD201 As Dictionary, ByRef dicDadosD205 As Dictionary, ByVal ARQUIVO As String, ByVal CHV_PAI As String)
     
 Dim Chave As String, NUM_DOC_INI$, NUM_DOC_FIN$
 Dim Campos As Variant, CamposDic
@@ -397,20 +397,20 @@ Dim i As Byte
         End If
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .Cfop, .DT_REF)
-        Campos = Array(.REG, Arquivo, .CHV_REG, "", .CHV_PAI, .COD_MOD, .COD_SIT, "'" & .SER, .SUB, _
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, .COD_MOD, .COD_SIT, "'" & .SER, .SUB, _
             "'" & .NUM_DOC_INI, "'" & .NUM_DOC_FIN, .Cfop, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
         
         dicDadosD200(Chave) = Campos
         
         vICMS = fnXML.ValidarValores(CTe, "//imp/ICMS//vICMS")
-        Call IncuirRegistroD201(CDbl(.VL_DOC), vICMS, dicDadosD201, Arquivo)
-        Call IncuirRegistroD205(CDbl(.VL_DOC), vICMS, dicDadosD205, Arquivo)
+        Call IncuirRegistroD201(CDbl(.VL_DOC), vICMS, dicDadosD201, ARQUIVO)
+        Call IncuirRegistroD205(CDbl(.VL_DOC), vICMS, dicDadosD205, ARQUIVO)
         
     End With
     
 End Sub
 
-Public Sub IncuirRegistroD201(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD201 As Dictionary, ByVal Arquivo As String)
+Public Sub IncuirRegistroD201(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD201 As Dictionary, ByVal ARQUIVO As String)
 
 Dim Campos As Variant
     
@@ -426,7 +426,7 @@ Dim Campos As Variant
         .CHV_PAI = CamposD200.CHV_REG
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CST_PIS, .ALIQ_PIS, .COD_CTA)
-        Campos = Array(.REG, Arquivo, .CHV_REG, "", .CHV_PAI, "'" & .CST_PIS, CDbl(.VL_ITEM), CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), CDbl(.VL_PIS), .COD_CTA)
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, "'" & .CST_PIS, CDbl(.VL_ITEM), CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), CDbl(.VL_PIS), .COD_CTA)
         
         dicDadosD201(.CHV_REG) = Campos
         
@@ -434,7 +434,7 @@ Dim Campos As Variant
     
 End Sub
 
-Public Sub IncuirRegistroD205(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD205 As Dictionary, ByVal Arquivo As String)
+Public Sub IncuirRegistroD205(ByRef vRec As Double, ByRef vICMS As Double, ByRef dicDadosD205 As Dictionary, ByVal ARQUIVO As String)
 
 Dim Campos As Variant
     
@@ -450,7 +450,7 @@ Dim Campos As Variant
         .CHV_PAI = CamposD200.CHV_REG
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CST_COFINS, .ALIQ_COFINS, .COD_CTA)
-        Campos = Array(.REG, Arquivo, .CHV_REG, "", .CHV_PAI, "'" & .CST_COFINS, CDbl(.VL_ITEM), CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA)
+        Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, "'" & .CST_COFINS, CDbl(.VL_ITEM), CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA)
         
         dicDadosD205(.CHV_REG) = Campos
         

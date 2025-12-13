@@ -143,7 +143,7 @@ Dim dicTitulos As New Dictionary
             Application.DisplayFormulaBar = True
             Set dicTitulos = Util.MapearTitulos(Sh, 3)
             
-            If dicTitulos.Exists("ARQUIVO") Then Arquivo = Sh.Cells(Target.Row, dicTitulos("ARQUIVO")).value
+            If dicTitulos.Exists("ARQUIVO") Then ARQUIVO = Sh.Cells(Target.Row, dicTitulos("ARQUIVO")).value
             
             If Target.Column = dicTitulos("REGIME_TRIBUTARIO") Then Target.value = RegrasCadastrais.PIS_COFINS.ValidarEnumeracao_REGIME_TRIBUTARIO(Target.value)
             If Target.Column = dicTitulos("COD_CONS") Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_COD_CONS(Target.value)
@@ -189,7 +189,7 @@ Dim dicTitulos As New Dictionary
             If Target.Column = dicTitulos("CST_PIS_SPED") Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_CST_PIS_COFINS(Target.value)
             If Target.Column = dicTitulos("CST_COFINS_NF") Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_CST_PIS_COFINS(Target.value)
             If Target.Column = dicTitulos("CST_COFINS_SPED") Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_CST_PIS_COFINS(Target.value)
-            If Target.Column = dicTitulos("COD_NAT") And Not Sh.name Like "*0400*" Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_COD_NAT(Arquivo, Target.value)
+            If Target.Column = dicTitulos("COD_NAT") And Not Sh.name Like "*0400*" Then Target.value = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_COD_NAT(ARQUIVO, Target.value)
             
         End If
     

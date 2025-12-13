@@ -31,7 +31,7 @@ Dim Campos
         .BAIRRO = Util.FormatarTexto(Campos(13))
 
         .CHV_REG = Util.RemoverAspaSimples(.COD_PART)
-        dicDados(.CHV_REG) = Array(.REG, Campos0000.Arquivo, .COD_PART, .Nome, .COD_PAIS, _
+        dicDados(.CHV_REG) = Array(.REG, Campos0000.ARQUIVO, .COD_PART, .Nome, .COD_PAIS, _
                                    .CNPJ, .CPF, .IE, .COD_MUN, .SUFRAMA, .END, .NUM, .COMPL, .BAIRRO)
 
     End With

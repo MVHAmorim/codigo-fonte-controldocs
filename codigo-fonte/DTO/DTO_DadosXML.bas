@@ -7,7 +7,7 @@ Public DadosXML As InformacoesXML
 Public Type InformacoesXML
     
     Periodo As String
-    Arquivo As String
+    ARQUIVO As String
     COD_MOD As String
     CNPJ_EMITENTE As String
     CNPJ_DESTINATARIO As String

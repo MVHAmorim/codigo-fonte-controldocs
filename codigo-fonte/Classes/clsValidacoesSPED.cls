@@ -175,7 +175,7 @@ End Function
 Public Function ValidarPeriodoArquivo() As Boolean
     
 Dim dicDados0000 As New Dictionary
-Dim Periodo As String, Arquivo$, Msg$
+Dim Periodo As String, ARQUIVO$, Msg$
 
     Set dicDados0000 = Util.CriarDicionarioRegistro(reg0000, "ARQUIVO")
     
@@ -183,8 +183,8 @@ Dim Periodo As String, Arquivo$, Msg$
     CNPJBase = VBA.Left(CNPJContribuinte, 8)
     Periodo = VBA.Format(PeriodoEspecifico, "00/0000")
             
-    Arquivo = Periodo & "-" & CNPJContribuinte
-    If dicDados0000.Exists(Arquivo) Then ValidarPeriodoArquivo = True
+    ARQUIVO = Periodo & "-" & CNPJContribuinte
+    If dicDados0000.Exists(ARQUIVO) Then ValidarPeriodoArquivo = True
 
 End Function
 

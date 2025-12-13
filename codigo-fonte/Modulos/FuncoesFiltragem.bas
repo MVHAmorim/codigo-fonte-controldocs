@@ -25,7 +25,7 @@ Dim UltLin As Long
             .Apply
         End With
             
-        Application.GoTo [A3]
+        Application.Goto [A3]
     
     End If
     
@@ -53,7 +53,7 @@ Dim UltLin As Long
             .Apply
         End With
         
-        Application.GoTo [A3]
+        Application.Goto [A3]
     
     End If
     
@@ -95,7 +95,7 @@ Dim CHV_NFE As String
         
         regC100.Activate
         Intervalo.AutoFilter Field:=CInt(dicTitulos("CHV_NFE")), Criteria1:=CHV_NFE
-        Call Application.GoTo(regC100.Range("A3"))
+        Call Application.Goto(regC100.Range("A3"))
         
 End Function
 
@@ -129,7 +129,7 @@ Dim REG As String, Cfop$, CST$, ALIQ$
         
         End With
         
-        Call Application.GoTo(Plan.Range("A3"))
+        Call Application.Goto(Plan.Range("A3"))
         
 End Function
 

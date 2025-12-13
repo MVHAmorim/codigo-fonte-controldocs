@@ -543,7 +543,7 @@ End Function
 
 Public Sub AtualizarRegistros()
 
-Dim CHV_REG As String, CHV_PAI$, CHV_0001$, CHV_0140$, CHV_0190$, CHV_0200$, CHV_C100$, COD_ITEM$, UNID$, Arquivo$
+Dim CHV_REG As String, CHV_PAI$, CHV_0001$, CHV_0140$, CHV_0190$, CHV_0200$, CHV_C100$, COD_ITEM$, UNID$, ARQUIVO$
 Dim Campos As Variant, Campos0190, Campos0200, CamposC170, dicCampos, regCampo, nCampo
 Dim ExpReg As New ExportadorRegistros
 Dim arrDivProdutos As New ArrayList
@@ -578,7 +578,7 @@ Dim i As Integer, j As Integer
         
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulos("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulos("ARQUIVO"))
             COD_ITEM = Campos(dicTitulos("COD_ITEM_SPED"))
             UNID = Campos(dicTitulos("UNID_SPED"))
             
@@ -586,12 +586,12 @@ Dim i As Integer, j As Integer
             CHV_0190 = Util.UnirCampos(CHV_PAI, UNID)
             If Not dtoRegSPED.r0190.Exists(CHV_0190) Then
                 
-                CHV_0001 = dtoRegSPED.r0001(Arquivo)(dtoTitSPED.t0001("CHV_REG"))
+                CHV_0001 = dtoRegSPED.r0001(ARQUIVO)(dtoTitSPED.t0001("CHV_REG"))
                 CHV_C100 = Campos(dicTitulos("CHV_PAI_CONTRIBUICOES"))
                 CHV_0140 = Extrair_CHV_0140(CHV_C100)
                 
                 CHV_REG = fnSPED.GerarChaveRegistro(CHV_0001, UNID)
-                dicCampos = Array("'0190", Arquivo, CHV_REG, CHV_0001, CHV_0140, UNID, UNID)
+                dicCampos = Array("'0190", ARQUIVO, CHV_REG, CHV_0001, CHV_0140, UNID, UNID)
                 
                 dtoRegSPED.r0190(CHV_0190) = dicCampos
                 
@@ -724,7 +724,7 @@ End Sub
 Private Function TaratarCamposC170(ByVal Campos As Variant, ByVal Campo As String)
 
 Const CamposIgnorar As String = "CHV_NFE, NUM_DOC, SER, DESCR_ITEM, COD_BARRA, COD_NCM, EX_IPI, CEST"
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, COD_ITEM$, UNID$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, COD_ITEM$, UNID$
 Dim VL_OPER As Double
     
     With Divergencias
@@ -739,8 +739,8 @@ Dim VL_OPER As Double
                 Call .ExtrairDadosC100(CHV_PAI)
                 
             Case Campo Like "ARQUIVO"
-                Arquivo = Campos(dtoTitSPED.tC170(Campo))
-                .AtribuirValor Campo, Arquivo
+                ARQUIVO = Campos(dtoTitSPED.tC170(Campo))
+                .AtribuirValor Campo, ARQUIVO
                 
             Case Campo Like "COD_ITEM"
                 COD_ITEM = Campos(dtoTitSPED.tC170(Campo))
@@ -814,18 +814,18 @@ Dim i As Integer
 Dim Chave As String
 Dim Campo As Variant, Valor
 Dim Campos0001 As Variant, Campos0140, Campos0190, CamposC010, CamposC100
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_C010$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOES$, CNPJ$, UNID$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_C010$, CHV_PAI_FISCAL$, CHV_PAI_CONTRIBUICOES$, CNPJ$, UNID$
     
     i = Util.VerificarPosicaoInicialArray(Campos)
     
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
-    CHV_PAI_Fiscal = Campos(dicTitulos("CHV_PAI_FISCAL") - i)
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
+    CHV_PAI_FISCAL = Campos(dicTitulos("CHV_PAI_FISCAL") - i)
     CHV_PAI_CONTRIBUICOES = Campos(dicTitulos("CHV_PAI_CONTRIBUICOES") - i)
     UNID = Campos(dicTitulos(IIf(CamposSPED = True, "UNID_SPED", "UNID")) - i)
     
-    If CHV_PAI_Fiscal <> "" And dtoRegSPED.r0000.Count > 0 Then
+    If CHV_PAI_FISCAL <> "" And dtoRegSPED.r0000.Count > 0 Then
         
-        Campos0001 = dtoRegSPED.r0001(Arquivo)
+        Campos0001 = dtoRegSPED.r0001(ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos0001)
         CHV_PAI = Campos0001(dtoTitSPED.t0001("CHV_REG") - i)
         
@@ -855,18 +855,18 @@ Dim i As Integer
 Dim Chave As String
 Dim Campo As Variant, Valor
 Dim Campos0001 As Variant, Campos0140, Campos0200, CamposC010, CamposC100
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_C010$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOES$, CNPJ$, COD_ITEM$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_C010$, CHV_PAI_FISCAL$, CHV_PAI_CONTRIBUICOES$, CNPJ$, COD_ITEM$
     
     i = Util.VerificarPosicaoInicialArray(Campos)
     
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
-    CHV_PAI_Fiscal = Campos(dicTitulos("CHV_PAI_FISCAL") - i)
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
+    CHV_PAI_FISCAL = Campos(dicTitulos("CHV_PAI_FISCAL") - i)
     CHV_PAI_CONTRIBUICOES = Campos(dicTitulos("CHV_PAI_CONTRIBUICOES") - i)
     COD_ITEM = Campos(dicTitulos(IIf(CamposSPED = True, "COD_ITEM_SPED", "COD_ITEM")) - i)
     
-    If CHV_PAI_Fiscal <> "" And dtoRegSPED.r0000.Count > 0 Then
+    If CHV_PAI_FISCAL <> "" And dtoRegSPED.r0000.Count > 0 Then
         
-        Campos0001 = dtoRegSPED.r0001(Arquivo)
+        Campos0001 = dtoRegSPED.r0001(ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos0001)
         CHV_PAI = Campos0001(dtoTitSPED.t0001("CHV_REG") - i)
         
@@ -1824,7 +1824,7 @@ Dim UltLin As Long
     With Campos0150
             
         .REG = "'0150"
-        .Arquivo = CamposSPED(1)
+        .ARQUIVO = CamposSPED(1)
         .CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, Util.ApenasNumeros(CamposSPED(8)))
         .CHV_PAI = CHV_PAI
         .COD_PART = fnXML.ExtrairCNPJEmitente(NFe)
@@ -1841,7 +1841,7 @@ Dim UltLin As Long
         .BAIRRO = VBA.UCase(ValidarTag(NFe, "//emit//xBairro"))
         If .COD_PAIS = "" Then .COD_PAIS = "1058"
                 
-        dicDados0150(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
+        dicDados0150(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
             .Nome, .COD_PAIS, .CNPJ, .CPF, .IE, .COD_MUN, .SUFRAMA, .END, .NUM, .COMPL, .BAIRRO)
         
     End With

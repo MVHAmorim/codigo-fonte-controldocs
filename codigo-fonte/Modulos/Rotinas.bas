@@ -428,7 +428,7 @@ Public Function ListarArquivos(ByRef ListaXMLS As ArrayList) As ArrayList
 Dim Caminho As String, Arq
 Dim FSO As New FileSystemObject
 Dim pasta As Folder
-Dim Arquivo As file
+Dim ARQUIVO As file
     
     Caminho = Util.SelecionarPasta()
     If Caminho <> "" Then
@@ -438,9 +438,9 @@ Dim Arquivo As file
         Set pasta = FSO.GetFolder(Caminho)
         Application.StatusBar = "Listando os arquivos do diretório, por favor aguarde."
         
-        For Each Arquivo In pasta.Files
-            If InStr(1, VBA.LCase(Arquivo.Path), ".xml") Then ListaXMLS.Add Arquivo.Path
-        Next Arquivo
+        For Each ARQUIVO In pasta.Files
+            If InStr(1, VBA.LCase(ARQUIVO.Path), ".xml") Then ListaXMLS.Add ARQUIVO.Path
+        Next ARQUIVO
         
         Call Funcoes.IndentificarSubPastas(Caminho, ListaXMLS)
         

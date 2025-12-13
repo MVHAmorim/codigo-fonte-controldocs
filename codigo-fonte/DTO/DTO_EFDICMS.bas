@@ -218,10 +218,10 @@ Public Campos1990 As CamposReg1990
 Public Type CamposReg0000
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_VER As String
     COD_FIN As String
@@ -243,10 +243,10 @@ End Type
 Public Type CamposReg0001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -255,10 +255,10 @@ End Type
 Public Type CamposReg0002
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CLAS_ESTAB_IND As String
     
@@ -267,10 +267,10 @@ End Type
 Public Type CamposReg0005
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     FANTASIA As String
     CEP As String
@@ -287,10 +287,10 @@ End Type
 Public Type CamposReg0015
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     UF_ST As String
     IE_ST As String
@@ -300,10 +300,10 @@ End Type
 Public Type CamposReg0100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     Nome As String
     CPF As String
@@ -324,10 +324,10 @@ End Type
 Public Type CamposReg0140
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_EST As String
     Nome As String
@@ -343,10 +343,10 @@ End Type
 Public Type CamposReg0150
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     Nome As String
@@ -366,10 +366,10 @@ End Type
 Public Type CamposReg0175
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_ALT As String
     NR_CAMPO As String
@@ -380,10 +380,10 @@ End Type
 Public Type CamposReg0190
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     UNID As String
     DESCR As String
@@ -393,10 +393,10 @@ End Type
 Public Type CamposReg0200
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     DESCR_ITEM As String
@@ -416,10 +416,10 @@ End Type
 Public Type CamposReg0205
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DESCR_ANT_ITEM As String
     DT_INI As String
@@ -431,10 +431,10 @@ End Type
 Public Type CamposReg0206
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_COMB As String
     
@@ -443,10 +443,10 @@ End Type
 Public Type CamposReg0210
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM_COMP As String
     QTD_COMP As String
@@ -457,10 +457,10 @@ End Type
 Public Type CamposReg0220
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     UNID_CONV As String
     FAT_CONV As String
@@ -471,10 +471,10 @@ End Type
 Public Type CamposReg0221
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM_ATOMICO As String
     QTD_CONTIDA As String
@@ -484,10 +484,10 @@ End Type
 Public Type CamposReg0300
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_IND_BEM As String
     IDENT_MERC As String
@@ -501,10 +501,10 @@ End Type
 Public Type CamposReg0305
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_CCUS As String
     FUNC As String
@@ -515,10 +515,10 @@ End Type
 Public Type CamposReg0400
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_NAT As String
     DESCR_NAT As String
@@ -528,10 +528,10 @@ End Type
 Public Type CamposReg0450
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_INF As String
     TXT As String
@@ -541,10 +541,10 @@ End Type
 Public Type CamposReg0460
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OBS As String
     TXT As String
@@ -554,10 +554,10 @@ End Type
 Public Type CamposReg0500
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_ALT As String
     COD_NAT_CC As String
@@ -571,10 +571,10 @@ End Type
 Public Type CamposReg0600
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_ALT As String
     COD_CCUS As String
@@ -585,10 +585,10 @@ End Type
 Public Type CamposReg0990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_0 As String
     
@@ -602,10 +602,10 @@ End Type
 Public Type CamposRegB001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_DAD As String
     
@@ -614,10 +614,10 @@ End Type
 Public Type CamposRegB990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_B As String
     
@@ -631,10 +631,10 @@ End Type
 Public Type CamposRegC001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -643,10 +643,10 @@ End Type
 Public Type CamposRegC010
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CNPJ As String
     IND_ESCRI As String
@@ -656,10 +656,10 @@ End Type
 Public Type CamposRegC100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -699,10 +699,10 @@ End Type
 Public Type CamposRegC101
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_FCP_UF_DEST As String
     VL_ICMS_UF_DEST As String
@@ -713,10 +713,10 @@ End Type
 Public Type CamposRegC105
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     OPER As String
     UF As String
@@ -726,10 +726,10 @@ End Type
 Public Type CamposRegC110
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_INF As String
     TXT_COMPL As String
@@ -739,10 +739,10 @@ End Type
 Public Type CamposRegC111
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_PROC As String
     IND_PROC As String
@@ -752,10 +752,10 @@ End Type
 Public Type CamposRegC112
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_DA As String
     UF As String
@@ -770,10 +770,10 @@ End Type
 Public Type CamposRegC113
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -790,10 +790,10 @@ End Type
 Public Type CamposRegC114
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     ECF_FAB As String
@@ -806,10 +806,10 @@ End Type
 Public Type CamposRegC115
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_CARGA As String
     CNPJ_COL As String
@@ -826,10 +826,10 @@ End Type
 Public Type CamposRegC116
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     NR_SAT As String
@@ -842,10 +842,10 @@ End Type
 Public Type CamposRegC120
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_DOC_IMP As String
     NUM_DOC_IMP As String
@@ -858,10 +858,10 @@ End Type
 Public Type CamposRegC130
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_SERV_NT As String
     VL_BC_ISSQN As String
@@ -876,10 +876,10 @@ End Type
 Public Type CamposRegC140
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_EMIT As String
     IND_TIT As String
@@ -893,10 +893,10 @@ End Type
 Public Type CamposRegC141
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_PARC As String
     DT_VCTO As String
@@ -907,10 +907,10 @@ End Type
 Public Type CamposRegC160
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     VEIC_ID As String
@@ -924,10 +924,10 @@ End Type
 Public Type CamposRegC165
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     VEIC_ID As String
@@ -947,10 +947,10 @@ End Type
 Public Type CamposRegC170
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -997,10 +997,10 @@ End Type
 Public Type CamposRegC171
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_TANQUE As String
     QTDE As String
@@ -1010,10 +1010,10 @@ End Type
 Public Type CamposRegC172
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_BC_ISSQN As String
     ALIQ_ISSQN As String
@@ -1024,10 +1024,10 @@ End Type
 Public Type CamposRegC173
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     LOTE_MED As String
     QTD_ITEM As String
@@ -1042,10 +1042,10 @@ End Type
 Public Type CamposRegC174
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_ARM As String
     NUM_ARM As String
@@ -1056,10 +1056,10 @@ End Type
 Public Type CamposRegC175
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_VEIC_OPER As String
     CNPJ As String
@@ -1071,10 +1071,10 @@ End Type
 Public Type CamposregC175_Contr
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     Cfop As String
     VL_OPER As String
@@ -1100,10 +1100,10 @@ End Type
 Public Type CamposRegC176
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD_ULT_E As String
     NUM_DOC_ULT_E As String
@@ -1137,10 +1137,10 @@ End Type
 Public Type CamposRegC177
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_INF_ITEM As String
     
@@ -1149,10 +1149,10 @@ End Type
 Public Type CamposRegC178
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CL_ENQ As String
     VL_UNID As String
@@ -1163,10 +1163,10 @@ End Type
 Public Type CamposRegC179
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     BC_ST_ORIG_DEST As String
     ICMS_ST_REP As String
@@ -1179,10 +1179,10 @@ End Type
 Public Type CamposRegC180
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_RESP_RET As String
     QUANT_CONV As String
@@ -1200,10 +1200,10 @@ End Type
 Public Type CamposRegC181
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
@@ -1231,10 +1231,10 @@ End Type
 Public Type CamposRegC185
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -1259,10 +1259,10 @@ End Type
 Public Type CamposRegC186
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -1288,10 +1288,10 @@ End Type
 Public Type CamposRegC190
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ENFOQUE As String
     CST_ICMS As String
@@ -1312,10 +1312,10 @@ End Type
 Public Type CamposRegC191
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_FCP_OP As String
     VL_FCP_ST As String
@@ -1326,10 +1326,10 @@ End Type
 Public Type CamposRegC195
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OBS As String
     TXT_COMPL As String
@@ -1339,10 +1339,10 @@ End Type
 Public Type CamposRegC197
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ As String
     DESCR_COMPL_AJ As String
@@ -1358,10 +1358,10 @@ End Type
 Public Type CamposRegC400
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     ECF_MOD As String
@@ -1374,10 +1374,10 @@ End Type
 Public Type CamposRegC405
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_DOC As String
     CRO As String
@@ -1392,10 +1392,10 @@ End Type
 Public Type CamposRegC410
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_PIS As String
     VL_COFINS As String
@@ -1406,10 +1406,10 @@ End Type
 Public Type CamposRegC420
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_TOT_PAR As String
     VLR_ACUM_TOT As String
@@ -1422,10 +1422,10 @@ End Type
 Public Type CamposRegC425
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     Qtd As String
@@ -1440,10 +1440,10 @@ End Type
 Public Type CamposRegC430
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
@@ -1467,10 +1467,10 @@ End Type
 Public Type CamposRegC460
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     COD_SIT As String
@@ -1488,10 +1488,10 @@ End Type
 Public Type CamposRegC465
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CHV_CFE As String
     NUM_CCF As String
@@ -1502,10 +1502,10 @@ End Type
 Public Type CamposRegC470
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     Qtd As String
@@ -1524,10 +1524,10 @@ End Type
 Public Type CamposRegC480
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
@@ -1551,10 +1551,10 @@ End Type
 Public Type CamposRegC490
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ENFOQUE As String
     CST_ICMS As String
@@ -1572,10 +1572,10 @@ End Type
 Public Type CamposRegC495
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     ALIQ_ICMS As String
     COD_ITEM As String
@@ -1597,10 +1597,10 @@ End Type
 Public Type CamposRegC500
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -1647,10 +1647,10 @@ End Type
 Public Type CamposRegC590
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -1670,10 +1670,10 @@ End Type
 Public Type CamposRegC800
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     COD_SIT As String
@@ -1698,10 +1698,10 @@ End Type
 Public Type CamposRegC810
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -1716,10 +1716,10 @@ End Type
 Public Type CamposRegC815
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
@@ -1741,10 +1741,10 @@ End Type
 Public Type CamposRegC850
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -1761,10 +1761,10 @@ End Type
 Public Type CamposRegC855
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OBS As String
     TXT_COMPL As String
@@ -1774,10 +1774,10 @@ End Type
 Public Type CamposRegC857
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ As String
     DESCR_COMPL_AJ As String
@@ -1792,10 +1792,10 @@ End Type
 Public Type CamposRegC860
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOD As String
     NR_SAT As String
@@ -1808,10 +1808,10 @@ End Type
 Public Type CamposRegC870
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     Qtd As String
@@ -1824,10 +1824,10 @@ End Type
 Public Type CamposRegC880
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
@@ -1848,10 +1848,10 @@ End Type
 Public Type CamposRegC890
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -1867,10 +1867,10 @@ End Type
 Public Type CamposRegC895
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OBS As String
     TXT_COMPL As String
@@ -1880,10 +1880,10 @@ End Type
 Public Type CamposRegC897
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ As String
     DESCR_COMPL_AJ As String
@@ -1898,10 +1898,10 @@ End Type
 Public Type CamposRegC990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_C As String
     
@@ -1914,10 +1914,10 @@ End Type
 Public Type CamposRegD001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -1926,10 +1926,10 @@ End Type
 Public Type CamposRegD100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -1961,10 +1961,10 @@ End Type
 Public Type CamposRegD101
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_FCP_UF_DEST As String
     VL_ICMS_UF_DEST As String
@@ -1975,10 +1975,10 @@ End Type
 Public Type CamposRegD190
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -1996,10 +1996,10 @@ End Type
 Public Type CamposRegD195
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OBS As String
     TXT_COMPL As String
@@ -2009,10 +2009,10 @@ End Type
 Public Type CamposRegD197
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ As String
     DESCR_COMPL_AJ As String
@@ -2027,10 +2027,10 @@ End Type
 Public Type CamposRegD500
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -2061,10 +2061,10 @@ End Type
 Public Type CamposRegD510
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -2091,10 +2091,10 @@ End Type
 Public Type CamposRegD530
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_SERV As String
     DT_INI_SERV As String
@@ -2108,10 +2108,10 @@ End Type
 Public Type CamposRegD590
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -2131,10 +2131,10 @@ End Type
 Public Type CamposRegD700
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_OPER As String
     IND_EMIT As String
@@ -2173,10 +2173,10 @@ End Type
 Public Type CamposRegD730
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     Cfop As String
@@ -2192,10 +2192,10 @@ End Type
 Public Type CamposRegD731
 
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_FCP_OP As String
 
@@ -2204,10 +2204,10 @@ End Type
 Public Type CamposRegD990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_D As String
     
@@ -2222,10 +2222,10 @@ End Type
 Public Type CamposRegE001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -2234,10 +2234,10 @@ End Type
 Public Type CamposRegE100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INI As String
     DT_FIN As String
@@ -2247,10 +2247,10 @@ End Type
 Public Type CamposRegE110
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_TOT_DEBITOS As String
     VL_AJ_DEBITOS As String
@@ -2272,10 +2272,10 @@ End Type
 Public Type CamposRegE111
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ_APUR As String
     DESCR_COMPL_AJ As String
@@ -2286,10 +2286,10 @@ End Type
 Public Type CamposRegE112
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_DA As String
     NUM_PROC As String
@@ -2302,10 +2302,10 @@ End Type
 Public Type CamposRegE113
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     COD_MOD As String
@@ -2322,10 +2322,10 @@ End Type
 Public Type CamposRegE115
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_INF_ADIC As String
     VL_INF_ADIC As String
@@ -2336,10 +2336,10 @@ End Type
 Public Type CamposRegE116
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OR As String
     VL_OR As String
@@ -2356,10 +2356,10 @@ End Type
 Public Type CamposRegE200
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     UF As String
     DT_INI As String
@@ -2370,10 +2370,10 @@ End Type
 Public Type CamposRegE210
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV_ST As String
     VL_SLD_CRED_ANT_ST As String
@@ -2395,10 +2395,10 @@ End Type
 Public Type CamposRegE220
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ_APUR As String
     DESCR_COMPL_AJ As String
@@ -2409,10 +2409,10 @@ End Type
 Public Type CamposRegE230
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_DA As String
     NUM_PROC As String
@@ -2425,10 +2425,10 @@ End Type
 Public Type CamposRegE240
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     COD_MOD As String
@@ -2445,10 +2445,10 @@ End Type
 Public Type CamposRegE250
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OR As String
     VL_OR As String
@@ -2465,10 +2465,10 @@ End Type
 Public Type CamposRegE300
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     UF As String
     DT_INI As String
@@ -2479,10 +2479,10 @@ End Type
 Public Type CamposRegE310
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV_FCP_DIFAL As String
     VL_SLD_CRED_ANT_DIFAL As String
@@ -2511,10 +2511,10 @@ End Type
 Public Type CamposRegE311
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_AJ_APUR As String
     DESCR_COMPL_AJ As String
@@ -2525,10 +2525,10 @@ End Type
 Public Type CamposRegE312
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_DA As String
     NUM_PROC As String
@@ -2541,10 +2541,10 @@ End Type
 Public Type CamposRegE313
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     COD_MOD As String
@@ -2561,10 +2561,10 @@ End Type
 Public Type CamposRegE316
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_OR As String
     VL_OR As String
@@ -2581,10 +2581,10 @@ End Type
 Public Type CamposRegE500
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_APUR As String
     DT_INI As String
@@ -2595,10 +2595,10 @@ End Type
 Public Type CamposRegE510
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     Cfop As String
     CST_IPI As String
@@ -2611,10 +2611,10 @@ End Type
 Public Type CamposRegE520
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_SD_ANT_IPI As String
     VL_DEB_IPI As String
@@ -2629,10 +2629,10 @@ End Type
 Public Type CamposRegE530
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_AJ As String
     VL_AJ As String
@@ -2646,10 +2646,10 @@ End Type
 Public Type CamposRegE531
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART As String
     COD_MOD As String
@@ -2666,10 +2666,10 @@ End Type
 Public Type CamposRegE990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_E As String
     
@@ -2683,10 +2683,10 @@ End Type
 Public Type CamposRegG001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -2695,10 +2695,10 @@ End Type
 Public Type CamposRegG110
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INI As String
     DT_FIN As String
@@ -2715,10 +2715,10 @@ End Type
 Public Type CamposRegG125
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_IND_BEM As String
     DT_MOV As String
@@ -2736,10 +2736,10 @@ End Type
 Public Type CamposRegG126
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INI As String
     DT_FIM As String
@@ -2755,10 +2755,10 @@ End Type
 Public Type CamposRegG130
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_EMIT As String
     COD_PART As String
@@ -2774,10 +2774,10 @@ End Type
 Public Type CamposRegG140
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_ITEM As String
     COD_ITEM As String
@@ -2793,10 +2793,10 @@ End Type
 Public Type CamposRegG990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_G As String
     
@@ -2811,10 +2811,10 @@ End Type
 Public Type CamposRegH001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -2823,10 +2823,10 @@ End Type
 Public Type CamposRegH005
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INV As String
     VL_INV As String
@@ -2837,10 +2837,10 @@ End Type
 Public Type CamposRegH010
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     UNID As String
@@ -2858,10 +2858,10 @@ End Type
 Public Type CamposRegH020
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
     BC_ICMS As String
@@ -2872,10 +2872,10 @@ End Type
 Public Type CamposRegH030
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_ICMS_OP As String
     VL_BC_ICMS_ST As String
@@ -2887,10 +2887,10 @@ End Type
 Public Type CamposRegH990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_H As String
     
@@ -2904,10 +2904,10 @@ End Type
 Public Type CamposRegK001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -2916,10 +2916,10 @@ End Type
 Public Type CamposRegK010
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_TP_LEIAUTE As String
     
@@ -2928,10 +2928,10 @@ End Type
 Public Type CamposRegK100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INI As String
     DT_FIN As String
@@ -2941,10 +2941,10 @@ End Type
 Public Type CamposRegK200
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_EST As String
     COD_ITEM As String
@@ -2957,10 +2957,10 @@ End Type
 Public Type CamposRegK280
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_EST As String
     COD_ITEM As String
@@ -2974,10 +2974,10 @@ End Type
 Public Type CamposRegK230
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_INI_OP As String
     DT_FIN_OP As String
@@ -2990,10 +2990,10 @@ End Type
 Public Type CamposRegK990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_K As String
     
@@ -3002,10 +3002,10 @@ End Type
 Public Type CamposRegM001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
     
@@ -3014,10 +3014,10 @@ End Type
 Public Type CamposRegM100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_CRED As String
     IND_CRED_ORI As String
@@ -3039,10 +3039,10 @@ End Type
 Public Type CamposRegM200
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_TOT_CONT_NC_PER As String
     VL_TOT_CRED_DESC As String
@@ -3062,10 +3062,10 @@ End Type
 Public Type CamposRegM210
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_CONT As String
     VL_REC_BRT As String
@@ -3088,10 +3088,10 @@ End Type
 Public Type CamposRegM500
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_CRED As String
     IND_CRED_ORI As String
@@ -3113,10 +3113,10 @@ End Type
 Public Type CamposRegM600
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     VL_TOT_CONT_NC_PER As String
     VL_TOT_CRED_DESC As String
@@ -3136,10 +3136,10 @@ End Type
 Public Type CamposRegM610
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_CONT As String
     VL_REC_BRT As String
@@ -3162,10 +3162,10 @@ End Type
 Public Type CamposRegM990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_M As String
     
@@ -3178,10 +3178,10 @@ End Type
 Public Type CamposReg1001
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_MOV As String
 
@@ -3190,10 +3190,10 @@ End Type
 Public Type CamposReg1010
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_EXP As String
     IND_CCRF As String
@@ -3214,10 +3214,10 @@ End Type
 Public Type CamposReg1100
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     IND_DOC As String
     NRO_DE As String
@@ -3250,10 +3250,10 @@ End Type
 Public Type CamposReg1300
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM As String
     DT_FECH As String
@@ -3271,10 +3271,10 @@ End Type
 Public Type CamposReg1310
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_TANQUE As String
     ESTQ_ABERT As String
@@ -3291,10 +3291,10 @@ End Type
 Public Type CamposReg1320
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_BICO As String
     NR_INTERV As String
@@ -3312,10 +3312,10 @@ End Type
 Public Type CamposReg1350
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     SERIE As String
     FABRICANTE As String
@@ -3327,10 +3327,10 @@ End Type
 Public Type CamposReg1360
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_LACRE As String
     DT_APLICACAO As String
@@ -3340,10 +3340,10 @@ End Type
 Public Type CamposReg1370
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     NUM_BICO As String
     COD_ITEM As String
@@ -3354,10 +3354,10 @@ End Type
 Public Type CamposReg1390
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PROD As String
                 
@@ -3366,10 +3366,10 @@ End Type
 Public Type CamposReg1400
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_ITEM_IPM As String
     MUN As String
@@ -3380,10 +3380,10 @@ End Type
 Public Type CamposReg1391
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     DT_REGISTRO As String
     QTD_MOID As String
@@ -3410,10 +3410,10 @@ End Type
 Public Type CamposReg1601
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     COD_PART_IP As String
     COD_PART_IT As String
@@ -3426,10 +3426,10 @@ End Type
 Public Type CamposReg1990
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
-    CHV_PAI_Fiscal As String
+    CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     QTD_LIN_1 As String
     

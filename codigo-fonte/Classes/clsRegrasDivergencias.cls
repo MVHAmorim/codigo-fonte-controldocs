@@ -16,7 +16,7 @@ Public Function VerificarCampoCFOP(ByRef Campos As Variant, ByRef dicTitulos As 
 
 Dim i As Byte, j As Byte
 Dim CFOP_SPED As Integer, CFOP_NF As Integer
-Dim INCONSISTENCIA As String, SUGESTAO$, Arquivo$, IND_ATIV$
+Dim INCONSISTENCIA As String, SUGESTAO$, ARQUIVO$, IND_ATIV$
 Dim VL_OPER_NF As Double, VL_OPER_SPED#, VL_DESC_SPED#, VL_IPI_SPED#, VL_ITEM_SPED#, VL_ICMS_ST_SPED#
 Dim CompraRevSemST As Boolean, CompraRevComST As Boolean, CompIndustrializacao As Boolean, CompPrestServico As Boolean, _
     EntradaInterna As Boolean, EntradaInterestadual  As Boolean, SaidaInterna As Boolean, SaidaInterestadual  As Boolean, _
@@ -28,11 +28,11 @@ Dim CompraRevSemST As Boolean, CompraRevComST As Boolean, CompIndustrializacao A
     i = Util.VerificarPosicaoInicialArray(Campos)
     
     'Carrega dados do arquivo
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
-    If dicDados0000.Exists(Arquivo) Then
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
+    If dicDados0000.Exists(ARQUIVO) Then
         
-        j = Util.VerificarPosicaoInicialArray(dicDados0000.Exists(Arquivo))
-        IND_ATIV = Util.ApenasNumeros(dicDados0000(Arquivo)(dicTitulos0000("IND_ATIV") - j))
+        j = Util.VerificarPosicaoInicialArray(dicDados0000.Exists(ARQUIVO))
+        IND_ATIV = Util.ApenasNumeros(dicDados0000(ARQUIVO)(dicTitulos0000("IND_ATIV") - j))
         If IND_ATIV = "0" Then vIndustria = True Else vComercio = True
         
     End If

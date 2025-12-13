@@ -18,7 +18,7 @@ Private CNPJEstabelecimento As String
 Private CNPJEmit As String
 Private CNPJDest As String
 Private Periodo As String
-Private Arquivo As String
+Private ARQUIVO As String
 Private tpNF As String
 
 Public Sub ImportarNFeNFCe(ByVal tpImportacao As String)
@@ -67,15 +67,15 @@ Private Sub GerarRegistrosSPED(ByRef NFe As DOMDocument60)
     
     With assImportacao
         
-        If Not dtoRegSPED.r0000.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0000(NFe)
-        If Not dtoRegSPED.r0000_Contr.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0000_Contr(NFe)
-        If Not dtoRegSPED.r0001.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0001
-        If Not dtoRegSPED.r0005.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0005(NFe)
-        If Not dtoRegSPED.r0100.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0100
-        If Not dtoRegSPED.r0110.Exists(DadosXML.Arquivo) Then Call .CriarRegistro0110
-        If Not dtoRegSPED.r0140.Exists(DadosXML.Arquivo & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistro0140(NFe)
-        If Not dtoRegSPED.rC001.Exists(DadosXML.Arquivo) Then Call .CriarRegistroC001
-        If Not dtoRegSPED.rC010.Exists(DadosXML.Arquivo & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistroC010
+        If Not dtoRegSPED.r0000.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0000(NFe)
+        If Not dtoRegSPED.r0000_Contr.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0000_Contr(NFe)
+        If Not dtoRegSPED.r0001.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0001
+        If Not dtoRegSPED.r0005.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0005(NFe)
+        If Not dtoRegSPED.r0100.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0100
+        If Not dtoRegSPED.r0110.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistro0110
+        If Not dtoRegSPED.r0140.Exists(DadosXML.ARQUIVO & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistro0140(NFe)
+        If Not dtoRegSPED.rC001.Exists(DadosXML.ARQUIVO) Then Call .CriarRegistroC001
+        If Not dtoRegSPED.rC010.Exists(DadosXML.ARQUIVO & DadosXML.CNPJ_ESTABELECIMENTO) Then Call .CriarRegistroC010
         
         Call ProcessarXML(NFe)
         
@@ -176,9 +176,9 @@ Dim i As Long
     With CamposC100
         
         .REG = Campos(dtoTitSPED.tC100("REG") - i)
-        .Arquivo = Campos(dtoTitSPED.tC100("ARQUIVO") - i)
+        .ARQUIVO = Campos(dtoTitSPED.tC100("ARQUIVO") - i)
         .CHV_REG = Campos(dtoTitSPED.tC100("CHV_REG") - i)
-        .CHV_PAI_Fiscal = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
+        .CHV_PAI_FISCAL = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tC100("CHV_PAI_CONTRIBUICOES") - i)
         .IND_OPER = Campos(dtoTitSPED.tC100("IND_OPER") - i)
         .IND_EMIT = Campos(dtoTitSPED.tC100("IND_EMIT") - i)
@@ -223,7 +223,7 @@ Dim Chave  As String
     With CamposC100
         
         .REG = "C100"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .COD_MOD = fnXML.ValidarTag(NFe, "//mod")
         .COD_PART = assImportacao.ExtrairCodigoParticipante()
         .COD_SIT = EnumContribuicoes.ValidarEnumeracao_COD_SIT(fnSPED.GerarCodigoSituacao(fnXML.ValidarSituacao(ValidarTag(NFe, "//cStat"))))
@@ -251,7 +251,7 @@ Dim Chave  As String
         .VL_PIS_ST = 0
         .VL_COFINS_ST = 0
         .CHV_PAI_CONTRIBUICOES = assImportacao.ExtrairChaveRegC010()
-        .CHV_PAI_Fiscal = assImportacao.ExtrairChaveRegC001()
+        .CHV_PAI_FISCAL = assImportacao.ExtrairChaveRegC001()
         
         If .COD_MOD = "65" Then .COD_PART = ""
         If .IND_PGTO = "" Then .IND_PGTO = "0 - Á Vista"
@@ -282,7 +282,7 @@ Dim Chave  As String
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .IND_OPER, .IND_EMIT, .COD_PART, .COD_MOD, .SER, .NUM_DOC, .CHV_NFE)
         Chave = Util.UnirCampos(.IND_OPER, .IND_EMIT, .CHV_NFE)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_OPER, .IND_EMIT, _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_OPER, .IND_EMIT, _
             Util.FormatarTexto(.COD_PART), .COD_MOD, .COD_SIT, "'" & .SER, "'" & .NUM_DOC, "'" & .CHV_NFE, .DT_DOC, _
             .DT_E_S, CDbl(.VL_DOC), .IND_PGTO, CDbl(.VL_DESC), CDbl(.VL_ABAT_NT), CDbl(.VL_MERC), .IND_FRT, _
             CDbl(.VL_FRT), CDbl(.VL_SEG), CDbl(.VL_OUT_DA), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), _
@@ -319,12 +319,12 @@ Dim Chave As String
     With CamposC170
         
         .NUM_ITEM = CInt(fnXML.ValidarnItem(Produto))
-        .CHV_PAI_Fiscal = CamposC100.CHV_REG
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, .NUM_ITEM)
+        .CHV_PAI_FISCAL = CamposC100.CHV_REG
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, .NUM_ITEM)
         If Not dtoRegSPED.rC170.Exists(Chave) Then
             
             .REG = "C170"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .COD_ITEM = fnXML.ValidarTag(Produto, "prod/cProd")
             .DESCR_COMPL = Util.RemoverPipes(ValidarTag(Produto, "prod/xProd"))
             .Qtd = fnXML.ValidarValores(Produto, "prod/qCom")
@@ -369,11 +369,11 @@ Dim Chave As String
             If .ALIQ_COFINS_QUANT = 0 Then .ALIQ_COFINS_QUANT = ""
             
             .CHV_PAI_CONTRIBUICOES = CamposC100.CHV_REG
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .NUM_ITEM)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .NUM_ITEM)
             
             Call IncluirRegistrosCadastrais(Produto)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, CInt(.NUM_ITEM), _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, CInt(.NUM_ITEM), _
                 "'" & .COD_ITEM, .DESCR_COMPL, CDbl(.Qtd), "'" & .UNID, CDbl(.VL_ITEM), CDbl(.VL_DESC), _
                 .IND_MOV, "'" & .CST_ICMS, CInt(.Cfop), .COD_NAT, CDbl(.VL_BC_ICMS), CDbl(.ALIQ_ICMS), _
                 CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), CDbl(.ALIQ_ST), CDbl(.VL_ICMS_ST), .IND_APUR, _
@@ -482,15 +482,15 @@ Dim total As Double
         If Not dtoRegSPED.rC101.Exists(CamposC100.CHV_REG) Then
             
             .REG = "C101"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .VL_FCP_UF_DEST = fnXML.ValidarValores(NFe, "//ICMSTot/vFCPUFDest")
             .VL_ICMS_UF_DEST = fnXML.ValidarValores(NFe, "//ICMSTot/vICMSUFDest")
             .VL_ICMS_UF_REM = fnXML.ValidarValores(NFe, "//ICMSTot/vICMSUFRemet")
-            .CHV_PAI_Fiscal = CamposC100.CHV_REG
+            .CHV_PAI_FISCAL = CamposC100.CHV_REG
             .CHV_PAI_CONTRIBUICOES = ""
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "C101")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
                 CDbl(.VL_FCP_UF_DEST), CDbl(.VL_ICMS_UF_DEST), CDbl(.VL_ICMS_UF_REM))
             
             total = CDbl(.VL_FCP_UF_DEST) + CDbl(.VL_ICMS_UF_DEST) + CDbl(.VL_ICMS_UF_REM)
@@ -514,18 +514,18 @@ Dim NotasRef As IXMLDOMNodeList
     With CamposC110
         
         .COD_INF = "INF_NF"
-        .CHV_PAI_Fiscal = CamposC100.CHV_REG
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, .COD_INF)
+        .CHV_PAI_FISCAL = CamposC100.CHV_REG
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, .COD_INF)
         
         If Not dtoRegSPED.rC110.Exists(Chave) Then
             
             .REG = "C110"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .TXT_COMPL = fnXML.ValidarTag(NFe, "//infAdFisco")
             .CHV_PAI_CONTRIBUICOES = CamposC100.CHV_REG
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .COD_INF)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .COD_INF)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .COD_INF, .TXT_COMPL)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .COD_INF, .TXT_COMPL)
             If .COD_INF <> "" Then dtoRegSPED.rC110(.CHV_REG) = Campos
             
             Set NotasRef = NFe.SelectNodes("//NFref")
@@ -557,7 +557,7 @@ Dim Campos As Variant
         If Not dtoRegSPED.rC113.Exists(Chave) Then
             
             .REG = "C113"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .IND_EMIT = EnumFiscal.ValidarEnumeracao_IND_EMIT(assImportacao.IdentificarTipoEmissao_C113(VBA.Mid(.CHV_DOCE, 35, 1), CNPJ_EMIT))
             .IND_OPER = EnumFiscal.ValidarEnumeracao_IND_OPER(assImportacao.IdentificarTipoOperacao_C113(VBA.Left(.IND_EMIT, 1), CNPJ_EMIT))
             .COD_PART = CNPJ_EMIT
@@ -566,11 +566,11 @@ Dim Campos As Variant
             .SUB = ""
             .NUM_DOC = VBA.Mid(.CHV_DOCE, 26, 9)
             .DT_DOC = "20" & VBA.Mid(.CHV_DOCE, 3, 2) & "-" & VBA.Mid(.CHV_DOCE, 5, 2) & "-01"
-            .CHV_PAI_Fiscal = ""
+            .CHV_PAI_FISCAL = ""
             .CHV_PAI_CONTRIBUICOES = CamposC100.CHV_REG
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .IND_EMIT, .COD_PART, .COD_MOD, .SER, .NUM_DOC)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .IND_EMIT, .COD_PART, .COD_MOD, .SER, .NUM_DOC)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_OPER, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_OPER, _
                 .IND_EMIT, .COD_PART, .COD_MOD, .SER, .SUB, .NUM_DOC, .DT_DOC, "'" & .CHV_DOCE)
                 
             dtoRegSPED.rC113(Chave) = Campos
@@ -590,21 +590,21 @@ Dim Campos As Variant
     
     With CamposC120
         
-        .CHV_PAI_Fiscal = CamposC100.CHV_REG
+        .CHV_PAI_FISCAL = CamposC100.CHV_REG
         .NUM_DOC_IMP = ValidarTag(Produto, "prod/DI/nDI")
         .NUM_ACDRAW = Util.FormatarTexto(ValidarTag(Produto, "prod//nDraw"))
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, .NUM_DOC_IMP, .NUM_ACDRAW)
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, .NUM_DOC_IMP, .NUM_ACDRAW)
         
         .REG = "C120"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .COD_DOC_IMP = ""
         .PIS_IMP = fnXML.ValidarValores(Produto, "imposto/PIS//vPIS")
         .COFINS_IMP = fnXML.ValidarValores(Produto, "imposto/COFINS//vCOFINS")
         .CHV_PAI_CONTRIBUICOES = CamposC100.CHV_REG
         
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .NUM_DOC_IMP, .NUM_ACDRAW)
+        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .NUM_DOC_IMP, .NUM_ACDRAW)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
             .COD_DOC_IMP, "'" & .NUM_DOC_IMP, CDbl(.PIS_IMP), CDbl(.COFINS_IMP), .NUM_ACDRAW)
             
         dtoRegSPED.rC120(Chave) = Campos
@@ -632,16 +632,16 @@ Dim Duplicatas As IXMLDOMNodeList
             Set Duplicatas = NFe.SelectNodes("//dup")
             
             .REG = "C140"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .IND_EMIT = EnumFiscal.ValidarEnumeracao_IND_EMIT(VBA.Left(CamposC100.IND_EMIT, 1))
             .IND_TIT = EnumFiscal.ValidarEnumeracao_IND_TIT(fnXML.ConverterTipoPagamento(fnXML.ValidarTag(NFe, "//pag/detPag/tPag")))
             .DESC_TIT = fnXML.ValidarDescricaoTitulo(.IND_TIT)
             .NUM_TIT = fnXML.ValidarTag(NFe, "//fat/nFat")
             .QTD_PARC = ""
             .VL_TIT = fnXML.ValidarValores(NFe, "//cobr/fat/vLiq")
-            .CHV_PAI_Fiscal = CamposC100.CHV_REG
+            .CHV_PAI_FISCAL = CamposC100.CHV_REG
             .CHV_PAI_CONTRIBUICOES = ""
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .REG)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .REG)
             
             If .VL_TIT = 0 Then .VL_TIT = fnXML.ValidarValores(NFe, "//pag/detPag/vPag")
             If Duplicatas.Length > 0 Then
@@ -651,7 +651,7 @@ Dim Duplicatas As IXMLDOMNodeList
                 
             End If
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
                 .IND_EMIT, .IND_TIT, .DESC_TIT, .NUM_TIT, .QTD_PARC, CDbl(.VL_TIT))
                 
             If .VL_TIT > 0 Then dtoRegSPED.rC140(.CHV_REG) = Campos
@@ -678,16 +678,16 @@ Dim i As Byte
         With CamposC141
             
             .REG = "C141"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .NUM_PARC = VBA.Format(i, "00")
             .DT_VCTO = Util.FormatarData(fnXML.ValidarTag(Duplicata, "dVenc"))
             .VL_PARC = fnXML.ValidarValores(Duplicata, "vDup")
-            .CHV_PAI_Fiscal = CamposC140.CHV_REG
+            .CHV_PAI_FISCAL = CamposC140.CHV_REG
             .CHV_PAI_CONTRIBUICOES = ""
             
             .CHV_REG = fnSPED.GerarChaveRegistro(CStr(CamposC140.CHV_REG), CStr(.NUM_PARC))
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .NUM_PARC, .DT_VCTO, CDbl(.VL_PARC))
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .NUM_PARC, .DT_VCTO, CDbl(.VL_PARC))
             
             dtoRegSPED.rC141(.CHV_REG) = Campos
             

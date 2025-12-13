@@ -915,7 +915,7 @@ Public Function ValidarEnumeracao_TP_ASSINANTE(ByVal TP_ASSINANTE As String)
     
 End Function
 
-Public Function ValidarEnumeracao_COD_NAT(ByVal Arquivo As Variant, ByVal COD_NAT As Variant) As String
+Public Function ValidarEnumeracao_COD_NAT(ByVal ARQUIVO As Variant, ByVal COD_NAT As Variant) As String
     
 Dim dicDados0400 As New Dictionary
 Dim dicTitulos0400 As New Dictionary
@@ -924,7 +924,7 @@ Dim CHV_0400 As String
     Set dicTitulos0400 = Util.MapearTitulos(reg0400, 3)
     Set dicDados0400 = Util.CriarDicionarioRegistro(reg0400, "ARQUIVO", "COD_NAT")
 
-    CHV_0400 = VBA.Replace(VBA.Join(Array(Arquivo, COD_NAT)), " ", "")
+    CHV_0400 = VBA.Replace(VBA.Join(Array(ARQUIVO, COD_NAT)), " ", "")
     If dicDados0400.Exists(CHV_0400) Then
     
         ValidarEnumeracao_COD_NAT = COD_NAT & " - " & dicDados0400(CHV_0400)(dicTitulos0400("DESCR_NAT"))

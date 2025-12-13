@@ -191,7 +191,7 @@ Dim ALIQ_DEST As Double, ALIQ_FCP#, ALIQ_ICMS#, ALIQ_DIFAL#, VL_BC_ICMS#
     With CamposC101
         
         .REG = "C101"
-        .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+        .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
         .CHV_PAI = Campos(dicTitulosApuracao("CHV_PAI_FISCAL"))
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "C101")
         .VL_FCP_UF_DEST = VL_FCP
@@ -201,7 +201,7 @@ Dim ALIQ_DEST As Double, ALIQ_FCP#, ALIQ_ICMS#, ALIQ_DIFAL#, VL_BC_ICMS#
         Call AtualizarRegistroE310(CHV_E310, .VL_ICMS_UF_DEST, .VL_FCP_UF_DEST, 0, 0, 0, 0)
         If dicDadosC101.Exists(.CHV_REG) Then Call AtualizarRegistroC101(.CHV_REG)
         
-        dicDadosC101(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", _
+        dicDadosC101(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", _
             CDbl(.VL_FCP_UF_DEST), CDbl(.VL_ICMS_UF_DEST), CDbl(.VL_ICMS_UF_REM))
         
     End With
@@ -239,7 +239,7 @@ Dim CHV_PAI As String, CHV_NFE$, CHV_CTE$, COD_MUN_ORIG$, COD_MUN_DEST$
                 With CamposD101
                     
                     .REG = "D101"
-                    .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+                    .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
                     .CHV_PAI = CHV_PAI
                     .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "D101")
                     .VL_FCP_UF_DEST = VL_FCP
@@ -249,7 +249,7 @@ Dim CHV_PAI As String, CHV_NFE$, CHV_CTE$, COD_MUN_ORIG$, COD_MUN_DEST$
                     Call AtualizarRegistroE310(CHV_E310, .VL_ICMS_UF_DEST, .VL_FCP_UF_DEST, 0, 0, 0, 0)
                     If dicDadosD101.Exists(.CHV_REG) Then Call AtualizarRegistroD101(.CHV_REG)
                     
-                    dicDadosD101(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", _
+                    dicDadosD101(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", _
                         CDbl(.VL_FCP_UF_DEST), CDbl(.VL_ICMS_UF_DEST), CDbl(.VL_ICMS_UF_REM))
                         
                 End With
@@ -284,14 +284,14 @@ End Function
 
 Private Sub ChecarExistenciaRegistros(ByRef Campos As Variant)
 
-Dim Arquivo As String, Periodo$, CHV_PAI$, UF$, DT_INI$, DT_FIN$
+Dim ARQUIVO As String, Periodo$, CHV_PAI$, UF$, DT_INI$, DT_FIN$
     
-    Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+    ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
     UF = Campos(dicTitulosApuracao("UF_PART"))
-    Periodo = VBA.Split(Arquivo, "-")(0)
+    Periodo = VBA.Split(ARQUIVO, "-")(0)
     
     'E001
-    CHV_0000 = dicDados0000(Arquivo)(dicTitulos0000("CHV_REG"))
+    CHV_0000 = dicDados0000(ARQUIVO)(dicTitulos0000("CHV_REG"))
     CHV_E001 = fnSPED.GerarChaveRegistro(CHV_0000, "E001")
     If Not dicDadosE001.Exists(CHV_E001) Then Call CriarRegistroE001(Campos)
     
@@ -342,12 +342,12 @@ Private Function CriarRegistroE001(ByRef Campos As Variant)
     With CamposE001
         
         .REG = "E001"
-        .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
-        .CHV_PAI = dicDados0000(.Arquivo)(dicTitulos0000("CHV_REG"))
+        .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
+        .CHV_PAI = dicDados0000(.ARQUIVO)(dicTitulos0000("CHV_REG"))
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "E001")
         .IND_MOV = 0
         
-        dicDadosE001(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .IND_MOV)
+        dicDadosE001(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .IND_MOV)
         
     End With
     
@@ -361,14 +361,14 @@ Dim Periodo As String, Chave$
     With CamposE300
         
         .REG = "E300"
-        .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+        .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
         .CHV_PAI = dicDadosE001(CHV_E001)(dicTitulosE001("CHV_REG"))
         .UF = Campos(dicTitulosApuracao("UF_PART"))
         .DT_FIN = VBA.Format(Util.ConverterPeriodoData(Periodo), "yyyy-mm-dd")
         .DT_INI = VBA.Format(.DT_FIN, "yyyy-mm-01")
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .UF, CDate(.DT_INI), CDate(.DT_FIN))
         
-        If .UF <> "EX" Then dicDadosE300(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .UF, .DT_INI, .DT_FIN)
+        If .UF <> "EX" Then dicDadosE300(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .UF, .DT_INI, .DT_FIN)
         
     End With
     
@@ -379,11 +379,11 @@ Private Function CriarRegistroE310(ByRef Campos As Variant)
     With CamposE310
         
         .REG = "E310"
-        .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+        .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
         .CHV_PAI = CHV_E300
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "E310")
         
-        dicDadosE310(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        dicDadosE310(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         
     End With
     
@@ -468,7 +468,7 @@ Dim Chave As String, UF As String
     With CamposE311
         
         .REG = "E311"
-        .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+        .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
         .COD_AJ_APUR = Campos(dicTitulosApuracao("UF_PART")) & COD_AJUSTE
         .CHV_PAI = dicDadosE310(CHV_E310)(dicTitulosE310("CHV_REG") - 1)
         .DESCR_COMPL_AJ = DESCR_AJUSTE
@@ -478,7 +478,7 @@ Dim Chave As String, UF As String
         CHV_E311 = .CHV_REG
         If dicDadosE311.Exists(.CHV_REG) Then Call AtualizarRegistroE311(.CHV_REG)
         
-        dicDadosE311(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
+        dicDadosE311(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
         
     End With
     
@@ -509,7 +509,7 @@ Dim Chave As String
         With CamposE313
             
             .REG = "E313"
-            .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+            .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
             .CHV_PAI = dicDadosE311(CHV_E311)(dicTitulosE311("CHV_REG") - 1)
             .COD_PART = Campos(dicTitulosApuracao("COD_PART"))
             .COD_MOD = Campos(dicTitulosApuracao("COD_MOD"))
@@ -525,7 +525,7 @@ Dim Chave As String
             
             If dicDadosE313.Exists(.CHV_REG) Then Call AtualizarRegistroE313(.CHV_REG)
             
-            dicDadosE313(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
+            dicDadosE313(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
                 .COD_MOD, "'" & .SER, .SUB, .NUM_DOC, "'" & .CHV_DOCE, .DT_DOC, "'" & .COD_ITEM, CDbl(.VL_AJ_ITEM))
             
         End With
@@ -545,7 +545,7 @@ Dim CamposD100 As Variant
         With CamposE313
             
             .REG = "E313"
-            .Arquivo = Campos(dicTitulosApuracao("ARQUIVO"))
+            .ARQUIVO = Campos(dicTitulosApuracao("ARQUIVO"))
             .CHV_PAI = dicDadosE311(CHV_E311)(dicTitulosE311("CHV_REG") - 1)
             .COD_PART = CamposD100(dicTitulosD100("COD_PART"))
             .COD_MOD = CamposD100(dicTitulosD100("COD_MOD"))
@@ -560,7 +560,7 @@ Dim CamposD100 As Variant
             
             If dicDadosE313.Exists(.CHV_REG) Then Call AtualizarRegistroE313(.CHV_REG)
             
-            dicDadosE313(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
+            dicDadosE313(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .COD_PART, _
                 .COD_MOD, "'" & .SER, .SUB, .NUM_DOC, "'" & .CHV_DOCE, .DT_DOC, "'" & .COD_ITEM, CDbl(.VL_AJ_ITEM))
             
         End With
@@ -632,7 +632,7 @@ Dim Campos As Variant
         
         'DIFAL ICMS
         .REG = Campos(dicTitulosE310("REG") - 1)
-        .Arquivo = Campos(dicTitulosE310("ARQUIVO") - 1)
+        .ARQUIVO = Campos(dicTitulosE310("ARQUIVO") - 1)
         .CHV_PAI = Campos(dicTitulosE310("CHV_PAI_FISCAL") - 1)
         .CHV_REG = Campos(dicTitulosE310("CHV_REG") - 1)
         .IND_MOV_FCP_DIFAL = Campos(dicTitulosE310("IND_MOV_FCP_DIFAL") - 1)
@@ -675,7 +675,7 @@ Dim Campos As Variant
             
         End If
         
-        dicDadosE310(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .IND_MOV_FCP_DIFAL, _
+        dicDadosE310(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .IND_MOV_FCP_DIFAL, _
             CDbl(.VL_SLD_CRED_ANT_DIFAL), CDbl(.VL_TOT_DEBITOS_DIFAL), CDbl(.VL_OUT_DEB_DIFAL), _
             CDbl(.VL_TOT_CREDITOS_DIFAL), CDbl(.VL_OUT_CRED_DIFAL), CDbl(.VL_SLD_DEV_ANT_DIFAL), _
             CDbl(.VL_DEDUCOES_DIFAL), CDbl(.VL_RECOL_DIFAL), CDbl(.VL_SLD_CRED_TRANSPORTAR_DIFAL), _
@@ -685,8 +685,8 @@ Dim Campos As Variant
         
         If CalcularSaldo Then
         
-            If .VL_RECOL_DIFAL > 0 Then Call IncluirRegistroE316(.Arquivo, "'000", "100110", .VL_RECOL_DIFAL)
-            If .VL_RECOL_FCP > 0 Then Call IncluirRegistroE316(.Arquivo, "'006", "100137", .VL_RECOL_FCP)
+            If .VL_RECOL_DIFAL > 0 Then Call IncluirRegistroE316(.ARQUIVO, "'000", "100110", .VL_RECOL_DIFAL)
+            If .VL_RECOL_FCP > 0 Then Call IncluirRegistroE316(.ARQUIVO, "'006", "100137", .VL_RECOL_FCP)
         
         End If
         
@@ -707,25 +707,25 @@ Dim Chave As Variant
 
 End Function
 
-Private Function IncluirRegistroE316(ByRef Arquivo As String, ByVal COD_OR As String, ByVal COD_REC As String, ByVal VL_OR As Double)
+Private Function IncluirRegistroE316(ByRef ARQUIVO As String, ByVal COD_OR As String, ByVal COD_REC As String, ByVal VL_OR As Double)
     
     With CamposE316
         
         .REG = "E316"
-        .Arquivo = Arquivo
+        .ARQUIVO = ARQUIVO
         .CHV_PAI = CHV_E310
         .COD_OR = COD_OR
         .VL_OR = VL_OR
-        .DT_VCTO = VBA.Format("09/" & VBA.Split(Arquivo, "-")(0), "yyyy-mm-dd")
+        .DT_VCTO = VBA.Format("09/" & VBA.Split(ARQUIVO, "-")(0), "yyyy-mm-dd")
         .COD_REC = COD_REC
         .NUM_PROC = ""
         .IND_PROC = ""
         .PROC = ""
         .TXT_COMPL = ""
-        .MES_REF = fnExcel.FormatarTexto(VBA.Replace(VBA.Split(Arquivo, "-")(0), "/", ""))
+        .MES_REF = fnExcel.FormatarTexto(VBA.Replace(VBA.Split(ARQUIVO, "-")(0), "/", ""))
         
         .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_OR, .COD_REC, .IND_PROC)
-        dicDadosE316(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI, "", .COD_OR, _
+        dicDadosE316(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .COD_OR, _
             CDbl(.VL_OR), .DT_VCTO, .COD_REC, .NUM_PROC, .IND_PROC, .PROC, .TXT_COMPL, .MES_REF)
         
     End With

@@ -10,7 +10,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Public Arquivo As String
+Public ARQUIVO As String
 Public SPEDOriginal As Boolean
 Public CamposFiscais As Variant
 Public CamposContribuicoes As Variant
@@ -138,8 +138,8 @@ Dim Campos As Variant
             CNPJ = Campos(7)
             DT_INI = Campos(4)
             Chave = MontarChaveArquivo(CNPJ, DT_INI)
-            Me.Arquivo = Chave
-            AtribuirValor "ARQUIVO", Arquivo, Chave, "ICMS"
+            Me.ARQUIVO = Chave
+            AtribuirValor "ARQUIVO", ARQUIVO, Chave, "ICMS"
             
         Case nReg = "E110"
             Call ExtrairSaldoICMS(Campos)
@@ -169,8 +169,8 @@ Dim Campos As Variant
             CNPJ = Campos(7)
             DT_INI = Campos(4)
             Chave = MontarChaveArquivo(CNPJ, DT_INI)
-            Me.Arquivo = Chave
-            AtribuirValor "ARQUIVO", Arquivo, Chave, "IPI"
+            Me.ARQUIVO = Chave
+            AtribuirValor "ARQUIVO", ARQUIVO, Chave, "IPI"
             
         Case nReg = "E520"
             Call ExtrairSaldoIPI(Campos)
@@ -200,8 +200,8 @@ Dim Campos As Variant
             CNPJ = Campos(9)
             DT_INI = Campos(6)
             Chave = MontarChaveArquivo(CNPJ, DT_INI)
-            Me.Arquivo = Chave
-            AtribuirValor "ARQUIVO", Arquivo, Chave, "PIS"
+            Me.ARQUIVO = Chave
+            AtribuirValor "ARQUIVO", ARQUIVO, Chave, "PIS"
             
         Case nReg = "M100"
             Call ExtrairSaldoCredorPIS(Campos)
@@ -244,7 +244,7 @@ Dim vDevedorICMS As Double, vCredorICMS As Double, vSaldoICMS As Double
     
     vSaldoICMS = ExtrairSaldoCredorDevedor(vCredorICMS, vDevedorICMS, "ICMS", "Fiscal")
     
-    If SPEDOriginal Then AtribuirValor "ICMS_ORIGINAL", Arquivo, vSaldoICMS, "ICMS" Else AtribuirValor "ICMS_CORRIGIDO", Arquivo, vSaldoICMS, "ICMS"
+    If SPEDOriginal Then AtribuirValor "ICMS_ORIGINAL", ARQUIVO, vSaldoICMS, "ICMS" Else AtribuirValor "ICMS_CORRIGIDO", ARQUIVO, vSaldoICMS, "ICMS"
     
 End Function
 
@@ -257,7 +257,7 @@ Dim vDevedorIPI As Double, vCredorIPI As Double, vSaldoIPI As Double
     
     vSaldoIPI = ExtrairSaldoCredorDevedor(vCredorIPI, vDevedorIPI, "IPI", "Fiscal")
     
-    If SPEDOriginal Then AtribuirValor "IPI_ORIGINAL", Arquivo, vSaldoIPI, "IPI" Else AtribuirValor "IPI_CORRIGIDO", Arquivo, vSaldoIPI, "IPI"
+    If SPEDOriginal Then AtribuirValor "IPI_ORIGINAL", ARQUIVO, vSaldoIPI, "IPI" Else AtribuirValor "IPI_CORRIGIDO", ARQUIVO, vSaldoIPI, "IPI"
     
 End Function
 
@@ -321,10 +321,10 @@ Private Sub AtribuirSaldoImposto(ByVal Imposto As String, ByVal Saldo As Double)
     Select Case SPEDOriginal
         
         Case True
-            AtribuirValor Imposto & "_ORIGINAL", Arquivo, Saldo, Imposto
+            AtribuirValor Imposto & "_ORIGINAL", ARQUIVO, Saldo, Imposto
             
         Case False
-            AtribuirValor Imposto & "_CORRIGIDO", Arquivo, Saldo, Imposto
+            AtribuirValor Imposto & "_CORRIGIDO", ARQUIVO, Saldo, Imposto
             
     End Select
     
@@ -440,7 +440,7 @@ Private Function ExtrairSaldoCredorDevedor(ByVal SaldoCredor As Double, _
             ExtrairSaldoCredorDevedor = 0
             
         Case Else
-            AtribuirValor "DIFERENCA_" & Imposto, Arquivo, -999999.99, TipoSPED
+            AtribuirValor "DIFERENCA_" & Imposto, ARQUIVO, -999999.99, TipoSPED
             ExtrairSaldoCredorDevedor = -999999.99
             
     End Select
@@ -473,7 +473,7 @@ Dim RECOMENDACAO As String
         
     End Select
     
-    AtribuirValor "RECOMENDACAO", Arquivo, RECOMENDACAO, Imposto
+    AtribuirValor "RECOMENDACAO", ARQUIVO, RECOMENDACAO, Imposto
     
 End Function
 
@@ -511,7 +511,7 @@ Dim DIFERENCA As Variant
             
     End Select
     
-    AtribuirValor "DIFERENCA_" & Imposto, Arquivo, DIFERENCA, Imposto
+    AtribuirValor "DIFERENCA_" & Imposto, ARQUIVO, DIFERENCA, Imposto
     
 End Function
 

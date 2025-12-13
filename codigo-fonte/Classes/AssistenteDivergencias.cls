@@ -65,12 +65,12 @@ Private Sub CarregarDadosRegistro0200(Optional Contrib As Boolean = False)
         
 End Sub
 
-Public Function ExtrairCHV_0001(ByVal Arquivo As String) As String
+Public Function ExtrairCHV_0001(ByVal ARQUIVO As String) As String
     
     With dtoRegSPED
         
         If .r0001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0001("ARQUIVO")
-        If .r0001.Exists(Arquivo) Then ExtrairCHV_0001 = .r0001(Arquivo)(dtoTitSPED.t0001("CHV_REG"))
+        If .r0001.Exists(ARQUIVO) Then ExtrairCHV_0001 = .r0001(ARQUIVO)(dtoTitSPED.t0001("CHV_REG"))
         
     End With
     
@@ -87,12 +87,12 @@ Public Function ExtrairCHV_0140(ByVal Chave As String) As String
     
 End Function
 
-Public Function ExtrairCHV_C001(ByVal Arquivo As String) As String
+Public Function ExtrairCHV_C001(ByVal ARQUIVO As String) As String
         
     With dtoRegSPED
         
         If .rC001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroC001("ARQUIVO")
-        If .rC001.Exists(Arquivo) Then ExtrairCHV_C001 = .rC001(Arquivo)(dtoTitSPED.tC001("CHV_REG"))
+        If .rC001.Exists(ARQUIVO) Then ExtrairCHV_C001 = .rC001(ARQUIVO)(dtoTitSPED.tC001("CHV_REG"))
         
     End With
     
@@ -228,13 +228,13 @@ Dim CEST As String
     
 End Sub
 
-Public Function ExtrairCNPJ_CONTRIBUINTE(ByVal Arquivo As String) As String
+Public Function ExtrairCNPJ_CONTRIBUINTE(ByVal ARQUIVO As String) As String
     
-    ExtrairCNPJ_CONTRIBUINTE = VBA.Split(Arquivo, "-")(1)
+    ExtrairCNPJ_CONTRIBUINTE = VBA.Split(ARQUIVO, "-")(1)
     
 End Function
 
-Public Function ExtrairCNPJ_ESTABELECIMENTO_C100(ByVal CHV_C100 As String, Optional Arquivo As String) As String
+Public Function ExtrairCNPJ_ESTABELECIMENTO_C100(ByVal CHV_C100 As String, Optional ARQUIVO As String) As String
 
 Dim CHV_C010 As String
     
@@ -242,7 +242,7 @@ Dim CHV_C010 As String
         
         If .rC010 Is Nothing Then Call CarregarDadosRegistroC010
         If Not Util.ValidarDicionario(.rC010) Then
-            ExtrairCNPJ_ESTABELECIMENTO_C100 = ExtrairCNPJ_CONTRIBUINTE(Arquivo)
+            ExtrairCNPJ_ESTABELECIMENTO_C100 = ExtrairCNPJ_CONTRIBUINTE(ARQUIVO)
             Exit Function
         End If
         

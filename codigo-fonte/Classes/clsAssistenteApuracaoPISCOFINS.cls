@@ -71,7 +71,7 @@ End Function
 
 Public Sub CarregarDadosA170(ByVal Msg As String)
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_A100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_A100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosA170 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -101,16 +101,16 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosA170("REG"))
-                Arquivo = Campos(dicTitulosA170("ARQUIVO"))
+                ARQUIVO = Campos(dicTitulosA170("ARQUIVO"))
                 CHV_A100 = Campos(dicTitulosA170("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_A100, Arquivo)
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_A100, ARQUIVO)
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 COD_PART = .ExtrairCOD_PART_A100(CHV_A100)
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
-                CHV_0150 = Util.UnirCampos(Arquivo, COD_PART)
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
+                CHV_0150 = Util.UnirCampos(ARQUIVO, COD_PART)
                 COD_ITEM = Campos(dicTitulosA170("COD_ITEM"))
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosA170("VL_ITEM")))
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro A100
                 Call .ExtrairDadosA100(CHV_A100)
@@ -123,7 +123,7 @@ Dim b As Long
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", REG
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_A100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosA170("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", fnExcel.FormatarTexto(CNPJ_ESTABELECIMENTO)
@@ -154,7 +154,7 @@ End Sub
 
 Public Sub CarregarDadosC175(ByVal Msg As String)
 
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, UF_CONTRIB$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, UF_CONTRIB$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC175 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -188,16 +188,16 @@ Dim b As Long
                 If arrChavesPai.contains(CHV_PAI) Then GoTo Prx: Stop
                 
                 'Carrega as variáveis necessárias
-                Arquivo = Campos(dicTitulosC175("ARQUIVO"))
-                UF_CONTRIB = .ExtrairUFContribuinte(Arquivo, True)
+                ARQUIVO = Campos(dicTitulosC175("ARQUIVO"))
+                UF_CONTRIB = .ExtrairUFContribuinte(ARQUIVO, True)
                 CHV_C100 = Campos(dicTitulosC175("CHV_PAI_CONTRIBUICOES"))
                 CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO_C100(CHV_C100)
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_0150 = Util.UnirCampos(CHV_0140, COD_PART)
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosC175("VL_OPER")))
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro C100
                 Call .ExtrairDadosC100(CHV_C100)
@@ -212,7 +212,7 @@ Dim b As Long
                 .AtribuirValor "DESCR_ITEM", "O REGISTRO C175 NÃO POSSUI DADOS DO PRODUTO"
                 .AtribuirValor "NOME_RAZAO", "O REGISTRO C175 NÃO POSSUI DADOS DO PARTICIPANTE"
                 .AtribuirValor "REG", Campos(dicTitulosC175("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC175("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", fnExcel.FormatarTexto(CNPJ_ESTABELECIMENTO)
@@ -249,7 +249,7 @@ End Sub
 
 Public Sub CarregarDadosC170(ByVal Msg As String)
 
-Dim Arquivo As String, REG$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim ARQUIVO As String, REG$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC170 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -279,16 +279,16 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosC170("REG"))
-                Arquivo = Campos(dicTitulosC170("ARQUIVO"))
+                ARQUIVO = Campos(dicTitulosC170("ARQUIVO"))
                 CHV_C100 = Campos(dicTitulosC170("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C100, Arquivo)
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C100, ARQUIVO)
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_0150 = Util.UnirCampos(CHV_0140, COD_PART)
-                .UFContrib = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                .UFContrib = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
                 COD_ITEM = Campos(dicTitulosC170("COD_ITEM"))
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosC170("VL_ITEM")))
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro C100
                 Call .ExtrairDadosC100(CHV_C100)
@@ -301,7 +301,7 @@ Dim b As Long
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", REG
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC170("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", fnExcel.FormatarTexto(CNPJ_ESTABELECIMENTO)
@@ -342,7 +342,7 @@ End Sub
 
 Public Sub CarregarDadosC181(ByVal Msg As String)
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_0140$, CHV_C180$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_0140$, CHV_C180$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC181 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -373,14 +373,14 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosC181("REG"))
-                Arquivo = Campos(dicTitulosC181("ARQUIVO"))
-                UF_CONTRIB = .ExtrairUFContribuinte(Arquivo, True)
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                ARQUIVO = Campos(dicTitulosC181("ARQUIVO"))
+                UF_CONTRIB = .ExtrairUFContribuinte(ARQUIVO, True)
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_C180 = Campos(dicTitulosC181("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C180, Arquivo)
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C180, ARQUIVO)
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulosC181("VL_ITEM")), True, 2)
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro C180
                 Call .ExtrairDadosC180(CHV_C180)
@@ -391,7 +391,7 @@ Dim b As Long
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", Campos(dicTitulosC181("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C180
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC181("CHV_REG"))
                 .AtribuirValor "CHV_NFE", "O REGISTRO C181 NÃO POSSUI DADOS DO DOCUMENTO FISCAL"
@@ -425,7 +425,7 @@ End Sub
 
 Public Sub CarregarDadosC185(ByVal Msg As String)
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_0140$, CHV_C180$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_0140$, CHV_C180$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC185 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -455,13 +455,13 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosC185("REG"))
-                Arquivo = Campos(dicTitulosC185("ARQUIVO"))
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                ARQUIVO = Campos(dicTitulosC185("ARQUIVO"))
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_C180 = Campos(dicTitulosC185("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C180, Arquivo)
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C180, ARQUIVO)
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulosC185("VL_ITEM")), True, 2)
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro C180
                 Call .ExtrairDadosC180(CHV_C180)
@@ -472,7 +472,7 @@ Dim b As Long
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", Campos(dicTitulosC185("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C180
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC185("CHV_REG"))
                 .AtribuirValor "CHV_NFE", "O REGISTRO C185 NÃO POSSUI DADOS DO DOCUMENTO FISCAL"
@@ -506,7 +506,7 @@ End Sub
 
 Public Sub CarregarDadosC191(ByVal Msg As String)
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_0140$, CHV_C190$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_0140$, CHV_C190$, COD_ITEM$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC191 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -537,13 +537,13 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosC191("REG"))
-                Arquivo = Campos(dicTitulosC191("ARQUIVO"))
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                ARQUIVO = Campos(dicTitulosC191("ARQUIVO"))
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_C190 = Campos(dicTitulosC191("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C190, Arquivo)
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C190, ARQUIVO)
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulosC191("VL_ITEM")), True, 2)
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro C190
                 'Call .ExtrairDadosC190(CHV_C190)
@@ -554,7 +554,7 @@ Dim b As Long
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", Campos(dicTitulosC191("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C190
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC191("CHV_REG"))
                 .AtribuirValor "CHV_NFE", "O REGISTRO C191 NÃO POSSUI DADOS DO DOCUMENTO FISCAL"
@@ -591,7 +591,7 @@ Public Function CarregarDadosC195(ByRef dicDados0200 As Dictionary, ByRef dicTit
     ByRef arrRelatorio As ArrayList, ByRef dicTitulos As Dictionary, Optional ByVal Msg As String)
     
 'TODO: REFATORAR ROTINA PARA FICAR IGUAL A CarregarDadosC185
-Dim CHV_REG As String, Arquivo$, COD_ITEM$, COD_NCM$, EX_IPI$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_0140$, CHV_PAI$, DESCR_ITEM$
+Dim CHV_REG As String, ARQUIVO$, COD_ITEM$, COD_NCM$, EX_IPI$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_0140$, CHV_PAI$, DESCR_ITEM$
 Dim Campos As Variant, Campos0200, CamposC190
 Dim dicTitulos0110 As New Dictionary
 Dim dicTitulos0140 As New Dictionary
@@ -635,11 +635,11 @@ Dim i As Byte
         
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulosC195("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosC195("ARQUIVO"))
             'COD_INC_TRIB = ExtrairRegimeTributario(dicDados0110, dicTitulos0110, ARQUIVO, COD_INC_TRIB)
                         
             arrDados.Add Campos(dicTitulosC195("REG"))
-            arrDados.Add Arquivo
+            arrDados.Add ARQUIVO
             arrDados.Add Campos(dicTitulosC195("CHV_PAI_CONTRIBUICOES"))
             arrDados.Add Campos(dicTitulosC195("CHV_REG"))
             arrDados.Add COD_INC_TRIB
@@ -668,7 +668,7 @@ Dim i As Byte
                 If LBound(CamposC190) = 0 Then i = 1 Else i = 0
                 'Coleta dados do registro 0200
                 
-                If dicDados0140.Exists(Arquivo) Then CHV_0140 = dicDados0140(Arquivo)(dicTitulos0140("CHV_REG") - i)
+                If dicDados0140.Exists(ARQUIVO) Then CHV_0140 = dicDados0140(ARQUIVO)(dicTitulos0140("CHV_REG") - i)
                 
                 CHV_REG = fnSPED.GerarChaveRegistro(CHV_0140, COD_ITEM)
                 If dicDados0200.Exists(CHV_REG) Then
@@ -730,7 +730,7 @@ End Function
 
 Public Function CarregarDadosD201(ByRef arrRelatorio As ArrayList, ByRef dicTitulos As Dictionary, Optional ByVal Msg As String)
 'TODO: REFATORAR ROTINA PARA FICAR IGUAL A CarregarDadosC181
-Dim CHV_REG As String, Arquivo$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_PAI$
+Dim CHV_REG As String, ARQUIVO$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_PAI$
 Dim dicTitulos0110 As New Dictionary
 Dim dicTitulosD010 As New Dictionary
 Dim dicTitulosD200 As New Dictionary
@@ -768,11 +768,11 @@ Dim i As Byte
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulosD201("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosD201("ARQUIVO"))
             'COD_INC_TRIB = ExtrairRegimeTributario(dicDados0110, dicTitulos0110, ARQUIVO, COD_INC_TRIB)
             
             arrDados.Add Campos(dicTitulosD201("REG"))
-            arrDados.Add Arquivo
+            arrDados.Add ARQUIVO
             arrDados.Add Campos(dicTitulosD201("CHV_PAI_CONTRIBUICOES"))
             arrDados.Add Campos(dicTitulosD201("CHV_REG"))
             arrDados.Add COD_INC_TRIB
@@ -845,7 +845,7 @@ End Function
 
 Public Function CarregarDadosD205(ByRef arrRelatorio As ArrayList, ByRef dicTitulos As Dictionary, Optional ByVal Msg As String)
 'TODO: REFATORAR ROTINA PARA FICAR IGUAL A CarregarDadosC185
-Dim CHV_REG As String, Arquivo$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_PAI$
+Dim CHV_REG As String, ARQUIVO$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$, CHV_PAI$
 Dim dicTitulos0110 As New Dictionary
 Dim dicTitulosD010 As New Dictionary
 Dim dicTitulosD200 As New Dictionary
@@ -883,11 +883,11 @@ Dim i As Byte
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulosD205("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosD205("ARQUIVO"))
             'COD_INC_TRIB = ExtrairRegimeTributario(dicDados0110, dicTitulos0110, ARQUIVO, COD_INC_TRIB)
             
             arrDados.Add Campos(dicTitulosD205("REG"))
-            arrDados.Add Arquivo
+            arrDados.Add ARQUIVO
             arrDados.Add Campos(dicTitulosD205("CHV_PAI_CONTRIBUICOES"))
             arrDados.Add Campos(dicTitulosD205("CHV_REG"))
             arrDados.Add COD_INC_TRIB
@@ -960,7 +960,7 @@ End Function
 
 Public Sub CarregarDadosF100(ByVal Msg As String)
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_F010$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_F010$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, UF_CONTRIB$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosF100 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -990,16 +990,16 @@ Dim b As Long
                 
                 'Carrega as variáveis necessárias
                 REG = Campos(dicTitulosF100("REG"))
-                Arquivo = Campos(dicTitulosF100("ARQUIVO"))
+                ARQUIVO = Campos(dicTitulosF100("ARQUIVO"))
                 COD_PART = Campos(dicTitulosF100("COD_PART"))
                 CHV_F010 = Campos(dicTitulosF100("CHV_PAI_CONTRIBUICOES"))
-                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_F010, Arquivo)
-                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
-                UF_CONTRIB = .ExtrairUF_Estabelecimento(Arquivo, CNPJ_ESTABELECIMENTO)
-                CHV_0150 = Util.UnirCampos(Arquivo, COD_PART)
+                CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_F010, ARQUIVO)
+                CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
+                UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
+                CHV_0150 = Util.UnirCampos(ARQUIVO, COD_PART)
                 COD_ITEM = Campos(dicTitulosF100("COD_ITEM"))
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosF100("VL_OPER")))
-                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(Arquivo, True)
+                COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
                 
                 'Extrai dados do registro 0150
                 Call .ExtrairDados0150_Contrib(CHV_0140, COD_PART)
@@ -1018,7 +1018,7 @@ Dim b As Long
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "CHV_NFE", "O REGISTRO F100 NÃO POSSUI NOTAS FISCAIS"
                 .AtribuirValor "REG", Campos(dicTitulosF100("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", Campos(dicTitulosF100("CHV_PAI_CONTRIBUICOES"))
                 .AtribuirValor "CHV_REG", Campos(dicTitulosF100("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", fnExcel.FormatarTexto(CNPJ_ESTABELECIMENTO)
@@ -1049,7 +1049,7 @@ End Sub
 
 Public Function CarregarDadosF120(ByRef arrRelatorio As ArrayList, ByRef dicTitulos As Dictionary, Optional ByVal Msg As String)
 'TODO: REFATORAR ROTINA PARA FICAR IGUAL A CarregarDadosF100
-Dim CHV_REG As String, Arquivo$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$
+Dim CHV_REG As String, ARQUIVO$, CST_PIS$, CST_COFINS$, CHV_CNPJ$, COD_INC_TRIB$, CHV_0110$
 Dim dicTitulos0110 As New Dictionary
 Dim dicTitulosF120 As New Dictionary
 Dim dicTitulosF010 As New Dictionary
@@ -1082,11 +1082,11 @@ Dim b As Long
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulosF120("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosF120("ARQUIVO"))
             'COD_INC_TRIB = ExtrairRegimeTributario(dicDados0110, dicTitulos0110, ARQUIVO, COD_INC_TRIB)
             
             arrDados.Add Campos(dicTitulosF120("REG"))
-            arrDados.Add Arquivo
+            arrDados.Add ARQUIVO
             arrDados.Add Campos(dicTitulosF120("CHV_PAI_CONTRIBUICOES"))
             arrDados.Add Campos(dicTitulosF120("CHV_REG"))
             arrDados.Add COD_INC_TRIB
@@ -1259,7 +1259,7 @@ End Sub
 Public Function AceitarSugestoes()
 
 Dim Campos As Variant, Campos0200, CamposC170, dicCampos, regCampo, CamposTrib
-Dim Arquivo As String, COD_INC_TRIB$, CNPJ$, COD_ITEM$, Cfop$, CHV_REG$
+Dim ARQUIVO As String, COD_INC_TRIB$, CNPJ$, COD_ITEM$, Cfop$, CHV_REG$
 Dim VL_BC_PIS_CALC As Double, VL_BC_COFINS_CALC#
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicDados0110 As New Dictionary
@@ -1289,7 +1289,7 @@ Dim arrDados As New ArrayList
                 
                 If Linha.EntireRow.Hidden = False And Campos(.dicTitulos("SUGESTAO")) <> "" And Linha.Row > 3 Then
                     
-                    Arquivo = Campos(.dicTitulos("ARQUIVO"))
+                    ARQUIVO = Campos(.dicTitulos("ARQUIVO"))
                     COD_INC_TRIB = Util.ApenasNumeros(Campos(.dicTitulos("REGIME_TRIBUTARIO")))
                     
 VERIFICAR:
@@ -1511,7 +1511,7 @@ End Function
 
 Public Sub AtualizarRegistrosPIS_COFINS()
 
-Dim Arquivo As String, CHV_REG$, REG$, CHV_0000$, CHV_0140$, CHV_M001$, CNPJ$, COD_ITEM$, Msg$, Chave$
+Dim ARQUIVO As String, CHV_REG$, REG$, CHV_0000$, CHV_0140$, CHV_M001$, CNPJ$, COD_ITEM$, Msg$, Chave$
 Dim dicCorrelacoesInversas As New Dictionary
 Dim dicReceitaCSTNAT As New Dictionary
 Dim dicCorrelacoes As New Dictionary
@@ -1549,9 +1549,9 @@ Dim i As Byte
                 
                 If REG Like "*70" Then
                     
-                    Arquivo = Campos(dicTitulos("ARQUIVO"))
+                    ARQUIVO = Campos(dicTitulos("ARQUIVO"))
                     CNPJ = Campos(dicTitulos("CNPJ_ESTABELECIMENTO"))
-                    Chave = Util.UnirCampos(Arquivo, CNPJ)
+                    Chave = Util.UnirCampos(ARQUIVO, CNPJ)
                     If .r0140.Exists(Chave) Then CHV_0140 = .r0140(Chave)(dtoTitSPED.t0140("CHV_REG"))
                     COD_ITEM = Campos(dicTitulos("COD_ITEM"))
                     CHV_REG = Util.UnirCampos(CHV_0140, COD_ITEM)
@@ -1595,27 +1595,27 @@ Dim i As Byte
                         
                 End Select
                 
-                Arquivo = Util.RemoverAspaSimples(Util.LimparTexto(CStr(Campos(dicTitulos("ARQUIVO") - i))))
+                ARQUIVO = Util.RemoverAspaSimples(Util.LimparTexto(CStr(Campos(dicTitulos("ARQUIVO") - i))))
                 
             End If
             
             If AtualizarM400M800 Then
                 
-                If .rM001.Exists(Arquivo) Then
+                If .rM001.Exists(ARQUIVO) Then
                     
-                    If LBound(.rM001(Arquivo)) = 0 Then i = 1 Else i = 0
-                    CHV_M001 = .rM001(Arquivo)(dtoTitSPED.tM001("CHV_REG") - i)
+                    If LBound(.rM001(ARQUIVO)) = 0 Then i = 1 Else i = 0
+                    CHV_M001 = .rM001(ARQUIVO)(dtoTitSPED.tM001("CHV_REG") - i)
                     
                 Else
                     
                     'Carrega campo CHV_REG do registro 0000
-                    If LBound(.r0000_Contr(Arquivo)) = 0 Then i = 1 Else i = 0
-                    CHV_0000 = Util.LimparTexto(CStr(.r0000_Contr(Arquivo)(dtoTitSPED.t0000_Contr("CHV_REG") - i)))
+                    If LBound(.r0000_Contr(ARQUIVO)) = 0 Then i = 1 Else i = 0
+                    CHV_0000 = Util.LimparTexto(CStr(.r0000_Contr(ARQUIVO)(dtoTitSPED.t0000_Contr("CHV_REG") - i)))
                     
                     'Cria chave do registro M001
                     CHV_M001 = fnSPED.GerarChaveRegistro(CHV_0000, "M001")
                     
-                    .rM001(Arquivo) = Array("M001", Arquivo, CHV_M001, "", CHV_0000, "0")
+                    .rM001(ARQUIVO) = Array("M001", ARQUIVO, CHV_M001, "", CHV_0000, "0")
                     
                 End If
                 
@@ -1665,7 +1665,7 @@ Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
-    Arquivo = Util.RemoverAspaSimples(Campos(dicTitulos("ARQUIVO")))
+    ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulos("ARQUIVO")))
     CST_PIS = Util.ApenasNumeros(Campos(dicTitulos("CST_PIS")))
     CST_COFINS = Util.ApenasNumeros(Campos(dicTitulos("CST_COFINS")))
     VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulos("VL_ITEM")))
@@ -1673,7 +1673,7 @@ Dim i As Byte
     VL_COFINS = fnExcel.ConverterValores(Campos(dicTitulos("VL_COFINS")))
     COD_CTA = Util.RemoverAspaSimples(Campos(dicTitulos("COD_CTA")))
     COD_NAT = Util.RemoverAspaSimples(Campos(dicTitulos("COD_NAT_PIS_COFINS")))
-    Arquivo = Campos(dicTitulos("ARQUIVO"))
+    ARQUIVO = Campos(dicTitulos("ARQUIVO"))
     
     With dtoRegSPED
         
@@ -1688,7 +1688,7 @@ Dim i As Byte
                 
             End If
             
-            .rM400(CHV_M400) = Array("M400", Arquivo, CHV_M400, "", CHV_M001, "'" & CST_PIS, VL_ITEM + VL_ITEM00, COD_CTA, "")
+            .rM400(CHV_M400) = Array("M400", ARQUIVO, CHV_M400, "", CHV_M001, "'" & CST_PIS, VL_ITEM + VL_ITEM00, COD_CTA, "")
             
             CHV_REG = fnSPED.GerarChaveRegistro(CHV_M400, COD_NAT, COD_CTA)
             If .rM410.Exists(CHV_REG) Then
@@ -1700,7 +1700,7 @@ Dim i As Byte
             End If
             
             CHV_REG = fnSPED.GerarChaveRegistro(CHV_M400, COD_NAT, COD_CTA)
-            .rM410(CHV_REG) = Array("M410", Arquivo, CHV_REG, "", CHV_M400, "'" & COD_NAT, VL_ITEM + VL_ITEM10, COD_CTA, "")
+            .rM410(CHV_REG) = Array("M410", ARQUIVO, CHV_REG, "", CHV_M400, "'" & COD_NAT, VL_ITEM + VL_ITEM10, COD_CTA, "")
             
         End If
         
@@ -1715,7 +1715,7 @@ Dim i As Byte
                 
             End If
             
-            .rM800(CHV_M800) = Array("M800", Arquivo, CHV_M800, "", CHV_M001, "'" & CST_COFINS, VL_ITEM + VL_ITEM00, COD_CTA, "")
+            .rM800(CHV_M800) = Array("M800", ARQUIVO, CHV_M800, "", CHV_M001, "'" & CST_COFINS, VL_ITEM + VL_ITEM00, COD_CTA, "")
             
             CHV_REG = fnSPED.GerarChaveRegistro(CHV_M800, COD_NAT, COD_CTA)
             If .rM810.Exists(CHV_REG) Then
@@ -1726,7 +1726,7 @@ Dim i As Byte
                 
             End If
             
-            .rM810(CHV_REG) = Array("M810", Arquivo, CHV_REG, "", CHV_M800, "'" & COD_NAT, VL_ITEM + VL_ITEM10, COD_CTA, "")
+            .rM810(CHV_REG) = Array("M810", ARQUIVO, CHV_REG, "", CHV_M800, "'" & COD_NAT, VL_ITEM + VL_ITEM10, COD_CTA, "")
             
         End If
         

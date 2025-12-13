@@ -63,35 +63,35 @@ Notificar:
     
 End Function
 
-Private Function ClassificarXML(ByRef Doce As DOMDocument60, ByVal Arquivo As String)
+Private Function ClassificarXML(ByRef Doce As DOMDocument60, ByVal ARQUIVO As String)
     
     With DocsFiscais
         
         Select Case True
             
             Case Not fnXML.ValidarXML(Doce)
-                If Not .arrDocsInvalidos.contains(Arquivo) Then .arrDocsInvalidos.Add Arquivo
+                If Not .arrDocsInvalidos.contains(ARQUIVO) Then .arrDocsInvalidos.Add ARQUIVO
                 
             Case fnXML.ValidarNFe(Doce)
-                If Not .arrNFeNFCe.contains(Arquivo) Then .arrNFeNFCe.Add Arquivo
+                If Not .arrNFeNFCe.contains(ARQUIVO) Then .arrNFeNFCe.Add ARQUIVO
                 
             Case fnXML.ValidarCTe(Doce)
-                If Not .arrCTe.contains(Arquivo) Then .arrCTe.Add Arquivo
+                If Not .arrCTe.contains(ARQUIVO) Then .arrCTe.Add ARQUIVO
                 
             Case fnXML.ValidarCFe(Doce)
-                If Not .arrCFe.contains(Arquivo) Then .arrCFe.Add Arquivo
+                If Not .arrCFe.contains(ARQUIVO) Then .arrCFe.Add ARQUIVO
                 
             Case fnXML.ValidarNFSe(Doce)
-                If Not .arrNFSe.contains(Arquivo) Then .arrNFSe.Add Arquivo
+                If Not .arrNFSe.contains(ARQUIVO) Then .arrNFSe.Add ARQUIVO
                 
             Case fnXML.ValidarProtocoloCancelamento(Doce)
-                If Not .arrProtocolos.contains(Arquivo) Then .arrProtocolos.Add Arquivo
+                If Not .arrProtocolos.contains(ARQUIVO) Then .arrProtocolos.Add ARQUIVO
                 
             Case fnXML.ValidarTag(Doce, "//mod") = "62"
-                If Not .arrNFCom.contains(Arquivo) Then .arrNFCom.Add Arquivo
+                If Not .arrNFCom.contains(ARQUIVO) Then .arrNFCom.Add ARQUIVO
 
             Case Else
-                If Not .arrDocsInvalidos.contains(Arquivo) Then .arrDocsInvalidos.Add Arquivo
+                If Not .arrDocsInvalidos.contains(ARQUIVO) Then .arrDocsInvalidos.Add ARQUIVO
                 
         End Select
         

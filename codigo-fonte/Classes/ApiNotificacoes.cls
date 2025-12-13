@@ -99,7 +99,7 @@ Dim HTML As String
         If .Funcao <> "" Then HTML = HTML & "<b>Função:</b> " & .Funcao & vbLf
         If .Classe <> "" Then HTML = HTML & "<b>Classe:</b> " & .Classe & vbLf
         If .Modulo <> "" Then HTML = HTML & "<b>Módulo:</b> " & .Modulo & vbLf
-        If .Arquivo <> "" Then HTML = HTML & "<b>Arquivo:</b> " & .Arquivo & vbLf
+        If .ARQUIVO <> "" Then HTML = HTML & "<b>Arquivo:</b> " & .ARQUIVO & vbLf
         If .ConteudoLinha <> "" Then HTML = HTML & "<b>Linha com erro:</b> " & .ConteudoLinha & vbLf
         If .MensagemErro <> "" Then HTML = HTML & "<b>Erro VBA:</b> " & .MensagemErro & vbLf
         If .OBSERVACOES <> "" Then HTML = HTML & "<b>Observações:</b> " & .OBSERVACOES & vbLf

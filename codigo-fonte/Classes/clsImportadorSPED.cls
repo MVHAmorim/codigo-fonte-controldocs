@@ -113,18 +113,18 @@ Private Sub CarregarEstruturas()
 End Sub
 
 Private Sub ProcessarListaArquivos()
-    Dim Arquivo As Variant
+    Dim ARQUIVO As Variant
     Dim Indice As Long
     Dim TempoInicio As Double
     
     Indice = 0
     TempoInicio = VBA.Timer
     
-    For Each Arquivo In pArquivosSelecionados
+    For Each ARQUIVO In pArquivosSelecionados
         Call Util.AntiTravamento(Indice, 1, "Processando Arq " & (Indice + 1), pArquivosSelecionados.Count, TempoInicio)
-        Call ProcessarArquivo(VBA.CStr(Arquivo))
+        Call ProcessarArquivo(VBA.CStr(ARQUIVO))
         Indice = Indice + 1
-    Next Arquivo
+    Next ARQUIVO
 End Sub
 
 Private Sub FinalizarProcesso()

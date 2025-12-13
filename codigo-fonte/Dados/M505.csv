@@ -1,3 +1,7 @@
 FILTROS;;;;;;;;;;;;;;
-;0 Registros;;;;;;0;0;0;0;;;;
+;4 Registros;;;;;;976569,22;0;976569,22;976569,22;;;;
 REG;ARQUIVO;CHV_REG;CHV_PAI_FISCAL;CHV_PAI_CONTRIBUICOES;NAT_BC_CRED;CST_COFINS;VL_BC_COFINS_TOT;VL_BC_COFINS_CUM;VL_BC_COFINS_NC;VL_BC_COFINS;QUANT_BC_COFINS_TOT;QUANT_BC_COFINS;DESC_CRED;
+M505;09/2025-67903807000105;A2614795B8B5BF09FCEA58E7335D54E8;;2017AAB14EA5E938CD5433FD933198CC;01 - Aquisição de bens para revenda;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;942085,19;0;942085,19;942085,19;;0;;
+M505;09/2025-67903807000105;E8CD2D18E82AFFC628DB6F628C425F90;;2017AAB14EA5E938CD5433FD933198CC;03 - Aquisição de serviços utilizados como insumo;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;18550;0;18550;18550;;0;;
+M505;09/2025-67903807000105;039775591DBF94FF3491F74AE8698EC6;;2017AAB14EA5E938CD5433FD933198CC;04 - Energia elétrica e térmica, inclusive sob a forma de vapor;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;15688,98;0;15688,98;15688,98;;0;;
+M505;09/2025-67903807000105;F6B9D25091F6197211F9959A52E0D9BC;;2017AAB14EA5E938CD5433FD933198CC;12 - Devolução de Vendas Sujeitas à Incidência Não-Cumulativa;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;245,05;0;245,05;245,05;;0;;

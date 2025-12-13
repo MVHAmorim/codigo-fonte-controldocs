@@ -89,13 +89,13 @@ End Function
 
 Private Function VerificarNCM_C180_0200(ByRef Campos As Variant)
 
-Dim Arquivo As String, COD_ITEM$, COD_NCM$, Chave$, COD_NCM_0200$
+Dim ARQUIVO As String, COD_ITEM$, COD_NCM$, Chave$, COD_NCM_0200$
     
-    Arquivo = Campos(dicTitulosC180Contrib("ARQUIVO"))
+    ARQUIVO = Campos(dicTitulosC180Contrib("ARQUIVO"))
     COD_ITEM = Campos(dicTitulosC180Contrib("COD_ITEM"))
     COD_NCM = Campos(dicTitulosC180Contrib("COD_NCM"))
     
-    Chave = Arquivo & COD_ITEM
+    Chave = ARQUIVO & COD_ITEM
     If dicDados0200.Exists(Chave) Then
         
         COD_NCM_0200 = CarregarNCM_0200(Chave)

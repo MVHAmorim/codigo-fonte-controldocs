@@ -251,7 +251,7 @@ End Sub
 
 Public Sub ImportarXMLsC100(ByVal TipoImportacao As String, Optional ByVal SPEDContrib As Boolean)
 
-Dim Arquivo As String, Periodo$, Caminho$, CNPJEmit$, CNPJDest$, tpPart$, CHV_0000$, CHV_0001$, CHV_0140$, CHV_0150$
+Dim ARQUIVO As String, Periodo$, Caminho$, CNPJEmit$, CNPJDest$, tpPart$, CHV_0000$, CHV_0001$, CHV_0140$, CHV_0150$
 Dim VL_PIS_ST As String, VL_COFINS_ST$, Msg$, CHV_C001$, CHV_PAI$, CNPJ0140$, tpCont$, CNPJCont$
 Dim arrCorrelacoesExistentes As New ArrayList
 Dim dicCorrelacoes As New Dictionary
@@ -410,10 +410,10 @@ Dim b As Long
                     If UsarPeriodo And PeriodoEspecifico <> "" Then Periodo = VBA.Format(PeriodoEspecifico, "00/0000")
                     tpCont = fnXML.DefinirContribuinteNFe(NFe, SPEDContrib)
                     CNPJCont = ValidarTag(NFe, "//" & tpCont & "/CNPJ")
-                    .Arquivo = Periodo & "-" & CNPJCont
+                    .ARQUIVO = Periodo & "-" & CNPJCont
                     
-                    If SPEDContrib Then .Arquivo = Periodo & "-" & CNPJContribuinte
-                    If Not dicDados0000.Exists(.Arquivo) Then
+                    If SPEDContrib Then .ARQUIVO = Periodo & "-" & CNPJContribuinte
+                    If Not dicDados0000.Exists(.ARQUIVO) Then
                         If SPEDContrib Then
                             Call fnXML.CriarRegistro0000_Contr(NFe, dicDados0000, dicDados0001, dicDados0110, Periodo, tpCont)
                         Else
@@ -421,9 +421,9 @@ Dim b As Long
                         End If
                     End If
                     
-                    If dicDados0000.Exists(.Arquivo) Then
+                    If dicDados0000.Exists(.ARQUIVO) Then
                         
-                        Campos = dicDados0000(.Arquivo)
+                        Campos = dicDados0000(.ARQUIVO)
                         
                         If LBound(Campos) = 0 Then i = 1 Else i = 0
                         
@@ -447,8 +447,8 @@ Dim b As Long
                     End If
                     
                     If SPEDContrib Then
-                        Call fnXML.CriarRegistro0140(NFe, dicDados0140, dicTitulos0140, .Arquivo, CHV_0001, tpCont)
-                        Call fnXML.CriarRegistroC010(NFe, dicDadosC010, dicTitulosC010, .Arquivo, CHV_C001, tpCont)
+                        Call fnXML.CriarRegistro0140(NFe, dicDados0140, dicTitulos0140, .ARQUIVO, CHV_0001, tpCont)
+                        Call fnXML.CriarRegistroC010(NFe, dicDadosC010, dicTitulosC010, .ARQUIVO, CHV_C001, tpCont)
                     End If
                     
                     CHV_PAI = Util.SelecionarChaveSPED(CHV_C001, CNPJBase, CNPJEmit, CNPJDest, SPEDContrib)
@@ -456,7 +456,7 @@ Dim b As Long
                     If dicDadosC100.Exists(Chave) Then
                         
                         .CHV_REG = dicDadosC100(Chave)(dicTitulosC100("CHV_REG"))
-                        .Arquivo = dicDadosC100(Chave)(dicTitulosC100("ARQUIVO"))
+                        .ARQUIVO = dicDadosC100(Chave)(dicTitulosC100("ARQUIVO"))
                         .COD_PART = dicDadosC100(Chave)(dicTitulosC100("COD_PART"))
                         .IND_OPER = dicDadosC100(Chave)(dicTitulosC100("IND_OPER"))
                         .IND_EMIT = dicDadosC100(Chave)(dicTitulosC100("IND_EMIT"))
@@ -478,13 +478,13 @@ Dim b As Long
                     Set Produtos = NFe.SelectNodes("//det")
                     
                     CHV_PAI = Util.SelecionarChaveSPED(CHV_0001, CNPJBase, CNPJEmit, CNPJDest, SPEDContrib)
-                    If .COD_MOD <> "65" Then Call fnXML.CriarRegistro0150(NFe, dicDados0150, dicTitulos0150, .COD_PART, .Arquivo, CHV_PAI, tpPart)
+                    If .COD_MOD <> "65" Then Call fnXML.CriarRegistro0150(NFe, dicDados0150, dicTitulos0150, .COD_PART, .ARQUIVO, CHV_PAI, tpPart)
                     
                     CHV_PAI = Util.SelecionarChaveSPED(CHV_C001, CNPJBase, CNPJEmit, CNPJDest, SPEDContrib)
-                    Call fnXML.CriarRegistroC101(NFe, dicDadosC101, .Arquivo)
-                    Call fnXML.CriarRegistroC120(Produtos, dicDadosC120, .Arquivo)
-                    Call fnXML.CriarRegistroC140(NFe, dicDadosC140, dicDadosC141, .Arquivo)
-                    Call fnXML.CriarRegistroC170(Produtos, VL_PIS_ST, VL_COFINS_ST, CNPJEmit, CNPJDest, dicDadosC170, .Arquivo, dicCorrelacoes, dicTitulosCorrelacoes, dicDados0000, dicTitulos0000, dicDados0190, dicDados0200, dicDados0220, dicTitulos0220, SPEDContrib)
+                    Call fnXML.CriarRegistroC101(NFe, dicDadosC101, .ARQUIVO)
+                    Call fnXML.CriarRegistroC120(Produtos, dicDadosC120, .ARQUIVO)
+                    Call fnXML.CriarRegistroC140(NFe, dicDadosC140, dicDadosC141, .ARQUIVO)
+                    Call fnXML.CriarRegistroC170(Produtos, VL_PIS_ST, VL_COFINS_ST, CNPJEmit, CNPJDest, dicDadosC170, .ARQUIVO, dicCorrelacoes, dicTitulosCorrelacoes, dicDados0000, dicTitulos0000, dicDados0190, dicDados0200, dicDados0220, dicTitulos0220, SPEDContrib)
                     Call fnXML.CriarRegistroC190(Produtos, dicTitulosC190, dicDadosC190, dicTitulosC191, dicDadosC191)
                     
                 End With
@@ -534,7 +534,7 @@ End Sub
 
 Public Sub ImportarXMLsA100(ByVal TipoImportacao As String)
 
-Dim Arquivo As String, Periodo$, Caminho$, CNPJToma$, CNPJPrest$, CHV_PAI$, CHV_0000$, CHV_0001$, CHV_0110$, CHV_0140$, CHV_0150$, CHV_A001$, CHV_A010$, CHV_REG$, Msg$, tpCont$
+Dim ARQUIVO As String, Periodo$, Caminho$, CNPJToma$, CNPJPrest$, CHV_PAI$, CHV_0000$, CHV_0001$, CHV_0110$, CHV_0140$, CHV_0150$, CHV_A001$, CHV_A010$, CHV_REG$, Msg$, tpCont$
 Dim dicTitulos0000 As New Dictionary
 Dim dicTitulos0001 As New Dictionary
 Dim dicTitulos0100 As New Dictionary
@@ -632,34 +632,34 @@ Dim b As Long
                         
                         If Not fnNFSe.ExtrairCNPJContribunte(Nota) Like CNPJBase & "*" Then GoTo Prx:
                         
-                        .Arquivo = Periodo & "-" & CNPJContribuinte
-                        If Not dicDados0000.Exists(.Arquivo) Then Call fnNFSe.CriarRegistro0000(Nota, dicDados0000, Periodo)
+                        .ARQUIVO = Periodo & "-" & CNPJContribuinte
+                        If Not dicDados0000.Exists(.ARQUIVO) Then Call fnNFSe.CriarRegistro0000(Nota, dicDados0000, Periodo)
                         
-                        If dicDados0000.Exists(.Arquivo) Then
+                        If dicDados0000.Exists(.ARQUIVO) Then
                             
-                            Campos = dicDados0000(.Arquivo)
+                            Campos = dicDados0000(.ARQUIVO)
                             If LBound(Campos) = 0 Then i = 1 Else i = 0
                             
                             CHV_0000 = Util.RemoverAspaSimples(Campos(dicTitulos0000("CHV_REG") - i))
                             
                             'Cria registro 0001
                             CHV_0001 = fnSPED.GerarChaveRegistro(CHV_0000, "0001")
-                            dicDados0001(.Arquivo) = Array("'0001", .Arquivo, CHV_0001, CHV_0000, 0)
+                            dicDados0001(.ARQUIVO) = Array("'0001", .ARQUIVO, CHV_0001, CHV_0000, 0)
                             
                             'Cria registro 0110
                             CHV_0110 = fnSPED.GerarChaveRegistro(CHV_0000, "0110")
-                            dicDados0110(.Arquivo) = Array("'0110", .Arquivo, CHV_0110, CHV_0001, "", "", "", "")
+                            dicDados0110(.ARQUIVO) = Array("'0110", .ARQUIVO, CHV_0110, CHV_0001, "", "", "", "")
                             
                             'Cria registro A001
                             CHV_A001 = fnSPED.GerarChaveRegistro(CHV_0000, "A001")
-                            dicDadosA001(.Arquivo) = Array("A001", .Arquivo, CHV_A001, CHV_0000, 0)
+                            dicDadosA001(.ARQUIVO) = Array("A001", .ARQUIVO, CHV_A001, CHV_0000, 0)
                             
                             CHV_A010 = fnSPED.GerarChaveRegistro(CHV_0000, fnNFSe.ExtrairCNPJContribunte(Nota))
-                            dicDadosA010(.Arquivo) = Array("A010", .Arquivo, CHV_A010, CHV_A001, "'" & fnNFSe.ExtrairCNPJContribunte(Nota))
+                            dicDadosA010(.ARQUIVO) = Array("A010", .ARQUIVO, CHV_A010, CHV_A001, "'" & fnNFSe.ExtrairCNPJContribunte(Nota))
                             
                         End If
                         
-                        Call fnNFSe.CriarRegistro0140(Nota, dicDados0140, .Arquivo, CHV_0001)
+                        Call fnNFSe.CriarRegistro0140(Nota, dicDados0140, .ARQUIVO, CHV_0001)
                         
                         Call fnNFSe.DefinirDadosA100(Nota)
                         .CHV_NFSE = VBA.UCase(ValidarTag(Nota, "Nfse//CodigoVerificacao"))
@@ -668,7 +668,7 @@ Dim b As Long
                         If Not dicDadosA100.Exists(CHV_REG) Then _
                             Call fnNFSe.CriarRegistroA100(Nota, dicDadosA100, dicDadosA170, dicTitulosA170, CHV_A010)
                         
-                        CHV_0140 = VBA.Join(Array(.Arquivo, CNPJContribuinte))
+                        CHV_0140 = VBA.Join(Array(.ARQUIVO, CNPJContribuinte))
                         If dicDados0140.Exists(CHV_0140) Then
                             
                             Campos = dicDados0140(CHV_0140)
@@ -677,8 +677,8 @@ Dim b As Long
                             
                         End If
                         
-                        Call fnNFSe.CriarRegistro0150(Nota, dicDados0150, .Arquivo, CHV_0140)
-                        Call fnNFSe.CriarRegistro0200(Nota, dicDados0200, .Arquivo, CHV_0140)
+                        Call fnNFSe.CriarRegistro0150(Nota, dicDados0150, .ARQUIVO, CHV_0140)
+                        Call fnNFSe.CriarRegistro0200(Nota, dicDados0200, .ARQUIVO, CHV_0140)
                         
                     End With
                 
@@ -841,9 +841,9 @@ Dim a As Long, i&
                 
                 Periodo = VBA.Format(VBA.Left(CTe.SelectSingleNode("//dhEmi").text, 10), "mm/yyyy")
                 tpCont = fnXML.DefinirContribuinteCTe(CTe, SPEDContrib)
-                Arquivo = Periodo & "-" & CNPJContribuinte
+                ARQUIVO = Periodo & "-" & CNPJContribuinte
                 
-                If Not dicDados0000.Exists(Arquivo) Then
+                If Not dicDados0000.Exists(ARQUIVO) Then
                     
                     If SPEDContrib Then
                         
@@ -858,38 +858,38 @@ Dim a As Long, i&
                     
                 End If
                 
-                If dicDados0000.Exists(Arquivo) Then
+                If dicDados0000.Exists(ARQUIVO) Then
                     
-                    Campos = dicDados0000(Arquivo)
+                    Campos = dicDados0000(ARQUIVO)
                     If LBound(Campos) = 0 Then i = 1 Else i = 0
                     
                     CHV_0000 = Util.RemoverAspaSimples(Campos(dicTitulos0000("CHV_REG") - i))
                     
                     'Cria registro 0001
                     CHV_0001 = fnSPED.GerarChaveRegistro(CHV_0000, "0001")
-                    dicDados0001(Arquivo) = Array("'0001", Arquivo, CHV_0001, CHV_0000, 0)
+                    dicDados0001(ARQUIVO) = Array("'0001", ARQUIVO, CHV_0001, CHV_0000, 0)
                     
                     'Cria registro 0100
                     CHV_0100 = fnSPED.GerarChaveRegistro(CHV_0001, "0100")
-                    dicDados0100(Arquivo) = Array("'0100", Arquivo, CHV_0100, CHV_0001, "", "", "", "", "", "", "", "", "", "", "", "", "")
+                    dicDados0100(ARQUIVO) = Array("'0100", ARQUIVO, CHV_0100, CHV_0001, "", "", "", "", "", "", "", "", "", "", "", "", "")
                     
                     'Cria registro D001
                     CHV_D001 = fnSPED.GerarChaveRegistro(CHV_0000, "D001")
-                    dicDadosD001(Arquivo) = Array("D001", Arquivo, CHV_D001, CHV_0000, "", 0)
+                    dicDadosD001(ARQUIVO) = Array("D001", ARQUIVO, CHV_D001, CHV_0000, "", 0)
                     
                     If SPEDContrib Then
                         
                         'Cria registro 0110
                         CHV_0110 = fnSPED.GerarChaveRegistro(CHV_0000, "0110")
-                        dicDados0110(Arquivo) = Array("'0110", Arquivo, CHV_0110, CHV_0001, "", "", "", "")
+                        dicDados0110(ARQUIVO) = Array("'0110", ARQUIVO, CHV_0110, CHV_0001, "", "", "", "")
                         
                         'Cria registro 0140
                         CHV_0140 = fnSPED.GerarChaveRegistro(CHV_0000, "0140")
-                        Call fnXML.CriarRegistro0140(CTe, dicDados0140, dicTitulos0140, Arquivo, CHV_0001, tpCont)
+                        Call fnXML.CriarRegistro0140(CTe, dicDados0140, dicTitulos0140, ARQUIVO, CHV_0001, tpCont)
                         
                         'Cria registro D010
                         CHV_D010 = fnSPED.GerarChaveRegistro(CHV_D001, CStr(fnXML.ExtrairCNPJContribuinte(CTe, tpCont)))
-                        Call fnXML.CriarRegistroD010(CTe, dicDadosD010, dicTitulosD010, Arquivo, CHV_D001, tpCont)
+                        Call fnXML.CriarRegistroD010(CTe, dicDadosD010, dicTitulosD010, ARQUIVO, CHV_D001, tpCont)
                         
                     End If
                     
@@ -912,8 +912,8 @@ Dim a As Long, i&
                         Chave = Util.UnirCampos(.IND_OPER, .IND_EMIT, .CHV_CTE)
                         If dicDadosD100.Exists(Chave) Then
                             
-                            .Arquivo = dicDadosD100(Chave)(dicTitulosD100("ARQUIVO"))
-                            If dicDados0000.Exists(.Arquivo) Then Campos0000.UF = dicDados0000(.Arquivo)(dicTitulos0000("UF"))
+                            .ARQUIVO = dicDadosD100(Chave)(dicTitulosD100("ARQUIVO"))
+                            If dicDados0000.Exists(.ARQUIVO) Then Campos0000.UF = dicDados0000(.ARQUIVO)(dicTitulos0000("UF"))
                             .COD_PART = dicDadosD100(Chave)(dicTitulosD100("COD_PART"))
                             .IND_OPER = dicDadosD100(Chave)(dicTitulosD100("IND_OPER"))
                             .IND_EMIT = dicDadosD100(Chave)(dicTitulosD100("IND_EMIT"))
@@ -926,15 +926,15 @@ Dim a As Long, i&
                             CNPJBase = VBA.Left(CNPJContribuinte, 8)
                             Periodo = VBA.Format(VBA.Left(CTe.SelectSingleNode("//dhEmi").text, 10), "mm/yyyy")
                             If UsarPeriodo And PeriodoEspecifico <> "" Then Periodo = VBA.Format(PeriodoEspecifico, "00/0000")
-                            .Arquivo = Periodo & "-" & CNPJContribuinte
-                            If dicDados0000.Exists(.Arquivo) Then Campos0000.CHV_REG = dicDados0000(.Arquivo)(dicTitulos0000("CHV_REG"))
-                            If dicDados0000.Exists(.Arquivo) Then Campos0000.UF = dicDados0000(.Arquivo)(dicTitulos0000("UF"))
+                            .ARQUIVO = Periodo & "-" & CNPJContribuinte
+                            If dicDados0000.Exists(.ARQUIVO) Then Campos0000.CHV_REG = dicDados0000(.ARQUIVO)(dicTitulos0000("CHV_REG"))
+                            If dicDados0000.Exists(.ARQUIVO) Then Campos0000.UF = dicDados0000(.ARQUIVO)(dicTitulos0000("UF"))
                             
                             CNPJEmit = fnXML.ExtrairCNPJEmitente(CTe)
                             CNPJToma = fnXML.ExtrairCNPJTomador(CTe)
                             
                             CHV_PAI = Util.SelecionarChaveSPED(CHV_D001, CNPJBase, CNPJEmit, CNPJToma, SPEDContrib)
-                            Call fnXML.CriarRegistroD100(CTe, dicDadosD100, dicDadosD101Contr, dicDadosD105, dicDadosD190, .Arquivo, CHV_PAI, SPEDContrib)
+                            Call fnXML.CriarRegistroD100(CTe, dicDadosD100, dicDadosD101Contr, dicDadosD105, dicDadosD190, .ARQUIVO, CHV_PAI, SPEDContrib)
                             
                         End If
                     
@@ -949,7 +949,7 @@ Dim a As Long, i&
                             .Cfop = ValidarTag(CTe, "//CFOP")
                             .DT_REF = VBA.Format(VBA.Left(ValidarTag(CTe, "//dhEmi"), 10), "yyyy-mm-dd")
                                                         
-                            Call fnXML.CriarRegistroD200(CTe, dicDadosD200, dicTitulosD200, dicDadosD201, dicDadosD205, Arquivo, CHV_D010)
+                            Call fnXML.CriarRegistroD200(CTe, dicDadosD200, dicTitulosD200, dicDadosD201, dicDadosD205, ARQUIVO, CHV_D010)
                             
                         End With
                         
@@ -963,7 +963,7 @@ Dim a As Long, i&
                     End If
                     
                     CHV_PAI = Util.SelecionarChaveSPED(CHV_0001, CNPJBase, CNPJEmit, CNPJToma, SPEDContrib)
-                    Call fnXML.CriarRegistro0150(CTe, dicDados0150, dicTitulos0150, CHV_0150, Arquivo, CHV_PAI, tpPart)
+                    Call fnXML.CriarRegistro0150(CTe, dicDados0150, dicTitulos0150, CHV_0150, ARQUIVO, CHV_PAI, tpPart)
                     
                 End With
                 
@@ -1070,14 +1070,14 @@ Dim Comeco As Double
                     Periodo = VBA.Format(VBA.Format(CFe.SelectSingleNode("//dEmi").text, "0000-00-00"), "mm/yyyy")
                     CNPJContribuinte = Util.FormatarCNPJ(CadContrib.Range("CNPJContribuinte").value)
                     CNPJBase = VBA.Left(CNPJContribuinte, 8)
-                    .Arquivo = Periodo & "-" & CNPJContribuinte
-                    .CHV_PAI = fnSPED.GerarChaveRegistro(.Arquivo, "C001")
+                    .ARQUIVO = Periodo & "-" & CNPJContribuinte
+                    .CHV_PAI = fnSPED.GerarChaveRegistro(.ARQUIVO, "C001")
                     
                     Chave = VBA.Join(Array(VBA.Replace(.CHV_CFE, "'", "")))
                     If dicDadosC800.Exists(Chave) Then
                         
                         .CHV_REG = dicDadosC800(Chave)(dicTitulosC800("CHV_REG"))
-                        .Arquivo = dicDadosC800(Chave)(dicTitulosC800("ARQUIVO"))
+                        .ARQUIVO = dicDadosC800(Chave)(dicTitulosC800("ARQUIVO"))
                         .COD_SIT = dicDadosC800(Chave)(dicTitulosC800("COD_SIT"))
                         
                     Else
@@ -1121,7 +1121,7 @@ End Sub
 
 Public Sub ImportarRegistrosC140eFilhos(ByVal TipoImportacao As String)
 
-Dim Arquivo As String, Caminho$, Chave$
+Dim ARQUIVO As String, Caminho$, Chave$
 Dim dicTitulosC100 As New Dictionary
 Dim dicTitulosC140 As New Dictionary
 Dim dicTitulosC141 As New Dictionary
@@ -1168,12 +1168,12 @@ Dim XML As Variant
                     If dicDadosC100.Exists(Chave) Then
                             
                         .CHV_REG = dicDadosC100(Chave)(dicTitulosC100("CHV_REG"))
-                        .Arquivo = dicDadosC100(Chave)(dicTitulosC100("ARQUIVO"))
+                        .ARQUIVO = dicDadosC100(Chave)(dicTitulosC100("ARQUIVO"))
                         .COD_PART = dicDadosC100(Chave)(dicTitulosC100("COD_PART"))
                         .IND_OPER = dicDadosC100(Chave)(dicTitulosC100("IND_OPER"))
                         .IND_EMIT = dicDadosC100(Chave)(dicTitulosC100("IND_EMIT"))
                     
-                        Call fnXML.CriarRegistroC140(NFe, dicDadosC140, dicDadosC141, .Arquivo)
+                        Call fnXML.CriarRegistroC140(NFe, dicDadosC140, dicDadosC141, .ARQUIVO)
                         
                     End If
                     
@@ -1250,7 +1250,7 @@ Dim dicDadosC001 As New Dictionary
 Dim Produtos As IXMLDOMNodeList
 Dim arrXMLs As New ArrayList
 Dim NFe As New DOMDocument60
-Dim Arquivo As String, Periodo$, Caminho$, CNPJEmit$, tpPart$, CHV_0150$, CHV_0000$, CHV_0001$, Msg$
+Dim ARQUIVO As String, Periodo$, Caminho$, CNPJEmit$, tpPart$, CHV_0150$, CHV_0000$, CHV_0001$, Msg$
 Dim XML As Variant, Chave
 Dim i As Integer
 
@@ -1298,7 +1298,7 @@ Dim i As Integer
             Periodo = VBA.Format(PeriodoImportacao, "00/0000")
         End If
         
-        Arquivo = Periodo & "-" & CNPJContribuinte
+        ARQUIVO = Periodo & "-" & CNPJContribuinte
         For Each XML In arrXMLs
             
             Call Util.AntiTravamento(a, 100, "Importando XML " & a + 1 & " de " & arrXMLs.Count, arrXMLs.Count, Comeco)
@@ -1311,19 +1311,19 @@ Dim i As Integer
                     
                     Set Produtos = NFe.SelectNodes("//det")
                     
-                    If Not dicDados0000.Exists(Arquivo) Then
+                    If Not dicDados0000.Exists(ARQUIVO) Then
                         
                         Call fnXML.CriarRegistro0000(NFe, dicDados0000, _
                             dicDados0001, dicDados0005, dicDados0100, dicDadosC001, Periodo, "emit")
                         
                     End If
                     
-                    If LBound(dicDados0000(Arquivo)) = 0 Then i = 1 Else i = 0
-                    CHV_0000 = dicDados0000(Arquivo)(3 - i)
+                    If LBound(dicDados0000(ARQUIVO)) = 0 Then i = 1 Else i = 0
+                    CHV_0000 = dicDados0000(ARQUIVO)(3 - i)
                     
                     CHV_0001 = fnSPED.GerarChaveRegistro(CHV_0000, "0001")
-                    Call fnXML.CriarRegistro0190(Produtos, dicDados0190, dicTitulos0190, Arquivo, CHV_0001)
-                    Call fnXML.CriarRegistro0200(Produtos, dicDados0200, dicTitulos0200, Arquivo, CHV_0001)
+                    Call fnXML.CriarRegistro0190(Produtos, dicDados0190, dicTitulos0190, ARQUIVO, CHV_0001)
+                    Call fnXML.CriarRegistro0200(Produtos, dicDados0200, dicTitulos0200, ARQUIVO, CHV_0001)
                     
                 End If
                 

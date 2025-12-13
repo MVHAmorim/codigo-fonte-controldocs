@@ -11,7 +11,7 @@ Option Explicit
 
 Public Function GerarSaidasCTeMunicipio()
 
-Dim COD_MUN_ORIG As String, Arquivo$, COD_UF$, COD_SIT$, CHV_1001$, CHV_1400$
+Dim COD_MUN_ORIG As String, ARQUIVO$, COD_UF$, COD_SIT$, CHV_1001$, CHV_1400$
 Dim Campos As Variant, CamposDic, Chave
 Dim dicTitulos0000 As New Dictionary
 Dim dicTitulosD100 As New Dictionary
@@ -41,13 +41,13 @@ Dim i As Byte
     'Gera os dados do registro 1400 a partir das informações do registro D100
     For Each Campos In dicDadosD100.Items()
         
-        Arquivo = Campos(dicTitulosD100("ARQUIVO"))
+        ARQUIVO = Campos(dicTitulosD100("ARQUIVO"))
         COD_MUN_ORIG = Campos(dicTitulosD100("COD_MUN_ORIG"))
         COD_SIT = Campos(dicTitulosD100("COD_SIT"))
         VL_DOC = Campos(dicTitulosD100("VL_DOC"))
         
-        If dicDados1001.Exists(Arquivo) Then CHV_1001 = dicDados1001(Arquivo)(dicTitulos1001("CHV_REG"))
-        If dicDados1001.Exists(Arquivo) Then COD_UF = VBA.Left(dicDados0000(Arquivo)(dicTitulos0000("COD_MUN")), 2)
+        If dicDados1001.Exists(ARQUIVO) Then CHV_1001 = dicDados1001(ARQUIVO)(dicTitulos1001("CHV_REG"))
+        If dicDados1001.Exists(ARQUIVO) Then COD_UF = VBA.Left(dicDados0000(ARQUIVO)(dicTitulos0000("COD_MUN")), 2)
         
         CHV_1400 = fnSPED.GerarChaveRegistro(CHV_1001, "", COD_MUN_ORIG)
         If dicDados.Exists(CHV_1400) Then
@@ -62,7 +62,7 @@ Dim i As Byte
         'Adiciona dados do registro caso caso o valor do documento seja maior que zero
         If VL_DOC > 0 And COD_MUN_ORIG Like COD_UF & "*" Then
         
-            Campos = Array("'1400", Arquivo, CHV_1400, CHV_1001, "", COD_MUN_ORIG, VL_DOC)
+            Campos = Array("'1400", ARQUIVO, CHV_1400, CHV_1001, "", COD_MUN_ORIG, VL_DOC)
             dicDados(CHV_1400) = Campos
         
         End If

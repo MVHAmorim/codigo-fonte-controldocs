@@ -380,9 +380,9 @@ Dim arrDados As New ArrayList
                     REG = Util.RemoverAspaSimples(Campos(.dicTitulosApuracao("REG")))
                     If RegistrosIgnorados Like "*" & REG & "*" Then GoTo Prx:
                     
-                    Arquivo = (Campos(.dicTitulosApuracao("ARQUIVO")))
+                    ARQUIVO = (Campos(.dicTitulosApuracao("ARQUIVO")))
                     DT_REF = .ExtrairDataReferencia(Campos)
-                    COD_INC_TRIB = Apuracao.ExtrairREGIME_TRIBUTARIO(Arquivo)
+                    COD_INC_TRIB = Apuracao.ExtrairREGIME_TRIBUTARIO(ARQUIVO)
                     
                     ChaveTrib = .GerarChaveTributacao(assTributacaoPISCOFINS, Campos, True)
                     CamposTrib = .ExtrairCamposTributarios(ChaveTrib, DT_REF)

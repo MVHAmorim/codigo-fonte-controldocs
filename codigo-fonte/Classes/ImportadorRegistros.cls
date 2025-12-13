@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Registro As String, Arquivo$, Periodo$, CHV_REG$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOES$, COD_VER_FISCAL$, COD_VER_CONTRIBUICOES$
+Private Registro As String, ARQUIVO$, Periodo$, CHV_REG$, CHV_PAI_FISCAL$, CHV_PAI_CONTRIBUICOES$, COD_VER_FISCAL$, COD_VER_CONTRIBUICOES$
 Private EnumContribuicoes As clsEnumeracoesSPEDContribuicoes
 Private EnumFiscal As clsEnumeracoesSPEDFiscal
 Private GerenciadorSPED As clsRegistrosSPED
@@ -57,7 +57,7 @@ Dim Titulo As String
     Else
         
         Periodo = VBA.Format(PeriodoImportacao, "00/0000")
-        Arquivo = Periodo & "-" & CNPJContribuinte
+        ARQUIVO = Periodo & "-" & CNPJContribuinte
         If VBA.IsDate(Periodo) Then ValidarPeriodoImportacao = True
         
     End If
@@ -101,7 +101,7 @@ Dim Campo As Variant
         Select Case Campo
             
             Case "ARQUIVO"
-                arrCampos.Add Arquivo
+                arrCampos.Add ARQUIVO
                 
             Case Else
                 If dicTitulosOrig.Exists(CStr(Campo)) Then _
@@ -126,11 +126,11 @@ Dim REG As String
     REG = arrCampos(dicTitulosDest("REG"))
     
     CHV_REG = ""
-    CHV_PAI_Fiscal = ""
+    CHV_PAI_FISCAL = ""
     CHV_PAI_CONTRIBUICOES = ""
     
     arrCampos(dicTitulosDest("CHV_REG")) = CHV_REG
-    arrCampos(dicTitulosDest("CHV_PAI_FISCAL")) = CHV_PAI_Fiscal
+    arrCampos(dicTitulosDest("CHV_PAI_FISCAL")) = CHV_PAI_FISCAL
     arrCampos(dicTitulosDest("CHV_PAI_CONTRIBUICOES")) = CHV_PAI_CONTRIBUICOES
     
 End Sub
@@ -142,11 +142,11 @@ Dim REG As String
     REG = arrCampos(dicTitulosDest("REG"))
     
     CHV_REG = ""
-    CHV_PAI_Fiscal = ""
+    CHV_PAI_FISCAL = ""
     CHV_PAI_CONTRIBUICOES = ""
     
     arrCampos(dicTitulosDest("CHV_REG")) = CHV_REG
-    arrCampos(dicTitulosDest("CHV_PAI_FISCAL")) = CHV_PAI_Fiscal
+    arrCampos(dicTitulosDest("CHV_PAI_FISCAL")) = CHV_PAI_FISCAL
     arrCampos(dicTitulosDest("CHV_PAI_CONTRIBUICOES")) = CHV_PAI_CONTRIBUICOES
     
 End Sub

@@ -68,7 +68,7 @@ Public ExclusaoICMS As New clsAssistenteRecuperacaoICMS
 '#Variáveis
 '---------------------------------------------
 ' Arquivo
-Public Arquivo As String
+Public ARQUIVO As String
 
 
 'Byte

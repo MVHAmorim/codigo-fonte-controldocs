@@ -23,7 +23,7 @@ Private arrDadosOrig As ArrayList
 Private arrCampos As ArrayList
 Private PlanOrig As Worksheet
 Private Periodo As String
-Private Arquivo As String
+Private ARQUIVO As String
 Private total As Integer
 
 Public Sub ImportarPlanilha()
@@ -65,7 +65,7 @@ Dim Titulo As String
     Else
         
         Periodo = VBA.Format(PeriodoImportacao, "00/0000")
-        Arquivo = Periodo & "-" & CNPJContribuinte
+        ARQUIVO = Periodo & "-" & CNPJContribuinte
         If VBA.IsDate(Periodo) Then ValidarPeriodoImportacao = True
         
     End If
@@ -146,9 +146,9 @@ Dim CHV_REG As String, CHV_PAI_CONTRIBUICOES$, Chave$, CNPJEstabelecimento$, IND
                     DT_REF = IIf(DT_EXE_SERV <> "", DT_EXE_SERV, DT_DOC)
                     Periodo = Util.ExtrairPeriodo(DT_REF)
                     CNPJEstabelecimento = ExtrairCampo(dicTitulosOrig, Campos, "CNPJ_ESTABELECIMENTO")
-                    Arquivo = Periodo & "-" & CNPJContribuinte
-                    If Not dtoRegSPED.r0000_Contr.Exists(Arquivo) Then Exit Function
-                    arrCampos.Add Arquivo
+                    ARQUIVO = Periodo & "-" & CNPJContribuinte
+                    If Not dtoRegSPED.r0000_Contr.Exists(ARQUIVO) Then Exit Function
+                    arrCampos.Add ARQUIVO
                     
                 Case Campo = "CHV_REG"
                     arrCampos.Add ""
@@ -157,7 +157,7 @@ Dim CHV_REG As String, CHV_PAI_CONTRIBUICOES$, Chave$, CNPJEstabelecimento$, IND
                     arrCampos.Add ""
                     
                 Case Campo = "CHV_PAI_CONTRIBUICOES"
-                    CHV_PAI_CONTRIBUICOES = ExtrairChaveRegA010(Arquivo, CNPJEstabelecimento)
+                    CHV_PAI_CONTRIBUICOES = ExtrairChaveRegA010(ARQUIVO, CNPJEstabelecimento)
                     arrCampos.Add CHV_PAI_CONTRIBUICOES
                     
                 Case Campo = "IND_OPER"
@@ -238,9 +238,9 @@ Dim CHV_REG As String, CHV_PAI_CONTRIBUICOES$, Chave$, CNPJEstabelecimento$, NAT
                     DT_REF = IIf(DT_EXE_SERV <> "", DT_EXE_SERV, DT_DOC)
                     Periodo = Util.ExtrairPeriodo(DT_REF)
                     CNPJEstabelecimento = ExtrairCampo(dicTitulosOrig, Campos, "CNPJ_ESTABELECIMENTO")
-                    Arquivo = Periodo & "-" & CNPJContribuinte
-                    If Not dtoRegSPED.r0000_Contr.Exists(Arquivo) Then Exit Sub
-                    arrCampos.Add Arquivo
+                    ARQUIVO = Periodo & "-" & CNPJContribuinte
+                    If Not dtoRegSPED.r0000_Contr.Exists(ARQUIVO) Then Exit Sub
+                    arrCampos.Add ARQUIVO
                     
                 Case Campo = "CHV_REG"
                     arrCampos.Add ""
@@ -362,9 +362,9 @@ Dim i As Long
     With CamposA100
         
         .REG = Campos(dtoTitSPED.tA100("REG") - i)
-        .Arquivo = Campos(dtoTitSPED.tA100("ARQUIVO") - i)
+        .ARQUIVO = Campos(dtoTitSPED.tA100("ARQUIVO") - i)
         .CHV_REG = Campos(dtoTitSPED.tA100("CHV_REG") - i)
-        .CHV_PAI_Fiscal = Campos(dtoTitSPED.tA100("CHV_PAI_FISCAL") - i)
+        .CHV_PAI_FISCAL = Campos(dtoTitSPED.tA100("CHV_PAI_FISCAL") - i)
         .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tA100("CHV_PAI_CONTRIBUICOES") - i)
         .IND_OPER = Campos(dtoTitSPED.tA100("IND_OPER") - i)
         .IND_EMIT = Campos(dtoTitSPED.tA100("IND_EMIT") - i)
@@ -437,7 +437,7 @@ Dim CHV_REG As String
     
 End Sub
 
-Private Sub CriarRegistroA001(ByVal Arquivo As String)
+Private Sub CriarRegistroA001(ByVal ARQUIVO As String)
 
 Dim tpCont As String, Chave$
 Dim Campos As Variant
@@ -446,18 +446,18 @@ Dim Campos As Variant
     
     With CamposA001
         
-        If Not dtoRegSPED.rA001.Exists(Arquivo) Then
+        If Not dtoRegSPED.rA001.Exists(ARQUIVO) Then
             
             .REG = "'A001"
-            .Arquivo = Arquivo
+            .ARQUIVO = ARQUIVO
             .IND_MOV = EnumFiscal.ValidarEnumeracao_IND_MOV("0")
-            .CHV_PAI_Fiscal = ""
-            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.Arquivo)(dtoTitSPED.t0000_Contr("CHV_REG"))
+            .CHV_PAI_FISCAL = ""
+            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.ARQUIVO)(dtoTitSPED.t0000_Contr("CHV_REG"))
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_CONTRIBUICOES, "A001")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
             
-            dtoRegSPED.rA001(.Arquivo) = Campos
+            dtoRegSPED.rA001(.ARQUIVO) = Campos
             
         End If
         
@@ -465,7 +465,7 @@ Dim Campos As Variant
     
 End Sub
 
-Private Sub CriarRegistroA010(ByVal Arquivo As String, ByVal CNPJ As String)
+Private Sub CriarRegistroA010(ByVal ARQUIVO As String, ByVal CNPJ As String)
 
 Dim Chave As String
 Dim Campos As Variant
@@ -474,16 +474,16 @@ Dim Campos As Variant
     
     With CamposA010
         
-        Chave = Util.UnirCampos(Arquivo, CNPJ)
+        Chave = Util.UnirCampos(ARQUIVO, CNPJ)
         If Not dtoRegSPED.rA010.Exists(Chave) Then
             
             .REG = "A010"
-            .Arquivo = Arquivo
+            .ARQUIVO = ARQUIVO
             .CNPJ = CNPJ
-            .CHV_PAI = ExtrairChaveRegA001(.Arquivo)
+            .CHV_PAI = ExtrairChaveRegA001(.ARQUIVO)
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CNPJ)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ))
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ))
             
             dtoRegSPED.rA010(Chave) = Campos
             
@@ -493,7 +493,7 @@ Dim Campos As Variant
     
 End Sub
 
-Private Function ExtrairChaveRegA001(ByVal Arquivo As String)
+Private Function ExtrairChaveRegA001(ByVal ARQUIVO As String)
 
 Dim i As Integer
 Dim Campos As Variant
@@ -502,9 +502,9 @@ Dim Campos As Variant
         
         If .rA001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroA001("ARQUIVO")
         
-        If Not .rA001.Exists(Arquivo) Then Call CriarRegistroA001(Arquivo)
+        If Not .rA001.Exists(ARQUIVO) Then Call CriarRegistroA001(ARQUIVO)
         
-        Campos = .rA001(Arquivo)
+        Campos = .rA001(ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveRegA001 = Campos(dtoTitSPED.tA001("CHV_REG") - i)
@@ -513,7 +513,7 @@ Dim Campos As Variant
         
 End Function
 
-Private Function ExtrairChaveRegA010(ByVal Arquivo As String, ByVal CNPJ As String) As String
+Private Function ExtrairChaveRegA010(ByVal ARQUIVO As String, ByVal CNPJ As String) As String
 
 Dim i As Byte
 Dim Campos As Variant
@@ -523,8 +523,8 @@ Dim Chave As String, CHV_PAI$, CHV_REG$
         
         If .rA010 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroA010("ARQUIVO", "CNPJ")
         
-        Chave = Util.UnirCampos(Arquivo, CNPJ)
-        If Not .rA010.Exists(Chave) Then Call CriarRegistroA010(Arquivo, CNPJ)
+        Chave = Util.UnirCampos(ARQUIVO, CNPJ)
+        If Not .rA010.Exists(Chave) Then Call CriarRegistroA010(ARQUIVO, CNPJ)
         
         Campos = .rA010(Chave)
         i = Util.VerificarPosicaoInicialArray(Campos)

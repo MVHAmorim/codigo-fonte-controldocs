@@ -7,7 +7,7 @@ Public dicTitulosNotas As New Dictionary
 Public Type CamposDivergenciaNotas
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_PAI As String
     CHV_REG As String
     CHV_NFE As String
@@ -99,7 +99,7 @@ Dim i As Long
     With CamposNota
         
         .REG = Util.RemoverAspaSimples(Campos(dicTitulosNotas("REG") - i))
-        .Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosNotas("ARQUIVO") - i))
+        .ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosNotas("ARQUIVO") - i))
         .CHV_PAI = Util.RemoverAspaSimples(Campos(dicTitulosNotas("CHV_PAI_FISCAL") - i))
         .CHV_REG = Util.RemoverAspaSimples(Campos(dicTitulosNotas("CHV_REG") - i))
         .CHV_NFE = Util.RemoverAspaSimples(Campos(dicTitulosNotas("CHV_NFE") - i))
@@ -178,7 +178,7 @@ Dim i As Long
     With CamposNota
         
         Campos(dicTitulosNotas("REG") - i) = .REG
-        Campos(dicTitulosNotas("ARQUIVO") - i) = .Arquivo
+        Campos(dicTitulosNotas("ARQUIVO") - i) = .ARQUIVO
         Campos(dicTitulosNotas("CHV_PAI_FISCAL") - i) = .CHV_PAI
         Campos(dicTitulosNotas("CHV_REG") - i) = .CHV_REG
         Campos(dicTitulosNotas("CHV_NFE") - i) = .CHV_NFE

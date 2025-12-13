@@ -6,18 +6,18 @@ Public Function IndentificarSubPastas(ByVal Caminho As String, ByRef ListaXMLS A
         
 Dim FSO As New FileSystemObject
 Dim pasta As Folder
-Dim Arquivo As file
+Dim ARQUIVO As file
 Dim i As Long
 
     Set pasta = FSO.GetFolder(Caminho)
     
     For Each pasta In pasta.SubFolders
     
-        For Each Arquivo In pasta.Files
+        For Each ARQUIVO In pasta.Files
 
-            If InStr(VBA.LCase(Arquivo.Path), ".xml") > 0 Then ListaXMLS.Add Arquivo.Path
+            If InStr(VBA.LCase(ARQUIVO.Path), ".xml") > 0 Then ListaXMLS.Add ARQUIVO.Path
             
-        Next Arquivo
+        Next ARQUIVO
         
         Call IndentificarSubPastas(pasta.Path, ListaXMLS)
         

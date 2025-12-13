@@ -185,7 +185,7 @@ End Sub
 Private Sub TratarCamposC100(ByVal Campos As Variant, ByVal Campo As String)
 
 Const CamposIgnorar As String = "INSC_EST, NOME_RAZAO"
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOES$, COD_PART$, COD_MOD$, CNPJ$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_PAI_FISCAL$, CHV_PAI_CONTRIBUICOES$, COD_PART$, COD_MOD$, CNPJ$
     
     With Divergencias
         
@@ -195,9 +195,9 @@ Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOE
                 Exit Sub
                 
             Case Campo Like "CHV_PAI_FISCAL"
-                CHV_PAI_Fiscal = Campos(dtoTitSPED.tC100(Campo))
-                .AtribuirValor Campo, CHV_PAI_Fiscal
-                Call .ExtrairDadosC100(CHV_PAI_Fiscal)
+                CHV_PAI_FISCAL = Campos(dtoTitSPED.tC100(Campo))
+                .AtribuirValor Campo, CHV_PAI_FISCAL
+                Call .ExtrairDadosC100(CHV_PAI_FISCAL)
                 
             Case Campo Like "CHV_PAI_CONTRIBUICOES"
                 CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tC100(Campo))
@@ -205,8 +205,8 @@ Dim Arquivo As String, CHV_REG$, CHV_PAI$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOE
                 Call .ExtrairDadosC100(CHV_PAI_CONTRIBUICOES)
                 
             Case Campo Like "ARQUIVO"
-                Arquivo = Campos(dtoTitSPED.tC100(Campo))
-                .AtribuirValor Campo, Arquivo
+                ARQUIVO = Campos(dtoTitSPED.tC100(Campo))
+                .AtribuirValor Campo, ARQUIVO
                 
             Case Campo Like "COD_PART"
                 .AtribuirValor Campo, fnExcel.FormatarTexto(ExtrairCampoParticipante(dtoTitSPED.tC100, Campos, False, "CNPJ", "CPF"))
@@ -240,7 +240,7 @@ End Sub
 Private Function FormatarCamposC100(ByVal Campos As Variant, ByVal Campo As String) As Variant
 
 Dim Campos0150 As Variant
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_Fiscal$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_FISCAL$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
     
     With Divergencias
         
@@ -286,23 +286,23 @@ Dim i As Integer
 Dim Chave As String
 Dim Campo As Variant, Valor
 Dim Campos0001 As Variant, Campos0140, CamposC010, Campos0150
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_Fiscal$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_FISCAL$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
     
     i = Util.VerificarPosicaoInicialArray(Campos)
         
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
     COD_PART = Campos(dicTitulos(IIf(CamposSPED = True, "COD_PART_SPED", "COD_PART")) - i)
     COD_SIT = Campos(dicTitulos(IIf(CamposSPED = True, "COD_SIT_SPED", "COD_SIT")) - i)
     COD_MOD = Campos(dicTitulos(IIf(CamposSPED = True, "COD_MOD_SPED", "COD_MOD")) - i)
     
-    CHV_PAI_Fiscal = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
+    CHV_PAI_FISCAL = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
     CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tC100("CHV_PAI_CONTRIBUICOES") - i)
     
     If Not COD_SIT Like "*02*" And Not COD_MOD Like "*65*" Then
         
-        If CHV_PAI_Fiscal <> "" And dtoRegSPED.r0000.Count > 0 Then
+        If CHV_PAI_FISCAL <> "" And dtoRegSPED.r0000.Count > 0 Then
             
-            Campos0001 = dtoRegSPED.r0001(Arquivo)
+            Campos0001 = dtoRegSPED.r0001(ARQUIVO)
             i = Util.VerificarPosicaoInicialArray(Campos0001)
             CHV_PAI = Campos0001(dtoTitSPED.t0001("CHV_REG") - i)
             
@@ -344,24 +344,24 @@ Private Sub IncluirCampoParticipante(ByVal Campos As Variant, ByVal Campo, ByVal
 Dim i As Integer
 Dim ValorIncluir As Variant
 Dim Campos0001 As Variant, Campos0140, CamposC010, Campos0150
-Dim Arquivo As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_Fiscal$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CNPJ$, CHV_PAI_FISCAL$, COD_PART$, CHV_PAI_CONTRIBUICOES$, COD_MOD$, COD_SIT$
     
     i = Util.VerificarPosicaoInicialArray(Campos)
     
-    Arquivo = Campos(dicTitulosRelatorio("ARQUIVO") - i)
+    ARQUIVO = Campos(dicTitulosRelatorio("ARQUIVO") - i)
     COD_PART = Campos(dicTitulosRelatorio("COD_PART_SPED") - i)
     COD_SIT = Campos(dicTitulosRelatorio("COD_SIT_SPED") - i)
     COD_MOD = Campos(dicTitulosRelatorio("COD_MOD_SPED") - i)
     ValorIncluir = Campos(dicTitulosRelatorio(CampoIncluir) - i)
     
-    CHV_PAI_Fiscal = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
+    CHV_PAI_FISCAL = Campos(dtoTitSPED.tC100("CHV_PAI_FISCAL") - i)
     CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tC100("CHV_PAI_CONTRIBUICOES") - i)
     
     If Not COD_SIT Like "*02*" And Not COD_MOD Like "*65*" Then
         
-        If CHV_PAI_Fiscal <> "" And dtoRegSPED.r0000.Count > 0 Then
+        If CHV_PAI_FISCAL <> "" And dtoRegSPED.r0000.Count > 0 Then
             
-            Campos0001 = dtoRegSPED.r0001(Arquivo)
+            Campos0001 = dtoRegSPED.r0001(ARQUIVO)
             i = Util.VerificarPosicaoInicialArray(Campos0001)
             CHV_PAI = Campos0001(dtoTitSPED.t0001("CHV_REG") - i)
             

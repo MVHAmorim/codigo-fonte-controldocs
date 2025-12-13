@@ -487,7 +487,7 @@ Dim UltLin As Long
                     .CHV_REG = VBA.Replace(Campos(dicTitulos("CHV_REG")), "'", "")
                     .COD_VER = VBA.Replace(Campos(dicTitulos("COD_VER")), "'", "")
                     .IND_ATIV = Util.ApenasNumeros(Campos(dicTitulos("IND_ATIV")))
-                    .Arquivo = Util.RemoverAspaSimples(Campos(dicTitulos("ARQUIVO")))
+                    .ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulos("ARQUIVO")))
                     .CNPJ = Util.ApenasNumeros(Campos(dicTitulos("CNPJ")))
                     .COD_FIN = Util.ApenasNumeros(Campos(dicTitulos("COD_FIN")))
                     .DT_INI = VBA.Format(Util.ApenasNumeros(Campos(dicTitulos("DT_INI"))), "yyyymm")

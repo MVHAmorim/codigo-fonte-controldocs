@@ -200,7 +200,7 @@ End Function
 
 Public Function ImportarCadastro0200()
 
-Dim dtIni As String, dtFim$, Arquivo$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0190$, COD_ITEM$, UNID_INV$, Msg$
+Dim dtIni As String, dtFim$, ARQUIVO$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0190$, COD_ITEM$, UNID_INV$, Msg$
 Dim Caminho As Variant, Campos, Titulo
 Dim dicTitulos0200 As New Dictionary
 Dim dicDados0190 As New Dictionary
@@ -290,8 +290,8 @@ Dim Mapeamento As Byte
                             arrCampos.Add "'0200"
                             
                         Case "ARQUIVO"
-                            Arquivo = VBA.Format(PeriodoImportacao, "00/0000") & "-" & CNPJContribuinte
-                            arrCampos.Add Arquivo
+                            ARQUIVO = VBA.Format(PeriodoImportacao, "00/0000") & "-" & CNPJContribuinte
+                            arrCampos.Add ARQUIVO
                             
                         Case "COD_ITEM"
                             COD_ITEM = Campos(dicTitulos(Titulo))
@@ -332,7 +332,7 @@ Dim Mapeamento As Byte
                 
                 If UNID_INV <> "" Then CHV_REG_0190 = fnSPED.GerarChaveRegistro(CHV_REG_0001, UNID_INV)
                 
-                If Not dicDados0190.Exists(CHV_REG_0190) Then Call IncluirUnid0190(dicDados0190, Arquivo, CHV_REG_0001, CHV_REG_0190, UNID_INV)
+                If Not dicDados0190.Exists(CHV_REG_0190) Then Call IncluirUnid0190(dicDados0190, ARQUIVO, CHV_REG_0001, CHV_REG_0190, UNID_INV)
                 If Util.ChecarCamposPreenchidos(arrCampos.ToArray()) Then arrDados.Add arrCampos.ToArray()
                 
             End If
@@ -367,7 +367,7 @@ End Function
 
 Public Function ImportarCadastroK200()
 
-Dim dtIni As String, dtFim$, Arquivo$, CHV_REG_0000$, CHV_REG_K001$, CHV_REG_K010$, CHV_REG_K100$, COD_ITEM$, DT_EST$, IND_EST$, COD_PART$, Msg$
+Dim dtIni As String, dtFim$, ARQUIVO$, CHV_REG_0000$, CHV_REG_K001$, CHV_REG_K010$, CHV_REG_K100$, COD_ITEM$, DT_EST$, IND_EST$, COD_PART$, Msg$
 Dim Caminho As Variant, Campos, Titulo
 Dim dicTitulosK001 As New Dictionary
 Dim dicTitulosK010 As New Dictionary
@@ -465,8 +465,8 @@ Dim Mapeamento As Byte, i As Byte
                 IND_EST = Campos(dicTitulos("IND_EST"))
                 COD_PART = Campos(dicTitulos("COD_PART"))
                 
-                Arquivo = VBA.Format(DT_EST, "mm/yyyy") & "-" & CNPJContribuinte
-                Call GerarRegistrosBlocoK(dicDadosK001, dicDadosK010, dicDadosK100, Arquivo, DT_EST)
+                ARQUIVO = VBA.Format(DT_EST, "mm/yyyy") & "-" & CNPJContribuinte
+                Call GerarRegistrosBlocoK(dicDadosK001, dicDadosK010, dicDadosK100, ARQUIVO, DT_EST)
                 For Each Titulo In dicTitulosK200
                     
                     Select Case Titulo
@@ -475,15 +475,15 @@ Dim Mapeamento As Byte, i As Byte
                             arrCampos.Add "K200"
                             
                         Case "ARQUIVO"
-                            arrCampos.Add Arquivo
+                            arrCampos.Add ARQUIVO
                             
                         Case "COD_ITEM"
                             arrCampos.Add fnExcel.FormatarTexto(COD_ITEM)
                             
                         Case "CHV_REG"
-                            If dicDadosK100.Exists(Arquivo) Then
-                                If LBound(dicDadosK100(Arquivo)) = 0 Then i = 1 Else i = 1
-                                CHV_REG_K100 = dicDadosK100(Arquivo)(dicTitulosK100("CHV_REG") - i)
+                            If dicDadosK100.Exists(ARQUIVO) Then
+                                If LBound(dicDadosK100(ARQUIVO)) = 0 Then i = 1 Else i = 1
+                                CHV_REG_K100 = dicDadosK100(ARQUIVO)(dicTitulosK100("CHV_REG") - i)
                             End If
                             arrCampos.Add fnSPED.GerarChaveRegistro(CHV_REG_K100, DT_EST, COD_ITEM, IND_EST, COD_PART)
                             
@@ -549,7 +549,7 @@ PrxLin:
 End Function
 
 Private Function GerarRegistrosBlocoK(ByRef dicDadosK001 As Dictionary, ByRef dicDadosK010 As Dictionary, _
-    ByRef dicDadosK100 As Dictionary, ByVal Arquivo As String, ByVal DT_EST As String)
+    ByRef dicDadosK100 As Dictionary, ByVal ARQUIVO As String, ByVal DT_EST As String)
     
 Dim CHV_REG_0000 As String, CHV_REG_K001$, CHV_REG_K010$, CHV_REG_K100$, Periodo$, DT_INI$, DT_FIN$
     
@@ -562,21 +562,21 @@ Dim CHV_REG_0000 As String, CHV_REG_K001$, CHV_REG_K010$, CHV_REG_K100$, Periodo
     CHV_REG_K010 = fnSPED.GerarChaveRegistro(CHV_REG_K001, "K010")
     CHV_REG_K100 = fnSPED.GerarChaveRegistro(CHV_REG_K001, "K100")
     
-    If Not dicDadosK001.Exists(Arquivo) Then
+    If Not dicDadosK001.Exists(ARQUIVO) Then
         
-        dicDadosK001(Arquivo) = Array("K001", Arquivo, CHV_REG_K001, CHV_REG_0000, "", "0")
-        
-    End If
-    
-    If Not dicDadosK010.Exists(Arquivo) Then
-        
-        dicDadosK010(Arquivo) = Array("K010", Arquivo, CHV_REG_K010, CHV_REG_K001, "", "2")
+        dicDadosK001(ARQUIVO) = Array("K001", ARQUIVO, CHV_REG_K001, CHV_REG_0000, "", "0")
         
     End If
     
-    If Not dicDadosK100.Exists(Arquivo) Then
+    If Not dicDadosK010.Exists(ARQUIVO) Then
+        
+        dicDadosK010(ARQUIVO) = Array("K010", ARQUIVO, CHV_REG_K010, CHV_REG_K001, "", "2")
+        
+    End If
     
-        dicDadosK100(Arquivo) = Array("K100", Arquivo, CHV_REG_K100, CHV_REG_K001, "", DT_INI, DT_FIN)
+    If Not dicDadosK100.Exists(ARQUIVO) Then
+    
+        dicDadosK100(ARQUIVO) = Array("K100", ARQUIVO, CHV_REG_K100, CHV_REG_K001, "", DT_INI, DT_FIN)
     
     End If
     
@@ -584,7 +584,7 @@ End Function
 
 Public Function ImportarCadastroTributacaoProdutos()
 
-Dim dtIni As String, dtFim$, Arquivo$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0190$, COD_ITEM$, UNID_INV$, Msg$
+Dim dtIni As String, dtFim$, ARQUIVO$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0190$, COD_ITEM$, UNID_INV$, Msg$
 Dim Caminho As Variant, Campos, Titulo
 Dim dicTitulosCadTribProd As New Dictionary
 Dim dicDados0190 As New Dictionary
@@ -985,8 +985,8 @@ Dim Campos As Variant
     
 End Function
 
-Public Function IncluirUnid0190(ByRef dicDados0190 As Dictionary, ByVal Arquivo As String, ByVal CHV_REG_0001 As String, ByVal CHV_REG_0190 As String, ByVal UNID_INV As String)
+Public Function IncluirUnid0190(ByRef dicDados0190 As Dictionary, ByVal ARQUIVO As String, ByVal CHV_REG_0001 As String, ByVal CHV_REG_0190 As String, ByVal UNID_INV As String)
 
-    dicDados0190(CHV_REG_0190) = Array("'0190", Arquivo, CHV_REG_0190, CHV_REG_0001, "", UNID_INV, UNID_INV)
+    dicDados0190(CHV_REG_0190) = Array("'0190", ARQUIVO, CHV_REG_0190, CHV_REG_0001, "", UNID_INV, UNID_INV)
 
 End Function

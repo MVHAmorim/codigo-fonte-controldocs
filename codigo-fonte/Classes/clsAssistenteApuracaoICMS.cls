@@ -61,7 +61,7 @@ End Function
 
 Public Sub CarregarDadosC170(ByRef arrDocsC100 As ArrayList, ByVal Msg As String)
 
-Dim Arquivo As String, CHV_REG$, CHV_0001$, CHV_C100$, COD_ITEM$, COD_PART$, COD_NAT$, UF_CONTRIB$, CONTRIBUINTE$, CNPJ_ESTABELECIMENTO$
+Dim ARQUIVO As String, CHV_REG$, CHV_0001$, CHV_C100$, COD_ITEM$, COD_PART$, COD_NAT$, UF_CONTRIB$, CONTRIBUINTE$, CNPJ_ESTABELECIMENTO$
 Dim dicTitulosC170 As New Dictionary
 Dim Dados As Range, Linha As Range
 Dim Comeco As Double, VL_ITEM#
@@ -89,15 +89,15 @@ Dim b As Long
             If Util.ChecarCamposPreenchidos(Campos) Then
                 
                 'Carrega as variáveis necessárias
-                Arquivo = Campos(dicTitulosC170("ARQUIVO"))
-                UF_CONTRIB = .ExtrairUFContribuinte(Arquivo)
-                CNPJ_ESTABELECIMENTO = fnExcel.FormatarTexto(VBA.Split(Arquivo, "-")(1))
+                ARQUIVO = Campos(dicTitulosC170("ARQUIVO"))
+                UF_CONTRIB = .ExtrairUFContribuinte(ARQUIVO)
+                CNPJ_ESTABELECIMENTO = fnExcel.FormatarTexto(VBA.Split(ARQUIVO, "-")(1))
                 
                 CHV_C100 = Campos(dicTitulosC170("CHV_PAI_FISCAL"))
                 If CHV_C100 <> "" Then arrDocsC100.Add CHV_C100
                 
                 COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
-                CHV_0001 = .ExtrairCHV_0001(Arquivo)
+                CHV_0001 = .ExtrairCHV_0001(ARQUIVO)
                 COD_ITEM = Campos(dicTitulosC170("COD_ITEM"))
                 COD_NAT = Campos(dicTitulosC170("COD_NAT"))
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosC170("VL_ITEM")))
@@ -115,11 +115,11 @@ Dim b As Long
                 Call .ExtrairDadosC177(CHV_C100)
                 
                 'Extrai dados do registro 0400
-                Call .ExtrairDados0400(Arquivo, COD_NAT)
+                Call .ExtrairDados0400(ARQUIVO, COD_NAT)
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "REG", Campos(dicTitulosC170("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_FISCAL", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC170("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", CNPJ_ESTABELECIMENTO
@@ -151,7 +151,7 @@ End Sub
 
 Public Sub CarregarDadosC190(ByRef arrDocsC100 As ArrayList, ByVal Msg As String)
 
-Dim Arquivo As String, CHV_REG$, CHV_0001$, CHV_C100$, COD_PART$, COD_NAT$, UF_CONTRIB$, CONTRIBUINTE$, CNPJ_ESTABELECIMENTO$
+Dim ARQUIVO As String, CHV_REG$, CHV_0001$, CHV_C100$, COD_PART$, COD_NAT$, UF_CONTRIB$, CONTRIBUINTE$, CNPJ_ESTABELECIMENTO$
 Dim dicTitulosC190 As New Dictionary
 Dim Dados As Range, Linha As Range
 Dim Comeco As Double, VL_OPR#
@@ -179,10 +179,10 @@ Dim b As Long
             If Util.ChecarCamposPreenchidos(Campos) Then
                 
                 'Carrega as variáveis necessárias
-                Arquivo = Campos(dicTitulosC190("ARQUIVO"))
-                UF_CONTRIB = .ExtrairUFContribuinte(Arquivo)
-                CNPJ_ESTABELECIMENTO = fnExcel.FormatarTexto(VBA.Split(Arquivo, "-")(1))
-                CHV_0001 = .ExtrairCHV_0001(Arquivo)
+                ARQUIVO = Campos(dicTitulosC190("ARQUIVO"))
+                UF_CONTRIB = .ExtrairUFContribuinte(ARQUIVO)
+                CNPJ_ESTABELECIMENTO = fnExcel.FormatarTexto(VBA.Split(ARQUIVO, "-")(1))
+                CHV_0001 = .ExtrairCHV_0001(ARQUIVO)
                 CHV_C100 = Campos(dicTitulosC190("CHV_PAI_FISCAL"))
                 If arrDocsC100.contains(CHV_C100) Then GoTo Prx:
                 
@@ -203,12 +203,12 @@ Dim b As Long
                 Call .ExtrairDadosC177(CHV_C100)
                 
                 'Extrai dados do registro 0400
-                Call .ExtrairDados0400(Arquivo, COD_NAT)
+                Call .ExtrairDados0400(ARQUIVO, COD_NAT)
                 
                 'Atribui valores aos campos do relatório
                 .AtribuirValor "DESCR_ITEM", "O REGISTRO C190 NÃO POSSUI DADOS DE PRODUTOS"
                 .AtribuirValor "REG", Campos(dicTitulosC190("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_FISCAL", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC190("CHV_REG"))
                 .AtribuirValor "CNPJ_ESTABELECIMENTO", CNPJ_ESTABELECIMENTO
@@ -237,7 +237,7 @@ End Sub
 Public Function ValidarRegrasFiscais(ByRef Campos As Variant, ByRef dicTitulos As Dictionary, _
     ByRef dicDados0000 As Dictionary, ByRef dicTitulos0000 As Dictionary) As Variant
     
-Dim Registro As String, Arquivo$, UF$
+Dim Registro As String, ARQUIVO$, UF$
 Dim Campos0000 As Variant
 Dim i As Integer
     
@@ -248,12 +248,12 @@ Dim i As Integer
     
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
     Registro = Campos(dicTitulos("REG") - i)
     
-    If dicDados0000.Exists(Arquivo) Then
+    If dicDados0000.Exists(ARQUIVO) Then
         
-        Campos0000 = dicDados0000(Arquivo)
+        Campos0000 = dicDados0000(ARQUIVO)
         If LBound(Campos0000) = 0 Then i = 1 Else i = 0
         
         UF = Campos0000(dicTitulos0000("UF") - i)

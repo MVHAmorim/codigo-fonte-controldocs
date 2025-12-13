@@ -29,7 +29,7 @@ Dim dicTitulosC170 As New Dictionary
 Dim dicTitulosK200 As New Dictionary
 Dim Dados, Intervalo, Campos, Chave
 Dim i As Long, UltLin&
-Dim Arquivo As String, UND_COM As String, TIPO_ITEM As String
+Dim ARQUIVO As String, UND_COM As String, TIPO_ITEM As String
     
     Set dicDados0200 = Util.CriarDicionarioRegistro(reg0200)
     Set dicDados0220 = Util.CriarDicionarioRegistro(reg0220)
@@ -67,18 +67,18 @@ Dim Arquivo As String, UND_COM As String, TIPO_ITEM As String
             .COD_PART = ""
             
             UND_COM = dicDadosC170(Chave)(dicTitulosC170("UNID"))
-            If dicDados0220.Exists(Arquivo & .COD_ITEM & UND_COM) Then .Qtd = CDbl(.Qtd) * CDbl(dicDados0220(.COD_ITEM & UND_COM)(dicTitulos0220("FAT_CONV")))
+            If dicDados0220.Exists(ARQUIVO & .COD_ITEM & UND_COM) Then .Qtd = CDbl(.Qtd) * CDbl(dicDados0220(.COD_ITEM & UND_COM)(dicTitulos0220("FAT_CONV")))
             
             Campos = Array("", .REG, .DT_EST, .COD_ITEM, .Qtd, .IND_EST, .COD_PART, "")
             
-            TIPO_ITEM = VBA.Left(dicDados0200(Arquivo & .COD_ITEM)(dicTitulos0200("TIPO_ITEM")), 2)
+            TIPO_ITEM = VBA.Left(dicDados0200(ARQUIVO & .COD_ITEM)(dicTitulos0200("TIPO_ITEM")), 2)
                         
             Select Case TIPO_ITEM
                     
                 Case "00", "01", "02", "03", "04", "05", "06", "10"
                 
                     .CHV_PAI = Dados(i, EncontrarColuna("CHV_PAI_FISCAL", Intervalo))
-                    .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, .CHV_PAI, .DT_EST, .COD_ITEM, .IND_EST, .COD_PART)
+                    .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, .CHV_PAI, .DT_EST, .COD_ITEM, .IND_EST, .COD_PART)
                     
                     dicDadosK200(.CHV_REG) = fnSPED.GerarRegistro(Campos)
                     
@@ -186,12 +186,12 @@ End Function
 
 Private Function ChecarAusenciaProduto(ByRef Campos As Variant)
 
-Dim Arquivo As String, COD_ITEM$, Chave$
+Dim ARQUIVO As String, COD_ITEM$, Chave$
     
-    Arquivo = Campos(dicTitulosK200("ARQUIVO"))
+    ARQUIVO = Campos(dicTitulosK200("ARQUIVO"))
     COD_ITEM = Campos(dicTitulosK200("COD_ITEM"))
     
-    Chave = Arquivo & COD_ITEM
+    Chave = ARQUIVO & COD_ITEM
     If Not dicDados0200.Exists(Chave) Then arrDados.Add Array(COD_ITEM, "")
     
 End Function

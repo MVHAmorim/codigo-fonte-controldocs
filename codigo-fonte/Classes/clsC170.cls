@@ -23,7 +23,7 @@ Public Function GerarC175(Optional ByVal OmitirMsg As Boolean)
 
 Dim VL_FRT As Double, VL_SEG#, VL_OUT_DA#, VL_DESP#, VL_MERC#, VL_ITEM#, VL_DESC#, VL_ADIC#, VL_ICMS#
 Dim Campos As Variant, Campo, nCampo, Titulos, Chave
-Dim Arquivo As String, CHV_REG$, COD_MOD$, COD_SIT$
+Dim ARQUIVO As String, CHV_REG$, COD_MOD$, COD_SIT$
 Dim Dados As Range, Linha As Range
 Dim dic0000 As New Dictionary
 Dim dic0150 As New Dictionary
@@ -103,7 +103,7 @@ Dim i As Long
                 
                 VL_MERC = dicC100(.CHV_PAI)("VL_MERC")
                 VL_DESP = dicC100(.CHV_PAI)("VL_DESP")
-                Arquivo = Campos(dicTitulos("ARQUIVO"))
+                ARQUIVO = Campos(dicTitulos("ARQUIVO"))
                 VL_ITEM = Util.ValidarValores(Campos(dicTitulos("VL_ITEM")))
                 VL_DESC = Util.ValidarValores(Campos(dicTitulos("VL_DESC")))
                 VL_ICMS = Util.ValidarValores(Campos(dicTitulos("VL_ICMS")))
@@ -131,7 +131,7 @@ Dim i As Long
                 
                 .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_PIS, .CST_COFINS, .ALIQ_PIS, .ALIQ_COFINS)
                 
-                Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI, .CHV_PAI, CInt(.Cfop), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, _
+                Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI, CInt(.Cfop), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, _
                     CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), .QUANT_BC_PIS, .ALIQ_PIS_QUANT, CDbl(.VL_PIS), .CST_COFINS, CDbl(.VL_BC_COFINS), _
                     CDbl(.ALIQ_COFINS), .QUANT_BC_COFINS, .ALIQ_COFINS_QUANT, CDbl(.VL_COFINS), .COD_CTA, .INFO_COMPL)
                     
@@ -257,7 +257,7 @@ Dim i As Long
             
             VL_MERC = dicC100(.CHV_PAI)("VL_MERC")
             VL_DESP = dicC100(.CHV_PAI)("VL_DESP")
-            Arquivo = Campos(dicTitulos("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulos("ARQUIVO"))
             VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulos("VL_ITEM")), True, 2)
             VL_DESC = fnExcel.ConverterValores(Campos(dicTitulos("VL_DESC")), True, 2)
             If VL_MERC > 0 Then VL_ADIC = fnExcel.ConverterValores(VL_ITEM / VL_MERC * VL_DESP, True, 2)
@@ -293,7 +293,7 @@ Dim i As Long
             
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
             
-            Campos = Array(.REG, Arquivo, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, CInt(.Cfop), .ALIQ_ICMS, _
+            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, CInt(.Cfop), .ALIQ_ICMS, _
                            CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), _
                            CDbl(.VL_ICMS_ST), CDbl(.VL_RED_BC), CDbl(.VL_IPI), .COD_OBS)
             
@@ -416,7 +416,7 @@ Dim i As Long
                 
                 .CHV_PAI = Campos(dicTitulos("CHV_PAI_FISCAL"))
                 .CHV_REG = Campos(dicTitulos("CHV_REG"))
-                Arquivo = Campos(dicTitulos("ARQUIVO"))
+                ARQUIVO = Campos(dicTitulos("ARQUIVO"))
                 CST_PIS = Util.ApenasNumeros(Campos(dicTitulos("CST_PIS")))
                 VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulos("VL_ITEM")))
                 VL_DESC = fnExcel.ConverterValores(Campos(dicTitulos("VL_DESC")))

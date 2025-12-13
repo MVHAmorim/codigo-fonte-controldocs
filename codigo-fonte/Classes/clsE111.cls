@@ -11,7 +11,7 @@ Option Explicit
 
 Public Function GerarEstornoDecretoAtacadistaBA()
 
-Dim Arquivo As String
+Dim ARQUIVO As String
 Dim dicDadosC100 As New Dictionary
 Dim dicDadosC170 As New Dictionary
 Dim dicDadosE110 As New Dictionary
@@ -41,7 +41,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE110
             
-            Arquivo = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
+            ARQUIVO = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
             .CHV_PAI = dicDadosE110(ChaveE110)(dicTitulosE110("CHV_PAI_FISCAL"))
             
         End With
@@ -51,7 +51,7 @@ Dim Chave As Variant, ChaveE110, Campos
             .REG = "E111"
             .COD_AJ_APUR = "BA010005"
             .DESCR_COMPL_AJ = "ESTORNO DOS CRÉDITOS DE ICMS ACIMA DE 10% REF. AO DECRETO ATACADISTA"
-            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
+            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
             
         End With
         
@@ -85,10 +85,10 @@ Dim Chave As Variant, ChaveE110, Campos
                         CamposE111.VL_AJ_APUR = CDbl(CamposE111.VL_AJ_APUR) + CDbl(.VL_AJ_ITEM)
                         
                         If .VL_AJ_ITEM > 0 Then
-                            Campos = Array(.REG, Arquivo, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
+                            Campos = Array(.REG, ARQUIVO, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
                                            .SER, .SUB, .NUM_DOC, .DT_DOC, .COD_ITEM, CDbl(.VL_AJ_ITEM), .CHV_DOCE)
                             
-                            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
+                            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
                                                                   .CHV_DOCE, .COD_ITEM, .VL_AJ_ITEM, dicDadosE113.Count)
                             dicDadosE113(.CHV_REG) = Campos
                         
@@ -104,7 +104,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE111
                             
-            Campos = Array(.REG, Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
+            Campos = Array(.REG, ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
             dicDadosE111(.CHV_REG) = Campos
             .VL_AJ_APUR = 0
         
@@ -126,7 +126,7 @@ Public Function GerarCreditoSIMPLESNACIONAL()
 
 Dim arrXML As New ArrayList
 Dim arrXMLs As New ArrayList
-Dim Arquivo As String, Caminho$
+Dim ARQUIVO As String, Caminho$
 Dim dicDadosC100 As New Dictionary
 Dim dicDadosC170 As New Dictionary
 Dim dicDadosE110 As New Dictionary
@@ -171,7 +171,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE110
             
-            Arquivo = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
+            ARQUIVO = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
             .CHV_PAI = dicDadosE110(ChaveE110)(dicTitulosE110("CHV_PAI_FISCAL"))
             
         End With
@@ -181,7 +181,7 @@ Dim Chave As Variant, ChaveE110, Campos
             .REG = "E111"
             .COD_AJ_APUR = "BA020008"
             .DESCR_COMPL_AJ = "CRÉDITOS NA AQUISIÇÃO DE EMPRESAS DO SIMPLES NACIONAL"
-            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
+            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
             
         End With
         
@@ -223,10 +223,10 @@ Dim Chave As Variant, ChaveE110, Campos
                         CamposE111.VL_AJ_APUR = CDbl(CamposE111.VL_AJ_APUR) + CDbl(.VL_AJ_ITEM)
                         
                         If .VL_AJ_ITEM > 0 Then
-                            Campos = Array(.REG, Arquivo, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
+                            Campos = Array(.REG, ARQUIVO, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
                                            .SER, .SUB, .NUM_DOC, .DT_DOC, .COD_ITEM, CDbl(.VL_AJ_ITEM), .CHV_DOCE)
                                             
-                            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
+                            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
                                                                   .CHV_DOCE, .COD_ITEM, .VL_AJ_ITEM, dicDadosE113.Count)
                             dicDadosE113(.CHV_REG) = Campos
                         
@@ -244,7 +244,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE111
                             
-            Campos = Array(.REG, Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
+            Campos = Array(.REG, ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
             dicDadosE111(.CHV_REG) = Campos
             .VL_AJ_APUR = 0
         
@@ -266,7 +266,7 @@ Public Function GerarCreditoArt269Inc10SEFAZBA()
 
 Dim arrXML As New ArrayList
 Dim arrXMLs As New ArrayList
-Dim Arquivo As String, Caminho$
+Dim ARQUIVO As String, Caminho$
 Dim dicDadosC100 As New Dictionary
 Dim dicDadosC170 As New Dictionary
 Dim dicDadosE110 As New Dictionary
@@ -303,7 +303,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE110
             
-            Arquivo = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
+            ARQUIVO = dicDadosE110(ChaveE110)(dicTitulosE110("ARQUIVO"))
             .CHV_PAI = dicDadosE110(ChaveE110)(dicTitulosE110("CHV_PAI_FISCAL"))
             
         End With
@@ -313,7 +313,7 @@ Dim Chave As Variant, ChaveE110, Campos
             .REG = "E111"
             .COD_AJ_APUR = "BA020009"
             .DESCR_COMPL_AJ = "CRÉDITOS NA AQUISIÇÃO INTERNA DE INDÚSTRIAS DO SIMPLES NACIONAL (ART. 269 INC X DO RICMS/BA)"
-            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
+            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ)
             
         End With
         
@@ -355,10 +355,10 @@ Dim Chave As Variant, ChaveE110, Campos
                         CamposE111.VL_AJ_APUR = CDbl(CamposE111.VL_AJ_APUR) + CDbl(.VL_AJ_ITEM)
                         
                         If .VL_AJ_ITEM > 0 Then
-                            Campos = Array(.REG, Arquivo, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
+                            Campos = Array(.REG, ARQUIVO, CamposE111.CHV_REG, .COD_PART, .COD_MOD, _
                                            .SER, .SUB, .NUM_DOC, .DT_DOC, .COD_ITEM, CDbl(.VL_AJ_ITEM), .CHV_DOCE)
                                             
-                            .CHV_REG = fnSPED.MontarChaveRegistro(Arquivo, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
+                            .CHV_REG = fnSPED.MontarChaveRegistro(ARQUIVO, CamposE111.CHV_REG, .COD_MOD, .SER, .NUM_DOC, _
                                                                   .CHV_DOCE, .COD_ITEM, .VL_AJ_ITEM, dicDadosE113.Count)
                             dicDadosE113(.CHV_REG) = Campos
                         
@@ -376,7 +376,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         With CamposE111
                             
-            Campos = Array(.REG, Arquivo, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
+            Campos = Array(.REG, ARQUIVO, CamposE110.CHV_PAI, .COD_AJ_APUR, .DESCR_COMPL_AJ, CDbl(.VL_AJ_APUR))
             dicDadosE111(.CHV_REG) = Campos
             .VL_AJ_APUR = 0
         

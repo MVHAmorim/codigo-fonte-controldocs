@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Public Function GerarRegistro(ByRef dicDados As Dictionary, ByVal Arquivo As String)
+Public Function GerarRegistro(ByRef dicDados As Dictionary, ByVal ARQUIVO As String)
 
 Dim Campos As Variant
 Dim r1100 As String, r1200$, r1250$, r1300$, r1390$, r1400$, r1500$, r1600$, r1700$, r1800$, r1960$, r1970$, r1980$
@@ -33,7 +33,7 @@ Dim DataRef As String
         If .dic1970.Count > 0 Then r1970 = "S" Else r1970 = "N"
         If .dic1980.Count > 0 Then r1980 = "S" Else r1980 = "N"
         
-        DataRef = VBA.Right(VBA.Left(Arquivo, 7), 4) & "-" & VBA.Left(Arquivo, 2) & "-" & "01"
+        DataRef = VBA.Right(VBA.Left(ARQUIVO, 7), 4) & "-" & VBA.Left(ARQUIVO, 2) & "-" & "01"
         If CDate(DataRef) >= CDate("2020-01-01") Then
             Campos = Array("", "1010", r1100, r1200, r1300, r1390, r1400, r1500, r1600, r1700, r1800, r1960, r1970, r1980, r1250, "")
         
@@ -45,7 +45,7 @@ Dim DataRef As String
             
         End If
         
-        If CDate(DataRef) >= CDate("2012-07-01") Then dicDados(Arquivo) = fnSPED.GerarRegistro(Campos)
+        If CDate(DataRef) >= CDate("2012-07-01") Then dicDados(ARQUIVO) = fnSPED.GerarRegistro(Campos)
         
     End With
 

@@ -7,7 +7,7 @@ Public dicTitulosAuditoriaInventario As New Dictionary
 Public Type CamposAuditoriaInventario
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_PAI As String
     CHV_REG As String
     CHV_NFE As String
@@ -49,7 +49,7 @@ Dim i As Long
     With CamposInventario
         
         .REG = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("REG") - i))
-        .Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("ARQUIVO") - i))
+        .ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("ARQUIVO") - i))
         .CHV_PAI = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("CHV_PAI_FISCAL") - i))
         .CHV_REG = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("CHV_REG") - i))
         .CHV_NFE = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("CHV_NFE") - i))
@@ -93,7 +93,7 @@ Dim i As Long
     With CamposInventario
         
         Campos(dicTitulosAuditoriaInventario("REG") - i) = .REG
-        Campos(dicTitulosAuditoriaInventario("ARQUIVO") - i) = .Arquivo
+        Campos(dicTitulosAuditoriaInventario("ARQUIVO") - i) = .ARQUIVO
         Campos(dicTitulosAuditoriaInventario("CHV_PAI_FISCAL") - i) = .CHV_PAI
         Campos(dicTitulosAuditoriaInventario("CHV_REG") - i) = .CHV_REG
         Campos(dicTitulosAuditoriaInventario("CHV_NFE") - i) = .CHV_NFE

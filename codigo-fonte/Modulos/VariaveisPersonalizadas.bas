@@ -151,7 +151,7 @@ Public Type DadosNotasFiscais
     cAjuste As String
     cResponsavel As String
     indEmit As String
-    Arquivo As String
+    ARQUIVO As String
     DataSPED As Date
     Movimento As String
     tpGIA As String

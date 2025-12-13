@@ -8,7 +8,7 @@ Public dtoSaldoInventario As CamposSaldoInventario
 Public Type CamposMovimentoEstoque
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_REG As String
     CHV_PAI As String
     Chave As String

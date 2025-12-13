@@ -11,7 +11,7 @@ Option Explicit
 
 Public Sub GerarRelatorio()
 
-Dim CHV_REG As String, COD_ITEM$, UNID_COM$, UNID_INV$, CHV_REG_0200$, CHV_REG_C100$, CHV_REG_C170$, IND_OPER$, CHV_NFE$, REG$, Arquivo$, DT_OPER$, DESCR_ITEM$, COD_BARRA$, TIPO_ITEM$, IND_MOV$, UNID$, UND_INV$, Cfop$
+Dim CHV_REG As String, COD_ITEM$, UNID_COM$, UNID_INV$, CHV_REG_0200$, CHV_REG_C100$, CHV_REG_C170$, IND_OPER$, CHV_NFE$, REG$, ARQUIVO$, DT_OPER$, DESCR_ITEM$, COD_BARRA$, TIPO_ITEM$, IND_MOV$, UNID$, UND_INV$, Cfop$
 Dim FAT_CONV As Double, QTD_COM#, VL_ITEM#, QTD_INV#, VL_UNIT_INV#, VL_UNIT_COM#, Qtd#, VL_UNIT#
 Dim dicTitulosC170 As New Dictionary
 Dim dicTitulos0190 As New Dictionary
@@ -62,7 +62,7 @@ Dim Campos As Variant
         If Util.ChecarCamposPreenchidos(Campos) Then
             
             REG = Campos(dicTitulosC170("REG"))
-            Arquivo = Campos(dicTitulosC170("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosC170("ARQUIVO"))
             CHV_REG_C100 = Campos(dicTitulosC170("CHV_PAI_FISCAL"))
             CHV_REG_C170 = Campos(dicTitulosC170("CHV_REG"))
             
@@ -106,7 +106,7 @@ Dim Campos As Variant
                 COD_BARRA = dicDados0200(CHV_REG)(dicTitulos0200("COD_BARRA"))
                 TIPO_ITEM = dicDados0200(CHV_REG)(dicTitulos0200("TIPO_ITEM"))
                 UNID_INV = dicDados0200(CHV_REG)(dicTitulos0200("UNID_INV"))
-                UNID_INV = ExtrairUnidade0190(Arquivo, UNID_INV, dicDados0190, dicTitulos0190)
+                UNID_INV = ExtrairUnidade0190(ARQUIVO, UNID_INV, dicDados0190, dicTitulos0190)
                 
             Else
                 
@@ -123,7 +123,7 @@ Dim Campos As Variant
             VL_ITEM = Campos(dicTitulosC170("VL_ITEM"))
             QTD_COM = Campos(dicTitulosC170("QTD"))
             UNID_COM = Campos(dicTitulosC170("UNID"))
-            UNID_COM = ExtrairUnidade0190(Arquivo, UNID_COM, dicDados0190, dicTitulos0190)
+            UNID_COM = ExtrairUnidade0190(ARQUIVO, UNID_COM, dicDados0190, dicTitulos0190)
             
             If QTD_COM > 0 Then VL_UNIT_COM = VL_ITEM / QTD_COM
                 
@@ -144,7 +144,7 @@ Dim Campos As Variant
             
         End If
         
-        Campos = Array(REG, Arquivo, CHV_REG_C100, CHV_REG_C170, CHV_REG_0200, CHV_NFE, IND_OPER, DT_OPER, COD_ITEM, DESCR_ITEM, COD_BARRA, TIPO_ITEM, IND_MOV, Cfop, VL_ITEM, QTD_COM, UNID_COM, VL_UNIT_COM, FAT_CONV, QTD_INV, UNID_INV, VL_UNIT_INV, Empty, Empty)
+        Campos = Array(REG, ARQUIVO, CHV_REG_C100, CHV_REG_C170, CHV_REG_0200, CHV_NFE, IND_OPER, DT_OPER, COD_ITEM, DESCR_ITEM, COD_BARRA, TIPO_ITEM, IND_MOV, Cfop, VL_ITEM, QTD_COM, UNID_COM, VL_UNIT_COM, FAT_CONV, QTD_INV, UNID_INV, VL_UNIT_INV, Empty, Empty)
         Campos = AnalisarInconsistencias(Campos, dicTitulos)
         Call fnExcel.DefinirTipoCampos(Campos, dicTitulos)
         arrRelatorio.Add Campos
@@ -166,11 +166,11 @@ Prx:
     
 End Sub
 
-Public Function ExtrairUnidade0190(ByVal Arquivo As String, ByVal UNID As String, ByRef dicDados0190 As Dictionary, ByRef dicTitulos0190 As Dictionary) As String
+Public Function ExtrairUnidade0190(ByVal ARQUIVO As String, ByVal UNID As String, ByRef dicDados0190 As Dictionary, ByRef dicTitulos0190 As Dictionary) As String
 
 Dim CHV_REG As String, DESCR$
     
-    CHV_REG = Util.UnirCampos(Arquivo, UNID)
+    CHV_REG = Util.UnirCampos(ARQUIVO, UNID)
     If dicDados0190.Exists(CHV_REG) Then
         
         UNID = dicDados0190(CHV_REG)(dicTitulos0190("UNID"))

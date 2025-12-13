@@ -145,33 +145,33 @@ Dim i As Long
             Campos = Application.Transpose(Application.Transpose(Linha))
             If Util.ChecarCamposPreenchidos(Campos) Then
                 
-                Arquivo = Campos(dicTitulos("ARQUIVO"))
-                CHV_0000 = dicDados0000(Arquivo)(dicTitulos0000("CHV_REG"))
+                ARQUIVO = Campos(dicTitulos("ARQUIVO"))
+                CHV_0000 = dicDados0000(ARQUIVO)(dicTitulos0000("CHV_REG"))
                 CHV_M001 = fnSPED.GerarChaveRegistro(CHV_0000, "M001")
-                VL_TOTAL = VL_TOTAL + CalcularReceitaIndividualizada(dicDadosA100, dicDadosA170, dicTitulosA100, dicTitulosA170, dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC385, dicTitulosC385, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC605, dicTitulosC605, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD205, dicTitulosD205, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD605, dicTitulosD605, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD300, dicTitulosD300, "CST_COFINS", "VL_DOC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD350, dicTitulosD350, "CST_COFINS", "VL_BRT", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF100, dicTitulosF100, "CST_PIS", "VL_OPER", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF200, dicTitulosF200, "CST_COFINS", "VL_TOT_REC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF500, dicTitulosF500, "CST_COFINS", "VL_REC_CAIXA", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF510, dicTitulosF510, "CST_COFINS", "VL_REC_CAIXA", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF550, dicTitulosF550, "CST_COFINS", "VL_REC_COMP", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF560, dicTitulosF560, "CST_COFINS", "VL_REC_COMP", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosI100, dicTitulosI100, "CST_COFINS", "VL_REC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
+                VL_TOTAL = VL_TOTAL + CalcularReceitaIndividualizada(dicDadosA100, dicDadosA170, dicTitulosA100, dicTitulosA170, dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC385, dicTitulosC385, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC605, dicTitulosC605, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD205, dicTitulosD205, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD605, dicTitulosD605, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD300, dicTitulosD300, "CST_COFINS", "VL_DOC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosD350, dicTitulosD350, "CST_COFINS", "VL_BRT", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF100, dicTitulosF100, "CST_PIS", "VL_OPER", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF200, dicTitulosF200, "CST_COFINS", "VL_TOT_REC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF500, dicTitulosF500, "CST_COFINS", "VL_REC_CAIXA", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF510, dicTitulosF510, "CST_COFINS", "VL_REC_CAIXA", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF550, dicTitulosF550, "CST_COFINS", "VL_REC_COMP", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosF560, dicTitulosF560, "CST_COFINS", "VL_REC_COMP", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosI100, dicTitulosI100, "CST_COFINS", "VL_REC", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
                 
                 If Campos(dicTitulos("IND_ESCRI")) = "1" Then
                     
-                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC185, dicTitulosC185, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC495, dicTitulosC495, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
+                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC185, dicTitulosC185, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC495, dicTitulosC495, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
                     
                 Else
                                         
-                    VL_TOTAL = VL_TOTAL + CalcularReceitaIndividualizada(dicDadosC100, dicDadosC170, dicTitulosC100, dicTitulosC170, dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
-                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC485, dicTitulosC485, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, Arquivo)
+                    VL_TOTAL = VL_TOTAL + CalcularReceitaIndividualizada(dicDadosC100, dicDadosC170, dicTitulosC100, dicTitulosC170, dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
+                    VL_TOTAL = VL_TOTAL + CalcularReceitas(dicDadosC485, dicTitulosC485, "CST_COFINS", "VL_ITEM", "VL_COFINS", dicDadosM400, dicDadosM800, CHV_M001, ARQUIVO)
                     
                 End If
             
@@ -189,7 +189,7 @@ End Function
 
 Private Function CalcularReceitas(ByRef dicDados As Dictionary, ByRef dicTitulos As Dictionary, ByVal TituloCST As String, _
     ByVal TituloBase As String, ByVal TituloImposto As String, ByRef dicDadosM400 As Dictionary, ByRef dicDadosM800 As Dictionary, _
-    ByVal CHV_PAI As String, ByVal Arquivo As String) As Double
+    ByVal CHV_PAI As String, ByVal ARQUIVO As String) As Double
 
 Dim Chave As Variant
 Dim CST As String, REG$, IND_OPER$, Arq$, CHV_REG$, COD_CTA$, DESC_COMPL$
@@ -204,7 +204,7 @@ Dim arrCSTs As New ArrayList
         For Each Chave In dicDados.Keys()
             
             Arq = dicDados(Chave)(dicTitulos("ARQUIVO"))
-            If Arq = Arquivo Then
+            If Arq = ARQUIVO Then
                 
                 REG = dicDados(Chave)(dicTitulos("REG"))
                 CST = dicDados(Chave)(dicTitulos(TituloCST))
@@ -222,7 +222,7 @@ Dim arrCSTs As New ArrayList
                 CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, CST, COD_CTA, DESC_COMPL)
                 If dicDadosM400.Exists(CHV_REG) Then
                     VL_TOT_REC = CDbl(dicDadosM400(CHV_REG)(4)) + VL_PROD
-                    dicDadosM400(CHV_REG) = Array("M400", Arquivo, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
+                    dicDadosM400(CHV_REG) = Array("M400", ARQUIVO, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
                 End If
                 
             End If
@@ -235,7 +235,7 @@ End Function
 
 Private Function CalcularReceitaIndividualizada(ByRef dicPai As Dictionary, ByRef dicFilho As Dictionary, _
     ByRef dicTitulosPai As Dictionary, ByRef dicTitulosFilho As Dictionary, ByRef dicDadosM400 As Dictionary, _
-    ByRef dicDadosM800 As Dictionary, ByVal CHV_PAI As String, ByVal Arquivo As String) As Double
+    ByRef dicDadosM800 As Dictionary, ByVal CHV_PAI As String, ByVal ARQUIVO As String) As Double
 
 Dim Chave As Variant
 Dim arrCSTs As New ArrayList
@@ -249,7 +249,7 @@ Dim CST As String, REG$, IND_OPER$, Arq$, COD_CTA$, DESC_COMPL$, CHV_REG$, chvPa
             
             chvPai = dicFilho(Chave)(dicTitulosFilho("CHV_PAI_FISCAL"))
             Arq = dicFilho(Chave)(dicTitulosFilho("ARQUIVO"))
-            If dicPai(chvPai)(dicTitulosPai("IND_OPER")) = "0" Or Arq <> Arquivo Then GoTo Prx:
+            If dicPai(chvPai)(dicTitulosPai("IND_OPER")) = "0" Or Arq <> ARQUIVO Then GoTo Prx:
             
             REG = dicFilho(Chave)(dicTitulosFilho("REG"))
             CST = dicFilho(Chave)(dicTitulosFilho("CST_COFINS"))
@@ -262,8 +262,8 @@ Dim CST As String, REG$, IND_OPER$, Arq$, COD_CTA$, DESC_COMPL$, CHV_REG$, chvPa
                 If dicDadosM400.Exists(CHV_REG) Then
                 
                     VL_TOT_REC = CDbl(dicDadosM400(CHV_REG)(4)) + VL_PROD
-                    dicDadosM400(CHV_REG) = Array("M400", Arquivo, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
-                    dicDadosM800(CHV_REG) = Array("M800", Arquivo, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
+                    dicDadosM400(CHV_REG) = Array("M400", ARQUIVO, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
+                    dicDadosM800(CHV_REG) = Array("M800", ARQUIVO, CHV_REG, CHV_PAI, CST, VL_TOT_REC, COD_CTA, DESC_COMPL)
                     
                 End If
                 

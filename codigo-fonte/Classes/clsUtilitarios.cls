@@ -568,14 +568,14 @@ End Function
 Public Function ImportarTxt(ByVal Arq As String, Optional Integro As Boolean)
 
 Dim FSO As FileSystemObject
-Dim Arquivo As TextStream
+Dim ARQUIVO As TextStream
 Dim Conteudo As String
     
     Set FSO = New FileSystemObject
-    Set Arquivo = FSO.OpenTextFile(Arq, ForReading, False)
-    Conteudo = Arquivo.ReadAll
+    Set ARQUIVO = FSO.OpenTextFile(Arq, ForReading, False)
+    Conteudo = ARQUIVO.ReadAll
     
-    Arquivo.Close
+    ARQUIVO.Close
     ImportarTxt = Conteudo
     If Integro Then Exit Function
     
@@ -1015,15 +1015,15 @@ End Function
 Public Function ListarArquivos(ByRef arrXMLs As ArrayList, ByVal Caminho As String, Optional Comeco As Double)
 
 Dim FSO As New FileSystemObject
-Dim Arquivo As file
+Dim ARQUIVO As file
 Dim pasta As Folder
 Dim subpasta As Folder
                 
     Set pasta = FSO.GetFolder(Caminho)
-    For Each Arquivo In pasta.Files
+    For Each ARQUIVO In pasta.Files
         Call Util.AntiTravamento(a, 100, "Listando XMLS para importa��o, por favor aguarde", arrXMLs.Count, Comeco)
-        If VBA.LCase(Arquivo.Path) Like "*.xml" Then arrXMLs.Add Arquivo.Path
-    Next Arquivo
+        If VBA.LCase(ARQUIVO.Path) Like "*.xml" Then arrXMLs.Add ARQUIVO.Path
+    Next ARQUIVO
     
     For Each subpasta In pasta.SubFolders
         Call ListarArquivos(arrXMLs, subpasta.Path, Comeco)
@@ -2055,7 +2055,7 @@ End Function
 
 Public Function CarregarRegistrosSPED(ByRef dicEstruturaSPED As Dictionary, Optional ByVal SPEDContr As Boolean) As Dictionary
 
-Dim REG As String, Arquivo$, CHV_REG$, CHV_PAI$
+Dim REG As String, ARQUIVO$, CHV_REG$, CHV_PAI$
 Dim dicRegistros As New Dictionary
 Dim dicArquivo As New Dictionary
 Dim Registro As Variant, Campos
@@ -2086,7 +2086,7 @@ Dim b As Long
                     For Each Campos In dicArquivo.Items
                         
                         REG = VBA.Left(Registro, 4)
-                        Arquivo = VBA.Replace(Campos(2), "'", "")
+                        ARQUIVO = VBA.Replace(Campos(2), "'", "")
                         CHV_PAI = VBA.Replace(Campos(3), "'", "")
                         CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, CStr(REG))
                         
@@ -2095,16 +2095,16 @@ Dim b As Long
                         Select Case True
                             
                             Case SPEDContr And (Registro Like "0001" Or Registro Like "9001")
-                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, Arquivo, CHV_REG, "", CHV_PAI, "0")
+                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, ARQUIVO, CHV_REG, "", CHV_PAI, "0")
                                 
                             Case SPEDContr
-                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, Arquivo, CHV_REG, "", CHV_PAI, "1")
+                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, ARQUIVO, CHV_REG, "", CHV_PAI, "1")
                                 
                             Case Registro Like "0001" Or Registro Like "E001" Or Registro Like "9001"
-                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, Arquivo, CHV_REG, CHV_PAI, "", "0")
+                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, ARQUIVO, CHV_REG, CHV_PAI, "", "0")
                                 
                             Case Else
-                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, Arquivo, CHV_REG, CHV_PAI, "", "1")
+                                dicDados(CHV_PAI)(CHV_REG) = Array(REG, ARQUIVO, CHV_REG, CHV_PAI, "", "1")
                                 
                         End Select
                         
@@ -2216,7 +2216,7 @@ Dim i As Integer
     Next i
     
     If Util.UltimaLinha(PlanDest, "A") > 3 Then
-        Call Application.GoTo(PlanDest.[C3], True)
+        Call Application.Goto(PlanDest.[C3], True)
     Else
         Call Util.MsgAlerta("N�o existem dados filtrados na planilha de destino.", "Filtragem sem Dados")
     End If
@@ -2654,12 +2654,12 @@ Public Function GerarJson(ByVal Arq As String) As String
 Dim Registros As Variant, Registro
 Dim Conteudo As String, json$
 Dim FSO As FileSystemObject
-Dim Arquivo As TextStream
+Dim ARQUIVO As TextStream
     
     Set FSO = New FileSystemObject
-    Set Arquivo = FSO.OpenTextFile(Arq, ForReading, False)
-    Conteudo = Arquivo.ReadAll
-    Arquivo.Close
+    Set ARQUIVO = FSO.OpenTextFile(Arq, ForReading, False)
+    Conteudo = ARQUIVO.ReadAll
+    ARQUIVO.Close
     
     Registros = VBA.Split(Conteudo, vbCrLf)
     

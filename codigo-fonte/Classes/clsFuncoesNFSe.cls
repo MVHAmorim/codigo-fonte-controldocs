@@ -27,22 +27,22 @@ Dim CHV_REG As String, DT_INI$, DT_FIN$, Ano$, Mes$, CHV_0001$, CHV_0110$, COD_V
     UF = ValidarTag(NFSe, "Nfse//" & tpCont & "//Uf")
     COD_MUN = ValidarTag(NFSe, "Nfse//" & tpCont & "//CodigoMunicipio")
     SUFRAMA = ""
-    Arquivo = Periodo & "-" & CNPJ
+    ARQUIVO = Periodo & "-" & CNPJ
     CHV_REG = fnSPED.GerarChaveRegistro(DT_INI, DT_FIN, CNPJ)
     
-    Campos = Array("'0000", Arquivo, CHV_REG, "", "", "'" & COD_VER, "'" & TIPO_ESCRIT, "", "", DT_INI, DT_FIN, Nome, "'" & CNPJ, UF, COD_MUN, "'" & SUFRAMA, "", "")
-    dic0000(Arquivo) = Campos
+    Campos = Array("'0000", ARQUIVO, CHV_REG, "", "", "'" & COD_VER, "'" & TIPO_ESCRIT, "", "", DT_INI, DT_FIN, Nome, "'" & CNPJ, UF, COD_MUN, "'" & SUFRAMA, "", "")
+    dic0000(ARQUIVO) = Campos
     
 End Function
 
-Public Sub CriarRegistro0140(ByVal NFSe As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal Arquivo As String, ByVal CHV_PAI As String)
+Public Sub CriarRegistro0140(ByVal NFSe As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal ARQUIVO As String, ByVal CHV_PAI As String)
 
 Dim tpCont As String, Chave$
     
     With Campos0140
         
         .CNPJ = ExtrairCNPJContribunte(NFSe, tpCont)
-        .CHV_REG = fnSPED.GerarChaveRegistro(Arquivo, .CNPJ)
+        .CHV_REG = fnSPED.GerarChaveRegistro(ARQUIVO, .CNPJ)
         If Not dicDados.Exists(.CHV_REG) And .CHV_REG <> "" Then
             
             .REG = "'0140"
@@ -54,8 +54,8 @@ Dim tpCont As String, Chave$
             .IM = fnExcel.FormatarTexto(ValidarTag(NFSe, "Nfse//" & tpCont & "//InscricaoMunicipal"))
             .SUFRAMA = ""
             
-            Chave = VBA.Join(Array(Arquivo, .CNPJ))
-            dicDados(Chave) = Array(.REG, Arquivo, .CHV_REG, "", CHV_PAI, .COD_EST, .Nome, "'" & .CNPJ, .UF, .IE, .COD_MUN, .IM, .SUFRAMA)
+            Chave = VBA.Join(Array(ARQUIVO, .CNPJ))
+            dicDados(Chave) = Array(.REG, ARQUIVO, .CHV_REG, "", CHV_PAI, .COD_EST, .Nome, "'" & .CNPJ, .UF, .IE, .COD_MUN, .IM, .SUFRAMA)
             
         End If
         
@@ -63,7 +63,7 @@ Dim tpCont As String, Chave$
     
 End Sub
 
-Public Sub CriarRegistro0150(ByVal Nota As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal Arquivo As String, ByVal CHV_PAI As String)
+Public Sub CriarRegistro0150(ByVal Nota As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal ARQUIVO As String, ByVal CHV_PAI As String)
             
 Dim tpPart As String
     
@@ -92,7 +92,7 @@ Dim tpPart As String
             If .COD_PAIS = "" Then .COD_PAIS = "1058"
             
             .CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, .COD_PART)
-            dicDados(.CHV_REG) = Array(.REG, Arquivo, .CHV_REG, "", CHV_PAI, Util.FormatarTexto(.COD_PART), _
+            dicDados(.CHV_REG) = Array(.REG, ARQUIVO, .CHV_REG, "", CHV_PAI, Util.FormatarTexto(.COD_PART), _
                 .Nome, .COD_PAIS, .CNPJ, .CPF, .IE, .COD_MUN, .SUFRAMA, .END, .NUM, .COMPL, .BAIRRO)
                     
         End If
@@ -101,7 +101,7 @@ Dim tpPart As String
 
 End Sub
 
-Public Sub CriarRegistro0200(ByVal Item As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal Arquivo As String, ByVal CHV_PAI As String)
+Public Sub CriarRegistro0200(ByVal Item As IXMLDOMNode, ByRef dicDados As Dictionary, ByVal ARQUIVO As String, ByVal CHV_PAI As String)
 
 Dim Campos As Variant
     
@@ -124,7 +124,7 @@ Dim Campos As Variant
             .ALIQ_ICMS = ""
             .CEST = ""
             
-            dicDados(.CHV_REG) = Array(.REG, Arquivo, .CHV_REG, "", CHV_PAI, "'" & .COD_ITEM, .DESCR_ITEM, .COD_BARRA, _
+            dicDados(.CHV_REG) = Array(.REG, ARQUIVO, .CHV_REG, "", CHV_PAI, "'" & .COD_ITEM, .DESCR_ITEM, .COD_BARRA, _
                 .COD_ANT_ITEM, .UNID_INV, .TIPO_ITEM, .COD_NCM, .EX_IPI, .COD_GEN, .COD_LST, .ALIQ_ICMS, .CEST)
             
         End If
@@ -177,7 +177,7 @@ Dim Emissao As String, Competencia$, CNPJPrest$, CNPJToma$, Chave$
             .VL_ISS = fnXML.ValidarValores(Nota, "Nfse//ValorIss") 'Valor do ISS
             
             .CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, .IND_OPER, .IND_EMIT, .COD_PART, .COD_SIT, .SER, .NUM_DOC, .CHV_NFSE)
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", CHV_PAI, .IND_OPER, .IND_EMIT, "'" & .COD_PART, .COD_SIT, .SER, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", CHV_PAI, .IND_OPER, .IND_EMIT, "'" & .COD_PART, .COD_SIT, .SER, _
                 .SUB, "'" & .NUM_DOC, .CHV_NFSE, .DT_DOC, .DT_EXE_SERV, CDbl(.VL_DOC), .IND_PGTO, CDbl(.VL_DESC), CDbl(.VL_BC_PIS), _
                 CDbl(.VL_PIS), CDbl(.VL_BC_COFINS), CDbl(.VL_COFINS), CDbl(.VL_PIS_RET), CDbl(.VL_COFINS_RET), CDbl(.VL_ISS))
                 
@@ -197,7 +197,7 @@ Public Sub CriarRegistroA170(ByVal Item As IXMLDOMNode, ByRef dicTitulos As Dict
     With CamposA170
        
        .REG = "A170"
-       .Arquivo = CamposA100.Arquivo
+       .ARQUIVO = CamposA100.ARQUIVO
        .NUM_ITEM = 1
        .COD_ITEM = fnExcel.FormatarTexto(fnXML.ValidarTag(Item, "Nfse//ItemListaServico"))
        .DESCR_COMPL = Util.LimparTexto(fnXML.ValidarTag(Item, "Nfse//Discriminacao"), 60)
@@ -218,7 +218,7 @@ Public Sub CriarRegistroA170(ByVal Item As IXMLDOMNode, ByRef dicTitulos As Dict
        .CHV_PAI = CamposA100.CHV_REG
        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .NUM_ITEM)
        
-       dicDados(.CHV_REG) = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, "", .NUM_ITEM, .COD_ITEM, .DESCR_COMPL, _
+       dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, "", .NUM_ITEM, .COD_ITEM, .DESCR_COMPL, _
         CDbl(.VL_ITEM), CDbl(.VL_DESC), .NAT_BC_CRED, .IND_ORIG_CRED, .CST_PIS, CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), _
         CDbl(.VL_PIS), .CST_COFINS, CDbl(.VL_BC_COFINS), CDbl(.ALIQ_COFINS), CDbl(.VL_COFINS), .COD_CTA, .COD_CCUS)
         

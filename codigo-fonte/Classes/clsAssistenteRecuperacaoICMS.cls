@@ -104,18 +104,18 @@ Dim b As Long
                 ' Extrai todos os dados necessários (lógica similar à original)
                 Dim REG As String: REG = Campos(dicTitulosC170("REG"))
                 
-                Dim Arquivo As String: Arquivo = Campos(dicTitulosC170("ARQUIVO"))
+                Dim ARQUIVO As String: ARQUIVO = Campos(dicTitulosC170("ARQUIVO"))
                 Dim COD_ITEM As String: COD_ITEM = Campos(dicTitulosC170("COD_ITEM"))
                 Dim COD_PART As String: COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
-                Dim CNPJ_ESTABELECIMENTO As String: CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C100, Arquivo)
-                Dim CHV_0140 As String: CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(Arquivo, CNPJ_ESTABELECIMENTO))
+                Dim CNPJ_ESTABELECIMENTO As String: CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO(REG, CHV_C100, ARQUIVO)
+                Dim CHV_0140 As String: CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 
                 Call .ExtrairDados0150_Contrib(CHV_0140, COD_PART, True)
                 Call .ExtrairDados0200_Contrib(CHV_0140, COD_ITEM, True)
                 
                 ' Atribui valores aos campos do relatório
                 .AtribuirValor "REG", Campos(dicTitulosC170("REG"))
-                .AtribuirValor "ARQUIVO", Arquivo
+                .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC170("CHV_REG"))
                 .AtribuirValor "COD_ITEM", fnExcel.FormatarTexto(COD_ITEM)

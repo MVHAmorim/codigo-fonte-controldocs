@@ -72,9 +72,9 @@ Dim nCampo As Variant
     
     With dtoMovimentoEstoque
         
-        .Arquivo = ExtrairValor("ARQUIVO")
+        .ARQUIVO = ExtrairValor("ARQUIVO")
         .COD_PART = ExtrairValor("COD_PART")
-        .Chave = .Arquivo & .COD_PART
+        .Chave = .ARQUIVO & .COD_PART
         If dtoRegSPED.r0150.Exists(.Chave) Then
             
             Campos0150 = dtoRegSPED.r0150(.Chave)
@@ -105,9 +105,9 @@ Dim nCampo As Variant
     
     With dtoMovimentoEstoque
         
-        .Arquivo = ExtrairValor("ARQUIVO")
+        .ARQUIVO = ExtrairValor("ARQUIVO")
         .COD_ITEM = ExtrairValor("COD_ITEM")
-        .Chave = .Arquivo & .COD_ITEM
+        .Chave = .ARQUIVO & .COD_ITEM
         If dtoRegSPED.r0200.Exists(.Chave) Then
             
             Campos0200 = dtoRegSPED.r0200(.Chave)

@@ -373,7 +373,7 @@ Dim arrDados As New ArrayList
                     REG = Util.RemoverAspaSimples(Campos(.dicTitulosApuracao("REG")))
                     If RegistrosIgnorados Like "*" & REG & "*" Then GoTo Prx:
                     
-                    Arquivo = (Campos(.dicTitulosApuracao("ARQUIVO")))
+                    ARQUIVO = (Campos(.dicTitulosApuracao("ARQUIVO")))
                     DT_REF = .ExtrairDataReferencia(Campos)
                     
                     ChaveTrib = .GerarChaveTributacao(assApuracaoIPI, Campos)

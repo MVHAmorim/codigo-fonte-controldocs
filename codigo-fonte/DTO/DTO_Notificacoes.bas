@@ -10,7 +10,7 @@ Public Type DadosNotificacao
     Funcao As String
     Classe As String
     Modulo As String
-    Arquivo As String
+    ARQUIVO As String
     MensagemErro As String
     OBSERVACOES As String
     ConteudoLinha As String

@@ -619,13 +619,13 @@ End Function
 
 Private Function GerarSugestoesInventario(ByVal Campos As Variant, ByRef dicTitulos As Dictionary) As Variant
 
-Dim DT_INV As String, MOT_INV$, DESCR_ITEM$, TIPO_ITEM$, IND_PROP$, COD_CTA$, UNID_INV$, COD_ITEM$, Arquivo$, UNID_0200$, CHV_0200$
+Dim DT_INV As String, MOT_INV$, DESCR_ITEM$, TIPO_ITEM$, IND_PROP$, COD_CTA$, UNID_INV$, COD_ITEM$, ARQUIVO$, UNID_0200$, CHV_0200$
 Dim Qtd As Double, VL_ITEM#, VL_UNIT#, VL_ITEM_CALC#, DIF_VL_ITEM#
 Dim i As Integer
     
     If LBound(Campos) = 0 Then i = 1
     
-    Arquivo = Campos(dicTitulos("ARQUIVO") - i)
+    ARQUIVO = Campos(dicTitulos("ARQUIVO") - i)
     UNID_INV = Campos(dicTitulos("UNID") - i)
     DT_INV = Campos(dicTitulos("DT_INV") - i)
     MOT_INV = Campos(dicTitulos("MOT_INV") - i)
@@ -637,7 +637,7 @@ Dim i As Integer
     VL_UNIT = fnExcel.ConverterValores(Campos(dicTitulos("VL_UNIT") - i), True, 6)
     IND_PROP = Campos(dicTitulos("IND_PROP") - i)
     COD_CTA = Campos(dicTitulos("COD_CTA") - i)
-    CHV_0200 = Util.UnirCampos(Arquivo, COD_ITEM)
+    CHV_0200 = Util.UnirCampos(ARQUIVO, COD_ITEM)
     VL_ITEM_CALC = fnExcel.ConverterValores(Qtd * VL_UNIT, True, 2)
     DIF_VL_ITEM = VBA.Abs(fnExcel.ConverterValores(VL_ITEM - VL_ITEM_CALC, True, 2))
     
@@ -1255,7 +1255,7 @@ Dim Dados As Range, Linha As Range
 Dim dicTitulos As New Dictionary
 Dim Campos As Variant, Campos0200, CamposC170, dicCampos, regCampo
 Dim dicDados As New Dictionary
-Dim Arquivo As String, UNID_INV$, COD_ITEM$, CHV_0200$
+Dim ARQUIVO As String, UNID_INV$, COD_ITEM$, CHV_0200$
 Dim Qtd As Double, VL_UNIT#
     
     Inicio = Now()
@@ -1281,9 +1281,9 @@ VERIFICAR:
                         GoTo Prx:
                         
                     Case "Informar a mesma unidade do cadastro (0200) para o inventário (H010)"
-                        Arquivo = Campos(dicTitulos("ARQUIVO"))
+                        ARQUIVO = Campos(dicTitulos("ARQUIVO"))
                         COD_ITEM = Campos(dicTitulos("COD_ITEM"))
-                        CHV_0200 = Util.UnirCampos(Arquivo, COD_ITEM)
+                        CHV_0200 = Util.UnirCampos(ARQUIVO, COD_ITEM)
                         If SPEDFiscal.dicDados0200.Exists(CHV_0200) Then
                             
                             Campos(dicTitulos("UNID")) = SPEDFiscal.dicDados0200(CHV_0200)(SPEDFiscal.dicTitulos0200("UNID_INV"))
@@ -1329,7 +1329,7 @@ End Function
 
 Public Sub GerarRelatorioContasPagarReceber(Optional ByVal OmitirMsg As Boolean)
 
-Dim REG As String, Arquivo$, CHV_REG_C100$, CHV_REG_C140$, CHV_REG_C141$, IND_OPER$, IND_EMIT$, COD_SIT$, NUM_DOC$, CHV_NFE$, DT_DOC$, DT_E_S$, IND_PGTO$, IND_TIT$, DESC_TIT$, NUM_TIT$, NUM_PARC$, DT_VCTO$, i$
+Dim REG As String, ARQUIVO$, CHV_REG_C100$, CHV_REG_C140$, CHV_REG_C141$, IND_OPER$, IND_EMIT$, COD_SIT$, NUM_DOC$, CHV_NFE$, DT_DOC$, DT_E_S$, IND_PGTO$, IND_TIT$, DESC_TIT$, NUM_TIT$, NUM_PARC$, DT_VCTO$, i$
 Dim VL_DOC As Double, QTD_PARC#, VL_TIT#, VL_PARC#
 Dim dicTitulosC140 As New Dictionary
 Dim dicTitulosC141 As New Dictionary
@@ -1374,7 +1374,7 @@ Dim Campos As Variant
             If Not COD_SIT Like "00*" And Not COD_SIT Like "01*" And Not COD_SIT Like "08*" Then GoTo Prx:
             
             REG = Campos(dicTitulosC100("REG"))
-            Arquivo = Campos(dicTitulosC100("ARQUIVO"))
+            ARQUIVO = Campos(dicTitulosC100("ARQUIVO"))
             CHV_REG_C100 = Campos(dicTitulosC100("CHV_REG"))
             IND_OPER = Campos(dicTitulosC100("IND_OPER"))
             IND_EMIT = Campos(dicTitulosC100("IND_EMIT"))
@@ -1428,7 +1428,7 @@ Dim Campos As Variant
                         
                     End If
                     
-                    Campos = Array(REG, Arquivo, CHV_REG_C100, CHV_REG_C140, CHV_REG_C141, IND_OPER, IND_EMIT, COD_SIT, NUM_DOC, "'" & CHV_NFE, DT_DOC, VL_DOC, IND_PGTO, IND_TIT, DESC_TIT, NUM_TIT, QTD_PARC, VL_TIT, NUM_PARC, DT_VCTO, VL_PARC, Empty, Empty)
+                    Campos = Array(REG, ARQUIVO, CHV_REG_C100, CHV_REG_C140, CHV_REG_C141, IND_OPER, IND_EMIT, COD_SIT, NUM_DOC, "'" & CHV_NFE, DT_DOC, VL_DOC, IND_PGTO, IND_TIT, DESC_TIT, NUM_TIT, QTD_PARC, VL_TIT, NUM_PARC, DT_VCTO, VL_PARC, Empty, Empty)
                     Campos = GerarSugestoesContas(Campos, dicTitulos)
                     'Call fnExcel.DefinirTipoCampos(Campos, dicTitulos)
                     arrRelatorio.Add Campos
@@ -1691,7 +1691,7 @@ End Function
 
 Public Function ImportarInventarioFisico()
 
-Dim dtIni As String, dtFim$, Arquivo$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0150$, CHV_REG_0190$, CHV_REG_0200$, CHV_REG_H001$, COD_ITEM$, UNID$, COD_PART$
+Dim dtIni As String, dtFim$, ARQUIVO$, CHV_REG_0000$, CHV_REG_0001$, CHV_REG_0150$, CHV_REG_0190$, CHV_REG_0200$, CHV_REG_H001$, COD_ITEM$, UNID$, COD_PART$
 Dim dicTitulosInventario As New Dictionary
 Dim dicTitulos0150 As New Dictionary
 Dim dicTitulos0190 As New Dictionary
@@ -1728,7 +1728,7 @@ Dim Plan As Worksheet
         CHV_REG_0001 = fnSPED.GerarChaveRegistro(CHV_REG_0000, "0001")
         CHV_REG_H001 = fnSPED.GerarChaveRegistro(CHV_REG_0000, "H001")
         
-        Arquivo = VBA.Format(PeriodoInventario, "00/0000") & "-" & CNPJContribuinte
+        ARQUIVO = VBA.Format(PeriodoInventario, "00/0000") & "-" & CNPJContribuinte
         If InscContribuinte = "" Then
             Call Util.MsgAlerta("Informe a Inscrição Estadual do Contribuinte.", "Inscrição Estadual não informada")
             CadContrib.Activate
@@ -1770,7 +1770,7 @@ Dim Plan As Worksheet
                         Select Case Titulo
                             
                             Case "ARQUIVO"
-                                arrCampos.Add Arquivo
+                                arrCampos.Add ARQUIVO
                                 GoTo PrxTit:
                                 
                             Case "COD_ITEM"
@@ -1813,7 +1813,7 @@ PrxTit:
                     Next Titulo
                     
                     CHV_REG_0190 = fnSPED.GerarChaveRegistro(CHV_REG_0001, UNID)
-                    If Not dicDados0190.Exists(CHV_REG_0190) Then Call IncluirUnid0190(dicDados0190, Arquivo, CHV_REG_0001, CHV_REG_0190, UNID)
+                    If Not dicDados0190.Exists(CHV_REG_0190) Then Call IncluirUnid0190(dicDados0190, ARQUIVO, CHV_REG_0001, CHV_REG_0190, UNID)
                     Campos = GerarSugestoesInventario(arrCampos.ToArray(), dicTitulosInventario)
                     Call fnExcel.DefinirTipoCampos(Campos, dicTitulosInventario)
                     arrDados.Add Campos
@@ -1896,7 +1896,7 @@ End Function
 Public Sub AtualizarInventario()
 
 Dim Campos As Variant, CamposH005, CamposH010, CamposH020, dicCampos, regCampo, nCampo, Campo
-Dim CHV_0000 As String, CHV_H001$, CHV_H005$, CHV_H010$, CHV_H020$, DT_INV$, MOT_INV$, COD_ITEM$, IND_PROP$, COD_PART$, Arquivo$, Periodo$
+Dim CHV_0000 As String, CHV_H001$, CHV_H005$, CHV_H010$, CHV_H020$, DT_INV$, MOT_INV$, COD_ITEM$, IND_PROP$, COD_PART$, ARQUIVO$, Periodo$
 Dim dicTitulosH001 As New Dictionary
 Dim dicTitulosH005 As New Dictionary
 Dim dicTitulosH010 As New Dictionary
@@ -1949,12 +1949,12 @@ Dim Reiniciado As Boolean
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulos("ARQUIVO"))
-            Periodo = VBA.Left(Arquivo, 7)
+            ARQUIVO = Campos(dicTitulos("ARQUIVO"))
+            Periodo = VBA.Left(ARQUIVO, 7)
             CHV_0000 = fnSPED.GerarChvReg0000(Periodo)
-            If Not dicDadosH001.Exists(Arquivo) Then Call CriarRegistroH001(Arquivo)
+            If Not dicDadosH001.Exists(ARQUIVO) Then Call CriarRegistroH001(ARQUIVO)
             
-            CHV_H001 = dicDadosH001(Arquivo)(dicTitulosH001("CHV_REG"))
+            CHV_H001 = dicDadosH001(ARQUIVO)(dicTitulosH001("CHV_REG"))
             
             'Atualizar dados do H005
             DT_INV = VBA.Format(Campos(dicTitulos("DT_INV")), "ddmmyyyy")
@@ -1982,7 +1982,7 @@ Dim Reiniciado As Boolean
             Else
                 
                 Reiniciado = True
-                dicCampos = Array("H005", Arquivo, CHV_H005, CHV_H001, "", Campos(dicTitulos("DT_INV")), Campos(dicTitulos("VL_ITEM")), "'" & MOT_INV)
+                dicCampos = Array("H005", ARQUIVO, CHV_H005, CHV_H001, "", Campos(dicTitulos("DT_INV")), Campos(dicTitulos("VL_ITEM")), "'" & MOT_INV)
                 
             End If
             
@@ -2005,7 +2005,7 @@ Dim Reiniciado As Boolean
                 
             Else
                 
-                dicCampos = Array("H010", Arquivo, CHV_H010, CHV_H005, "", "'" & Campos(dicTitulos("COD_ITEM")), _
+                dicCampos = Array("H010", ARQUIVO, CHV_H010, CHV_H005, "", "'" & Campos(dicTitulos("COD_ITEM")), _
                                   Campos(dicTitulos("UNID")), Campos(dicTitulos("QTD")), Campos(dicTitulos("VL_UNIT")), _
                                   Campos(dicTitulos("VL_ITEM")), Campos(dicTitulos("IND_PROP")), Campos(dicTitulos("COD_PART")), _
                                   Campos(dicTitulos("TXT_COMPL")), Campos(dicTitulos("COD_CTA")), Campos(dicTitulos("VL_ITEM_IR")))
@@ -2029,7 +2029,7 @@ Dim Reiniciado As Boolean
                 
                 Set dicCampos = Nothing
                 If Campos(dicTitulos("CST_ICMS")) <> "" Then _
-                    dicCampos = Array("H020", Arquivo, CHV_H020, CHV_H010, "", "'" & Campos(dicTitulos("CST_ICMS")), _
+                    dicCampos = Array("H020", ARQUIVO, CHV_H020, CHV_H010, "", "'" & Campos(dicTitulos("CST_ICMS")), _
                                   VBA.Round(Campos(dicTitulos("VL_BC_ICMS")), 2), VBA.Round(Campos(dicTitulos("VL_ICMS")), 2))
                                     
                 If VarType(dicCampos) = 8204 Then dicDadosH020(CHV_H020) = dicCampos
@@ -2067,7 +2067,7 @@ End Function
 Public Function GerarRelatorioInventario()
 
 Dim Comeco As Double, VL_MERC#, VL_ITEM#, VL_DESP#, VL_FRT#, VL_SEG#, VL_OUT#, VL_ADIC#
-Dim CHV_REG As String, CST_PIS$, CST_COFINS$, Arquivo$, CHV_0001$, COD_ITEM$, Periodo$, Msg$
+Dim CHV_REG As String, CST_PIS$, CST_COFINS$, ARQUIVO$, CHV_0001$, COD_ITEM$, Periodo$, Msg$
 Dim dicTitulos As New Dictionary
 Dim dicTitulos0000 As New Dictionary
 Dim dicTitulos0001 As New Dictionary
@@ -2130,12 +2130,12 @@ Dim b As Long
         Campos = Application.index(Linha.Value2, 0, 0)
         If Util.ChecarCamposPreenchidos(Campos) Then
             
-            Arquivo = Campos(dicTitulosH010("ARQUIVO"))
-            If dicDados0000.Exists(Arquivo) And Periodo <> Arquivo Then
-                Call fnSPED.AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, Arquivo, Periodo)
+            ARQUIVO = Campos(dicTitulosH010("ARQUIVO"))
+            If dicDados0000.Exists(ARQUIVO) And Periodo <> ARQUIVO Then
+                Call fnSPED.AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, ARQUIVO, Periodo)
             End If
             
-            arrDados.Add Arquivo
+            arrDados.Add ARQUIVO
             
             'Carrega dados do registro H005
             CHV_REG = Campos(dicTitulosH010("CHV_PAI_FISCAL"))
@@ -2154,7 +2154,7 @@ Dim b As Long
             arrDados.Add fnExcel.FormatarTexto(Campos(dicTitulosH010("COD_ITEM")))
             
             COD_ITEM = Campos(dicTitulosH010("COD_ITEM"))
-            If dicDados0001.Exists(Arquivo) Then CHV_0001 = dicDados0001(Arquivo)(dicTitulos0001("CHV_REG")) Else CHV_0001 = ""
+            If dicDados0001.Exists(ARQUIVO) Then CHV_0001 = dicDados0001(ARQUIVO)(dicTitulos0001("CHV_REG")) Else CHV_0001 = ""
             
             'Coleta dados do registro 0200
             CHV_REG = fnSPED.GerarChaveRegistro(CHV_0001, COD_ITEM)
@@ -2223,36 +2223,36 @@ Dim b As Long
     
 End Function
 
-Public Sub CriarRegistroH001(ByVal Arquivo As String)
+Public Sub CriarRegistroH001(ByVal ARQUIVO As String)
     ' Cria o registro H001 (Abertura do Bloco H) se ele não existir.
     Dim Campos As Variant
     
     With CamposH001
         .REG = "'H001"
-        .Arquivo = Arquivo
+        .ARQUIVO = ARQUIVO
         .IND_MOV = EnumFiscal.ValidarEnumeracao_IND_MOV("0") ' 0 - Bloco com dados informados
-        .CHV_PAI_Fiscal = "5C33CC2FF00FAD027154D56DC4CD090C" 'ExtrairChaveReg0000(ARQUIVO)
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, "H001")
+        .CHV_PAI_FISCAL = "5C33CC2FF00FAD027154D56DC4CD090C" 'ExtrairChaveReg0000(ARQUIVO)
+        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, "H001")
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, "", .IND_MOV)
-        dtoRegSPED.rH001(.Arquivo) = Campos
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, "", .IND_MOV)
+        dtoRegSPED.rH001(.ARQUIVO) = Campos
     End With
 End Sub
 
-Public Function ExtrairChaveReg0000(ByVal Arquivo As String) As String
+Public Function ExtrairChaveReg0000(ByVal ARQUIVO As String) As String
     ' Assume que uma função para extrair a chave do 0000 já existe.
     ' Se não, ela pode ser implementada aqui ou em uma classe de utilitários SPED.
-    ExtrairChaveReg0000 = dtoRegSPED.r0000(Arquivo)(dtoTitSPED.t0000("CHV_REG") - 1)
+    ExtrairChaveReg0000 = dtoRegSPED.r0000(ARQUIVO)(dtoTitSPED.t0000("CHV_REG") - 1)
 End Function
 
-Public Function ExtrairChaveRegH001(ByVal Arquivo As String) As String
+Public Function ExtrairChaveRegH001(ByVal ARQUIVO As String) As String
     ' Garante que o registro H001 exista para o arquivo antes de prosseguir.
     If dtoRegSPED.rH001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroH001("ARQUIVO")
 
-    If Not dtoRegSPED.rH001.Exists(Arquivo) Then
-        Call CriarRegistroH001(Arquivo)
+    If Not dtoRegSPED.rH001.Exists(ARQUIVO) Then
+        Call CriarRegistroH001(ARQUIVO)
     End If
     
-    ExtrairChaveRegH001 = dtoRegSPED.rH001(Arquivo)(dtoTitSPED.tH001("CHV_REG") - 1)
+    ExtrairChaveRegH001 = dtoRegSPED.rH001(ARQUIVO)(dtoTitSPED.tH001("CHV_REG") - 1)
 End Function
 

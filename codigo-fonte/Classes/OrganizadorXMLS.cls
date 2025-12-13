@@ -32,28 +32,28 @@ Public Sub RealocarArquivosXmlPorData()
 End Sub
 
 ' === Processa um único arquivo XML ===
-Private Sub ProcessarArquivo(ByVal Arquivo As Scripting.file, ByVal pastaPeriodos As String)
+Private Sub ProcessarArquivo(ByVal ARQUIVO As Scripting.file, ByVal pastaPeriodos As String)
     On Error GoTo TratarErro
     
-    Dim dataEmissao As Date
-    dataEmissao = ExtrairDataDhEmi(Arquivo.Path)
+    Dim DataEmissao As Date
+    DataEmissao = ExtrairDataDhEmi(ARQUIVO.Path)
     
     Dim pastaDestino As String
-    pastaDestino = ObterPastaDestino(dataEmissao, pastaPeriodos)
+    pastaDestino = ObterPastaDestino(DataEmissao, pastaPeriodos)
     
     CriarPastaSeNecessario pastaDestino
     
     Dim caminhoDestino As String
-    caminhoDestino = pastaDestino & "\" & Arquivo.name
+    caminhoDestino = pastaDestino & "\" & ARQUIVO.name
     
     ' Copia apenas se ainda não existir no destino
     If Dir(caminhoDestino) = "" Then
-        Arquivo.Copy caminhoDestino
+        ARQUIVO.Copy caminhoDestino
     End If
     Exit Sub
     
 TratarErro:
-    Debug.Print "Erro ao processar " & Arquivo.name & ": " & Err.Description
+    Debug.Print "Erro ao processar " & ARQUIVO.name & ": " & Err.Description
 End Sub
 
 ' === Extrai a data da tag <dhEmi> ===
@@ -76,9 +76,9 @@ Private Function ExtrairDataDhEmi(ByVal caminhoXml As String) As Date
 End Function
 
 ' === Retorna o caminho da subpasta destino no formato "mm-aaaa" ===
-Private Function ObterPastaDestino(ByVal dataEmissao As Date, ByVal pastaPeriodos As String) As String
+Private Function ObterPastaDestino(ByVal DataEmissao As Date, ByVal pastaPeriodos As String) As String
     Dim nomePasta As String
-    nomePasta = Format(dataEmissao, "mm-yyyy")
+    nomePasta = Format(DataEmissao, "mm-yyyy")
     ObterPastaDestino = pastaPeriodos & "\" & nomePasta
 End Function
 
@@ -109,14 +109,14 @@ End Function
 
 ' === Percorre pastas e subpastas recursivamente ===
 Private Sub PercorrerPasta(ByVal pastaAtual As Scripting.Folder, ByVal pastaPeriodos As String)
-    Dim Arquivo As Scripting.file
-    For Each Arquivo In pastaAtual.Files
+    Dim ARQUIVO As Scripting.file
+    For Each ARQUIVO In pastaAtual.Files
         If LCase(pastaAtual.Path) Like LCase("*" & NOME_PASTA_PERIODOS & "*") Then
             ' Evita processar a pasta Periodos
-        ElseIf LCase(Right(Arquivo.name, 4)) = ".xml" Then
-            ProcessarArquivo Arquivo, pastaPeriodos
+        ElseIf LCase(Right(ARQUIVO.name, 4)) = ".xml" Then
+            ProcessarArquivo ARQUIVO, pastaPeriodos
         End If
-    Next Arquivo
+    Next ARQUIVO
     
     Dim subpasta As Scripting.Folder
     For Each subpasta In pastaAtual.SubFolders

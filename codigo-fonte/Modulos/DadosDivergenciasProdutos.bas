@@ -7,7 +7,7 @@ Public dicTitulosProdutos As New Dictionary
 Public Type CamposDivergenciaProdutos
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_PAI As String
     CHV_REG As String
     CHV_NFE As String
@@ -135,7 +135,7 @@ Dim i As Long
     With CamposProduto
         
         .REG = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("REG") - i))
-        .Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("ARQUIVO") - i))
+        .ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("ARQUIVO") - i))
         .CHV_PAI = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("CHV_PAI_FISCAL") - i))
         .CHV_REG = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("CHV_REG") - i))
         .CHV_NFE = Util.RemoverAspaSimples(Campos(dicTitulosProdutos("CHV_NFE") - i))
@@ -232,7 +232,7 @@ Dim i As Long
     With CamposProduto
         
         Campos(dicTitulosProdutos("REG") - i) = .REG
-        Campos(dicTitulosProdutos("ARQUIVO") - i) = .Arquivo
+        Campos(dicTitulosProdutos("ARQUIVO") - i) = .ARQUIVO
         Campos(dicTitulosProdutos("CHV_PAI_FISCAL") - i) = .CHV_PAI
         Campos(dicTitulosProdutos("CHV_REG") - i) = .CHV_REG
         Campos(dicTitulosProdutos("CHV_NFE") - i) = .CHV_NFE

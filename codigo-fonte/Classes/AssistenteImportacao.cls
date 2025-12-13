@@ -29,7 +29,7 @@ Dim Campos As Variant
     With Campos0000
         
         .REG = "'0000"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .COD_VER = fnExcel.FormatarTexto(EnumFiscal.ValidarEnumeracao_COD_VER(DadosXML.Periodo))
         .COD_FIN = EnumFiscal.ValidarEnumeracao_COD_FIN(0)
         .DT_INI = Ano & "-" & Mes & "-01"
@@ -43,10 +43,10 @@ Dim Campos As Variant
         .SUFRAMA = ValidarTag(NFe, "//" & tpCont & "/SUFRAMA")
         .CHV_REG = fnSPED.GerarChaveRegistro(.DT_INI, .DT_FIN, .CNPJ, .CPF, .IE)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", "", .COD_VER, .COD_FIN, .DT_INI, .DT_FIN, .Nome, _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", "", .COD_VER, .COD_FIN, .DT_INI, .DT_FIN, .Nome, _
             fnExcel.FormatarTexto(.CNPJ), .CPF, .UF, fnExcel.FormatarTexto(.IE), .COD_MUN, "", .SUFRAMA, "", "")
             
-        dtoRegSPED.r0000(.Arquivo) = Campos
+        dtoRegSPED.r0000(.ARQUIVO) = Campos
         
     End With
     
@@ -66,7 +66,7 @@ Dim Campos As Variant
     With Campos0000_Contr
         
         .REG = "'0000"
-        .Arquivo = DadosXML.Arquivo
+        .ARQUIVO = DadosXML.ARQUIVO
         .COD_VER = fnExcel.FormatarTexto(EnumContrib.ValidarEnumeracao_COD_VER(DadosXML.Periodo))
         .TIPO_ESCRIT = fnExcel.FormatarTexto(EnumContrib.ValidarEnumeracao_TIPO_ESCRIT(0))
         .DT_INI = Ano & "-" & Mes & "-01"
@@ -78,10 +78,10 @@ Dim Campos As Variant
         .SUFRAMA = fnExcel.FormatarTexto(ValidarTag(NFe, "//" & tpCont & "/SUFRAMA"))
         .CHV_REG = fnSPED.GerarChaveRegistro(.DT_INI, .DT_FIN, .CNPJ)
         
-        Campos = Array(.REG, .Arquivo, .CHV_REG, "", "", .COD_VER, .TIPO_ESCRIT, "", "", _
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", "", .COD_VER, .TIPO_ESCRIT, "", "", _
             .DT_INI, .DT_FIN, .Nome, fnExcel.FormatarTexto(.CNPJ), .UF, .COD_MUN, .SUFRAMA, "", "")
             
-        dtoRegSPED.r0000_Contr(.Arquivo) = Campos
+        dtoRegSPED.r0000_Contr(.ARQUIVO) = Campos
         
     End With
     
@@ -96,18 +96,17 @@ Dim Campos As Variant
     
     With Campos0001
         
-        If Not dtoRegSPED.r0001.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.r0001.Exists(DadosXML.ARQUIVO) Then
             
             .REG = "'0001"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .IND_MOV = EnumFiscal.ValidarEnumeracao_IND_MOV("0")
-            .CHV_PAI_Fiscal = dtoRegSPED.r0000(.Arquivo)(dtoTitSPED.t0000("CHV_REG") - 1)
-            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.Arquivo)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, "0001")
+            .CHV_PAI_FISCAL = dtoRegSPED.r0000(.ARQUIVO)(dtoTitSPED.t0000("CHV_REG") - 1)
+            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.ARQUIVO)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, "0001")
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
-            
-            dtoRegSPED.r0001(.Arquivo) = Campos
+            dtoRegSPED.r0001(.ARQUIVO) = Campos
             
         End If
         
@@ -124,10 +123,10 @@ Dim Campos As Variant
     
     With Campos0100
         
-        If Not dtoRegSPED.r0100.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.r0100.Exists(DadosXML.ARQUIVO) Then
             
             .REG = "'0100"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .Nome = ""
             .CPF = ""
             .CRC = ""
@@ -141,14 +140,14 @@ Dim Campos As Variant
             .FAX = ""
             .EMAIL = ""
             .COD_MUN = ""
-            .CHV_PAI_Fiscal = ExtrairChaveReg0001()
+            .CHV_PAI_FISCAL = ExtrairChaveReg0001()
             .CHV_PAI_CONTRIBUICOES = ""
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "0100")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, .Nome, .CPF, .CRC, _
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, .Nome, .CPF, .CRC, _
                 .CNPJ, .CEP, .END, .NUM, .COMPL, .BAIRRO, .FONE, .FAX, .EMAIL, .COD_MUN)
                 
-            dtoRegSPED.r0100(.Arquivo) = Campos
+            dtoRegSPED.r0100(.ARQUIVO) = Campos
             
         End If
         
@@ -167,10 +166,10 @@ Dim Campos As Variant
     
     With Campos0005
         
-        If Not dtoRegSPED.r0005.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.r0005.Exists(DadosXML.ARQUIVO) Then
             
             .REG = "'0005"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .FANTASIA = ValidarTag(NFe, "//" & tpCont & "/xFant")
             .CEP = fnExcel.FormatarTexto(ValidarTag(NFe, "//" & tpCont & "//CEP"))
             .END = ValidarTag(NFe, "//" & tpCont & "//xLgr")
@@ -180,13 +179,13 @@ Dim Campos As Variant
             .FONE = fnExcel.FormatarTexto(ValidarTag(NFe, "//" & tpCont & "//fone"))
             .FAX = fnExcel.FormatarTexto(ValidarTag(NFe, "//" & tpCont & "//fone"))
             .EMAIL = ValidarTag(NFe, "//" & tpCont & "/email")
-            .CHV_PAI_Fiscal = ExtrairChaveReg0001()
+            .CHV_PAI_FISCAL = ExtrairChaveReg0001()
             .CHV_PAI_CONTRIBUICOES = ""
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, "0005")
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, "0005")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, "", .FANTASIA, .CEP, .END, .NUM, .COMPL, .BAIRRO, .FONE, .FAX, .EMAIL)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, "", .FANTASIA, .CEP, .END, .NUM, .COMPL, .BAIRRO, .FONE, .FAX, .EMAIL)
                 
-            dtoRegSPED.r0005(.Arquivo) = Campos
+            dtoRegSPED.r0005(.ARQUIVO) = Campos
             
         End If
         
@@ -203,10 +202,10 @@ Dim Campos As Variant
     
     With Campos0110
 
-        If Not dtoRegSPED.r0110.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.r0110.Exists(DadosXML.ARQUIVO) Then
 
             .REG = "'0110"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .COD_INC_TRIB = ""
             .IND_APRO_CRED = ""
             .COD_TIPO_CONT = ""
@@ -214,8 +213,8 @@ Dim Campos As Variant
             .CHV_PAI = ExtrairChaveReg0001()
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "0110")
 
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, .COD_INC_TRIB, .IND_APRO_CRED, .COD_TIPO_CONT, .IND_REG_CUM)
-            dtoRegSPED.r0110(DadosXML.Arquivo) = Campos
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, .COD_INC_TRIB, .IND_APRO_CRED, .COD_TIPO_CONT, .IND_REG_CUM)
+            dtoRegSPED.r0110(DadosXML.ARQUIVO) = Campos
 
         End If
 
@@ -234,11 +233,11 @@ Dim Campos As Variant
     
     With Campos0140
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not dtoRegSPED.r0140.Exists(Chave) Then
             
             .REG = "'0140"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .COD_EST = ""
             .Nome = fnXML.ValidarTag(NFe, "//" & tpCont & "/xNome")
             .CNPJ = DadosXML.CNPJ_ESTABELECIMENTO
@@ -250,7 +249,7 @@ Dim Campos As Variant
             .CHV_PAI = ExtrairChaveReg0001()
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CNPJ)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, .COD_EST, .Nome, "'" & .CNPJ, .UF, "'" & .IE, .COD_MUN, .IM, .SUFRAMA)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, .COD_EST, .Nome, "'" & .CNPJ, .UF, "'" & .IE, .COD_MUN, .IM, .SUFRAMA)
             
             dtoRegSPED.r0140(Chave) = Campos
             
@@ -270,12 +269,12 @@ Dim Chave As String, tpPart$
     
     With Campos0150
         
-        .CHV_PAI_Fiscal = ExtrairChaveReg0001()
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, COD_PART)
+        .CHV_PAI_FISCAL = ExtrairChaveReg0001()
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, COD_PART)
         If Not dtoRegSPED.r0150.Exists(Chave) Then
             
             .REG = "'0150"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .COD_PART = Util.FormatarTexto(COD_PART)
             .Nome = VBA.UCase(VBA.Trim(VBA.Left(ValidarTag(NFe, "//" & tpPart & "/xNome"), 100)))
             .COD_PAIS = ValidarTag(NFe, "//" & tpPart & "//cPais")
@@ -292,9 +291,9 @@ Dim Chave As String, tpPart$
             If .COD_PAIS = "" Or .COD_PAIS = "01058" Then .COD_PAIS = "'1058" Else .COD_PAIS = Util.FormatarTexto(.COD_PAIS)
                         
             .CHV_PAI_CONTRIBUICOES = ExtrairChaveReg0140()
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .COD_PART)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .COD_PART)
             
-            dtoRegSPED.r0150(Chave) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, _
+            dtoRegSPED.r0150(Chave) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
                 .COD_PART, .Nome, .COD_PAIS, .CNPJ, .CPF, .IE, .COD_MUN, .SUFRAMA, .END, .NUM, .COMPL, .BAIRRO)
             
         End If
@@ -311,18 +310,18 @@ Dim Chave As String
     
     With Campos0190
         
-        .CHV_PAI_Fiscal = ExtrairChaveReg0001()
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, UNID)
+        .CHV_PAI_FISCAL = ExtrairChaveReg0001()
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, UNID)
         If Not dtoRegSPED.r0190.Exists(Chave) Then
             
             .REG = "'0190"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .UNID = UNID
             .DESCR = VBA.UCase(.UNID)
             .CHV_PAI_CONTRIBUICOES = ExtrairChaveReg0140()
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .UNID)
             
-            dtoRegSPED.r0190(Chave) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .UNID, .DESCR)
+            dtoRegSPED.r0190(Chave) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .UNID, .DESCR)
             
         End If
         
@@ -338,12 +337,12 @@ Dim Chave As String
     
     With Campos0200
         
-        .CHV_PAI_Fiscal = ExtrairChaveReg0001()
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, .COD_ITEM)
+        .CHV_PAI_FISCAL = ExtrairChaveReg0001()
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, .COD_ITEM)
         If Not dtoRegSPED.r0200.Exists(Chave) Then
             
             .REG = "'0200"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .COD_BARRA = Util.FormatarTexto(fnXML.ExtrairCodigoBarrasProduto(Produto))
             .COD_ANT_ITEM = ""
             .TIPO_ITEM = ""
@@ -354,13 +353,13 @@ Dim Chave As String
             .ALIQ_ICMS = fnXML.ValidarPercentual(Produto, "imposto/ICMS//pICMS")
             .CEST = fnXML.ExtrairCEST(Produto)
             .CHV_PAI_CONTRIBUICOES = ExtrairChaveReg0140()
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .COD_ITEM)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .COD_ITEM)
             
             If CamposC100.COD_MOD = "65" Then .TIPO_ITEM = EnumContrib.ValidarEnumeracao_TIPO_ITEM("00")
             If VBA.UCase(.COD_BARRA) = "SEM GTIN" Then .COD_BARRA = ""
             If .CEST = "0" Then .CEST = ""
             
-            dtoRegSPED.r0200(Chave) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, "'" & .COD_ITEM, _
+            dtoRegSPED.r0200(Chave) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, "'" & .COD_ITEM, _
                 .DESCR_ITEM, .COD_BARRA, .COD_ANT_ITEM, .UNID_INV, .TIPO_ITEM, .COD_NCM, .EX_IPI, .COD_GEN, .COD_LST, CDbl(.ALIQ_ICMS), .CEST)
                 
             Call DTO_EFDICMS.ResetarCampos0200
@@ -379,19 +378,19 @@ Dim Chave As String
     
     With Campos0220
         
-        .CHV_PAI_Fiscal = ExtrairChaveReg0200(COD_ITEM)
-        Chave = Util.UnirCampos(.CHV_PAI_Fiscal, UNID_COM)
+        .CHV_PAI_FISCAL = ExtrairChaveReg0200(COD_ITEM)
+        Chave = Util.UnirCampos(.CHV_PAI_FISCAL, UNID_COM)
         If Not dtoRegSPED.r0220.Exists(Chave) Then
             
             .REG = "'0220"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .UNID_CONV = UNID_COM
             .FAT_CONV = FAT_CONV
             .COD_BARRA = ""
             .CHV_PAI_CONTRIBUICOES = ""
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, .UNID_CONV)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, .UNID_CONV)
             
-            dtoRegSPED.r0220(Chave) = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .UNID_CONV, .FAT_CONV, .COD_BARRA)
+            dtoRegSPED.r0220(Chave) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .UNID_CONV, .FAT_CONV, .COD_BARRA)
             
         End If
         
@@ -407,18 +406,18 @@ Dim Campos As Variant
     
     With CamposC001
         
-        If Not dtoRegSPED.rC001.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.rC001.Exists(DadosXML.ARQUIVO) Then
             
             .REG = "C001"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .IND_MOV = EnumFiscal.ValidarEnumeracao_IND_MOV("0")
-            .CHV_PAI_Fiscal = dtoRegSPED.r0000(.Arquivo)(dtoTitSPED.t0000("CHV_REG") - 1)
-            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.Arquivo)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, "C001")
+            .CHV_PAI_FISCAL = dtoRegSPED.r0000(.ARQUIVO)(dtoTitSPED.t0000("CHV_REG") - 1)
+            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.ARQUIVO)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, "C001")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
             
-            dtoRegSPED.rC001(.Arquivo) = Campos
+            dtoRegSPED.rC001(.ARQUIVO) = Campos
             
         End If
         
@@ -435,17 +434,17 @@ Dim Campos As Variant
     
     With CamposC010
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not dtoRegSPED.rC010.Exists(Chave) Then
             
             .REG = "C010"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .CNPJ = DadosXML.CNPJ_ESTABELECIMENTO
             .IND_ESCRI = "2"
             .CHV_PAI = ExtrairChaveRegC001()
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CNPJ)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ), .IND_ESCRI)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ), .IND_ESCRI)
             
             dtoRegSPED.rC010(Chave) = Campos
             
@@ -463,18 +462,18 @@ Dim Campos As Variant
     
     With CamposD001
         
-        If Not dtoRegSPED.rD001.Exists(DadosXML.Arquivo) Then
+        If Not dtoRegSPED.rD001.Exists(DadosXML.ARQUIVO) Then
             
             .REG = "D001"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .IND_MOV = EnumFiscal.ValidarEnumeracao_IND_MOV("0")
-            .CHV_PAI_Fiscal = dtoRegSPED.r0000(.Arquivo)(dtoTitSPED.t0000("CHV_REG") - 1)
-            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.Arquivo)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_Fiscal, "D001")
+            .CHV_PAI_FISCAL = dtoRegSPED.r0000(.ARQUIVO)(dtoTitSPED.t0000("CHV_REG") - 1)
+            .CHV_PAI_CONTRIBUICOES = dtoRegSPED.r0000_Contr(.ARQUIVO)(dtoTitSPED.t0000_Contr("CHV_REG") - 1)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI_FISCAL, "D001")
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, .CHV_PAI_Fiscal, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_MOV)
             
-            dtoRegSPED.rD001(.Arquivo) = Campos
+            dtoRegSPED.rD001(.ARQUIVO) = Campos
             
         End If
         
@@ -491,16 +490,16 @@ Dim Campos As Variant
     
     With CamposD010
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not dtoRegSPED.rD010.Exists(Chave) Then
             
             .REG = "D010"
-            .Arquivo = DadosXML.Arquivo
+            .ARQUIVO = DadosXML.ARQUIVO
             .CNPJ = DadosXML.CNPJ_ESTABELECIMENTO
             .CHV_PAI = ExtrairChaveReg0001()
             .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CNPJ)
             
-            Campos = Array(.REG, .Arquivo, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ))
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, "", .CHV_PAI, fnExcel.FormatarTexto(.CNPJ))
             
             dtoRegSPED.rD010(Chave) = Campos
             
@@ -519,9 +518,9 @@ Dim Campos As Variant
         
         If .r0000 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0000("ARQUIVO")
         
-        If Not .r0000.Exists(DadosXML.Arquivo) Then Call CriarRegistro0000(Doce)
+        If Not .r0000.Exists(DadosXML.ARQUIVO) Then Call CriarRegistro0000(Doce)
         
-        Campos = .r0000(DadosXML.Arquivo)
+        Campos = .r0000(DadosXML.ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveReg0000 = Campos(dtoTitSPED.t0000("CHV_REG") - i)
@@ -539,9 +538,9 @@ Dim Campos As Variant
         
         If .r0000_Contr Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0000_Contr("ARQUIVO")
         
-        If Not .r0000_Contr.Exists(DadosXML.Arquivo) Then Call CriarRegistro0000_Contr(Doce)
+        If Not .r0000_Contr.Exists(DadosXML.ARQUIVO) Then Call CriarRegistro0000_Contr(Doce)
         
-        Campos = .r0000_Contr(DadosXML.Arquivo)
+        Campos = .r0000_Contr(DadosXML.ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveReg0000_Contr = Campos(dtoTitSPED.t0000_Contr("CHV_REG") - i)
@@ -559,9 +558,9 @@ Dim Campos As Variant
         
         If .r0001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0001("ARQUIVO")
         
-        If Not .r0001.Exists(DadosXML.Arquivo) Then Call CriarRegistro0001
+        If Not .r0001.Exists(DadosXML.ARQUIVO) Then Call CriarRegistro0001
         
-        Campos = .r0001(DadosXML.Arquivo)
+        Campos = .r0001(DadosXML.ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveReg0001 = Campos(dtoTitSPED.t0001("CHV_REG") - i)
@@ -580,7 +579,7 @@ Dim Chave As String, CHV_PAI$, CHV_REG$
         
         If .r0140 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0140("ARQUIVO", "CNPJ")
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not .r0140.Exists(Chave) Then Call CriarRegistro0140(Doce)
         
         Campos = .r0140(Chave)
@@ -602,7 +601,7 @@ Dim Chave As String
         
         If .r0200 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0200("ARQUIVO", "COD_ITEM")
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, COD_ITEM)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, COD_ITEM)
         If Not .r0200.Exists(Chave) Then Exit Function
         
         Campos = .r0200(Chave)
@@ -623,9 +622,9 @@ Dim Campos As Variant
         
         If .rC001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroC001("ARQUIVO")
         
-        If Not .rC001.Exists(DadosXML.Arquivo) Then Call CriarRegistroC001
+        If Not .rC001.Exists(DadosXML.ARQUIVO) Then Call CriarRegistroC001
         
-        Campos = .rC001(DadosXML.Arquivo)
+        Campos = .rC001(DadosXML.ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveRegC001 = Campos(dtoTitSPED.tC001("CHV_REG") - i)
@@ -644,7 +643,7 @@ Dim Chave As String, CHV_PAI$, CHV_REG$
         
         If .rC010 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroC010("ARQUIVO", "CNPJ")
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not .rC010.Exists(Chave) Then Call CriarRegistroC010
         
         Campos = .rC010(Chave)
@@ -665,9 +664,9 @@ Dim Campos As Variant
         
         If .rD001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD001("ARQUIVO")
         
-        If Not .rD001.Exists(DadosXML.Arquivo) Then Call CriarRegistroD001
+        If Not .rD001.Exists(DadosXML.ARQUIVO) Then Call CriarRegistroD001
         
-        Campos = .rD001(DadosXML.Arquivo)
+        Campos = .rD001(DadosXML.ARQUIVO)
         i = Util.VerificarPosicaoInicialArray(Campos)
         
         ExtrairChaveRegD001 = Campos(dtoTitSPED.tD001("CHV_REG") - i)
@@ -686,7 +685,7 @@ Dim Chave As String, CHV_PAI$, CHV_REG$
         
         If .rD010 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD010("ARQUIVO", "CNPJ")
         
-        Chave = Util.UnirCampos(DadosXML.Arquivo, DadosXML.CNPJ_ESTABELECIMENTO)
+        Chave = Util.UnirCampos(DadosXML.ARQUIVO, DadosXML.CNPJ_ESTABELECIMENTO)
         If Not .rD010.Exists(Chave) Then Call CriarRegistroD010
         
         Campos = .rD010(Chave)
@@ -749,7 +748,7 @@ Dim Chave As String, COD_PART$
 
     With dtoRegSPED
 
-        Chave = Util.UnirCampos(Arquivo, COD_PART)
+        Chave = Util.UnirCampos(ARQUIVO, COD_PART)
         If .r0150.Exists(Chave) Then
 
             Campos = .r0150(Chave)
@@ -849,7 +848,7 @@ Public Function ExtrairDadosXML(ByVal XML As Variant) As DOMDocument60
         If .CNPJ_ESTABELECIMENTO = "" Then Exit Function
         
         .Periodo = DefinirPeriodoArquivo(Doce)
-        .Arquivo = .Periodo & "-" & CNPJContribuinte
+        .ARQUIVO = .Periodo & "-" & CNPJContribuinte
         .TIPO_NF = fnXML.ValidarTag(Doce, "//tpNF")
         
     End With
@@ -1047,13 +1046,13 @@ Public Function CadastrarItensTerceirosComoProprios(ByVal Produto As IXMLDOMNode
 
 End Function
 
-Public Function ExtrairCST_PIS_COFINS_AquisicaoFrete(ByVal Arquivo As String) As String
+Public Function ExtrairCST_PIS_COFINS_AquisicaoFrete(ByVal ARQUIVO As String) As String
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
     
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)
@@ -1070,13 +1069,13 @@ Dim COD_INC_TRIB As String
     
 End Function
 
-Public Function ExtrairALIQ_PIS_AquisicaoFrete(ByVal Arquivo As String) As Double
+Public Function ExtrairALIQ_PIS_AquisicaoFrete(ByVal ARQUIVO As String) As Double
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
         
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)
@@ -1093,13 +1092,13 @@ Dim COD_INC_TRIB As String
     
 End Function
 
-Public Function ExtrairALIQ_COFINS_AquisicaoFrete(ByVal Arquivo As String) As Double
+Public Function ExtrairALIQ_COFINS_AquisicaoFrete(ByVal ARQUIVO As String) As Double
 
 Dim i As Byte
 Dim Campos As Variant
 Dim COD_INC_TRIB As String
         
-    Campos = dtoRegSPED.r0110(Arquivo)
+    Campos = dtoRegSPED.r0110(ARQUIVO)
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     COD_INC_TRIB = VBA.Left(Util.ApenasNumeros(Campos(dtoTitSPED.t0110("COD_INC_TRIB") - i)), 1)

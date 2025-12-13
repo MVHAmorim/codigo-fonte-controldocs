@@ -36,7 +36,7 @@ End Sub
 Public Sub ImportarModulos()
     Dim Projeto As VBProject
     Dim caminhoPasta As String
-    Dim Arquivo As String
+    Dim ARQUIVO As String
     
     ' Solicitar ao usuário que selecione a pasta de origem
     With Application.FileDialog(msoFileDialogFolderPicker)
@@ -60,17 +60,17 @@ Public Sub ImportarModulos()
     Set Projeto = ThisWorkbook.VBProject
     
     ' Percorrer todos os arquivos .bas na pasta
-    Arquivo = Dir(caminhoPasta & "*.bas")
-    Do While Arquivo <> ""
-        Projeto.VBComponents.Import caminhoPasta & Arquivo
-        Arquivo = Dir()
+    ARQUIVO = Dir(caminhoPasta & "*.bas")
+    Do While ARQUIVO <> ""
+        Projeto.VBComponents.Import caminhoPasta & ARQUIVO
+        ARQUIVO = Dir()
     Loop
     
     ' Percorrer todos os arquivos .cls na pasta
-    Arquivo = Dir(caminhoPasta & "*.cls")
-    Do While Arquivo <> ""
-        Projeto.VBComponents.Import caminhoPasta & Arquivo
-        Arquivo = Dir()
+    ARQUIVO = Dir(caminhoPasta & "*.cls")
+    Do While ARQUIVO <> ""
+        Projeto.VBComponents.Import caminhoPasta & ARQUIVO
+        ARQUIVO = Dir()
     Loop
     
     MsgBox "Módulos importados com sucesso de: " & caminhoPasta

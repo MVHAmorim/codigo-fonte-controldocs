@@ -308,7 +308,7 @@ Dim dicRegFiscal As Dictionary
 Dim dicRegContribuicoes As Dictionary
 Dim arrConversoes As New ArrayList
 Dim nCampos As New ArrayList
-Dim nReg As String, nRegContrib$, CHV_PAI$, CHV_REG$, CHV_PAI_Fiscal$, CHV_PAI_CONTRIBUICOES$
+Dim nReg As String, nRegContrib$, CHV_PAI$, CHV_REG$, CHV_PAI_FISCAL$, CHV_PAI_CONTRIBUICOES$
 Dim Posicao As Long
     
     arrConversoes.Add "0001"
@@ -365,10 +365,10 @@ Dim Posicao As Long
         Select Case Titulo
             
             Case "REG"
-                If nReg = "0000" Or nReg = "0000_Contr" Then Campos0000.Arquivo = fnSPED.GerarCodigoArquivo(Campos, SPEDContr, Unificar)
+                If nReg = "0000" Or nReg = "0000_Contr" Then Campos0000.ARQUIVO = fnSPED.GerarCodigoArquivo(Campos, SPEDContr, Unificar)
                 
             Case "ARQUIVO"
-                If Periodo = "" Then Campos(Posicao) = Campos0000.Arquivo Else Campos(Posicao) = Periodo & "-" & CNPJContribuinte
+                If Periodo = "" Then Campos(Posicao) = Campos0000.ARQUIVO Else Campos(Posicao) = Periodo & "-" & CNPJContribuinte
                 
             Case "CHV_REG"
                 CHV_PAI = IdentificarChavePai(dicReg)
@@ -377,7 +377,7 @@ Dim Posicao As Long
                 If VerificarExistenciaChaveRegistro(nReg, CHV_REG) Then Exit Function
                 If arrConversoes.contains(nReg) And Not SPEDContr Then Call IncluirRegistrosContribuicoes(nReg)
                 
-                If Not dicRegFiscal Is Nothing Then CHV_PAI_Fiscal = IdentificarChavePaiFiscal(dicRegFiscal)
+                If Not dicRegFiscal Is Nothing Then CHV_PAI_FISCAL = IdentificarChavePaiFiscal(dicRegFiscal)
                 If Not dicRegFiscal Is Nothing Then Call AtribuirChaveNivelFiscal(dicRegFiscal, CHV_REG)
                 If Not dicRegContribuicoes Is Nothing Then CHV_PAI_CONTRIBUICOES = IdentificarChavePaiContribuicoes(dicRegContribuicoes)
                 If Not dicRegContribuicoes Is Nothing Then Call AtribuirChaveNivelContribuicoes(dicRegContribuicoes, CHV_REG)
@@ -388,7 +388,7 @@ Dim Posicao As Long
                 End If
                 
             Case "CHV_PAI_FISCAL"
-                Campos(Posicao) = CHV_PAI_Fiscal
+                Campos(Posicao) = CHV_PAI_FISCAL
                 
             Case "CHV_PAI_CONTRIBUICOES"
                 Campos(Posicao) = CHV_PAI_CONTRIBUICOES
@@ -418,7 +418,7 @@ Dim Posicao As Long
                 
         End Select
         
-        If (CHV_PAI_Fiscal = IngorarCHV_PAI And CHV_PAI_Fiscal <> "") _
+        If (CHV_PAI_FISCAL = IngorarCHV_PAI And CHV_PAI_FISCAL <> "") _
             Or (CHV_PAI_CONTRIBUICOES = IngorarCHV_PAI And CHV_PAI_CONTRIBUICOES <> "") Then
             Exit Function
         End If
@@ -1057,16 +1057,16 @@ Public Function FormatarPercentuais(ByVal Valor As String) As Double
     
 End Function
 
-Public Function CarregarChaveRegistro(ByVal Arquivo As String, dicDadosPai As Dictionary, _
+Public Function CarregarChaveRegistro(ByVal ARQUIVO As String, dicDadosPai As Dictionary, _
     dicDadosAvo As Dictionary, dicTitulosPai As Dictionary, dicTitulosAvo As Dictionary) As String
         
-    If dicDadosPai.Exists(Arquivo) Then
+    If dicDadosPai.Exists(ARQUIVO) Then
         
-        CarregarChaveRegistro = dicDadosPai(Arquivo)(dicTitulosPai("CHV_REG"))
+        CarregarChaveRegistro = dicDadosPai(ARQUIVO)(dicTitulosPai("CHV_REG"))
         
-    ElseIf dicDadosAvo.Exists(Arquivo) Then
+    ElseIf dicDadosAvo.Exists(ARQUIVO) Then
     
-        CarregarChaveRegistro = dicDadosAvo(Arquivo)(dicTitulosAvo("CHV_REG"))
+        CarregarChaveRegistro = dicDadosAvo(ARQUIVO)(dicTitulosAvo("CHV_REG"))
     
     End If
 
@@ -1076,7 +1076,7 @@ Public Function ExtrairCadastroSPEDFiscal()
 
 Dim dicDados0000 As New Dictionary
 Dim dicTitulos0000 As New Dictionary
-Dim Arquivo As String
+Dim ARQUIVO As String
     
     Set dicTitulos0000 = Util.MapearTitulos(reg0000, 3)
     Set dicDados0000 = Util.CriarDicionarioRegistro(reg0000, "ARQUIVO")
@@ -1088,8 +1088,8 @@ Dim Arquivo As String
         
     End If
     
-    Arquivo = dicDados0000.Items(0)(dicTitulos0000("ARQUIVO"))
-    Call AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, Arquivo)
+    ARQUIVO = dicDados0000.Items(0)(dicTitulos0000("ARQUIVO"))
+    Call AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, ARQUIVO)
     
     Call Util.MsgAviso("Dados importados com sucesso!", "Importação de dados do SPED Fiscal")
     
@@ -1099,7 +1099,7 @@ Public Function ExtrairCadastroSPEDContribuicoes()
 
 Dim dicDados0000 As New Dictionary
 Dim dicTitulos0000 As New Dictionary
-Dim Arquivo As String
+Dim ARQUIVO As String
     
     Set dicTitulos0000 = Util.MapearTitulos(reg0000_Contr, 3)
     Set dicDados0000 = Util.CriarDicionarioRegistro(reg0000_Contr, "ARQUIVO")
@@ -1111,21 +1111,21 @@ Dim Arquivo As String
         
     End If
     
-    Arquivo = dicDados0000.Items(0)(dicTitulos0000("ARQUIVO"))
-    Call AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, Arquivo)
+    ARQUIVO = dicDados0000.Items(0)(dicTitulos0000("ARQUIVO"))
+    Call AtuailzarCadastroContribuinte(dicDados0000, dicTitulos0000, ARQUIVO)
     
     Call Util.MsgAviso("Dados importados com sucesso!", "Importação de dados do SPED Fiscal")
     
 End Function
 
 Public Function AtuailzarCadastroContribuinte(ByRef dicDados0000 As Dictionary, _
-    ByRef dicTitulos0000 As Dictionary, ByRef Arquivo As String, Optional ByRef Periodo As String)
+    ByRef dicTitulos0000 As Dictionary, ByRef ARQUIVO As String, Optional ByRef Periodo As String)
     
-    CadContrib.Range("CNPJContribuinte").value = dicDados0000(Arquivo)(dicTitulos0000("CNPJ"))
-    CadContrib.Range("InscContribuinte").value = dicDados0000(Arquivo)(dicTitulos0000("IE"))
-    CadContrib.Range("UFContribuinte").value = dicDados0000(Arquivo)(dicTitulos0000("UF"))
-    CadContrib.Range("RazaoContribuinte").value = dicDados0000(Arquivo)(dicTitulos0000("NOME"))
-    Periodo = Arquivo
+    CadContrib.Range("CNPJContribuinte").value = dicDados0000(ARQUIVO)(dicTitulos0000("CNPJ"))
+    CadContrib.Range("InscContribuinte").value = dicDados0000(ARQUIVO)(dicTitulos0000("IE"))
+    CadContrib.Range("UFContribuinte").value = dicDados0000(ARQUIVO)(dicTitulos0000("UF"))
+    CadContrib.Range("RazaoContribuinte").value = dicDados0000(ARQUIVO)(dicTitulos0000("NOME"))
+    Periodo = ARQUIVO
     
 End Function
 
@@ -1497,32 +1497,32 @@ Public Sub ListarSPEDs(ByVal Caminho As String, ByRef arrFiscal As ArrayList, _
     ByRef arrContribuicoes As ArrayList, Optional ByVal Comeco As Double)
     
 Dim FSO As New FileSystemObject
-Dim Arquivo As Scripting.file
+Dim ARQUIVO As Scripting.file
 Dim subpasta As Folder
 Dim TipoSPED As String
 Dim pasta As Folder
 
     Set pasta = FSO.GetFolder(Caminho)
-    For Each Arquivo In pasta.Files
+    For Each ARQUIVO In pasta.Files
         
         Call Util.AntiTravamento(a, 1, "Listando SPEDs para importação, por favor aguarde", pasta.Files.Count, Comeco)
         
-        If VBA.LCase(Arquivo.Path) Like "*.txt" Then
+        If VBA.LCase(ARQUIVO.Path) Like "*.txt" Then
             
-            TipoSPED = ClassificarSPED(Arquivo.Path)
+            TipoSPED = ClassificarSPED(ARQUIVO.Path)
             Select Case TipoSPED
                 
                 Case "Fiscal"
-                    arrFiscal.Add Arquivo.Path
+                    arrFiscal.Add ARQUIVO.Path
                     
                 Case "Contribuições"
-                    arrContribuicoes.Add Arquivo.Path
+                    arrContribuicoes.Add ARQUIVO.Path
                     
             End Select
             
         End If
         
-    Next Arquivo
+    Next ARQUIVO
     
     For Each subpasta In pasta.SubFolders
         Call ListarSPEDs(subpasta.Path, arrFiscal, arrContribuicoes, Comeco)
@@ -1533,12 +1533,12 @@ End Sub
 Public Function ExtrairRegistrosSPED(ByVal Arq As String)
 
 Dim FSO As New FileSystemObject
-Dim Arquivo As TextStream
+Dim ARQUIVO As TextStream
 Dim Conteudo As String
     
-    Set Arquivo = FSO.OpenTextFile(Arq, ForReading, False)
-    Conteudo = Arquivo.ReadAll
-    Arquivo.Close
+    Set ARQUIVO = FSO.OpenTextFile(Arq, ForReading, False)
+    Conteudo = ARQUIVO.ReadAll
+    ARQUIVO.Close
     
     ExtrairRegistrosSPED = VBA.Split(Conteudo, vbCrLf)
     If UBound(ExtrairRegistrosSPED) <= 1 Then ExtrairRegistrosSPED = VBA.Split(Conteudo, vbLf)

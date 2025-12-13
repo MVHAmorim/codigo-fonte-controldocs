@@ -99,7 +99,7 @@ Public CST_COFINSOutrasOperacoes As Boolean
 
 Public Type CamposValidacaoCFOP
     
-    Arquivo As String
+    ARQUIVO As String
     COD_CFOP As String
     CFOP_SPED As String
     CFOP_NF As String
@@ -158,7 +158,7 @@ Dim CFOP_NF As String
     
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
-    CamposCFOP.Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("ARQUIVO") - i))
+    CamposCFOP.ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("ARQUIVO") - i))
     CamposCFOP.CFOP_NF = fnExcel.ConverterValores(Campos(dicTitulosRelatorio("CFOP_NF") - i), True, 0)
     CamposCFOP.CFOP_SPED = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("CFOP_SPED") - i))
     CamposCFOP.COD_CFOP = CamposCFOP.CFOP_SPED
@@ -177,7 +177,7 @@ Dim i As Long
     
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
-    CamposCFOP.Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("ARQUIVO") - i))
+    CamposCFOP.ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("ARQUIVO") - i))
     CamposCFOP.COD_CFOP = Util.ApenasNumeros(Campos(dicTitulosRelatorio("CFOP") - i))
     CamposCFOP.IND_OPER = Util.RemoverAspaSimples(Campos(dicTitulosRelatorio("IND_OPER") - i))
     CamposCFOP.DT_DOC = fnExcel.FormatarData(Campos(dicTitulosRelatorio("DT_DOC") - i))
@@ -452,9 +452,9 @@ Dim i As Integer
     
     With CamposCFOP
         
-        If SPEDFiscal.dicDados0000.Exists(.Arquivo) Then
+        If SPEDFiscal.dicDados0000.Exists(.ARQUIVO) Then
             
-            Campos = SPEDFiscal.dicDados0000(.Arquivo)
+            Campos = SPEDFiscal.dicDados0000(.ARQUIVO)
             If Not VBA.IsEmpty(Campos) Then
             
                 i = Util.VerificarPosicaoInicialArray(Campos)

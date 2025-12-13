@@ -7,7 +7,7 @@ Public CamposPISCOFINS As CamposApuracaoPISCOFINS
 Public Type CamposApuracaoPISCOFINS
     
     REG As String
-    Arquivo As String
+    ARQUIVO As String
     CHV_PAI As String
     CHV_REG As String
     REGIME_TRIBUTARIO As String
@@ -70,7 +70,7 @@ Dim i As Long
     With CamposPISCOFINS
         
         .REG = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("REG") - i))
-        .Arquivo = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("ARQUIVO") - i))
+        .ARQUIVO = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("ARQUIVO") - i))
         .CHV_PAI = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("CHV_PAI_FISCAL") - i))
         .CHV_REG = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("CHV_REG") - i))
         .REGIME_TRIBUTARIO = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("REGIME_TRIBUTARIO") - i))
@@ -129,7 +129,7 @@ Dim i As Long
     With CamposPISCOFINS
         
         Campos(dicTitulosApuracaoPISCOFINS("REG") - i) = .REG
-        Campos(dicTitulosApuracaoPISCOFINS("ARQUIVO") - i) = .Arquivo
+        Campos(dicTitulosApuracaoPISCOFINS("ARQUIVO") - i) = .ARQUIVO
         Campos(dicTitulosApuracaoPISCOFINS("CHV_PAI_FISCAL") - i) = .CHV_PAI
         Campos(dicTitulosApuracaoPISCOFINS("CHV_REG") - i) = .CHV_REG
         Campos(dicTitulosApuracaoPISCOFINS("REGIME_TRIBUTARIO") - i) = .REGIME_TRIBUTARIO

@@ -710,7 +710,7 @@ Dim CamposChave As Variant, Campo
     
     If dicChaves.Count > 0 Then
         
-        Call Application.GoTo(PlanTrib.[H3], True)
+        Call Application.Goto(PlanTrib.[H3], True)
         
     Else
         

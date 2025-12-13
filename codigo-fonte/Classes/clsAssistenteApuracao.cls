@@ -71,7 +71,7 @@ End Sub
 '
 'End Sub
 
-Public Sub ExtrairDados0150_Fiscal(ByVal CHV_PAI_Fiscal As String, ByVal COD_PART As String, _
+Public Sub ExtrairDados0150_Fiscal(ByVal CHV_PAI_FISCAL As String, ByVal COD_PART As String, _
     ByVal COD_MOD As String, Optional Contrib As Boolean, Optional IPI As Boolean)
 
 Dim Chave As String, Nome As String
@@ -81,7 +81,7 @@ Dim Chave As String, Nome As String
     With dtoRegSPED
         
         If Not Util.ValidarDicionario(.r0150_Fiscal) Then Exit Sub
-        Chave = Util.UnirCampos(CHV_PAI_Fiscal, COD_PART)
+        Chave = Util.UnirCampos(CHV_PAI_FISCAL, COD_PART)
         
         If COD_MOD = "65" Then
         
@@ -168,7 +168,7 @@ End Sub
 '
 'End Sub
 
-Public Sub ExtrairDados0200_oLD(ByVal Arquivo As String, ByVal COD_ITEM As String, _
+Public Sub ExtrairDados0200_oLD(ByVal ARQUIVO As String, ByVal COD_ITEM As String, _
     Optional ByVal CNPJEstabelecimento As String, Optional ByVal SPEDContrib As Boolean = False)
 
 Dim i As Byte
@@ -179,7 +179,7 @@ Dim CHV_REG As String, CHV_PAI$, Chave$
         If .r0200 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0200
         If Not Util.ValidarDicionario(.r0200) Then Exit Sub
         
-        Chave = Util.UnirCampos(Arquivo, CNPJEstabelecimento)
+        Chave = Util.UnirCampos(ARQUIVO, CNPJEstabelecimento)
         Select Case True
             
             Case CNPJEstabelecimento <> ""
@@ -188,7 +188,7 @@ Dim CHV_REG As String, CHV_PAI$, Chave$
                 
             Case Else
                 If .r0001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0001("ARQUIVO")
-                If .r0001.Exists(Arquivo) Then CHV_PAI = .r0001(Arquivo)(dtoTitSPED.t0001("CHV_REG"))
+                If .r0001.Exists(ARQUIVO) Then CHV_PAI = .r0001(ARQUIVO)(dtoTitSPED.t0001("CHV_REG"))
                 
         End Select
         
@@ -213,7 +213,7 @@ Dim CHV_REG As String, CHV_PAI$, Chave$
     
 End Sub
 
-Public Sub ExtrairDados0400(ByVal Arquivo As String, ByVal COD_NAT As String)
+Public Sub ExtrairDados0400(ByVal ARQUIVO As String, ByVal COD_NAT As String)
     
 Dim CHV_REG As String
     
@@ -222,7 +222,7 @@ Dim CHV_REG As String
         If .r0400 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0400("ARQUIVO", "COD_NAT")
         If Not Util.ValidarDicionario(.r0400) Then Exit Sub
         
-        CHV_REG = Util.UnirCampos(Arquivo, COD_NAT)
+        CHV_REG = Util.UnirCampos(ARQUIVO, COD_NAT)
         If .r0400.Exists(CHV_REG) Then
             
             AtribuirValor "COD_NAT", COD_NAT & " - " & .r0400(CHV_REG)(dtoTitSPED.t0400("DESCR_NAT"))
@@ -355,12 +355,12 @@ Public Function ExtrairCOD_PART_C100(ByVal CHV_REG As String) As String
     
 End Function
 
-Public Function ExtrairCHV_0001(ByVal Arquivo As String) As String
+Public Function ExtrairCHV_0001(ByVal ARQUIVO As String) As String
     
     With dtoRegSPED
         
         If .r0001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0001("ARQUIVO")
-        If .r0001.Exists(Arquivo) Then ExtrairCHV_0001 = .r0001(Arquivo)(dtoTitSPED.t0001("CHV_REG"))
+        If .r0001.Exists(ARQUIVO) Then ExtrairCHV_0001 = .r0001(ARQUIVO)(dtoTitSPED.t0001("CHV_REG"))
         
     End With
     
@@ -377,12 +377,12 @@ Public Function ExtrairCHV_0140(ByVal Chave As String) As String
     
 End Function
 
-Public Function ExtrairCHV_C001(ByVal Arquivo As String) As String
+Public Function ExtrairCHV_C001(ByVal ARQUIVO As String) As String
         
     With dtoRegSPED
         
         If .rC001 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroC001("ARQUIVO")
-        If .rC001.Exists(Arquivo) Then ExtrairCHV_C001 = .rC001(Arquivo)(dtoTitSPED.tC001("CHV_REG"))
+        If .rC001.Exists(ARQUIVO) Then ExtrairCHV_C001 = .rC001(ARQUIVO)(dtoTitSPED.tC001("CHV_REG"))
         
     End With
     
@@ -530,7 +530,7 @@ Dim dictAlvo As Dictionary ' Dicionário que será usado na consulta
     
 End Function
 
-Public Function ExtrairUF_Estabelecimento(ByVal Arquivo As String, ByVal CNPJ As String) As String
+Public Function ExtrairUF_Estabelecimento(ByVal ARQUIVO As String, ByVal CNPJ As String) As String
 
 Dim UF As String, Chave$
     
@@ -539,7 +539,7 @@ Dim UF As String, Chave$
         If .r0140 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistro0140("ARQUIVO", "CNPJ")
         If Not Util.ValidarDicionario(.r0140) Then ExtrairUF_Estabelecimento = UFContrib
         
-        Chave = Util.UnirCampos(Arquivo, CNPJ)
+        Chave = Util.UnirCampos(ARQUIVO, CNPJ)
         If .r0140.Exists(Chave) Then
             UF = .r0140(Chave)(dtoTitSPED.t0140("UF"))
         End If
@@ -550,14 +550,14 @@ Dim UF As String, Chave$
     
 End Function
 
-Public Function ExtrairUFContribuinte(ByVal Arquivo As String, Optional ByVal Contrib As Boolean = False) As String
+Public Function ExtrairUFContribuinte(ByVal ARQUIVO As String, Optional ByVal Contrib As Boolean = False) As String
 
 Dim UF As String
     
     With dtoRegSPED
         
         If .r0000 Is Nothing Then Call CarregarDadosRegistro0000(Contrib)
-        If .r0000.Exists(Arquivo) Then UFContrib = .r0000(Arquivo)(dtoTitSPED.t0000("UF"))
+        If .r0000.Exists(ARQUIVO) Then UFContrib = .r0000(ARQUIVO)(dtoTitSPED.t0000("UF"))
         
         ExtrairUFContribuinte = UFContrib
         
@@ -609,7 +609,7 @@ End Sub
 '
 'End Sub
 
-Public Sub ExtrairDados0200_Fiscal(ByVal CHV_PAI_Fiscal As String, ByVal COD_ITEM As String)
+Public Sub ExtrairDados0200_Fiscal(ByVal CHV_PAI_FISCAL As String, ByVal COD_ITEM As String)
 
 Dim Chave As String
     
@@ -618,7 +618,7 @@ Dim Chave As String
     With dtoRegSPED
         
         If Not Util.ValidarDicionario(.r0200_Fiscal) Then Exit Sub
-        Chave = Util.UnirCampos(CHV_PAI_Fiscal, COD_ITEM)
+        Chave = Util.UnirCampos(CHV_PAI_FISCAL, COD_ITEM)
         
         If .r0200_Fiscal.Exists(Chave) Then
             
@@ -683,7 +683,7 @@ Public Function ExtrairValor(ByVal Titulo As String)
     
 End Function
 
-Public Function ExtrairREGIME_TRIBUTARIO(ByVal Arquivo As String, Optional AtribuirValorCampo As Boolean)
+Public Function ExtrairREGIME_TRIBUTARIO(ByVal ARQUIVO As String, Optional AtribuirValorCampo As Boolean)
 
 Dim COD_INC_TRIB As String
     
@@ -695,7 +695,7 @@ Dim COD_INC_TRIB As String
             Exit Function
         End If
         
-        If .r0110.Exists(Arquivo) Then COD_INC_TRIB = .r0110(Arquivo)(dtoTitSPED.t0110("COD_INC_TRIB"))
+        If .r0110.Exists(ARQUIVO) Then COD_INC_TRIB = .r0110(ARQUIVO)(dtoTitSPED.t0110("COD_INC_TRIB"))
         ExtrairREGIME_TRIBUTARIO = COD_INC_TRIB
         
         If AtribuirValorCampo Then
@@ -717,7 +717,7 @@ Dim COD_INC_TRIB As String
     
 End Function
 
-Public Function ExtrairCNPJ_ESTABELECIMENTO(ByVal REG As String, ByVal CHV_REG As String, ByVal Arquivo As String) As String
+Public Function ExtrairCNPJ_ESTABELECIMENTO(ByVal REG As String, ByVal CHV_REG As String, ByVal ARQUIVO As String) As String
 
 Dim CNPJ As String
     
@@ -729,7 +729,7 @@ Dim CNPJ As String
                 CNPJ = ExtrairCNPJ_ESTABELECIMENTO_A100(CHV_REG)
                 
             Case "C170"
-                CNPJ = ExtrairCNPJ_ESTABELECIMENTO_C100(CHV_REG, Arquivo)
+                CNPJ = ExtrairCNPJ_ESTABELECIMENTO_C100(CHV_REG, ARQUIVO)
                 
             Case "C181", "C1815"
                 CNPJ = ExtrairCNPJ_ESTABELECIMENTO_C180(CHV_REG)
@@ -739,7 +739,7 @@ Dim CNPJ As String
                 
         End Select
                 
-        If CNPJ = "" And .r0000.Exists(Arquivo) Then CNPJ = .r0000(Arquivo)(dtoTitSPED.t0000("CNPJ"))
+        If CNPJ = "" And .r0000.Exists(ARQUIVO) Then CNPJ = .r0000(ARQUIVO)(dtoTitSPED.t0000("CNPJ"))
         ExtrairCNPJ_ESTABELECIMENTO = CNPJ
         
     End With
@@ -766,7 +766,7 @@ Dim CHV_A010 As String
     
 End Function
 
-Public Function ExtrairCNPJ_ESTABELECIMENTO_C100(ByVal CHV_C100 As String, Optional Arquivo As String) As String
+Public Function ExtrairCNPJ_ESTABELECIMENTO_C100(ByVal CHV_C100 As String, Optional ARQUIVO As String) As String
 
 Dim CHV_C010 As String
     
@@ -774,7 +774,7 @@ Dim CHV_C010 As String
         
         If .rC010 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroC010
         If Not Util.ValidarDicionario(.rC010) Then
-            ExtrairCNPJ_ESTABELECIMENTO_C100 = ExtrairCNPJ_CONTRIBUINTE(Arquivo)
+            ExtrairCNPJ_ESTABELECIMENTO_C100 = ExtrairCNPJ_CONTRIBUINTE(ARQUIVO)
             Exit Function
         End If
         
@@ -812,9 +812,9 @@ Dim CHV_C010 As String
     
 End Function
 
-Public Function ExtrairCNPJ_CONTRIBUINTE(ByVal Arquivo As String) As String
+Public Function ExtrairCNPJ_CONTRIBUINTE(ByVal ARQUIVO As String) As String
     
-    ExtrairCNPJ_CONTRIBUINTE = VBA.Split(Arquivo, "-")(1)
+    ExtrairCNPJ_CONTRIBUINTE = VBA.Split(ARQUIVO, "-")(1)
     
 End Function
 
