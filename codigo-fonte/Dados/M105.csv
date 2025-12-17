@@ -1,7 +1,3 @@
 FILTROS;;;;;;;;;;;;;;
-;4 Registros;;;;;;976569,22;0;976569,22;976569,22;;;;
+;0 Registros;;;;;;0;0;0;0;;;;
 REG;ARQUIVO;CHV_REG;CHV_PAI_FISCAL;CHV_PAI_CONTRIBUICOES;NAT_BC_CRED;CST_PIS;VL_BC_PIS_TOT;VL_BC_PIS_CUM;VL_BC_PIS_NC;VL_BC_PIS;QUANT_BC_PIS_TOT;QUANT_BC_PIS;DESC_CRED;
-M105;09/2025-67903807000105;52FAC4CCA09B2FFE2A6AD4DCA8A6ABE8;;FC9FB0D78F85939E2C32019E79150F79;01 - Aquisição de bens para revenda;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;942085,19;0;942085,19;942085,19;;0;;
-M105;09/2025-67903807000105;5F68395D1301FB6C41042D32231987AD;;FC9FB0D78F85939E2C32019E79150F79;03 - Aquisição de serviços utilizados como insumo;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;18550;0;18550;18550;;0;;
-M105;09/2025-67903807000105;6CE283AD9010282AFA7145B6A0B43E95;;FC9FB0D78F85939E2C32019E79150F79;04 - Energia elétrica e térmica, inclusive sob a forma de vapor;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;15688,98;0;15688,98;15688,98;;0;;
-M105;09/2025-67903807000105;6C5E8F5FA51D5EB9302563AD4E961AA5;;FC9FB0D78F85939E2C32019E79150F79;12 - Devolução de Vendas Sujeitas à Incidência Não-Cumulativa;50 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno;245,05;0;245,05;245,05;;0;;

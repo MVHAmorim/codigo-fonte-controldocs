@@ -192,6 +192,6 @@ Dim CamposOrig As Variant, CamposDest
     CamposDest = Array("CFOP", "CST_ICMS", "ALIQ_ICMS")
     
     Call Util.FiltrarRegistros(resICMS, assApuracaoICMS, CamposOrig, CamposDest)
-    Call Application.Goto(assApuracaoICMS.[AA3], True)
+    Call Application.GoTo(assApuracaoICMS.[AA3], True)
     
 End Sub

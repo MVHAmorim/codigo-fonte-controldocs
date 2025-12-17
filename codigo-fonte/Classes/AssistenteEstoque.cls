@@ -170,13 +170,13 @@ Private Sub ExtrairCamposC100()
 Const TitulosIgnorados As String = "REG, VL_DESC, VL_ICMS, VL_ICMS_ST, VL_IPI, VL_PIS, VL_COFINS"
 Dim CamposC100 As Variant
 Dim Posicao As Integer
-Dim nCampo As Variant
+Dim nCampo As Variant, Valor
     
     With dtoMovimentoEstoque
         
         .CHV_PAI = ExtrairValor("CHV_PAI_FISCAL")
         If dtoRegSPED.rC100.Exists(.CHV_PAI) Then
-                        
+            
             CamposC100 = dtoRegSPED.rC100(.CHV_PAI)
             Call ExtrairVL_DESP_C100(CamposC100, .CHV_PAI)
             For Each nCampo In dicTitulosAnalitico
@@ -189,7 +189,8 @@ Dim nCampo As Variant
                 If dtoTitSPED.tC100.Exists(nCampo) Then
                     
                     Posicao = dtoTitSPED.tC100(nCampo)
-                    AtribuirValor nCampo, CamposC100(Posicao)
+                    If nCampo = "CHV_NFE" Then Valor = "'" & CamposC100(Posicao) Else Valor = CamposC100(Posicao)
+                    AtribuirValor nCampo, Valor
                     
                 End If
 Prx:

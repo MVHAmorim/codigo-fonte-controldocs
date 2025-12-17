@@ -544,7 +544,7 @@ End Function
 Public Sub AtualizarRegistros()
 
 Dim CHV_REG As String, CHV_PAI$, CHV_0001$, CHV_0140$, CHV_0190$, CHV_0200$, CHV_C100$, COD_ITEM$, UNID$, ARQUIVO$
-Dim Campos As Variant, Campos0190, Campos0200, CamposC170, dicCampos, regCampo, nCampo
+Dim Campos As Variant, Campos0190, Campos0200, CamposC170, dicCampos, regCampo, nCampo, Valor
 Dim ExpReg As New ExportadorRegistros
 Dim arrDivProdutos As New ArrayList
 Dim dicTitulos As New Dictionary
@@ -606,7 +606,11 @@ Dim i As Integer, j As Integer
                 For Each regCampo In Campos0200
                     
                     nCampo = regCampo & "_SPED"
-                    dicCampos(dtoTitSPED.t0200(regCampo) - j) = Campos(dicTitulos(nCampo) - i)
+                    
+                    If regCampo Like "*CEST*" Or regCampo Like "*NCM*" Then _
+                        Valor = "'" & Campos(dicTitulos(nCampo) - i) Else Valor = Campos(dicTitulos(nCampo) - i)
+                    
+                    dicCampos(dtoTitSPED.t0200(regCampo) - j) = Valor
                     
                 Next regCampo
                 

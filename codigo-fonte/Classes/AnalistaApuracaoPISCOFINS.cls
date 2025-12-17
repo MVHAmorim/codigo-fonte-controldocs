@@ -193,7 +193,7 @@ Dim CamposOrig As Variant, CamposDest
     CamposDest = Array("CFOP", "CST_PIS", "CST_COFINS", "ALIQ_PIS", "ALIQ_COFINS", "ALIQ_PIS_QUANT", "ALIQ_PIS_QUANT")
     
     Call Util.FiltrarRegistros(resPISCOFINS, assApuracaoPISCOFINS, CamposOrig, CamposDest)
-    Call Application.Goto(assApuracaoPISCOFINS.[AA3], True)
+    Call Application.GoTo(assApuracaoPISCOFINS.[AA3], True)
     
 End Sub
 

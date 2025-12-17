@@ -2216,7 +2216,7 @@ Dim i As Integer
     Next i
     
     If Util.UltimaLinha(PlanDest, "A") > 3 Then
-        Call Application.Goto(PlanDest.[C3], True)
+        Call Application.GoTo(PlanDest.[C3], True)
     Else
         Call Util.MsgAlerta("N�o existem dados filtrados na planilha de destino.", "Filtragem sem Dados")
     End If
