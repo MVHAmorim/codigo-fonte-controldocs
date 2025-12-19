@@ -139,7 +139,7 @@ Dim i As Long
             If dicDadosD190.Exists(CHV_REG) Then
             
                 CamposDic = dicDadosD190(CHV_REG)
-                .Cfop = CamposDic(dicTitulosD190("CFOP"))
+                .CFOP = CamposDic(dicTitulosD190("CFOP"))
                 VL_ICMS = CamposDic(dicTitulosD190("VL_ICMS"))
                 
             End If
@@ -167,14 +167,14 @@ Dim i As Long
             End If
             
             'Define a chave do registro D200
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .CFOP, .DT_REF)
             'fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .CFOP, .DT_REF)
 
             Call IncuirRegistroD201(CDbl(.VL_DOC), VL_ICMS, dicDadosD201, ARQUIVO, dicTitulosD201)
             Call IncuirRegistroD205(CDbl(.VL_DOC), VL_ICMS, dicDadosD205, ARQUIVO, dicTitulosD205)
             
             
-            Chave = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
+            Chave = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .SER, .COD_SIT, .CFOP, .DT_REF)
             If dicDadosD200.Exists(Chave) Then
                 
                 'carrega campos do dicionário
@@ -193,7 +193,7 @@ Dim i As Long
             End If
                         
             Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", .COD_MOD, .COD_SIT, Util.FormatarTexto(.SER), Util.FormatarTexto(.SUB), _
-                 Util.FormatarTexto(.NUM_DOC_INI), Util.FormatarTexto(.NUM_DOC_FIN), .Cfop, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
+                 Util.FormatarTexto(.NUM_DOC_INI), Util.FormatarTexto(.NUM_DOC_FIN), .CFOP, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
             
             dicDadosD200(Chave) = Campos
             

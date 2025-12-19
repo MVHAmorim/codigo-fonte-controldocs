@@ -94,7 +94,7 @@ End Function
 
 Public Function VerificarCFOP(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
 
-Dim Cfop As String
+Dim CFOP As String
 Dim i As Integer
     
     Call DadosValidacaoCFOP.CarregarCamposCFOP(Campos, ActiveSheet)
@@ -123,34 +123,34 @@ Dim i As Integer
     
 End Function
 
-Public Function ValidarCFOPCompraIndustrializacao(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraIndustrializacao(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#101"
+        Case CFOP < 4000 And CFOP Like "#101"
             ValidarCFOPCompraIndustrializacao = True
             
-        Case Cfop < 4000 And Cfop Like "#111"
+        Case CFOP < 4000 And CFOP Like "#111"
             ValidarCFOPCompraIndustrializacao = True
             
-        Case Cfop < 4000 And Cfop Like "#116"
+        Case CFOP < 4000 And CFOP Like "#116"
             ValidarCFOPCompraIndustrializacao = True
         
-        Case Cfop < 4000 And Cfop Like "#120"
+        Case CFOP < 4000 And CFOP Like "#120"
             ValidarCFOPCompraIndustrializacao = True
             
-        Case Cfop < 4000 And Cfop Like "#122"
+        Case CFOP < 4000 And CFOP Like "#122"
             ValidarCFOPCompraIndustrializacao = True
         
         'CHECAR: Verificar se o CFOP #124 é obrigatório para industriais ou equiparados a industariais
-        Case Cfop < 4000 And Cfop Like "#124"
+        Case CFOP < 4000 And CFOP Like "#124"
             ValidarCFOPCompraIndustrializacao = True
             
         'CHECAR: Verificar se o CFOP #125 é obrigatório para industriais ou equiparados a industariais
-        Case Cfop < 4000 And Cfop Like "#125"
+        Case CFOP < 4000 And CFOP Like "#125"
             ValidarCFOPCompraIndustrializacao = True
         
-        Case Cfop < 4000 And Cfop Like "#401"
+        Case CFOP < 4000 And CFOP Like "#401"
             ValidarCFOPCompraIndustrializacao = True
         
             
@@ -158,253 +158,253 @@ Public Function ValidarCFOPCompraIndustrializacao(ByVal Cfop As Integer) As Bool
     
 End Function
 
-Public Function ValidarCFOPCompraIndustrializacaoSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraIndustrializacaoSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#101"
+        Case CFOP < 4000 And CFOP Like "#101"
             ValidarCFOPCompraIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#111"
+        Case CFOP < 4000 And CFOP Like "#111"
             ValidarCFOPCompraIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#116"
+        Case CFOP < 4000 And CFOP Like "#116"
             ValidarCFOPCompraIndustrializacaoSemST = True
         
-        Case Cfop < 4000 And Cfop Like "#120"
+        Case CFOP < 4000 And CFOP Like "#120"
             ValidarCFOPCompraIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#122"
+        Case CFOP < 4000 And CFOP Like "#122"
             ValidarCFOPCompraIndustrializacaoSemST = True
         
         'CHECAR: Verificar se o CFOP #124 é obrigatório para industriais ou equiparados a industariais
-        Case Cfop < 4000 And Cfop Like "#124"
+        Case CFOP < 4000 And CFOP Like "#124"
             ValidarCFOPCompraIndustrializacaoSemST = True
             
         'CHECAR: Verificar se o CFOP #125 é obrigatório para industriais ou equiparados a industariais
-        Case Cfop < 4000 And Cfop Like "#125"
+        Case CFOP < 4000 And CFOP Like "#125"
             ValidarCFOPCompraIndustrializacaoSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraIndustrializacaoComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraIndustrializacaoComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#401"
+        Case CFOP < 4000 And CFOP Like "#401"
             ValidarCFOPCompraIndustrializacaoComST = True
                     
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraRevendaSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraRevendaSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#102"
+        Case CFOP < 4000 And CFOP Like "#102"
             ValidarCFOPCompraRevendaSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#113"
+        Case CFOP < 4000 And CFOP Like "#113"
             ValidarCFOPCompraRevendaSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#117"
+        Case CFOP < 4000 And CFOP Like "#117"
             ValidarCFOPCompraRevendaSemST = True
         
-        Case Cfop < 4000 And Cfop Like "#118"
+        Case CFOP < 4000 And CFOP Like "#118"
             ValidarCFOPCompraRevendaSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#121"
+        Case CFOP < 4000 And CFOP Like "#121"
             ValidarCFOPCompraRevendaSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#126"
+        Case CFOP < 4000 And CFOP Like "#126"
             ValidarCFOPCompraRevendaSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraRevendaComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraRevendaComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#403"
+        Case CFOP < 4000 And CFOP Like "#403"
             ValidarCFOPCompraRevendaComST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPEntradaInterna(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPEntradaInterna(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "1###"
+        Case CFOP < 4000 And CFOP Like "1###"
             ValidarCFOPEntradaInterna = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPEntradaInterestadual(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPEntradaInterestadual(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "2###"
+        Case CFOP < 4000 And CFOP Like "2###"
             ValidarCFOPEntradaInterestadual = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPImportacao(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPImportacao(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "3###"
+        Case CFOP < 4000 And CFOP Like "3###"
             ValidarCFOPImportacao = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPSaidaInterna(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPSaidaInterna(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "5###"
+        Case CFOP > 4000 And CFOP Like "5###"
             ValidarCFOPSaidaInterna = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPSaidaInterestadual(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPSaidaInterestadual(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "6###"
+        Case CFOP > 4000 And CFOP Like "6###"
             ValidarCFOPSaidaInterestadual = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPExportacao(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPExportacao(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "7###"
+        Case CFOP > 4000 And CFOP Like "7###"
             ValidarCFOPExportacao = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraCombustiveisIndustrializacao(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraCombustiveisIndustrializacao(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#651"
+        Case CFOP < 4000 And CFOP Like "#651"
             ValidarCFOPCompraCombustiveisIndustrializacao = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPEntradaBonificacao(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPEntradaBonificacao(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#910"
+        Case CFOP < 4000 And CFOP Like "#910"
             ValidarCFOPEntradaBonificacao = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraCombustiveisRevenda(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraCombustiveisRevenda(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#652"
+        Case CFOP < 4000 And CFOP Like "#652"
             ValidarCFOPCompraCombustiveisRevenda = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraCombustiveisConsumo(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraCombustiveisConsumo(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#653"
+        Case CFOP < 4000 And CFOP Like "#653"
             ValidarCFOPCompraCombustiveisConsumo = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPVendaCombustiveis(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPVendaCombustiveis(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "#651"
+        Case CFOP > 4000 And CFOP Like "#651"
             ValidarCFOPVendaCombustiveis = True
             
-        Case Cfop > 4000 And Cfop Like "#652"
+        Case CFOP > 4000 And CFOP Like "#652"
             ValidarCFOPVendaCombustiveis = True
             
-        Case Cfop > 4000 And Cfop Like "#653"
+        Case CFOP > 4000 And CFOP Like "#653"
             ValidarCFOPVendaCombustiveis = True
             
-        Case Cfop > 4000 And Cfop Like "#654"
+        Case CFOP > 4000 And CFOP Like "#654"
             ValidarCFOPVendaCombustiveis = True
             
-        Case Cfop > 4000 And Cfop Like "#655"
+        Case CFOP > 4000 And CFOP Like "#655"
             ValidarCFOPVendaCombustiveis = True
             
-        Case Cfop > 4000 And Cfop Like "#656"
+        Case CFOP > 4000 And CFOP Like "#656"
             ValidarCFOPVendaCombustiveis = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraPrestacaoServico(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraPrestacaoServico(ByVal CFOP As Integer) As Boolean
     
     Select Case True
                     
-        Case Cfop < 4000 And Cfop Like "#128"
+        Case CFOP < 4000 And CFOP Like "#128"
             ValidarCFOPCompraPrestacaoServico = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraAtivoImobilizadoSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraAtivoImobilizadoSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#551"
+        Case CFOP < 4000 And CFOP Like "#551"
             ValidarCFOPCompraAtivoImobilizadoSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarAquisicaoUsoConsumo(ByVal Cfop As Integer) As Boolean
+Public Function ValidarAquisicaoUsoConsumo(ByVal CFOP As Integer) As Boolean
     
-    If Cfop < 4000 Then
+    If CFOP < 4000 Then
         
         Select Case True
             
-            Case Cfop Like "#407"
+            Case CFOP Like "#407"
                 ValidarAquisicaoUsoConsumo = True
                 
-            Case Cfop Like "#556"
+            Case CFOP Like "#556"
                 ValidarAquisicaoUsoConsumo = True
                 
         End Select
@@ -413,16 +413,16 @@ Public Function ValidarAquisicaoUsoConsumo(ByVal Cfop As Integer) As Boolean
     
 End Function
 
-Public Function ValidarAquisicaoAtivoImobilizado(ByVal Cfop As Integer) As Boolean
+Public Function ValidarAquisicaoAtivoImobilizado(ByVal CFOP As Integer) As Boolean
     
-    If Cfop < 4000 Then
+    If CFOP < 4000 Then
         
         Select Case True
             
-            Case Cfop Like "#406"
+            Case CFOP Like "#406"
                 ValidarAquisicaoAtivoImobilizado = True
                 
-            Case Cfop Like "#551"
+            Case CFOP Like "#551"
                 ValidarAquisicaoAtivoImobilizado = True
                 
         End Select
@@ -431,237 +431,237 @@ Public Function ValidarAquisicaoAtivoImobilizado(ByVal Cfop As Integer) As Boole
     
 End Function
 
-Public Function ValidarCFOPCompraUsoConsumoSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraUsoConsumoSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#556"
+        Case CFOP < 4000 And CFOP Like "#556"
             ValidarCFOPCompraUsoConsumoSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraUsoConsumoComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraUsoConsumoComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#407"
+        Case CFOP < 4000 And CFOP Like "#407"
             ValidarCFOPCompraUsoConsumoComST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPCompraAtivoImobilizadoComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPCompraAtivoImobilizadoComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#406"
+        Case CFOP < 4000 And CFOP Like "#406"
             ValidarCFOPCompraAtivoImobilizadoComST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPFaturamento(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPFaturamento(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "#10#"
+        Case CFOP > 4000 And CFOP Like "#10#"
             ValidarCFOPFaturamento = True
             
-        Case Cfop > 4000 And Cfop Like "#11#" And VBA.Right(Cfop, 3) <> 117
+        Case CFOP > 4000 And CFOP Like "#11#" And VBA.Right(CFOP, 3) <> 117
             ValidarCFOPFaturamento = True
             
-        Case Cfop > 4000 And Cfop Like "#12#"
+        Case CFOP > 4000 And CFOP Like "#12#"
             ValidarCFOPFaturamento = True
         
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 400 And VBA.Right(Cfop, 3) < 406
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 400 And VBA.Right(CFOP, 3) < 406
             ValidarCFOPFaturamento = True
             
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 650 And VBA.Right(Cfop, 3) < 657
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 650 And VBA.Right(CFOP, 3) < 657
             ValidarCFOPFaturamento = True
         
-        Case Cfop > 4000 And Cfop Like "#667"
+        Case CFOP > 4000 And CFOP Like "#667"
             ValidarCFOPFaturamento = True
         
-        Case Cfop > 4000 And Cfop Like "#922"
+        Case CFOP > 4000 And CFOP Like "#922"
             ValidarCFOPFaturamento = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPVendaSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPVendaSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "#10#"
+        Case CFOP > 4000 And CFOP Like "#10#"
             ValidarCFOPVendaSemST = True
             
-        Case Cfop > 4000 And Cfop Like "#11#" And VBA.Right(Cfop, 3) <> 117
+        Case CFOP > 4000 And CFOP Like "#11#" And VBA.Right(CFOP, 3) <> 117
             ValidarCFOPVendaSemST = True
             
-        Case Cfop > 4000 And Cfop Like "#12#"
+        Case CFOP > 4000 And CFOP Like "#12#"
             ValidarCFOPVendaSemST = True
             
-        Case Cfop > 4000 And Cfop Like "#922"
+        Case CFOP > 4000 And CFOP Like "#922"
             ValidarCFOPVendaSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPVendaComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPVendaComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
 
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 400 And VBA.Right(Cfop, 3) < 406
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 400 And VBA.Right(CFOP, 3) < 406
             ValidarCFOPVendaComST = True
             
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 650 And VBA.Right(Cfop, 3) < 657
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 650 And VBA.Right(CFOP, 3) < 657
             ValidarCFOPVendaComST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoCompra(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoCompra(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop > 4000 And Cfop Like "#20#"
+        Case CFOP > 4000 And CFOP Like "#20#"
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And Cfop Like "#21#"
+        Case CFOP > 4000 And CFOP Like "#21#"
             ValidarCFOPDevolucaoCompra = True
         
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 409 And VBA.Right(Cfop, 3) < 412
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 409 And VBA.Right(CFOP, 3) < 412
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And Cfop Like "#503"
+        Case CFOP > 4000 And CFOP Like "#503"
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And Cfop Like "#553"
+        Case CFOP > 4000 And CFOP Like "#553"
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And Cfop Like "#555"
+        Case CFOP > 4000 And CFOP Like "#555"
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And Cfop Like "#556"
+        Case CFOP > 4000 And CFOP Like "#556"
             ValidarCFOPDevolucaoCompra = True
             
-        Case Cfop > 4000 And VBA.Right(Cfop, 3) > 659 And VBA.Right(Cfop, 3) < 663
+        Case CFOP > 4000 And VBA.Right(CFOP, 3) > 659 And VBA.Right(CFOP, 3) < 663
             ValidarCFOPDevolucaoCompra = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoIndustrializacaoSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoIndustrializacaoSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#201"
+        Case CFOP < 4000 And CFOP Like "#201"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#203"
+        Case CFOP < 4000 And CFOP Like "#203"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
         
-        Case Cfop < 4000 And Cfop Like "#212"
+        Case CFOP < 4000 And CFOP Like "#212"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#213"
+        Case CFOP < 4000 And CFOP Like "#213"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#214"
+        Case CFOP < 4000 And CFOP Like "#214"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#215"
+        Case CFOP < 4000 And CFOP Like "#215"
             ValidarCFOPDevolucaoIndustrializacaoSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoTransferenciaIndustrializacaoSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoTransferenciaIndustrializacaoSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#208"
+        Case CFOP < 4000 And CFOP Like "#208"
             ValidarCFOPDevolucaoTransferenciaIndustrializacaoSemST = True
 
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoTransferenciaIndustrializacaoComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoTransferenciaIndustrializacaoComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#408"
+        Case CFOP < 4000 And CFOP Like "#408"
             ValidarCFOPDevolucaoTransferenciaIndustrializacaoComST = True
 
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoIndustrializacaoComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoIndustrializacaoComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#410"
+        Case CFOP < 4000 And CFOP Like "#410"
             ValidarCFOPDevolucaoIndustrializacaoComST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoRevendaSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoRevendaSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#202"
+        Case CFOP < 4000 And CFOP Like "#202"
             ValidarCFOPDevolucaoRevendaSemST = True
             
-        Case Cfop < 4000 And Cfop Like "#204"
+        Case CFOP < 4000 And CFOP Like "#204"
             ValidarCFOPDevolucaoRevendaSemST = True
         
-        Case Cfop < 4000 And Cfop Like "#216"
+        Case CFOP < 4000 And CFOP Like "#216"
             ValidarCFOPDevolucaoRevendaSemST = True
             
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoTransferenciaRevendaSemST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoTransferenciaRevendaSemST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#209"
+        Case CFOP < 4000 And CFOP Like "#209"
             ValidarCFOPDevolucaoTransferenciaRevendaSemST = True
 
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoRevendaComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoRevendaComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#411"
+        Case CFOP < 4000 And CFOP Like "#411"
             ValidarCFOPDevolucaoRevendaComST = True
 
     End Select
     
 End Function
 
-Public Function ValidarCFOPDevolucaoTransferenciaRevendaComST(ByVal Cfop As Integer) As Boolean
+Public Function ValidarCFOPDevolucaoTransferenciaRevendaComST(ByVal CFOP As Integer) As Boolean
     
     Select Case True
         
-        Case Cfop < 4000 And Cfop Like "#409"
+        Case CFOP < 4000 And CFOP Like "#409"
             ValidarCFOPDevolucaoTransferenciaRevendaComST = True
 
     End Select

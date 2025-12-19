@@ -59,7 +59,7 @@ End Function
 
 Private Sub CarregarDadosC170(ByVal Msg As String)
 
-Dim ARQUIVO As String, REG$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, CST_ICMS$, Cfop$, CST_PIS$
+Dim ARQUIVO As String, REG$, CHV_REG$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, CST_ICMS$, CFOP$, CST_PIS$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC170 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -98,7 +98,7 @@ Dim b As Long
                 COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
                 COD_ITEM = Campos(dicTitulosC170("COD_ITEM"))
                 CST_ICMS = Campos(dicTitulosC170("CST_ICMS"))
-                Cfop = Campos(dicTitulosC170("CFOP"))
+                CFOP = Campos(dicTitulosC170("CFOP"))
                 CST_PIS = Campos(dicTitulosC170("CST_PIS"))
                 VL_ITEM = fnExcel.FormatarValores(Campos(dicTitulosC170("VL_ITEM")))
                 'COD_INC_TRIB = .ExtrairREGIME_TRIBUTARIO(ARQUIVO, True)
@@ -118,7 +118,7 @@ Dim b As Long
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC170("CHV_REG"))
                 .AtribuirValor "COD_ITEM", fnExcel.FormatarTexto(COD_ITEM)
-                .AtribuirValor "CFOP", Cfop
+                .AtribuirValor "CFOP", CFOP
                 .AtribuirValor "CST_ICMS", fnExcel.FormatarTexto(CST_ICMS)
                 .AtribuirValor "VL_ITEM", VL_ITEM
                 .AtribuirValor "VL_DESP", .ExtrairVL_DESP_C100(CHV_C100, VL_ITEM)
@@ -134,7 +134,7 @@ Dim b As Long
                 
             End If
             
-            If isOperacaoElegivel(Cfop, CST_ICMS, CST_PIS) Then arrRelatorio.Add .Campo
+            If isOperacaoElegivel(CFOP, CST_ICMS, CST_PIS) Then arrRelatorio.Add .Campo
             
         Next Linha
         
@@ -146,7 +146,7 @@ End Sub
 
 Private Sub CarregarDadosC175(ByVal Msg As String)
 
-Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, UF_CONTRIB$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, Cfop$, CST_PIS$
+Dim ARQUIVO As String, CHV_REG$, CHV_PAI$, CHV_0140$, CHV_0150$, CHV_C100$, COD_ITEM$, COD_PART$, UF_CONTRIB$, COD_INC_TRIB$, CNPJ_ESTABELECIMENTO$, CFOP$, CST_PIS$
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicTitulosC175 As New Dictionary
 Dim Dados As Range, Linha As Range
@@ -186,7 +186,7 @@ Dim b As Long
                 CNPJ_ESTABELECIMENTO = .ExtrairCNPJ_ESTABELECIMENTO_C100(CHV_C100)
                 UF_CONTRIB = .ExtrairUF_Estabelecimento(ARQUIVO, CNPJ_ESTABELECIMENTO)
                 COD_PART = .ExtrairCOD_PART_C100(CHV_C100)
-                Cfop = Campos(dicTitulosC175("CFOP"))
+                CFOP = Campos(dicTitulosC175("CFOP"))
                 CST_PIS = Campos(dicTitulosC175("CST_PIS"))
                 CHV_0140 = .ExtrairCHV_0140(Util.UnirCampos(ARQUIVO, CNPJ_ESTABELECIMENTO))
                 CHV_0150 = Util.UnirCampos(CHV_0140, COD_PART)
@@ -206,7 +206,7 @@ Dim b As Long
                 .AtribuirValor "ARQUIVO", ARQUIVO
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC175("CHV_REG"))
-                .AtribuirValor "CFOP", fnExcel.FormatarTexto(Cfop)
+                .AtribuirValor "CFOP", fnExcel.FormatarTexto(CFOP)
                 .AtribuirValor "CST_ICMS", Empty
                 .AtribuirValor "VL_ITEM", VL_ITEM
                 .AtribuirValor "VL_DESP", .ExtrairVL_DESP_C100(CHV_C100, VL_ITEM)
@@ -222,7 +222,7 @@ Dim b As Long
                 
             End If
             
-            If isOperacaoElegivel(Cfop, "", CST_PIS) Then arrRelatorio.Add .Campo
+            If isOperacaoElegivel(CFOP, "", CST_PIS) Then arrRelatorio.Add .Campo
 Prx:
         Next Linha
         
@@ -230,9 +230,9 @@ Prx:
     
 End Sub
 
-Public Function isOperacaoElegivel(ByVal Cfop As String, ByVal CST_ICMS As String, ByVal CST_PIS As String) As Boolean
+Public Function isOperacaoElegivel(ByVal CFOP As String, ByVal CST_ICMS As String, ByVal CST_PIS As String) As Boolean
 
-Dim cfopLimpo As String: cfopLimpo = Trim(Util.ApenasNumeros(Cfop))
+Dim cfopLimpo As String: cfopLimpo = Trim(Util.ApenasNumeros(CFOP))
 Dim cstIcmsLimpo As String: cstIcmsLimpo = Trim(VBA.Right(Util.ApenasNumeros(CST_ICMS), 2))
 Dim cstPisLimpo As String: cstPisLimpo = Trim(Util.ApenasNumeros(CST_PIS))
 

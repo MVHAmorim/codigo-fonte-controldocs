@@ -46,7 +46,7 @@ Public Sub CalcularDifalNaoContribuinte()
 
 Dim Campos As Variant, DadosC101
 Dim arrDadosApuracao As New ArrayList
-Dim Cfop As String, REG$, CHV_NFE$, UF$
+Dim CFOP As String, REG$, CHV_NFE$, UF$
     
     If Util.ChecarAusenciaDados(assApuracaoICMS, False) Then Exit Sub
     Inicio = Now()
@@ -65,15 +65,15 @@ Dim Cfop As String, REG$, CHV_NFE$, UF$
         
         REG = Campos(dicTitulosApuracao("REG"))
         CHV_NFE = Campos(dicTitulosApuracao("CHV_NFE"))
-        Cfop = Campos(dicTitulosApuracao("CFOP"))
+        CFOP = Campos(dicTitulosApuracao("CFOP"))
         
         Select Case True
             
-            Case REG Like "C170" And Cfop Like "22*" And ChecarConsumidorFinal(Campos)
+            Case REG Like "C170" And CFOP Like "22*" And ChecarConsumidorFinal(Campos)
                 Call AtualizarCorrelacaoCTeNFe(CHV_NFE, "ESTORNO_DIFAL", "SIM", UF)
                 Call IncluirRegistroE311_E313(Campos)
                 
-            Case REG Like "C170" And Cfop Like "61*" And ChecarConsumidorFinal(Campos)
+            Case REG Like "C170" And CFOP Like "61*" And ChecarConsumidorFinal(Campos)
                 Call AtualizarCorrelacaoCTeNFe(CHV_NFE, "DEBITO_DIFAL", "SIM", UF)
                 Call IncluirDebitosDIFALC101_D101(Campos)
                 
@@ -115,7 +115,7 @@ Private Function IncluirDebitosDIFALC101_D101(ByRef Campos As Variant)
 
 Dim DadosC101 As Variant
 Dim CamposTributarios As Variant
-Dim ChaveTrib As String, Cfop$, CHV_NFE$, DEBITO_DIFAL$, DT_REF$, CHV_CTE$, COD_AJUSTE_DEBITO_DIFAL$
+Dim ChaveTrib As String, CFOP$, CHV_NFE$, DEBITO_DIFAL$, DT_REF$, CHV_CTE$, COD_AJUSTE_DEBITO_DIFAL$
 Dim ALIQ_DEST As Double, ALIQ_FCP#, ALIQ_ICMS#, ALIQ_DIFAL#, VL_BC_ICMS#, VL_DIFAL_NFE#, VL_FCP_NFE#, VL_BC_DIFAL_CTE#, VL_DIFAL_CTE#, VL_FCP_CTE#
     
     ChaveTrib = AssistTributario.GerarChaveTributacao(assApuracaoICMS, Campos)

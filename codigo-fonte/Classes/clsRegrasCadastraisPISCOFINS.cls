@@ -24,7 +24,7 @@ End Function
 
 Private Function ValidarCampo_CST_PIS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_PIS$, Cfop$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
+Dim CST_PIS$, CFOP$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim i As Byte
     
@@ -33,13 +33,13 @@ Dim i As Byte
     'Carregar campos do relatório de tributação PIS/COFINS
     REGIME_TRIBUTARIO = Util.ApenasNumeros(Campos(dicTitulos("REGIME_TRIBUTARIO") - i))
     CST_PIS = Util.ApenasNumeros(Campos(dicTitulos("CST_PIS") - i))
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     
     'Verificações de dados com CFOP
-    If Cfop <> "" Then
+    If CFOP <> "" Then
     
-        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(Cfop)
-        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(Cfop)
+        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(CFOP)
+        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(CFOP)
     
     End If
     
@@ -55,19 +55,19 @@ Dim i As Byte
             
     End Select
                     
-    If Cfop <> "" And INCONSISTENCIA = "" Then
+    If CFOP <> "" And INCONSISTENCIA = "" Then
         
         Select Case True
             
-            Case Cfop > 4000 And fatCFOP And CST_PIS Like "*49*"
+            Case CFOP > 4000 And fatCFOP And CST_PIS Like "*49*"
                 INCONSISTENCIA = "CFOP informado indica receita operacional com CST_PIS de outras saídas"
                 SUGESTAO = "Informar CST_PIS correto"
                 
-            Case Cfop > 4000 And CST_PIS > 49 And CST_PIS < 99
+            Case CFOP > 4000 And CST_PIS > 49 And CST_PIS < 99
                 INCONSISTENCIA = "CST_PIS de entrada informado para CFOP de saída"
                 SUGESTAO = "Informar um CST_PIS para operação de saída"
                 
-            Case Cfop < 4000 And CST_PIS < 50
+            Case CFOP < 4000 And CST_PIS < 50
                 INCONSISTENCIA = "CST_PIS de saída informado para CFOP de entrada"
                 SUGESTAO = "Informar um CST_PIS para operação de entrada"
                 
@@ -83,19 +83,19 @@ Dim i As Byte
                 INCONSISTENCIA = "CST_PIS incorreto para operação de Venda"
                 SUGESTAO = "Informar CST_PIS correto"
             
-            Case (Cfop < 4000 And Cfop Like "#910") And Not CST_PIS Like "98*"
+            Case (CFOP < 4000 And CFOP Like "#910") And Not CST_PIS Like "98*"
                 INCONSISTENCIA = "CST_PIS (" & CST_PIS & ") incorreto para operação de entrada em bonificação"
                 SUGESTAO = "Informar CST_PIS 98 - Outras Operações de Entrada"
             
-            Case Cfop < 4000 And (Cfop Like "#407" Or Cfop Like "#556") And Not CST_PIS Like "98*"
+            Case CFOP < 4000 And (CFOP Like "#407" Or CFOP Like "#556") And Not CST_PIS Like "98*"
                 INCONSISTENCIA = "CST_PIS (" & CST_PIS & ") incorreto para operação de aquisição para uso e consumo"
                 SUGESTAO = "Informar CST_PIS 98 - Outras Operações de Entrada"
                 
-            Case (Cfop > 4000 And Cfop Like "#910") And Not CST_PIS Like "49*"
+            Case (CFOP > 4000 And CFOP Like "#910") And Not CST_PIS Like "49*"
                 INCONSISTENCIA = "CST_PIS (" & CST_PIS & ") incorreto para operação de saída em bonificação"
                 SUGESTAO = "Informar CST_PIS 49 - Outras Operações de Saída"
 
-            Case (Cfop < 4000 And Not CST_PIS Like "9*" And Not CST_PIS Like "7*")
+            Case (CFOP < 4000 And Not CST_PIS Like "9*" And Not CST_PIS Like "7*")
                 If REGIME_TRIBUTARIO = "2" Then
                     SUGESTAO = "Informar CST_PIS igual a 70 - Operação de Aquisição sem Direito a Crédito"
                     INCONSISTENCIA = "CST_PIS inconsistente com apuração no Regime Cumulativo (Lucro Presumido)"
@@ -112,7 +112,7 @@ End Function
 
 Private Function ValidarCampo_CST_COFINS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_COFINS$, Cfop$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
+Dim CST_COFINS$, CFOP$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim i As Byte
     
@@ -121,13 +121,13 @@ Dim i As Byte
     'Carregar campos do relatório de tributação PIS/COFINS
     REGIME_TRIBUTARIO = Util.ApenasNumeros(Campos(dicTitulos("REGIME_TRIBUTARIO") - i))
     CST_COFINS = Util.ApenasNumeros(Campos(dicTitulos("CST_COFINS") - i))
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     
     'Verificações de dados com CFOP
-    If Cfop <> "" Then
+    If CFOP <> "" Then
     
-        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(Cfop)
-        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(Cfop)
+        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(CFOP)
+        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(CFOP)
     
     End If
     
@@ -143,19 +143,19 @@ Dim i As Byte
             
     End Select
                     
-    If Cfop <> "" And INCONSISTENCIA = "" Then
+    If CFOP <> "" And INCONSISTENCIA = "" Then
         
         Select Case True
             
-            Case Cfop > 4000 And fatCFOP And CST_COFINS Like "*49*"
+            Case CFOP > 4000 And fatCFOP And CST_COFINS Like "*49*"
                 INCONSISTENCIA = "CFOP informado indica receita operacional com CST_COFINS de outras saídas"
                 SUGESTAO = "Informar CST_COFINS correto"
                 
-            Case Cfop > 4000 And CST_COFINS > 49 And CST_COFINS < 99
+            Case CFOP > 4000 And CST_COFINS > 49 And CST_COFINS < 99
                 INCONSISTENCIA = "CST_COFINS de entrada informado para CFOP de saída"
                 SUGESTAO = "Informar um CST_COFINS para operação de saída"
                 
-            Case Cfop < 4000 And CST_COFINS < 50
+            Case CFOP < 4000 And CST_COFINS < 50
                 INCONSISTENCIA = "CST_COFINS de saída informado para CFOP de entrada"
                 SUGESTAO = "Informar um CST_COFINS para operação de entrada"
                 
@@ -171,19 +171,19 @@ Dim i As Byte
                 INCONSISTENCIA = "CST_COFINS incorreto para operação de Venda"
                 SUGESTAO = "Informar CST_COFINS correto"
 
-            Case (Cfop < 4000 And Cfop Like "#910") And Not CST_COFINS Like "98*"
+            Case (CFOP < 4000 And CFOP Like "#910") And Not CST_COFINS Like "98*"
                 INCONSISTENCIA = "CST_COFINS (" & CST_COFINS & ") incorreto para operação de entrada em bonificação"
                 SUGESTAO = "Informar CST_COFINS 98 - Outras Operações de Entrada"
             
-            Case Cfop < 4000 And (Cfop Like "#407" Or Cfop Like "#556") And Not CST_COFINS Like "98*"
+            Case CFOP < 4000 And (CFOP Like "#407" Or CFOP Like "#556") And Not CST_COFINS Like "98*"
                 INCONSISTENCIA = "CST_COFINS (" & CST_COFINS & ") incorreto para operação de aquisição para uso e consumo"
                 SUGESTAO = "Informar CST_COFINS 98 - Outras Operações de Entrada"
                 
-            Case (Cfop > 4000 And Cfop Like "#910") And Not CST_COFINS Like "49*"
+            Case (CFOP > 4000 And CFOP Like "#910") And Not CST_COFINS Like "49*"
                 INCONSISTENCIA = "CST_COFINS (" & CST_COFINS & ") incorreto para operação de saída em bonificação"
                 SUGESTAO = "Informar CST_COFINS 49 - Outras Operações de Saída"
                 
-            Case (Cfop < 4000 And Not CST_COFINS Like "9*" And Not CST_COFINS Like "7*")
+            Case (CFOP < 4000 And Not CST_COFINS Like "9*" And Not CST_COFINS Like "7*")
                 If REGIME_TRIBUTARIO = "2" Then
                     SUGESTAO = "Informar CST_COFINS igual a 70 - Operação de Aquisição sem Direito a Crédito"
                     INCONSISTENCIA = "CST_COFINS inconsistente com apuração no Regime Cumulativo (Lucro Presumido)"
@@ -213,7 +213,7 @@ End Function
 
 Private Function ValidarCampo_ALIQ_PIS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_PIS$, Cfop$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
+Dim CST_PIS$, CFOP$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim ALIQ_PIS As Double
 Dim i As Byte
@@ -221,24 +221,24 @@ Dim i As Byte
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do relatório inteligente de COFINS/COFINS
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_PIS = Util.ApenasNumeros(Campos(dicTitulos("CST_PIS") - i))
     REGIME_TRIBUTARIO = Util.ApenasNumeros(Campos(dicTitulos("REGIME_TRIBUTARIO") - i))
     ALIQ_PIS = fnExcel.FormatarPercentuais(Campos(dicTitulos("ALIQ_PIS") - i))
 
     'Verificações de dados com CFOP
-    If Cfop <> "" Then
+    If CFOP <> "" Then
     
-        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(Cfop)
-        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(Cfop)
+        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(CFOP)
+        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(CFOP)
     
     End If
     
-    If Cfop <> "" Then
+    If CFOP <> "" Then
         
         Select Case True
             
-            Case Cfop > 4000 And Not fatCFOP And ALIQ_PIS > 0
+            Case CFOP > 4000 And Not fatCFOP And ALIQ_PIS > 0
                 INCONSISTENCIA = "CFOP informado não indica receita operacional com ALIQ_PIS maior que zero"
                 SUGESTAO = "Zerar valores do PIS"
         
@@ -287,7 +287,7 @@ End Function
 
 Private Function ValidarCampo_ALIQ_COFINS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_COFINS$, Cfop$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
+Dim CST_COFINS$, CFOP$, INCONSISTENCIA$, SUGESTAO$, REGIME_TRIBUTARIO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim ALIQ_COFINS As Double
 Dim i As Byte
@@ -295,24 +295,24 @@ Dim i As Byte
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do relatório inteligente de COFINS/COFINS
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_COFINS = Util.ApenasNumeros(Campos(dicTitulos("CST_COFINS") - i))
     REGIME_TRIBUTARIO = Util.ApenasNumeros(Campos(dicTitulos("REGIME_TRIBUTARIO") - i))
     ALIQ_COFINS = fnExcel.FormatarPercentuais(Campos(dicTitulos("ALIQ_COFINS") - i))
 
     'Verificações de dados com CFOP
-    If Cfop <> "" Then
+    If CFOP <> "" Then
     
-        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(Cfop)
-        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(Cfop)
+        fatCFOP = ValidacoesCFOP.ValidarCFOPFaturamento(CFOP)
+        devCompCFOP = ValidacoesCFOP.ValidarCFOPDevolucaoCompra(CFOP)
     
     End If
     
-    If Cfop <> "" Then
+    If CFOP <> "" Then
         
         Select Case True
             
-            Case Cfop > 4000 And Not fatCFOP And ALIQ_COFINS > 0
+            Case CFOP > 4000 And Not fatCFOP And ALIQ_COFINS > 0
                 INCONSISTENCIA = "CFOP informado não indica receita operacional com ALIQ_COFINS maior que zero"
                 SUGESTAO = "Zerar valores da COFINS"
             
@@ -448,7 +448,7 @@ End Function
 
 Public Function ValidarCampo_COD_NAT_PIS_COFINS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_PIS$, CST_COFINS$, Cfop$, COD_NAT_PIS_COFINS$, INCONSISTENCIA$, SUGESTAO$
+Dim CST_PIS$, CST_COFINS$, CFOP$, COD_NAT_PIS_COFINS$, INCONSISTENCIA$, SUGESTAO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim i As Byte
     

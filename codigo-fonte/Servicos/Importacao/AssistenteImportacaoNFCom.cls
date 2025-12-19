@@ -12,411 +12,401 @@ Option Explicit
 
 ' =========================================================================================
 ' CLASSE: AssistenteImportacaoNFCom
-' ARQUITETURA: SLA (Single Level of Abstraction) - Refatorada
-' AUTOR: Equipe de Engenharia ControlDocs
+' DESCRIÇÃO: Importação e mapeamento de Notas Fiscais de Comunicação (Mod 21/22)
+' PADRÃO: Orquestração Procedural (Matching NFe/CTe Architecture)
 ' =========================================================================================
 
 Private EnumContribuicoes As New clsEnumeracoesSPEDContribuicoes
 Private EnumFiscal As New clsEnumeracoesSPEDFiscal
-Private assImportacao As New AssistenteImportacao
 Private GerenciadorSPED As New clsRegistrosSPED
+Private assImportacao As New AssistenteImportacao
+Private ExpReg As New ExportadorRegistros
 
-' Variáveis de Contexto da Classe
-Private pDicionarioAgregacao As Scripting.Dictionary
-
-Private Sub Class_Initialize()
-    Set pDicionarioAgregacao = New Scripting.Dictionary
-End Sub
-
-Private Sub Class_Terminate()
-    Set pDicionarioAgregacao = Nothing
-End Sub
+' Variáveis de Contexto
+Private CNPJBase As String
+Private UF As String
 
 ' =========================================================================================
-' 1. ORQUESTRADOR PRINCIPAL (PÚBLICO)
+' 1. ORQUESTRADOR PRINCIPAL
 ' =========================================================================================
 
-Public Sub ImportarNFCom(ByVal TipoImportacao As String)
-    On Error GoTo TratarErro
-
-    Call CarregarDocumentos(TipoImportacao)
-    Call CarregarDadosExistentes
-    Call ExecutarProcessamentoEmLote
-    Call ExportarResultadosExcel
-    Call FinalizarProcesso
-
-    Exit Sub
-TratarErro:
-    Call Util.MsgInformativa("Erro crítico na importação: " & VBA.Err.Description, "Erro", VBA.Now)
-    Call Util.AtualizarBarraStatus(False)
-End Sub
-
-' =========================================================================================
-' 2. PROCESSAMENTO DE LOTE (PRIVADO)
-' =========================================================================================
-
-Private Sub CarregarDocumentos(ByVal TipoImportacao As String)
-    Call ProcessarDocumentos.CarregarXMLS(TipoImportacao)
-    If TipoImportacao = "Arquivo" Then
-        DocsFiscais.arrNFCom.addRange DocsFiscais.arrTodos
-    End If
-End Sub
-
-Private Sub CarregarDadosExistentes()
-    Call Util.AtualizarBarraStatus("Carregando estrutura SPED existente...")
+Public Sub ImportarNFCom(ByVal tpImportacao As String)
+    'On Error GoTo TratarErro
     
-    With GerenciadorSPED
-        ' Carrega hierarquia básica
-        .CarregarDadosRegistro0000 "Arquivo"
-        .CarregarDadosRegistro0000_Contr "Arquivo"
-        .CarregarDadosRegistro0001 "Arquivo"
-        
-        ' Tenta carregar blocos que podem existir
-        On Error Resume Next
-        .CarregarDadosRegistroD001 "Arquivo"
-        .CarregarDadosRegistroD700 "CHV_DOCE" ' Chave específica para facilitar busca
-        On Error GoTo 0
-    End With
-End Sub
-
-Private Sub ExecutarProcessamentoEmLote()
-    Dim Indice As Long
-    Dim TempoInicio As Double
-    Dim XML As Variant
+    ' 1. Carregamento
+    Call ProcessarDocumentos.CarregarXMLS(tpImportacao)
+    If tpImportacao = "Arquivo" Then DocsFiscais.arrNFCom.addRange DocsFiscais.arrTodos
     
     If DocsFiscais.arrNFCom.Count = 0 Then Exit Sub
     
+    CNPJBase = VBA.Left(CNPJContribuinte, 8)
+    
+    ' 2. Inicialização
+    Call InicializarObjetos
     Call Util.AtualizarBarraStatus("Iniciando processamento de NFCom...")
-    TempoInicio = VBA.Timer
-    Indice = 0
+    
+    ' 3. Processamento
+    Call ProcessarXMLS
+    
+    ' 4. Exportação
+    ' Exporta D700 (Pai), D730 (Analítico), D731 (FCP)
+    Call ExpReg.ExportarRegistros("0000", "0000_Contr", "D001", "D700", "D730", "D731", "D990")
+    
+    Call LimparObjetos
+    Call Util.AtualizarBarraStatus("Importação de NFCom concluída.")
+    
+Exit Sub
+'TratarErro:
+    'Call GerenciadorErros.TratarErroPersonalizado("AssistenteImportacaoNFCom", "ImportarNFCom")
+End Sub
+
+Private Sub ProcessarXMLS()
+
+Dim b As Long
+Dim XML As Variant
+Dim NFe As DOMDocument60
+    
+    b = 0
+    Comeco = Timer
+    DocsSemValidade = 0
     
     For Each XML In DocsFiscais.arrNFCom
-        Call Util.AntiTravamento(Indice, 10, "Processando NFCom " & Indice + 1, DocsFiscais.arrNFCom.Count, TempoInicio)
-        Call ProcessarArquivoUnico(XML)
-        Indice = Indice + 1
+        
+        Set NFe = assImportacao.ExtrairDadosXML(XML)
+        Call CriarRegistroD700(NFe)
+        Call Util.AntiTravamento(b, 50, "Importando XML " & b + 1 & " de " & DocsFiscais.arrNFCom.Count, DocsFiscais.arrNFCom.Count, Comeco)
+    
     Next XML
+    
 End Sub
 
-Private Sub ProcessarArquivoUnico(ByVal CaminhoArquivo As Variant)
-    Dim DocumentoXML As DOMDocument60
-    Set DocumentoXML = fnXML.RemoverNamespaces(CaminhoArquivo)
-    
-    If Not DocumentoXML Is Nothing Then
-        Call ProcessarNFCom(DocumentoXML)
-    End If
-End Sub
+Private Sub ProcessarXML(ByRef NFe As DOMDocument60)
 
-' =========================================================================================
-' 3. PROCESSAMENTO DE DOCUMENTO (CORE LÓGICO)
-' =========================================================================================
-
-Private Sub ProcessarNFCom(ByRef XML As DOMDocument60)
-    On Error GoTo ErroProc
+Dim Chave As String
     
-    ' 1. Validação Básica
-    If XML.SelectSingleNode("//*[local-name()='infNFCom']") Is Nothing Then Exit Sub
-    
-    ' 2. Preparação do Contexto
-    Call PrepararAmbienteGlobal(XML)
-    Call GarantirHierarquiaSPED(XML)
-    Call GarantirParticipante(XML)
-    
-    ' 3. Geração dos Registros
-    Call CriarRegistroD700(XML)
-    
-    Exit Sub
-ErroProc:
-    Debug.Print "Erro ao processar XML (" & DadosXML.ARQUIVO & "): " & VBA.Err.Description
-End Sub
-
-' =========================================================================================
-' 4. PREPARAÇÃO DO AMBIENTE (CONTEXTO)
-' =========================================================================================
-
-Private Sub PrepararAmbienteGlobal(ByRef XML As DOMDocument60)
-    Dim DataEmissao As String
-    Dim Ano As String, Mes As String
-    
-    Call DTO_DadosXML.ResetarDadosXML
-    
-    With DadosXML
-        .COD_MOD = "62"
-        .CNPJ_EMITENTE = fnXML.ValidarTag(XML, "//emit/CNPJ")
-        .CNPJ_DESTINATARIO = fnXML.ValidarTag(XML, "//dest/CNPJ")
-        If .CNPJ_DESTINATARIO = "" Then .CNPJ_DESTINATARIO = fnXML.ValidarTag(XML, "//dest/CPF")
-        
-        .CNPJ_ESTABELECIMENTO = CNPJContribuinte
-        
-        ' Extração de Data para Período (Fundamental para registro 0000)
-        DataEmissao = VBA.Left(fnXML.ValidarTag(XML, "//ide/dhEmi"), 10)
-        
-        If VBA.Len(DataEmissao) >= 10 Then
-            Ano = VBA.Left(DataEmissao, 4)
-            Mes = VBA.Mid(DataEmissao, 6, 2)
-            .Periodo = Mes & "/" & Ano
-        Else
-            .Periodo = VBA.Format(Date, "mm/yyyy")
-        End If
-        
-        .ARQUIVO = .Periodo & "-" & .CNPJ_ESTABELECIMENTO
-    End With
-End Sub
-
-Private Sub GarantirHierarquiaSPED(ByRef XML As DOMDocument60)
-    ' Verifica e cria Registro 0000 (Fiscal)
-    If Not dtoRegSPED.r0000.Exists(DadosXML.ARQUIVO) Then
-        Call assImportacao.CriarRegistro0000(XML)
-    End If
-    
-    ' Verifica e cria Registro 0000 (Contribuições)
-    If Not dtoRegSPED.r0000_Contr.Exists(DadosXML.ARQUIVO) Then
-        Call assImportacao.CriarRegistro0000_Contr(XML)
-    End If
-    
-    ' Verifica e cria Registro 0001 (Abertura Bloco 0)
-    If Not dtoRegSPED.r0001.Exists(DadosXML.ARQUIVO) Then
-        Call assImportacao.CriarRegistro0001
-    End If
-    
-    ' Verifica e cria Registro D001 (Abertura Bloco D)
-    If Not dtoRegSPED.rD001.Exists(DadosXML.ARQUIVO) Then
-        Call assImportacao.CriarRegistroD001
-    End If
-End Sub
-
-Private Sub GarantirParticipante(ByRef XML As DOMDocument60)
-    Dim NoDest As IXMLDOMNode
-    Dim CNPJ As String, CPF As String
-    
-    Set NoDest = XML.SelectSingleNode("//dest")
-    If NoDest Is Nothing Then Exit Sub
-    
-    CNPJ = fnXML.ValidarTag(NoDest, "CNPJ")
-    CPF = fnXML.ValidarTag(NoDest, "CPF")
-    
-    If CNPJ <> "" Then
-        Call assImportacao.CriarRegistro0150(XML, CNPJ)
-    ElseIf CPF <> "" Then
-        Call assImportacao.CriarRegistro0150(XML, CPF)
-    End If
-End Sub
-
-' =========================================================================================
-' 5. GERAÇÃO DE REGISTROS (ESPECIALISTAS)
-' =========================================================================================
-
-Public Sub CriarRegistroD700(ByRef NFCom As DOMDocument60)
-    Dim Campos As Variant
-    Dim Chave As String
-    Dim ChavePai As String
-    
-    ' Carrega Dicionário se necessário
-    If dtoRegSPED.rD700 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD700("CHV_DOCE")
+    If dtoRegSPED.rD700 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD700("IND_OPER", "IND_EMIT", "CHV_DOCE")
     
     With CamposD700
-        ' Identificação e Controle
+        
+        ' Usamos os helpers do AssistenteImportacao para manter a lógica DRY (regras centralizadas)
+        .IND_OPER = assImportacao.IdentificarTipoOperacao() ' 0-Entrada / 1-Saída
+        .IND_EMIT = assImportacao.IdentificarTipoEmissao(NFe) ' 0-Própria / 1-Terceiros
+        .CHV_DOCE = fnXML.ValidarChaveAcesso(NFe, "NFCom")
+        
+        Chave = Util.UnirCampos(.IND_OPER, .IND_EMIT, .CHV_DOCE)
+        .CHV_REG = Chave
+        
+        If dtoRegSPED.rD700.Exists(Chave) Then
+            Call CarregarCamposD700(NFe, Chave)
+        Else
+            Call CriarRegistroD700(NFe)
+        End If
+        
+        ' 5. Orquestração de Registros Filhos
+        ' Se tiver participante identificado, cria o registro 0150 (Cadastro Participante)
+        If .COD_PART <> "" Then Call assImportacao.CriarRegistro0150(NFe, .COD_PART)
+        
+        ' Processa Itens (Serviços/Produtos)
+        Call CriarRegistroD730(NFe, Chave)
+        
+        ' Espaço para futuros registros filhos (Ex: D710, D720, etc.)
+        
+    End With
+    
+End Sub
+
+Private Sub CarregarCamposD700(ByRef NFe As DOMDocument60, ByVal Chave As String)
+
+Dim Campos As Variant
+    
+    ' Recupera o array de dados armazenado no Dicionário
+    Campos = dtoRegSPED.rD700(Chave)
+    
+    With CamposD700
+        
+        .REG = Campos(dtoTitSPED.tD700("REG"))
+        .ARQUIVO = Campos(dtoTitSPED.tD700("ARQUIVO"))
+        .CHV_REG = Campos(dtoTitSPED.tD700("CHV_REG"))
+        .CHV_PAI_FISCAL = Campos(dtoTitSPED.tD700("CHV_PAI_FISCAL"))
+        .CHV_PAI_CONTRIBUICOES = Campos(dtoTitSPED.tD700("CHV_PAI_CONTRIBUICOES"))
+        .IND_OPER = Campos(dtoTitSPED.tD700("IND_OPER"))
+        .IND_EMIT = Campos(dtoTitSPED.tD700("IND_EMIT"))
+        .COD_PART = Campos(dtoTitSPED.tD700("COD_PART"))
+        .COD_MOD = Campos(dtoTitSPED.tD700("COD_MOD"))
+        .COD_SIT = Campos(dtoTitSPED.tD700("COD_SIT"))
+        .SER = Campos(dtoTitSPED.tD700("SER"))
+        .NUM_DOC = Campos(dtoTitSPED.tD700("NUM_DOC"))
+        .DT_DOC = Campos(dtoTitSPED.tD700("DT_DOC"))
+        .DT_A_P = Campos(dtoTitSPED.tD700("DT_A_P"))
+        .VL_DOC = CDbl(Campos(dtoTitSPED.tD700("VL_DOC")))
+        .VL_DESC = CDbl(Campos(dtoTitSPED.tD700("VL_DESC")))
+        .VL_SERV = CDbl(Campos(dtoTitSPED.tD700("VL_SERV")))
+        .VL_SERV_NT = CDbl(Campos(dtoTitSPED.tD700("VL_SERV_NT")))
+        .VL_TERC = CDbl(Campos(dtoTitSPED.tD700("VL_TERC")))
+        .VL_DA = CDbl(Campos(dtoTitSPED.tD700("VL_DA")))
+        .VL_BC_ICMS = CDbl(Campos(dtoTitSPED.tD700("VL_BC_ICMS")))
+        .VL_ICMS = CDbl(Campos(dtoTitSPED.tD700("VL_ICMS")))
+        .COD_INF = Campos(dtoTitSPED.tD700("COD_INF"))
+        .VL_PIS = CDbl(Campos(dtoTitSPED.tD700("VL_PIS")))
+        .VL_COFINS = CDbl(Campos(dtoTitSPED.tD700("VL_COFINS")))
+        .CHV_DOCE = Campos(dtoTitSPED.tD700("CHV_DOCE"))
+        .FIN_DOCE = Campos(dtoTitSPED.tD700("FIN_DOCE"))
+        .TIP_FAT = Campos(dtoTitSPED.tD700("TIP_FAT"))
+        .COD_MOD_DOC_REF = Campos(dtoTitSPED.tD700("COD_MOD_DOC_REF"))
+        .CHV_DOCE_REF = Campos(dtoTitSPED.tD700("CHV_DOCE_REF"))
+        .HASH_DOC_REF = Campos(dtoTitSPED.tD700("HASH_DOC_REF"))
+        .SER_DOC_REF = Campos(dtoTitSPED.tD700("SER_DOC_REF"))
+        .NUM_DOC_REF = Campos(dtoTitSPED.tD700("NUM_DOC_REF"))
+        .MES_DOC_REF = Campos(dtoTitSPED.tD700("MES_DOC_REF"))
+        .COD_MUN_DEST = Campos(dtoTitSPED.tD700("COD_MUN_DEST"))
+        .DED = Campos(dtoTitSPED.tD700("DED"))
+        
+    End With
+    
+End Sub
+
+Public Sub CriarRegistroD700(ByRef NFe As DOMDocument60)
+
+Dim Campos As Variant
+Dim Chave As String
+Dim CNPJ_Part As String
+    
+    ' 1. Lazy Loading do DTO (Carrega definições se for a primeira execução)
+    If dtoRegSPED.rD700 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD700("IND_OPER", "IND_EMIT", "CHV_DOCE")
+    
+    With CamposD700
+        
         .REG = "D700"
         .ARQUIVO = DadosXML.ARQUIVO
-        .COD_MOD = "62"
-        .COD_SIT = EnumContribuicoes.ValidarEnumeracao_COD_SIT(fnSPED.GerarCodigoSituacao(fnXML.ValidarSituacao(fnXML.ValidarTag(NFCom, "//cStat"))))
         
-        ' Chaves e Datas
-        .SER = VBA.Format(fnXML.ValidarTag(NFCom, "//ide/serie"), "000")
-        .NUM_DOC = fnXML.ValidarTag(NFCom, "//ide/nNF")
-        .DT_DOC = fnXML.ValidarTag(NFCom, "//ide/dhEmi")
-        .DT_E_S = .DT_DOC
+        ' --- Identificação e Participantes ---
+        ' Nota: IND_OPER e IND_EMIT já devem vir preenchidos do orquestrador (ProcessarXML)
+        ' ou podem ser recalculados aqui para garantir isolamento.
+        ' Mantendo a lógica do C100 de autossuficiência:
+        .IND_OPER = assImportacao.IdentificarTipoOperacao()
+        .IND_EMIT = assImportacao.IdentificarTipoEmissao(NFe)
         
-        .CHV_DOCE = fnXML.ValidarTag(NFCom, "//chNFCom")
-        If .CHV_DOCE = "" Then .CHV_DOCE = VBA.Replace(fnXML.ValidarTag(NFCom, "//infNFCom/@Id"), "NFCom", "")
+        If .IND_EMIT = "0" Then
+            ' Emissão Própria: Part é o Destinatário
+            CNPJ_Part = fnXML.ValidarTag(NFe, "//dest/CNPJ")
+            If CNPJ_Part = "" Then CNPJ_Part = fnXML.ValidarTag(NFe, "//dest/CPF")
+        Else
+            ' Terceiros: Part é o Emitente
+            CNPJ_Part = fnXML.ValidarTag(NFe, "//emit/CNPJ")
+        End If
+        .COD_PART = Util.FormatarTexto(CNPJ_Part)
         
-        ' Participante
-        .COD_PART = assImportacao.ExtrairCodigoParticipante()
-        If .COD_PART <> "" Then .COD_PART = Util.FormatarTexto(.COD_PART)
+        .COD_MOD = fnXML.ValidarTag(NFe, "//infNFCom/ide/mod")
         
-        ' Valores Monetários
-        .VL_DOC = fnXML.ValidarValores(NFCom, "//total/vNF")
-        .VL_DESC = fnXML.ValidarValores(NFCom, "//total/vDesc")
-        .VL_SERV = fnXML.ValidarValores(NFCom, "//total/vProd")
-        .VL_SERV_NT = 0 ' Ajustar se houver campo específico
-        .VL_TERC = 0
-        .VL_DA = fnXML.ValidarValores(NFCom, "//total/vOutro")
-        .VL_BC_ICMS = fnXML.ValidarValores(NFCom, "//total/ICMSTot/vBC")
-        .VL_ICMS = fnXML.ValidarValores(NFCom, "//total/ICMSTot/vICMS")
+        ' Tratamento de Situação (cStat -> COD_SIT SPED)
+        ' Exige mapeamento na EnumContribuicoes ou uso direto
+        .COD_SIT = "00" ' Padrão Regular
+        If fnXML.ValidarTag(NFe, "//cSit") <> "" Then
+             ' Implementar fnSPED.GerarCodigoSituacao se necessário para NFCom
+             ' .COD_SIT = EnumContribuicoes.ValidarEnumeracao_COD_SIT(...)
+        End If
+        
+        .SER = VBA.Format(fnXML.ValidarTag(NFe, "//infNFCom/ide/serie"), "000")
+        .NUM_DOC = fnXML.ValidarTag(NFe, "//infNFCom/ide/nNF")
+        .DT_DOC = Util.FormatarData(fnXML.ValidarTag(NFe, "//infNFCom/ide/dhEmi"))
+        .DT_A_P = .DT_DOC
+        .VL_DOC = fnXML.ValidarValores(NFe, "//infNFCom/total/vNF")
+        .VL_DESC = fnXML.ValidarValores(NFe, "//infNFCom/total/vDesc")
+        .VL_SERV = fnXML.ValidarValores(NFe, "//infNFCom/total/vProd")
+        .VL_SERV_NT = 0
+        .VL_TERC = fnXML.ValidarValores(NFe, "//infNFCom/total/vOutro")
+        .VL_DA = 0
+        .VL_BC_ICMS = fnXML.ValidarValores(NFe, "//infNFCom/total/ICMSTot/vBC")
+        .VL_ICMS = fnXML.ValidarValores(NFe, "//infNFCom/total/ICMSTot/vICMS")
         .COD_INF = ""
-        .VL_PIS = fnXML.ValidarValores(NFCom, "//total/vPIS")
-        .VL_COFINS = fnXML.ValidarValores(NFCom, "//total/vCOFINS")
+        .VL_PIS = fnXML.ValidarValores(NFe, "//infNFCom/total/vPIS")
+        .VL_COFINS = fnXML.ValidarValores(NFe, "//infNFCom/total/vCOFINS")
+        .FIN_DOCE = fnXML.ValidarTag(NFe, "//infNFCom/ide/tpEmis")
+        .TIP_FAT = fnXML.ValidarTag(NFe, "//infNFCom/ide/tpFat")
+        .COD_MUN_DEST = fnXML.ValidarTag(NFe, "//infNFCom/dest/enderDest/cMun")
         
-        ' Campos Específicos Modelo 62
-        .FIN_DOCE = fnXML.ValidarTag(NFCom, "//ide/finNFCom")
-        .TIP_FAT = fnXML.ValidarTag(NFCom, "//ide/tpFat")
+        ' Referências (Placeholders inicializados)
+        .COD_MOD_DOC_REF = ""
+        .CHV_DOCE_REF = ""
+        .HASH_DOC_REF = fnXML.ValidarTag(NFe, "//gRef/hash115")
+        .SER_DOC_REF = ""
+        .NUM_DOC_REF = ""
+        .MES_DOC_REF = ""
+        .DED = ""
         
-        ' Vínculos Pai (Hierarquia)
-        .CHV_PAI_CONTRIBUICOES = assImportacao.ExtrairChaveRegD010()
-        .CHV_PAI_FISCAL = assImportacao.ExtrairChaveRegD001()
+        ' Hierarquia de Chaves
+        .CHV_PAI_FISCAL = .CHV_DOCE ' Ou lógica de D001
+        .CHV_PAI_CONTRIBUICOES = ""
         
-        ' Tratamento de Cancelamento
+        ' --- Lógica de Documento Cancelado (Cópia da lógica C100) ---
+        ' Verifica se a chave está na lista global de cancelados
+        If DocsFiscais.arrChavesCanceladas.contains(VBA.Replace(.CHV_DOCE, "'", "")) Then
+            .COD_SIT = "02" ' Cancelado
+        End If
+        
+        ' Se cancelado (02) ou inutilizado (03), zera valores fiscais
         If VBA.Left(.COD_SIT, 2) = "02" Or VBA.Left(.COD_SIT, 2) = "03" Then
             .COD_PART = ""
             .VL_DOC = 0
+            .VL_DESC = 0
             .VL_SERV = 0
-            .VL_PIS = 0
-            .VL_COFINS = 0
+            .VL_SERV_NT = 0
+            .VL_TERC = 0
+            .VL_DA = 0
             .VL_BC_ICMS = 0
             .VL_ICMS = 0
+            .VL_PIS = 0
+            .VL_COFINS = 0
         End If
         
-        ' Gera a Chave Única do Registro D700
-        .CHV_REG = fnSPED.GerarChaveRegistro(.ARQUIVO, "D700", .CHV_DOCE)
+        Chave = Util.UnirCampos(.IND_OPER, .IND_EMIT, .CHV_DOCE)
+        .CHV_REG = Chave
         
-        ' Persistência no Dicionário Global
-        If Not dtoRegSPED.rD700.Exists(.CHV_REG) Then
-            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .IND_OPER, .IND_EMIT, _
-                .COD_PART, .COD_MOD, .COD_SIT, "'" & .SER, "'" & .NUM_DOC, .DT_DOC, .DT_E_S, CDbl(.VL_DOC), _
-                CDbl(.VL_DESC), CDbl(.VL_SERV), CDbl(.VL_SERV_NT), CDbl(.VL_TERC), CDbl(.VL_DA), CDbl(.VL_BC_ICMS), _
-                CDbl(.VL_ICMS), .COD_INF, CDbl(.VL_PIS), CDbl(.VL_COFINS), .CHV_DOCE, .FIN_DOCE, .TIP_FAT, _
-                .COD_MOD_DOC_REF, .CHV_DOCE_REF, .HASH_DOC_REF, .SER_DOC_REF, .NUM_DOC_REF, .MES_DOC_REF, .COD_MUN_DEST, CDbl(.DED))
-                
-            dtoRegSPED.rD700.Add .CHV_REG, Campos
-        End If
-        
-        ' Processa Itens Filhos (Agregação para D730)
-        ' Só processa itens se a nota for regular (não cancelada)
-        If VBA.Left(.COD_SIT, 2) = "00" Then
-            Call ProcessarItensD730(NFCom, .CHV_REG)
-        End If
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
+                       .IND_OPER, .IND_EMIT, .COD_PART, .COD_MOD, .COD_SIT, "'" & .SER, "'" & .NUM_DOC, _
+                       .DT_DOC, .DT_A_P, CDbl(.VL_DOC), CDbl(.VL_DESC), CDbl(.VL_SERV), CDbl(.VL_SERV_NT), _
+                       CDbl(.VL_TERC), CDbl(.VL_DA), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), .COD_INF, _
+                       CDbl(.VL_PIS), CDbl(.VL_COFINS), .CHV_DOCE, .FIN_DOCE, .TIP_FAT, _
+                       .COD_MOD_DOC_REF, .CHV_DOCE_REF, .HASH_DOC_REF, .SER_DOC_REF, _
+                       .NUM_DOC_REF, .MES_DOC_REF, .COD_MUN_DEST, .DED)
+                       
+        ' Adiciona ao Dicionário Global (Sobrescreve se existir, C100 logic)
+        dtoRegSPED.rD700(Chave) = Campos
         
     End With
-End Sub
-
-Private Sub ProcessarItensD730(ByRef NFCom As DOMDocument60, ByVal ChavePai As String)
-    ' Analítico dos Bilhetes (Agrupamento por CST, CFOP, Aliquota)
-    
-    Dim ListaDet As IXMLDOMNodeList
-    Dim NoDet As IXMLDOMNode
-    Dim DTO As clsAgregacaoD730
-    Dim ChaveAgrupamento As String
-    
-    pDicionarioAgregacao.RemoveAll ' Limpa para a nota atual
-    
-    Set ListaDet = NFCom.SelectNodes("//det")
-    
-    ' 1. Loop de Agregação
-    For Each NoDet In ListaDet
-        ChaveAgrupamento = GerarChaveAgrupamento(NoDet)
-        
-        If pDicionarioAgregacao.Exists(ChaveAgrupamento) Then
-            Set DTO = pDicionarioAgregacao(ChaveAgrupamento)
-        Else
-            Set DTO = New clsAgregacaoD730
-            Dim Partes() As String
-            Partes = VBA.Split(ChaveAgrupamento, "|")
-            DTO.CST_ICMS = Partes(0)
-            DTO.Cfop = Partes(1)
-            DTO.ALIQ_ICMS = Partes(2)
-            pDicionarioAgregacao.Add ChaveAgrupamento, DTO
-        End If
-        
-        ' Acumula valores
-        DTO.VL_OPR = DTO.VL_OPR + VBA.CDbl(fnXML.ValidarValores(NoDet, "vProd"))
-        
-        Dim NoImp As IXMLDOMNode: Set NoImp = NoDet.SelectSingleNode("imposto/ICMS00") ' Ajustar XPath se necessário
-        If NoImp Is Nothing Then Set NoImp = NoDet.SelectSingleNode("imposto")
-        
-        If Not NoImp Is Nothing Then
-            DTO.VL_BC_ICMS = DTO.VL_BC_ICMS + VBA.CDbl(fnXML.ValidarValores(NoImp, "vBC"))
-            DTO.VL_ICMS = DTO.VL_ICMS + VBA.CDbl(fnXML.ValidarValores(NoImp, "vICMS"))
-            DTO.VL_FCP = DTO.VL_FCP + VBA.CDbl(fnXML.ValidarValores(NoImp, "vFCP"))
-        End If
-    Next NoDet
-    
-    ' 2. Loop de Criação dos Registros
-    Dim Chave As Variant
-    For Each Chave In pDicionarioAgregacao.Keys
-        Set DTO = pDicionarioAgregacao(Chave)
-        Call CriarRegistroD730(DTO, ChavePai)
-    Next Chave
     
 End Sub
 
-Private Sub CriarRegistroD730(ByVal DTO As clsAgregacaoD730, ByVal ChavePai As String)
+Private Sub CriarRegistroD730(ByRef NFe As DOMDocument60, ByVal ChavePai As String)
+    ' D730: Registro Analítico (Agrupado por CST, CFOP, Aliq)
+    ' D731: FCP (Filho do D730)
+    
+    Dim Detalhes As IXMLDOMNodeList
+    Dim Det As IXMLDOMNode
+    Dim dicAgregacao As Object ' Scripting.Dictionary
+    Dim ChaveAgrup As String
+    Dim CST As String, CFOP As String, ALIQ As String, COD_OBS As String
+    Dim vOpr As Double, vBC As Double, vICMS As Double, vRedBC As Double, vFCP As Double
+    Dim ItemAgregado As Variant
+    Dim Key As Variant
     Dim Campos As Variant
+    Dim ChaveD730 As String
+    Dim i As Long
     
-    With CamposD730
-        .REG = "D730"
-        .ARQUIVO = DadosXML.ARQUIVO
-        .CHV_PAI = ChavePai
-        .CST_ICMS = DTO.CST_ICMS
-        .Cfop = DTO.Cfop
-        .ALIQ_ICMS = DTO.ALIQ_ICMS
-        .VL_OPR = DTO.VL_OPR
-        .VL_BC_ICMS = DTO.VL_BC_ICMS
-        .VL_ICMS = DTO.VL_ICMS
-        .VL_RED_BC = 0
-        .COD_OBS = ""
+    Set dicAgregacao = CreateObject("Scripting.Dictionary")
+    Set Detalhes = NFe.SelectNodes("//det")
+    
+    If dtoRegSPED.rD730 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD730("CHV_PAI_FISCAL", "CST_ICMS", "CFOP", "ALIQ_ICMS")
+    If dtoRegSPED.rD731 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD731("CHV_PAI_FISCAL")
+    
+    ' 1. Agregação
+    For Each Det In Detalhes
+        CST = fnXML.ValidarTag(Det, "imposto/ICMS/*/CST")
+        If CST = "" Then CST = "00" ' Fallback
         
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "D730", .CST_ICMS, .Cfop, .ALIQ_ICMS)
+        CFOP = fnXML.ValidarTag(Det, "prod/CFOP")
+        ALIQ = fnXML.ValidarPercentual(Det, "imposto/ICMS//pICMS")
+        If ALIQ = "" Then ALIQ = "0"
         
-        If Not dtoRegSPED.rD730.Exists(.CHV_REG) Then
-            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI_FISCAL, _
-                           .CHV_PAI_CONTRIBUICOES, .CST_ICMS, .Cfop, CDbl(.ALIQ_ICMS), _
-                           CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_RED_BC), .COD_OBS)
+        COD_OBS = "" ' Implementar se houver observações fiscais
+        
+        ' Valores do Item
+        vOpr = Util.TratarValor(fnXML.ValidarTag(Det, "prod/vProd"))
+        vBC = Util.TratarValor(fnXML.ValidarTag(Det, "imposto/ICMS/*/vBC"))
+        vICMS = Util.TratarValor(fnXML.ValidarTag(Det, "imposto/ICMS/*/vICMS"))
+        vRedBC = 0 ' Calcular se necessário (vProd - vBC) se houver redução explícita
+        vFCP = Util.TratarValor(fnXML.ValidarTag(Det, "imposto/ICMS/*/vFCP"))
+        
+        ChaveAgrup = CST & "|" & CFOP & "|" & ALIQ & "|" & COD_OBS
+        
+        If Not dicAgregacao.Exists(ChaveAgrup) Then
+            ' Array: CST, CFOP, ALIQ, VL_OPR, VL_BC, VL_ICMS, VL_RED, COD_OBS, VL_FCP
+            dicAgregacao.Add ChaveAgrup, Array(CST, CFOP, ALIQ, vOpr, vBC, vICMS, vRedBC, COD_OBS, vFCP)
+        Else
+            ItemAgregado = dicAgregacao(ChaveAgrup)
+            ItemAgregado(3) = ItemAgregado(3) + vOpr
+            ItemAgregado(4) = ItemAgregado(4) + vBC
+            ItemAgregado(5) = ItemAgregado(5) + vICMS
+            ItemAgregado(6) = ItemAgregado(6) + vRedBC
+            ItemAgregado(8) = ItemAgregado(8) + vFCP ' Acumula FCP
+            dicAgregacao(ChaveAgrup) = ItemAgregado
+        End If
+    Next Det
+    
+    ' 2. Criação dos Registros
+    i = 0
+    For Each Key In dicAgregacao.Keys
+        ItemAgregado = dicAgregacao(Key)
+        i = i + 1
+        
+        ' Gera chave única para o D730
+        ChaveD730 = ChavePai & "|" & i
+        
+        With CamposD730
+            .REG = "D730"
+            .ARQUIVO = DadosXML.ARQUIVO
+            .CHV_REG = ChaveD730
+            .CHV_PAI_FISCAL = ChavePai
+            .CHV_PAI_CONTRIBUICOES = ""
+            
+            .CST_ICMS = ItemAgregado(0)
+            .CFOP = ItemAgregado(1)
+            .ALIQ_ICMS = CDbl(ItemAgregado(2))
+            .VL_OPR = CDbl(ItemAgregado(3))
+            .VL_BC_ICMS = CDbl(ItemAgregado(4))
+            .VL_ICMS = CDbl(ItemAgregado(5))
+            .VL_RED_BC = CDbl(ItemAgregado(6))
+            .COD_OBS = ItemAgregado(7)
+            
+            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, _
+                           .CST_ICMS, .CFOP, .ALIQ_ICMS, .VL_OPR, .VL_BC_ICMS, .VL_ICMS, .VL_RED_BC, .COD_OBS)
             
             dtoRegSPED.rD730.Add .CHV_REG, Campos
-        End If
-        
-        ' Se houver FCP, cria filho D731
-        If DTO.VL_FCP > 0 Then
-            Call CriarRegistroD731(.CHV_REG, DTO.VL_FCP)
-        End If
-    End With
+            
+            ' 3. Processa Filho D731 (FCP) se houver valor
+            vFCP = CDbl(ItemAgregado(8))
+            If vFCP > 0 Then
+                Call CriarRegistroD731(ChaveD730, vFCP)
+            End If
+        End With
+    Next Key
+    
+    Set dicAgregacao = Nothing
 End Sub
 
 Private Sub CriarRegistroD731(ByVal ChavePaiD730 As String, ByVal ValorFCP As Double)
     Dim Campos As Variant
+    Dim ChaveD731 As String
+    
+    ChaveD731 = ChavePaiD730 & "|FCP"
     
     With CamposD731
         .REG = "D731"
         .ARQUIVO = DadosXML.ARQUIVO
-        .CHV_PAI = ChavePaiD730
+        .CHV_REG = ChaveD731
+        .CHV_PAI_FISCAL = ChavePaiD730
+        .CHV_PAI_CONTRIBUICOES = ""
         .VL_FCP_OP = ValorFCP
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, "D731")
         
-        If Not dtoRegSPED.rD731.Exists(.CHV_REG) Then
-            Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, CDbl(.VL_FCP_OP))
-            dtoRegSPED.rD731.Add .CHV_REG, Campos
-        End If
+        Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, .VL_FCP_OP)
+        
+        dtoRegSPED.rD731.Add .CHV_REG, Campos
     End With
 End Sub
 
 ' =========================================================================================
-' 6. FUNÇÕES AUXILIARES
+' 3. HELPER METHODS (Gestão de Objetos)
 ' =========================================================================================
 
-Private Function GerarChaveAgrupamento(ByVal NoDet As IXMLDOMNode) As String
-    Dim CST As String, Cfop As String, ALIQ As String
-    Dim NoImposto As IXMLDOMNode, NoProd As IXMLDOMNode
-    
-    Set NoImposto = NoDet.SelectSingleNode("imposto")
-    Set NoProd = NoDet.SelectSingleNode("prod")
-    
-    ' Tenta extrair CST de vários locais possíveis
-    CST = fnXML.ValidarTag(NoDet, "imposto/*/CST")
-    If CST = "" Then CST = "00" ' Default
-    
-    Cfop = fnXML.ValidarTag(NoProd, "CFOP")
-    ALIQ = fnXML.ValidarValores(NoImposto, "*/pICMS")
-    If ALIQ = "" Then ALIQ = "0"
-    
-    GerarChaveAgrupamento = CST & "|" & Cfop & "|" & ALIQ
-End Function
-
-Private Sub ExportarResultadosExcel()
-    Dim Exportador As New ExportadorRegistros
-    Call Exportador.ExportarRegistros("0000", "0000_Contr", "0001", "D001", "D700", "D730", "D731")
+Private Sub InicializarObjetos()
+    ' Garante que o dicionário SPED está pronto para receber dados
+    Call GerenciadorSPED.InicializarDicionarios
+    Call GerenciadorSPED.CarregarTítulos("D700", "D730", "D731")
+    ' Carrega DTOs específicos se ainda não existirem
+    If dtoRegSPED.rD700 Is Nothing Then Call GerenciadorSPED.CarregarDadosRegistroD700("IND_OPER", "IND_EMIT", "CHV_DOCE")
 End Sub
 
-Private Sub FinalizarProcesso()
-    Call Util.MsgInformativa("Importação NFCom concluída com sucesso!", "Sucesso", VBA.Now)
-    Call Util.AtualizarBarraStatus(False)
+Private Sub LimparObjetos()
+    Set NFe = Nothing
 End Sub
 

@@ -908,7 +908,7 @@ Dim Produtos As IXMLDOMNodeList
 Dim dicProdutos As New Dictionary
 Dim vProd As Double, pICMS#, bcICMS#, vICMS#
 Dim dhEmi As Variant, Registros, Registro, Campos, CamposDic
-Dim nNF As String, chNFe$, cProd$, xProd$, Cfop$, CSTICMS$, CNPJ_FORNEC$, Razao$, uCom$, Chave$, NITEM$, uInv$
+Dim nNF As String, chNFe$, cProd$, xProd$, CFOP$, CSTICMS$, CNPJ_FORNEC$, Razao$, uCom$, Chave$, NITEM$, uInv$
     
     For Each Arq In Arqs
         

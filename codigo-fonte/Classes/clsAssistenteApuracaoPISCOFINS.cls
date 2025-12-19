@@ -1259,7 +1259,7 @@ End Sub
 Public Function AceitarSugestoes()
 
 Dim Campos As Variant, Campos0200, CamposC170, dicCampos, regCampo, CamposTrib
-Dim ARQUIVO As String, COD_INC_TRIB$, CNPJ$, COD_ITEM$, Cfop$, CHV_REG$
+Dim ARQUIVO As String, COD_INC_TRIB$, CNPJ$, COD_ITEM$, CFOP$, CHV_REG$
 Dim VL_BC_PIS_CALC As Double, VL_BC_COFINS_CALC#
 Dim Apuracao As New clsAssistenteApuracao
 Dim dicDados0110 As New Dictionary

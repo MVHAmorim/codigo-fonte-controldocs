@@ -13,7 +13,7 @@ Private dtoValidacoes As DTOsClasseValidacoesResumoPISCOFINS
 
 Private Type CamposResumoPISCOFINS
     
-    Cfop As String
+    CFOP As String
     CST_PISCOFINS As String
     VL_ITEM As Double
     VL_BC_PISCOFINS As Double
@@ -115,16 +115,16 @@ Public Sub VerificarOperacoesFiscais()
         
         Select Case True
             
-            Case ValidarPadraoCFOP(.Cfop, "CompraComercializacao") And ValidarPadraoCST_PISCOFINS(.CST_PISCOFINS, "STGeral")
-                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .Cfop
+            Case ValidarPadraoCFOP(.CFOP, "CompraComercializacao") And ValidarPadraoCST_PISCOFINS(.CST_PISCOFINS, "STGeral")
+                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Corrigir CST_PISCOFINS informado na operação"
                 
-            Case .Cfop Like "[1-2]403" And Not .CST_PISCOFINS Like "#6[0-1]"
-                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .Cfop
+            Case .CFOP Like "[1-2]403" And Not .CST_PISCOFINS Like "#6[0-1]"
+                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Informar CST_PISCOFINS " & VBA.Left(.CST_PISCOFINS, 1) & "60 para a operação"
                 
-            Case ValidarPadraoCFOP(.Cfop, "EntradaST") And Not ValidarPadraoCST_PISCOFINS(.CST_PISCOFINS, "STGeral")
-                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .Cfop
+            Case ValidarPadraoCFOP(.CFOP, "EntradaST") And Not ValidarPadraoCST_PISCOFINS(.CST_PISCOFINS, "STGeral")
+                .INCONSISTENCIA = "CST_PISCOFINS (" & .CST_PISCOFINS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Corrigir CST_PISCOFINS informado na operação"
                 
         End Select
@@ -169,7 +169,7 @@ Private Sub CarregarDadosDTO()
     
     With dtoValidacoes
         
-        .dtoResumoPISCOFINS.Cfop = .Campos(.dicTitulosResumoPISCOFINS("CFOP"))
+        .dtoResumoPISCOFINS.CFOP = .Campos(.dicTitulosResumoPISCOFINS("CFOP"))
         .dtoResumoPISCOFINS.CST_PISCOFINS = .Campos(.dicTitulosResumoPISCOFINS("CST_PISCOFINS"))
         .dtoResumoPISCOFINS.VL_ITEM = .Campos(.dicTitulosResumoPISCOFINS("VL_ITEM"))
         .dtoResumoPISCOFINS.VL_BC_PISCOFINS = .Campos(.dicTitulosResumoPISCOFINS("VL_BC_PISCOFINS"))
@@ -188,7 +188,7 @@ Private Sub ExtrairDadosDTO()
     
     With dtoValidacoes
         
-        .Campos(.dicTitulosResumoPISCOFINS("CFOP")) = .dtoResumoPISCOFINS.Cfop
+        .Campos(.dicTitulosResumoPISCOFINS("CFOP")) = .dtoResumoPISCOFINS.CFOP
         .Campos(.dicTitulosResumoPISCOFINS("CST_PISCOFINS")) = .dtoResumoPISCOFINS.CST_PISCOFINS
         .Campos(.dicTitulosResumoPISCOFINS("VL_ITEM")) = .dtoResumoPISCOFINS.VL_ITEM
         .Campos(.dicTitulosResumoPISCOFINS("VL_BC_PISCOFINS")) = .dtoResumoPISCOFINS.VL_BC_PISCOFINS

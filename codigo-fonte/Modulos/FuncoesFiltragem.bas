@@ -107,15 +107,15 @@ Dim dicTitulos As New Dictionary
 Dim Dados As Variant, Titulos
 Dim Intervalo As Range
 Dim i As Long, UltLin&
-Dim REG As String, Cfop$, CST$, ALIQ$
+Dim REG As String, CFOP$, CST$, ALIQ$
         
         Set dicTitulos = Util.IndexarDados(Util.DefinirTitulos(relICMS, 3))
         REG = relICMS.Cells(ActiveCell.Row, dicTitulos("REG")).value
-        Cfop = relICMS.Cells(ActiveCell.Row, dicTitulos("CFOP")).value
+        CFOP = relICMS.Cells(ActiveCell.Row, dicTitulos("CFOP")).value
         CST = relICMS.Cells(ActiveCell.Row, dicTitulos("CST_ICMS")).value
         ALIQ = relICMS.Cells(ActiveCell.Row, dicTitulos("ALIQ_ICMS")).text
         
-        If Cfop = "" Or Cfop = "CFOP" Then Call Util.MsgAlerta("Seleção inválida!", "Nenhum registro selecionado"): Exit Function
+        If CFOP = "" Or CFOP = "CFOP" Then Call Util.MsgAlerta("Seleção inválida!", "Nenhum registro selecionado"): Exit Function
         Set Plan = Worksheets(REG)
         Set Intervalo = Util.DefinirIntervalo(Plan, 3, 3)
         Set dicTitulos = Util.IndexarDados(Util.DefinirTitulos(Plan, 3))
@@ -123,7 +123,7 @@ Dim REG As String, Cfop$, CST$, ALIQ$
         Plan.Activate
         With Intervalo
         
-            .AutoFilter Field:=CInt(dicTitulos("CFOP")), Criteria1:=Cfop
+            .AutoFilter Field:=CInt(dicTitulos("CFOP")), Criteria1:=CFOP
             .AutoFilter Field:=dicTitulos("CST_ICMS"), Criteria1:=CST
             .AutoFilter Field:=dicTitulos("ALIQ_ICMS"), Criteria1:=ALIQ
         

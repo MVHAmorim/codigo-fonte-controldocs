@@ -16,23 +16,23 @@ Private ValidacoesCFOP As New clsRegrasFiscaisCFOP
 
 Public Function VerificarCFOP(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
 
-Dim Cfop As String, TIPO_ITEM$
+Dim CFOP As String, TIPO_ITEM$
 Dim i As Integer
     
     If LBound(Campos) = 0 Then i = 1
     
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     TIPO_ITEM = Util.ApenasNumeros(Campos(dicTitulos("TIPO_ITEM") - i))
 
     Select Case True
         
-        Case CStr(Cfop) = "" And TIPO_ITEM <> "09"
+        Case CStr(CFOP) = "" And TIPO_ITEM <> "09"
             Call Util.GravarSugestao(Campos, dicTitulos, _
                 INCONSISTENCIA:="O campo CFOP não foi informado e o campo TIPO_ITEM é diferente de: 09 - Serviços", _
                 SUGESTAO:="informar um valor válido para o campo CFOP ou mudar o campos TIPO_ITEM para 09 - Serviços")
                 
         Case Else
-            If Not ValidarCFOP(Cfop) And Cfop <> "" Then
+            If Not ValidarCFOP(CFOP) And CFOP <> "" Then
                 Call Util.GravarSugestao(Campos, dicTitulos, _
                     INCONSISTENCIA:="O CFOP informado não existe na tabela CFOP", _
                     SUGESTAO:="Informar um valor válido para o campo CFOP")
@@ -42,19 +42,19 @@ Dim i As Integer
 
 End Function
 
-Private Function ValidarCFOP(ByVal Cfop As String) As Boolean
+Private Function ValidarCFOP(ByVal CFOP As String) As Boolean
 
     If dicTabelaCFOP.Count = 0 Then Call ValidacoesCFOP.CarregarTabelaCFOP
     
-    If Cfop <> "" Then
-        If dicTabelaCFOP.Exists(Cfop) Then ValidarCFOP = True
+    If CFOP <> "" Then
+        If dicTabelaCFOP.Exists(CFOP) Then ValidarCFOP = True
     End If
     
 End Function
 
 Public Function ValidarCST_ICMS(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_ICMS$, Cfop$, INCONSISTENCIA$, SUGESTAO$
+Dim CST_ICMS$, CFOP$, INCONSISTENCIA$, SUGESTAO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim arrCST_ICMS As New ArrayList
 Dim i As Byte
@@ -108,7 +108,7 @@ End Function
 
 Public Function ValidarCST_IPI(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
     
-Dim CST_IPI$, Cfop$, INCONSISTENCIA$, SUGESTAO$
+Dim CST_IPI$, CFOP$, INCONSISTENCIA$, SUGESTAO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim arrCST_IPI As New ArrayList
 Dim i As Byte
@@ -154,13 +154,13 @@ End Function
 
 Public Function ValidarCFOP_IPI(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
 
-Dim Cfop$, CST_IPI$, INCONSISTENCIA$, SUGESTAO$
+Dim CFOP$, CST_IPI$, INCONSISTENCIA$, SUGESTAO$
 Dim fatCFOP As Boolean, devCompCFOP As Boolean
 Dim arrCFOP_IPI As New ArrayList
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_IPI = Util.ApenasNumeros(Campos(dicTitulos("CST_IPI") - i))
     
     'carrega lista de CFOP válidos para o IPI
@@ -168,7 +168,7 @@ Dim i As Byte
     
     Select Case True
         
-        Case CST_IPI = "" And arrCFOP_IPI.contains(Cfop)
+        Case CST_IPI = "" And arrCFOP_IPI.contains(CFOP)
             INCONSISTENCIA = "O CFOP informado não possui um CST_IPI associado"
             SUGESTAO = "Informar um CST_IPI para a operação"
             

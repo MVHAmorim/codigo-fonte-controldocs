@@ -181,7 +181,7 @@ Dim nCampo As Variant
             Select Case CStr(nCampo)
                 
                 Case "CFOP"
-                    .Cfop = Campos(dtoInventario.dicTitulosMovimentoEstoque("CFOP"))
+                    .CFOP = Campos(dtoInventario.dicTitulosMovimentoEstoque("CFOP"))
                     .QTD_INV = Campos(dtoInventario.dicTitulosMovimentoEstoque("QTD_INV"))
                     .VL_ITEM = Campos(dtoInventario.dicTitulosMovimentoEstoque("VL_ITEM"))
                     
@@ -234,7 +234,7 @@ Private Sub AtribuirQuantidade()
         
         Select Case True
             
-            Case .Cfop < 4000
+            Case .CFOP < 4000
                 AtribuirValor "QTD_ENT", .QTD_INV
                 AtribuirValor "VL_ENT", .VL_ITEM
                 AtribuirValor "VL_UNIT_ENT", CalcularValorUnitario
@@ -243,7 +243,7 @@ Private Sub AtribuirQuantidade()
                 AtribuirValor "VL_SAI", 0
                 AtribuirValor "VL_UNIT_SAI", 0
                 
-            Case .Cfop > 4000
+            Case .CFOP > 4000
                 AtribuirValor "QTD_SAI", .QTD_INV
                 AtribuirValor "VL_SAI", .VL_ITEM
                 AtribuirValor "VL_UNIT_SAI", CalcularValorUnitario
@@ -470,15 +470,15 @@ Public Sub ListarCFOPs()
 
 Dim arrRelatorio As New ArrayList
 Dim arrCFOPs As New ArrayList
-Dim Cfop As Variant
+Dim CFOP As Variant
     
     Set arrCFOPs = Util.ListarValoresUnicos(relMovimentoEstoque, 4, 3, "CFOP")
     
-    For Each Cfop In arrCFOPs
+    For Each CFOP In arrCFOPs
         
-        If Cfop Like "#9##" Then arrRelatorio.Add Array(Cfop, "NÃO") Else arrRelatorio.Add Array(Cfop, "SIM")
+        If CFOP Like "#9##" Then arrRelatorio.Add Array(CFOP, "NÃO") Else arrRelatorio.Add Array(CFOP, "SIM")
         
-    Next Cfop
+    Next CFOP
     
     Call Util.LimparDados(configInventario, 4, False)
     Call Util.ExportarDadosArrayList(configInventario, arrRelatorio)

@@ -85,7 +85,7 @@ Dim b As Long
             If Not Util.ChecarCamposPreenchidos(Campos) Then GoTo ProximaLinha
                 
             ' Carrega variáveis para o filtro de elegibilidade
-            Dim Cfop As String: Cfop = Campos(dicTitulosC170("CFOP"))
+            Dim CFOP As String: CFOP = Campos(dicTitulosC170("CFOP"))
             Dim CST_ICMS As String: CST_ICMS = Campos(dicTitulosC170("CST_ICMS"))
             Dim CST_PIS As String: CST_PIS = Campos(dicTitulosC170("CST_PIS"))
             Dim VL_ICMS As Double: VL_ICMS = fnExcel.ConverterValores(Campos(dicTitulosC170("VL_ICMS")))
@@ -99,7 +99,7 @@ Dim b As Long
             
             If DT_ENT_SAI <> "" Then DT_DOC = DT_ENT_SAI
             
-            If isOperacaoElegivel_Normal(Cfop, CST_ICMS, CST_PIS, VL_ICMS, DT_DOC) Then
+            If isOperacaoElegivel_Normal(CFOP, CST_ICMS, CST_PIS, VL_ICMS, DT_DOC) Then
                 
                 ' Extrai todos os dados necessários (lógica similar à original)
                 Dim REG As String: REG = Campos(dicTitulosC170("REG"))
@@ -119,7 +119,7 @@ Dim b As Long
                 .AtribuirValor "CHV_PAI_CONTRIBUICOES", CHV_C100
                 .AtribuirValor "CHV_REG", Campos(dicTitulosC170("CHV_REG"))
                 .AtribuirValor "COD_ITEM", fnExcel.FormatarTexto(COD_ITEM)
-                .AtribuirValor "CFOP", Cfop
+                .AtribuirValor "CFOP", CFOP
                 .AtribuirValor "CST_ICMS", fnExcel.FormatarTexto(CST_ICMS)
                 .AtribuirValor "VL_ITEM", fnExcel.ConverterValores(Campos(dicTitulosC170("VL_ITEM")))
                 .AtribuirValor "VL_DESC", fnExcel.ConverterValores(Campos(dicTitulosC170("VL_DESC")))
@@ -144,7 +144,7 @@ ProximaLinha:
     Set Apuracao = Nothing
 End Sub
 
-Private Function isOperacaoElegivel_Normal(ByVal Cfop As String, ByVal CST_ICMS As String, _
+Private Function isOperacaoElegivel_Normal(ByVal CFOP As String, ByVal CST_ICMS As String, _
                                            ByVal CST_PIS As String, ByVal VL_ICMS As Double, _
                                            ByVal dtOperacao As String) As Boolean
 

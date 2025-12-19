@@ -111,7 +111,7 @@ Dim i As Long
                 If VL_MERC > 0 Then VL_ADIC = VBA.Round(VL_ITEM / VL_MERC * VL_DESP, 2)
                                                 
                 .REG = "C175"
-                .Cfop = Campos(dicTitulos("CFOP"))
+                .CFOP = Campos(dicTitulos("CFOP"))
                 .VL_OPER = VBA.Round(VL_ITEM + VL_ADIC, 2)
                 .VL_DESC = VL_DESC + VL_ICMS
                 .CST_PIS = Campos(dicTitulos("CST_PIS"))
@@ -129,9 +129,9 @@ Dim i As Long
                 .COD_CTA = Campos(dicTitulos("COD_CTA"))
                 .INFO_COMPL = Campos(dicTitulos("OBS"))
                 
-                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_PIS, .CST_COFINS, .ALIQ_PIS, .ALIQ_COFINS)
+                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_PIS, .CST_COFINS, .ALIQ_PIS, .ALIQ_COFINS)
                 
-                Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI, CInt(.Cfop), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, _
+                Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI, CInt(.CFOP), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, _
                     CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), .QUANT_BC_PIS, .ALIQ_PIS_QUANT, CDbl(.VL_PIS), .CST_COFINS, CDbl(.VL_BC_COFINS), _
                     CDbl(.ALIQ_COFINS), .QUANT_BC_COFINS, .ALIQ_COFINS_QUANT, CDbl(.VL_COFINS), .COD_CTA, .INFO_COMPL)
                     
@@ -265,7 +265,7 @@ Dim i As Long
             arrExcluir.Add .CHV_PAI
             
             .REG = "C190"
-            .Cfop = Campos(dicTitulos("CFOP"))
+            .CFOP = Campos(dicTitulos("CFOP"))
             .CST_ICMS = Campos(dicTitulos("CST_ICMS"))
             .ALIQ_ICMS = Campos(dicTitulos("ALIQ_ICMS"))
             .VL_BC_ICMS = fnExcel.ConverterValores(Campos(dicTitulos("VL_BC_ICMS")), True, 2)
@@ -291,9 +291,9 @@ Dim i As Long
             
             If .VL_OPR < 0 Then .VL_OPR = 0
             
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_ICMS, .ALIQ_ICMS)
             
-            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, CInt(.Cfop), .ALIQ_ICMS, _
+            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, CInt(.CFOP), .ALIQ_ICMS, _
                            CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), _
                            CDbl(.VL_ICMS_ST), CDbl(.VL_RED_BC), CDbl(.VL_IPI), .COD_OBS)
             
@@ -581,7 +581,7 @@ Public Function CalcularAjustesDecretoAtacadistaBA(ByVal Registro As String, ByR
                                                    ByVal cPart As String, ByVal Modelo As String, ByVal SERIE As String, _
                                                    ByVal nNF As String, ByVal Emissao As String, ByVal chNFe As String)
 
-Dim Cfop As Integer
+Dim CFOP As Integer
 Dim Campos As Variant
 Dim Chave As String, CST$, cProd$
 Dim bcICMS As Double, vICMS#, pCred#, vAjuste#
@@ -590,7 +590,7 @@ Dim bcICMS As Double, vICMS#, pCred#, vAjuste#
     Emissao = VBA.Format(VBA.Format(Emissao, "00/00/0000"), "ddmmyyyy")
     cProd = Campos(3)
     bcICMS = Util.ValidarValores(Campos(7)) - Util.ValidarValores(Campos(8))
-    Cfop = Campos(11)
+    CFOP = Campos(11)
     vICMS = Util.ValidarValores(Campos(15))
     pCred = CalcularPerncentualCredito(bcICMS, vICMS)
     
@@ -598,12 +598,12 @@ Dim bcICMS As Double, vICMS#, pCred#, vAjuste#
         
         Select Case True
             
-            Case (VBA.Left(Cfop, 2) = "11" Or VBA.Left(Cfop, 2) = "19" Or VBA.Left(Cfop, 2) = "21" Or VBA.Left(Cfop, 2) = "29") And (pCred > 0.1)
+            Case (VBA.Left(CFOP, 2) = "11" Or VBA.Left(CFOP, 2) = "19" Or VBA.Left(CFOP, 2) = "21" Or VBA.Left(CFOP, 2) = "29") And (pCred > 0.1)
                 vAjuste = FuncoesSEFAZ_BA.CalcularEstornoCreditoDecretoAtacadistaBA(bcICMS, vICMS)
                 Call CriarAtualizarAjustes(dicAjustes, "BA010005", vAjuste)
                 Call rE113.CriarAtualizarE113(dicE113, "BA010005", vAjuste, cPart, Modelo, SERIE, nNF, Emissao, cProd, chNFe)
                 
-            Case (Cfop > 6000) And (pCred >= 0.12)
+            Case (CFOP > 6000) And (pCred >= 0.12)
                 vAjuste = FuncoesSEFAZ_BA.CalcularCreditoPresumidoInsterestadualDecretoAtacadistaBA(bcICMS, vICMS)
                 Call CriarAtualizarAjustes(dicAjustes, "BA020010", vAjuste)
                 Call rE113.CriarAtualizarE113(dicE113, "BA020010", vAjuste, cPart, Modelo, SERIE, nNF, Emissao, cProd, chNFe)
@@ -619,7 +619,7 @@ Public Function CalcularCreditoPresumidoArt269Inc10BA(ByVal Registro As String, 
                                                       ByVal cPart As String, ByVal Modelo As String, ByVal SERIE As String, _
                                                       ByVal nNF As String, ByVal Emissao As String, ByVal chNFe As String) As String
 
-Dim Cfop As Integer
+Dim CFOP As Integer
 Dim Campos As Variant
 Dim Chave As String, CST$, cProd$, NITEM$
 Dim vItem As Double, vICMS#, pCredSN#, vAjuste#
@@ -629,14 +629,14 @@ Dim vItem As Double, vICMS#, pCredSN#, vAjuste#
     Emissao = VBA.Format(VBA.Format(Emissao, "00/00/0000"), "ddmmyyyy")
     cProd = Campos(3)
     vItem = Util.ValidarValores(Campos(7)) - Util.ValidarValores(Campos(8))
-    Cfop = Campos(11)
+    CFOP = Campos(11)
     vICMS = Util.ValidarValores(Campos(15))
     
     Chave = chNFe & NITEM
     Select Case True
         
-        Case (Cfop < 2000) And (dicFornecSN.Exists(Chave))
-            If (dicFornecSN(Chave)(0) = "5101") And (VBA.Left(Cfop, 2) = "11" Or VBA.Left(Cfop, 2) = "21" Or VBA.Right(Cfop, 3) = "910") Then
+        Case (CFOP < 2000) And (dicFornecSN.Exists(Chave))
+            If (dicFornecSN(Chave)(0) = "5101") And (VBA.Left(CFOP, 2) = "11" Or VBA.Left(CFOP, 2) = "21" Or VBA.Right(CFOP, 3) = "910") Then
                 vAjuste = FuncoesSEFAZ_BA.CalcularCreditoPresumidoArt269Inc10BA(vItem)
                 Call CriarAtualizarAjustes(dicAjustes, "BA020009", vAjuste)
                 Call rE113.CriarAtualizarE113(dicE113, "BA020009", vAjuste, cPart, Modelo, SERIE, nNF, Emissao, cProd, chNFe)
@@ -658,7 +658,7 @@ Public Function CalcularCreditoAquisicaoSimplesNacionalBA(ByVal Registro As Stri
                                                           ByVal cPart As String, ByVal Modelo As String, ByVal SERIE As String, _
                                                           ByVal nNF As String, ByVal Emissao As String, ByVal chNFe As String) As String
 
-Dim Cfop As Integer
+Dim CFOP As Integer
 Dim Campos As Variant
 Dim Chave As String, CST$, cProd$, NITEM$
 Dim vItem As Double, vICMS#, pCredSN#, vAjuste#
@@ -668,19 +668,19 @@ Dim vItem As Double, vICMS#, pCredSN#, vAjuste#
     Emissao = VBA.Format(VBA.Format(Emissao, "00/00/0000"), "ddmmyyyy")
     cProd = Campos(3)
     vItem = Util.ValidarValores(Campos(7)) - Util.ValidarValores(Campos(8))
-    Cfop = Campos(11)
+    CFOP = Campos(11)
     vICMS = Util.ValidarValores(Campos(15))
     
     Chave = chNFe & NITEM
     Select Case True
             
-        Case (Cfop < 3000) And (dicFornecSN.Exists(Chave))
+        Case (CFOP < 3000) And (dicFornecSN.Exists(Chave))
         
             If (dicFornecSN(Chave)(0) <> "5101") Then
             
                 pCredSN = dicFornecSN(Chave)(1)
                 If (Mid(dicFornecSN(Chave)(0), 2, 1) = "1") And (pCredSN > 0) _
-                And (VBA.Left(Cfop, 2) = "11" Or VBA.Left(Cfop, 2) = "21" Or VBA.Right(Cfop, 3) = "910") Then
+                And (VBA.Left(CFOP, 2) = "11" Or VBA.Left(CFOP, 2) = "21" Or VBA.Right(CFOP, 3) = "910") Then
                             
                     vAjuste = FuncoesSEFAZ_BA.CalcularCreditoAquisicaoSimplesNacionalBA(vItem, pCredSN)
                     Call CriarAtualizarAjustes(dicAjustes, "BA020008", vAjuste)

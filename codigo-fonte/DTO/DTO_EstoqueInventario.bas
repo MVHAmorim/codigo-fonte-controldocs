@@ -30,7 +30,7 @@ Public Type CamposMovimentoEstoque
     COD_PART As String
     NOME_RAZAO_SOCIAL As String
     IND_MOV As String
-    Cfop As String
+    CFOP As String
     QTD_COM As Double
     UNID_COM As String
     FAT_CONV As Double
@@ -94,7 +94,7 @@ Public Type CamposSaldoInventario
     QTD_INV As Double
     IND_PROP As String
     COD_PART As String
-    Cfop As String
+    CFOP As String
     INCONSISTENCIA As String
     SUGESTAO As String
     

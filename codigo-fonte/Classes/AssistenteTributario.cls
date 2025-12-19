@@ -468,7 +468,7 @@ Dim CamposChave As Variant, Campos, CampoChave
 Dim Dados As Range, Linha As Range
 Dim dicBase As New Dictionary
 Dim dicAtual As Dictionary
-Dim Cfop As String
+Dim CFOP As String
 Dim i As Long
 
     CamposChave = ObterNomesCamposChave(Plan)
@@ -494,10 +494,10 @@ Dim i As Long
                     CampoChave = Campos(dicTitulosTributacao(CamposChave(i)))
                     If CamposChave(i) = "CFOP" Then
                     
-                        Cfop = CampoChave
+                        CFOP = CampoChave
                         
                         'Armazena os campos diretamente no CFOP
-                        dicAtual(Cfop) = Campos
+                        dicAtual(CFOP) = Campos
                         Exit For
                         
                     Else
@@ -793,17 +793,17 @@ End Sub
 
 Public Function ExtrairDataReferencia(ByRef Campos As Variant)
     
-Dim Cfop As String
+Dim CFOP As String
     
-    Cfop = Campos(dicTitulosApuracao("CFOP"))
+    CFOP = Campos(dicTitulosApuracao("CFOP"))
     
     Select Case True
         
-        Case Cfop = ""
-        Case Cfop > 4000
+        Case CFOP = ""
+        Case CFOP > 4000
             ExtrairDataReferencia = Campos(dicTitulosApuracao("DT_DOC"))
             
-        Case Cfop < 4000
+        Case CFOP < 4000
             ExtrairDataReferencia = Campos(dicTitulosApuracao("DT_ENT_SAI"))
             
     End Select

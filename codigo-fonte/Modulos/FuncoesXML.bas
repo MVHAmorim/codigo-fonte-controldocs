@@ -946,7 +946,7 @@ Dim a As Long, i&
                             .COD_MOD = ValidarTag(CTe, "//mod")
                             .COD_SIT = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_COD_SIT(fnSPED.GerarCodigoSituacao(fnXML.ValidarSituacao(ValidarTag(CTe, "//cStat"))))
                             .SER = VBA.Format(ValidarTag(CTe, "//serie"), "000")
-                            .Cfop = ValidarTag(CTe, "//CFOP")
+                            .CFOP = ValidarTag(CTe, "//CFOP")
                             .DT_REF = VBA.Format(VBA.Left(ValidarTag(CTe, "//dhEmi"), 10), "yyyy-mm-dd")
                                                         
                             Call fnXML.CriarRegistroD200(CTe, dicDadosD200, dicTitulosD200, dicDadosD201, dicDadosD205, ARQUIVO, CHV_D010)

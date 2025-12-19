@@ -29,14 +29,14 @@ Private Function ValidarCampo_ALIQ_PIS(ByRef Campos As Variant, ByRef dicTitulos
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim ALIQ_PIS As Double, ALIQ_PIS_TRIB#
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     ALIQ_PIS = Campos(dicTitulosApuracao("ALIQ_PIS") - i)
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     'Carregar campos do assistente de Tributação PIS/COFINS
@@ -46,7 +46,7 @@ Dim i As Byte
     Select Case True
         
         Case ALIQ_PIS <> ALIQ_PIS_TRIB
-            INCONSISTENCIA = "ALIQ_PIS divergente: " & fnExcel.FormatarPercentuais(ALIQ_PIS) & " (informado) vs " & fnExcel.FormatarPercentuais(ALIQ_PIS_TRIB) & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "ALIQ_PIS divergente: " & fnExcel.FormatarPercentuais(ALIQ_PIS) & " (informado) vs " & fnExcel.FormatarPercentuais(ALIQ_PIS_TRIB) & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar a alíquota do PIS cadastrada na Tributação"
             
     End Select
@@ -60,14 +60,14 @@ Private Function ValidarCampo_ALIQ_COFINS(ByRef Campos As Variant, ByRef dicTitu
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim ALIQ_COFINS As Double, ALIQ_COFINS_TRIB#
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração COFINS/COFINS
     ALIQ_COFINS = Campos(dicTitulosApuracao("ALIQ_COFINS") - i)
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     'Carregar campos do assistente de Tributação COFINS/COFINS
@@ -77,7 +77,7 @@ Dim i As Byte
     Select Case True
         
         Case ALIQ_COFINS <> ALIQ_COFINS_TRIB
-            INCONSISTENCIA = "ALIQ_COFINS divergente: " & fnExcel.FormatarPercentuais(ALIQ_COFINS) & " (informado) vs " & fnExcel.FormatarPercentuais(ALIQ_COFINS_TRIB) & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "ALIQ_COFINS divergente: " & fnExcel.FormatarPercentuais(ALIQ_COFINS) & " (informado) vs " & fnExcel.FormatarPercentuais(ALIQ_COFINS_TRIB) & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar a alíquota da COFINS cadastrada na Tributação"
             
     End Select
@@ -169,14 +169,14 @@ Private Function ValidarCampo_CST_PIS(ByRef Campos As Variant, ByRef dicTitulosA
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim CST_PIS As String, CST_PIS_TRIB$
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     CST_PIS = Campos(dicTitulosApuracao("CST_PIS") - i)
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     'Carregar campos do assistente de Tributação PIS/COFINS
@@ -186,7 +186,7 @@ Dim i As Byte
     Select Case True
         
         Case CST_PIS <> CST_PIS_TRIB
-            INCONSISTENCIA = "CST_PIS divergente: " & CST_PIS & " (informado) vs " & CST_PIS_TRIB & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "CST_PIS divergente: " & CST_PIS & " (informado) vs " & CST_PIS_TRIB & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar o CST do PIS cadastrada na Tributação"
             
     End Select
@@ -200,14 +200,14 @@ Private Function ValidarCampo_CST_COFINS(ByRef Campos As Variant, ByRef dicTitul
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim CST_COFINS As String, CST_COFINS_TRIB$
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     CST_COFINS = Campos(dicTitulosApuracao("CST_COFINS") - i)
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     
@@ -217,7 +217,7 @@ Dim i As Byte
     Select Case True
         
         Case CST_COFINS <> CST_COFINS_TRIB
-            INCONSISTENCIA = "CST_COFINS divergente: " & CST_COFINS & " (informado) vs " & CST_COFINS_TRIB & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "CST_COFINS divergente: " & CST_COFINS & " (informado) vs " & CST_COFINS_TRIB & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar o CST da COFINS cadastrada na Tributação"
             
     End Select
@@ -247,14 +247,14 @@ Private Function ValidarCampo_ALIQ_PIS_QUANT(ByRef Campos As Variant, ByRef dicT
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim ALIQ_PIS_QUANT As Double, ALIQ_PIS_QUANT_TRIB#
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     ALIQ_PIS_QUANT = fnExcel.ConverterValores(Campos(dicTitulosApuracao("ALIQ_PIS_QUANT") - i))
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
 
     If LBound(Campos) = 0 Then i = 1
     'Carregar campos do assistente de Tributação PIS/COFINS
@@ -264,7 +264,7 @@ Dim i As Byte
     Select Case True
         
         Case ALIQ_PIS_QUANT <> ALIQ_PIS_QUANT_TRIB
-            INCONSISTENCIA = "ALIQ_PIS_QUANT divergente: " & fnExcel.FormatarValores(ALIQ_PIS_QUANT) & " (informado) vs " & fnExcel.FormatarValores(ALIQ_PIS_QUANT_TRIB) & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "ALIQ_PIS_QUANT divergente: " & fnExcel.FormatarValores(ALIQ_PIS_QUANT) & " (informado) vs " & fnExcel.FormatarValores(ALIQ_PIS_QUANT_TRIB) & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar a alíquota por quantidade do PIS cadastrada na Tributação"
             
     End Select
@@ -278,14 +278,14 @@ Private Function ValidarCampo_ALIQ_COFINS_QUANT(ByRef Campos As Variant, ByRef d
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim ALIQ_COFINS_QUANT As Double, ALIQ_COFINS_QUANT_TRIB#
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     ALIQ_COFINS_QUANT = fnExcel.ConverterValores(Campos(dicTitulosApuracao("ALIQ_COFINS_QUANT") - i))
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     'Carregar campos do assistente de Tributação PIS/COFINS
@@ -295,7 +295,7 @@ Dim i As Byte
     Select Case True
         
         Case ALIQ_COFINS_QUANT <> ALIQ_COFINS_QUANT_TRIB
-            INCONSISTENCIA = "ALIQ_COFINS divergente: " & fnExcel.FormatarValores(ALIQ_COFINS_QUANT) & " (informado) vs " & fnExcel.FormatarValores(ALIQ_COFINS_QUANT_TRIB) & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "ALIQ_COFINS divergente: " & fnExcel.FormatarValores(ALIQ_COFINS_QUANT) & " (informado) vs " & fnExcel.FormatarValores(ALIQ_COFINS_QUANT_TRIB) & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar a alíquota por quantidade da COFINS cadastrada na Tributação"
             
     End Select

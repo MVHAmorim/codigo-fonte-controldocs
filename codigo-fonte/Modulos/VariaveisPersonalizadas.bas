@@ -6,7 +6,7 @@ Public Type CamposrelICMS
     REG As String
     CHV_REG As String
     COD_MOD As String
-    Cfop As String
+    CFOP As String
     CST_ICMS As String
     ALIQ_ICMS As String
     VL_OPR As String
@@ -28,7 +28,7 @@ End Type
 Public Type CamposLivroIPI
     
     CHV_REG As String
-    Cfop As String
+    CFOP As String
     CST_IPI As String
     ALIQ_IPI As String
     VL_OPERACAO As String
@@ -41,7 +41,7 @@ End Type
 Public Type CamposLivroPISCOFINS
         
     CHV_REG As String
-    Cfop As String
+    CFOP As String
     CST_PIS As String
     CST_COFINS As String
     ALIQ_PIS As String
@@ -113,7 +113,7 @@ Public Type CamposRessarcimento
     ALIQ_ST As String
     VL_UNIT_RESSARCIMENTO As String
     OBSERVACOES As String
-    Cfop As String
+    CFOP As String
     
 End Type
 
@@ -121,7 +121,7 @@ Public Type DadosNotasFiscais
     
     cBarra As String
     CEST As String
-    Cfop As String
+    CFOP As String
     Chave As String
     chNFe As String
     chCTe As String

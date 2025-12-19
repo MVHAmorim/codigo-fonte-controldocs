@@ -1737,7 +1737,7 @@ End Function
 
 Public Function CriarDicionarioTributacao(ByVal Plan As Worksheet, Optional ByVal tpTributacao As String) As Dictionary
 
-Dim Chave As String, COD_ITEM$, Cfop$, UF$, COD_BARRA$, COD_NCM$
+Dim Chave As String, COD_ITEM$, CFOP$, UF$, COD_BARRA$, COD_NCM$
 Dim arrCamposChave As New ArrayList
 Dim Dados As Range, Linha As Range
 Dim dicTitulos As New Dictionary
@@ -1759,24 +1759,24 @@ Dim Campos As Variant
             COD_ITEM = Campos(dicTitulos("COD_ITEM"))
             COD_BARRA = Campos(dicTitulos("COD_BARRA"))
             COD_NCM = Campos(dicTitulos("COD_NCM"))
-            Cfop = Campos(dicTitulos("CFOP"))
+            CFOP = Campos(dicTitulos("CFOP"))
             UF = Campos(dicTitulos("UF"))
             
             'Define chave de tributa��o da opera��o
             If tpTributacao = "COD_NCM" Then
                 
                 'Cria a chave de tributa��o por NCM
-                Chave = COD_NCM & UF & Cfop
+                Chave = COD_NCM & UF & CFOP
                 
             ElseIf tpTributacao = "COD_BARRA" Then
                 
                 'Cria a chave de tributa��o por COD_BARRA
-                Chave = COD_BARRA & UF & Cfop
+                Chave = COD_BARRA & UF & CFOP
                 
             Else
                 
                 'Cria a chave de tributa��o geral
-                Chave = COD_ITEM & UF & Cfop
+                Chave = COD_ITEM & UF & CFOP
                 
             End If
             
@@ -3224,14 +3224,14 @@ Public Function SegregarEntradasSaidas(ByRef dicDados As Dictionary, ByRef dicTi
     ByRef dicEntradas As Dictionary, ByRef dicSaidas As Dictionary)
     
 Dim Campos As Variant
-Dim CHV_REG As String, Cfop$
+Dim CHV_REG As String, CFOP$
     
     For Each Campos In dicDados.Items()
         
         CHV_REG = Campos(dicTitulos("CHV_REG"))
-        Cfop = Campos(dicTitulos("CFOP"))
+        CFOP = Campos(dicTitulos("CFOP"))
         
-        If Cfop < 4000 Then dicEntradas(CHV_REG) = Campos Else dicSaidas(CHV_REG) = Campos
+        If CFOP < 4000 Then dicEntradas(CHV_REG) = Campos Else dicSaidas(CHV_REG) = Campos
         
     Next Campos
     

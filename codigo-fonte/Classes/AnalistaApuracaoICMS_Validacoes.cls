@@ -13,7 +13,7 @@ Private dtoValidacoes As DTOsClasseValidacoesResumoICMS
 
 Private Type CamposResumoICMS
     
-    Cfop As String
+    CFOP As String
     CST_ICMS As String
     VL_ITEM As Double
     VL_BC_ICMS As Double
@@ -111,16 +111,16 @@ Public Sub VerificarOperacoesFiscais()
         
         Select Case True
             
-            Case ValidarPadraoCFOP(.Cfop, "CompraComercializacao") And ValidarPadraoCST_ICMS(.CST_ICMS, "STGeral")
-                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .Cfop
+            Case ValidarPadraoCFOP(.CFOP, "CompraComercializacao") And ValidarPadraoCST_ICMS(.CST_ICMS, "STGeral")
+                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Corrigir CST_ICMS informado na operação"
                 
-            Case .Cfop Like "[1-2]403" And Not .CST_ICMS Like "#6[0-1]"
-                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .Cfop
+            Case .CFOP Like "[1-2]403" And Not .CST_ICMS Like "#6[0-1]"
+                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Informar CST_ICMS " & VBA.Left(.CST_ICMS, 1) & "60 para a operação"
                 
-            Case ValidarPadraoCFOP(.Cfop, "EntradaST") And Not ValidarPadraoCST_ICMS(.CST_ICMS, "STGeral")
-                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .Cfop
+            Case ValidarPadraoCFOP(.CFOP, "EntradaST") And Not ValidarPadraoCST_ICMS(.CST_ICMS, "STGeral")
+                .INCONSISTENCIA = "CST_ICMS (" & .CST_ICMS & ") inconsistente com CFOP " & .CFOP
                 .SUGESTAO = "Corrigir CST_ICMS informado na operação"
                 
         End Select
@@ -236,7 +236,7 @@ Private Sub CarregarDadosDTO()
     
     With dtoValidacoes
         
-        .dtoResumoICMS.Cfop = .Campos(.dicTitulosResumoICMS("CFOP"))
+        .dtoResumoICMS.CFOP = .Campos(.dicTitulosResumoICMS("CFOP"))
         .dtoResumoICMS.CST_ICMS = Util.RemoverAspaSimples(.Campos(.dicTitulosResumoICMS("CST_ICMS")))
         .dtoResumoICMS.VL_ITEM = .Campos(.dicTitulosResumoICMS("VL_ITEM"))
         .dtoResumoICMS.VL_BC_ICMS = .Campos(.dicTitulosResumoICMS("VL_BC_ICMS"))
@@ -255,7 +255,7 @@ Private Sub ExtrairDadosDTO()
     
     With dtoValidacoes
         
-        .Campos(.dicTitulosResumoICMS("CFOP")) = .dtoResumoICMS.Cfop
+        .Campos(.dicTitulosResumoICMS("CFOP")) = .dtoResumoICMS.CFOP
         .Campos(.dicTitulosResumoICMS("CST_ICMS")) = fnExcel.FormatarTexto(.dtoResumoICMS.CST_ICMS)
         .Campos(.dicTitulosResumoICMS("VL_ITEM")) = .dtoResumoICMS.VL_ITEM
         .Campos(.dicTitulosResumoICMS("VL_BC_ICMS")) = .dtoResumoICMS.VL_BC_ICMS

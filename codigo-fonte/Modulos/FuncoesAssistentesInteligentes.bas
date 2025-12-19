@@ -363,7 +363,7 @@ End Sub
 Private Function GerarSugestoesProdutos(ByVal Campos As Variant, ByRef dicTitulos As Dictionary) As Variant
 
 Dim VL_ICMS As Double, VL_BC_ICMS#, VL_ITEM#, VL_DESC#, VL_BC_ICMS_ST#, VL_ICMS_ST#
-Dim Cfop As String, CST_ICMS$, TIPO_ITEM$, IND_MOV$, CEST$, COD_NCM$, ALIQ_ICMS$
+Dim CFOP As String, CST_ICMS$, TIPO_ITEM$, IND_MOV$, CEST$, COD_NCM$, ALIQ_ICMS$
 Dim i As Integer
     
     If dicTabelaCFOP.Count = 0 Then Call ValidacoesCFOP.CarregarTabelaCFOP
@@ -375,7 +375,7 @@ Dim i As Integer
     IND_MOV = Campos(dicTitulos("IND_MOV") - i)
     TIPO_ITEM = Util.ApenasNumeros(Campos(dicTitulos("TIPO_ITEM") - i))
     COD_NCM = VBA.Format(Util.ApenasNumeros(Campos(dicTitulos("COD_NCM") - i)), "0000\.00\.00")
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CEST = Util.ApenasNumeros(Campos(dicTitulos("CEST") - i))
     CST_ICMS = Util.ApenasNumeros(Campos(dicTitulos("CST_ICMS") - i))
     VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulos("VL_ITEM") - i))
@@ -401,13 +401,13 @@ Dim i As Integer
             Call Util.GravarSugestao(Campos, dicTitulos, "Campo 'CST_ICMS' não informado", "Informe um CST/ICMS para o campo")
                                             
         'CFOP não informado
-        Case Cfop = ""
+        Case CFOP = ""
             Call Util.GravarSugestao(Campos, dicTitulos, "Campo 'CFOP' não informado", "Informe um CFOP para o campo")
             
         Case Not dicTabelaCEST.Exists(CEST) And CEST <> ""
             Call Util.GravarSugestao(Campos, dicTitulos, "O CEST informado não existe na tabela CEST", "Informar um CEST válido")
 
-        Case Not dicTabelaCFOP.Exists(Cfop)
+        Case Not dicTabelaCFOP.Exists(CFOP)
             Call Util.GravarSugestao(Campos, dicTitulos, "O CFOP informado não existe na tabela CFOP", "Informar um CFOP válido")
                         
         'CST_ICMS com 4 dígitos ou mais
@@ -435,47 +435,47 @@ Dim i As Integer
             Campos(dicTitulos("SUGESTAO") - i) = "Definir se há movimentação física para o produto: 0 - SIM / 1 - NÃO"
             
         'Operação sujeita a ST com CST_ICMS incorreto
-        Case VBA.Left(Cfop, 1) < 4 And Cfop Like "#4##" And VL_ICMS > 0 And Not Cfop Like "*411"
+        Case VBA.Left(CFOP, 1) < 4 And CFOP Like "#4##" And VL_ICMS > 0 And Not CFOP Like "*411"
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Operação sujeita a ST com aproveitamento de crédito do ICMS"
             Campos(dicTitulos("SUGESTAO") - i) = "Zerar os campos VL_BC_ICMS, ALIQ_ICMS e VL_ICMS"
             
         'Operação com ativo imobilizado e aproveitamento de crédito do ICMS
-        Case Cfop Like "*551" And VL_ICMS > 0
+        Case CFOP Like "*551" And VL_ICMS > 0
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Operação com ativo imobilizado e aproveitamento de crédito do ICMS"
             Campos(dicTitulos("SUGESTAO") - i) = "Zerar os campos VL_BC_ICMS, ALIQ_ICMS e VL_ICMS"
             
         'Operação interna informada com dígito de origem indicando importação
-        Case (CST_ICMS = "101" Or CST_ICMS = "102" Or CST_ICMS = "103" Or CST_ICMS = "201" Or CST_ICMS = "202" Or CST_ICMS = "203" Or CST_ICMS = "900") And VBA.Left(Cfop, 1) < 4
+        Case (CST_ICMS = "101" Or CST_ICMS = "102" Or CST_ICMS = "103" Or CST_ICMS = "201" Or CST_ICMS = "202" Or CST_ICMS = "203" Or CST_ICMS = "900") And VBA.Left(CFOP, 1) < 4
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Informado CSOSN em operação de entrada"
             Campos(dicTitulos("SUGESTAO") - i) = "Alterar CST_ICMS para 090"
             
         'Operação interna informada com dígito de origem indicando importação
-        Case Not Cfop Like "3*" And CST_ICMS Like "1*"
+        Case Not CFOP Like "3*" And CST_ICMS Like "1*"
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Informado dígito de origem de importação 1 para operação interna"
             Campos(dicTitulos("SUGESTAO") - i) = "Alterar dígito de origem do CST_ICMS para 2"
             
         'Operação interna informada com dígito de origem indicando importação
-        Case Not Cfop Like "3*" And CST_ICMS Like "6*"
+        Case Not CFOP Like "3*" And CST_ICMS Like "6*"
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Informado dígito de origem de importação 6 para operação interna"
             Campos(dicTitulos("SUGESTAO") - i) = "Alterar dígito de origem do CST_ICMS para 7"
         
         'Operação sujeita a ST com CST_ICMS incorreto
-        Case Cfop Like "#4##" And Not Cfop Like "*411" And Not CST_ICMS Like "*60"
+        Case CFOP Like "#4##" And Not CFOP Like "*411" And Not CST_ICMS Like "*60"
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Operação sujeita a ST com CST_ICMS inconsistente"
             Campos(dicTitulos("SUGESTAO") - i) = "Alterar últimos 2 dígitos do CST_ICMS para 60"
             
         'Operação com ativo imobilizado com CST_ICMS inconsistente
-        Case Cfop Like "*551" And Not CST_ICMS Like "*90"
+        Case CFOP Like "*551" And Not CST_ICMS Like "*90"
             Campos(dicTitulos("INCONSISTENCIA") - i) = "Operação com ativo imobilizado CST_ICMS inconsistente"
             Campos(dicTitulos("SUGESTAO") - i) = "Alterar últimos 2 dígitos do CST_ICMS para 90"
         
     End Select
     
-    If Cfop <> "" Then
+    If CFOP <> "" Then
         
         Select Case True
             
-            Case Cfop Like "*403" Or Cfop Like "*411" Or Cfop Like "*102"
+            Case CFOP Like "*403" Or CFOP Like "*411" Or CFOP Like "*102"
                 
                 'Verifica VL_ICMS_ST
                 If VL_ICMS_ST > 0 Then
@@ -486,7 +486,7 @@ Dim i As Integer
                 End If
                 
             'Operações de uso e consumo com ST e combustíveis
-            Case Cfop Like "*407" Or Cfop Like "*653"
+            Case CFOP Like "*407" Or CFOP Like "*653"
                 
                 'Verifica VL_ICMS
                 If VL_ICMS > 0 Then Call Util.GravarSugestao(Campos, dicTitulos, "Aproveitamento do VL_ICMS em operação de uso e consumo", "Zerar os campos VL_BC_ICMS, ALIQ_ICMS e VL_ICMS")
@@ -506,7 +506,7 @@ Dim i As Integer
                 If Not CST_ICMS Like "*60" Then Call Util.GravarSugestao(Campos, dicTitulos, "CST_ICMS inconsistente para operação de uso e consumo com ST", "Alterar últimos 2 dígitos do CST_ICMS para 60")
                 
             'Operações de uso e consumo
-            Case Cfop Like "*556"
+            Case CFOP Like "*556"
             
                 'Verifica VL_ICMS
                 If VL_ICMS > 0 Then Call Util.GravarSugestao(Campos, dicTitulos, "aproveitamento do VL_ICMS em operação de uso e consumo", "Zerar os campos VL_BC_ICMS, ALIQ_ICMS e VL_ICMS")
@@ -525,7 +525,7 @@ Dim i As Integer
                 'Verifica CST_ICMS
                 If Not CST_ICMS Like "*90" Then Call Util.GravarSugestao(Campos, dicTitulos, "CST_ICMS inconsistente para operação de uso e consumo", "Alterar últimos 2 dígitos do CST_ICMS para 90")
                                         
-            Case Cfop < 4000 And (Cfop Like "#10#" Or Cfop Like "#11#" Or Cfop Like "#12#")
+            Case CFOP < 4000 And (CFOP Like "#10#" Or CFOP Like "#11#" Or CFOP Like "#12#")
             
                 If CST_ICMS Like "*00" And VL_ICMS = 0 Then
                     Call Util.GravarSugestao(Campos, dicTitulos, _
@@ -533,7 +533,7 @@ Dim i As Integer
                             SUGESTAO:="Alterar últimos 2 dígitos do campo 'CST_ICMS' para '90'")
                 End If
 
-            Case Cfop < 4000 And Cfop Like "#65#"
+            Case CFOP < 4000 And CFOP Like "#65#"
                 
                 If VL_ICMS > 0 Then
                     Call Util.GravarSugestao(Campos, dicTitulos, _
@@ -566,17 +566,17 @@ Dim i As Integer
                     INCONSISTENCIA:="Operação sujeita a ST (últimos 2 dígitos do campo 'CST_ICMS' = 60) com aproveitamento de crédito do ICMS ('VL_ICMS' > 0)", _
                     SUGESTAO:="Zerar os campos VL_BC_ICMS, ALIQ_ICMS e VL_ICMS")
             
-            Case CST_ICMS Like "*10" And Not Cfop Like "#4##" And Not Cfop Like "#6##" And Not Cfop Like "#9##"
+            Case CST_ICMS Like "*10" And Not CFOP Like "#4##" And Not CFOP Like "#6##" And Not CFOP Like "#9##"
                 Call Util.GravarSugestao(Campos, dicTitulos, _
                     INCONSISTENCIA:="Operação sujeita a ST (últimos 2 dígitos do campo 'CST_ICMS' = 10) com CFOP inconsistente", _
                     SUGESTAO:="Alterar CFOP para representar uma operação sujeita a ST")
                     
-            Case CST_ICMS Like "*30" And Not Cfop Like "#4##" And Not Cfop Like "#6##" And Not Cfop Like "#9##"
+            Case CST_ICMS Like "*30" And Not CFOP Like "#4##" And Not CFOP Like "#6##" And Not CFOP Like "#9##"
                 Call Util.GravarSugestao(Campos, dicTitulos, _
                     INCONSISTENCIA:="Operação sujeita a ST (últimos 2 dígitos do campo 'CST_ICMS' = 30) com CFOP inconsistente", _
                     SUGESTAO:="Alterar CFOP para representar uma operação sujeita a ST")
                 
-            Case CST_ICMS Like "*60" And Not Cfop Like "#4##" And Not Cfop Like "#6##" And Not Cfop Like "#9##"
+            Case CST_ICMS Like "*60" And Not CFOP Like "#4##" And Not CFOP Like "#6##" And Not CFOP Like "#9##"
                 Call Util.GravarSugestao(Campos, dicTitulos, _
                     INCONSISTENCIA:="Operação sujeita a ST (últimos 2 dígitos do campo 'CST_ICMS' = 60) com CFOP inconsistente", _
                     SUGESTAO:="Alterar CFOP para representar uma operação sujeita a ST")
@@ -739,7 +739,7 @@ End Function
 Public Sub GerarRelatorioCustosPrecos()
 
 Dim VL_MERC As Double, VL_FRT#, VL_SEG#, VL_OUT_DA#, VL_DESP#, VL_OPR#, Valor#, VL_MED#, VL_CUSTO_MED#, VL_PRECO_MED#, QTD_ENT#, QTD_SAI#, VL_CUSTO#, VL_PRECO#, VL_RESULTADO_MED#, VL_MARGEM#, VL_PRECO_MIN#
-Dim CHV_REG As String, Cfop$, UF$, COD_ITEM$
+Dim CHV_REG As String, CFOP$, UF$, COD_ITEM$
 Dim CUSTO As Integer, PRECO&, Qtd&
 Dim dicTitulos0150 As New Dictionary
 Dim dicTitulos0200 As New Dictionary
@@ -789,8 +789,8 @@ Dim Campos As Variant, MarkUp
             'Coleta dados do registro C100
             CHV_REG = Campos(dicTitulosC170("CHV_PAI_FISCAL"))
             
-            Cfop = Campos(dicTitulosC170("CFOP"))
-            If Cfop Like "#1##" Or Cfop Like "#4##" Then
+            CFOP = Campos(dicTitulosC170("CFOP"))
+            If CFOP Like "#1##" Or CFOP Like "#4##" Then
                 
                 If dicDadosC100.Exists(CHV_REG) Then
                     VL_OPR = CDbl(Campos(dicTitulosC170("VL_ITEM")))
@@ -821,7 +821,7 @@ Dim Campos As Variant, MarkUp
                 
                 Qtd = Campos(dicTitulosC170("QTD"))
                 
-                If Cfop < 4000 Then
+                If CFOP < 4000 Then
                     QTD_ENT = Qtd
                     VL_CUSTO = VL_OPR
                     If QTD_ENT > 0 Then VL_CUSTO_MED = VBA.Round(VL_OPR / QTD_ENT, 2)

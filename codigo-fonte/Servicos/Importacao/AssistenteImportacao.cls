@@ -844,7 +844,7 @@ Public Function ExtrairDadosXML(ByVal XML As Variant) As DOMDocument60
                 
         .CNPJ_EMITENTE = fnXML.ExtrairCNPJEmitente(Doce)
         .CNPJ_DESTINATARIO = fnXML.ExtrairCNPJDestinatario(Doce)
-        .CNPJ_ESTABELECIMENTO = CNPJContribuinte 'DefinirCNPJEstabelecimento()
+        .CNPJ_ESTABELECIMENTO = CNPJContribuinte
         
         If .CNPJ_ESTABELECIMENTO = "" Then Exit Function
         

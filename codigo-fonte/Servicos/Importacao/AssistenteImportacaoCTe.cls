@@ -373,13 +373,13 @@ Dim i As Byte
         .SUB = ValidarTag(CTe, "//subserie")
         .NUM_DOC_INI = ValidarTag(CTe, "//nCT")
         .NUM_DOC_FIN = ValidarTag(CTe, "//nCT")
-        .Cfop = ValidarTag(CTe, "//CFOP")
+        .CFOP = ValidarTag(CTe, "//CFOP")
         .DT_REF = VBA.Format(VBA.Left(ValidarTag(CTe, "//dhEmi"), 10), "yyyy-mm-dd")
         .VL_DOC = fnXML.ValidarValores(CTe, "//vRec")
         .VL_DESC = 0
         .CHV_PAI = CHV_PAI
         
-        Chave = fnSPED.GerarChaveRegistro(.COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
+        Chave = fnSPED.GerarChaveRegistro(.COD_MOD, .SER, .COD_SIT, .CFOP, .DT_REF)
         If dicDadosD200.Exists(Chave) Then
             
             'carrega campos do dicionário
@@ -397,9 +397,9 @@ Dim i As Byte
             
         End If
         
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .Cfop, .DT_REF)
+        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .CFOP, .DT_REF)
         Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, .COD_MOD, .COD_SIT, "'" & .SER, .SUB, _
-            "'" & .NUM_DOC_INI, "'" & .NUM_DOC_FIN, .Cfop, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
+            "'" & .NUM_DOC_INI, "'" & .NUM_DOC_FIN, .CFOP, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
         
         dicDadosD200(Chave) = Campos
         

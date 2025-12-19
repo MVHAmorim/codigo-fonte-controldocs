@@ -211,7 +211,7 @@ Dim nCampo As Variant
         
         For Each nCampo In dicTitulosAnalitico
             
-            If nCampo = "CFOP" Then .Cfop = Campos(dtoTitSPED.tC170(nCampo))
+            If nCampo = "CFOP" Then .CFOP = Campos(dtoTitSPED.tC170(nCampo))
             If nCampo = "UNID" Then .UNID_COM = Campos(dtoTitSPED.tC170(nCampo))
             If nCampo = "QTD" Then .QTD_COM = Campos(dtoTitSPED.tC170(nCampo))
             If nCampo = "VL_ITEM" Then .VL_ITEM = Campos(dtoTitSPED.tC170(nCampo))
@@ -290,10 +290,10 @@ Private Sub DefinirDataOperacao()
         
         Select Case True
             
-            Case .Cfop < 4000
+            Case .CFOP < 4000
                 .DT_OPERACAO = .DT_E_S
                 
-            Case .Cfop > 4000
+            Case .CFOP > 4000
                 .DT_OPERACAO = .DT_DOC
                 
         End Select
@@ -319,12 +319,12 @@ Private Sub CalcularCusto()
     
     With dtoMovimentoEstoque
         
-        Select Case .Cfop
+        Select Case .CFOP
             
-            Case .Cfop < 4000
+            Case .CFOP < 4000
                 .VL_CUSTO = .VL_ITEM - .VL_DESC - .VL_ICMS + .VL_IPI - .VL_PIS - .VL_COFINS
                 
-            Case .Cfop > 4000
+            Case .CFOP > 4000
                 .VL_CUSTO = .VL_ITEM + .VL_DESP - .VL_DESC
                 
         End Select

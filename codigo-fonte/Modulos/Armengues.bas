@@ -13,7 +13,7 @@ Public Type DadosNotasFiscais2
     
     cBarra As String
     CEST As String
-    Cfop As String
+    CFOP As String
     Chave As String
     chNFe As String
     CPF As String
@@ -274,7 +274,7 @@ Private Sub ExtrairDadosAnaliticosEFD(ByVal Registro As String, ByVal Modelo As 
     
     With DadosNFe
     
-        .Cfop = Campos(3)
+        .CFOP = Campos(3)
         .CSTICMS = Campos(2)
         .pICMS = Util.ValidarValores(Campos(4)) / 100
         .vOperacao = Campos(5)
@@ -295,7 +295,7 @@ Private Sub ExtrairDadosAnaliticosEFD(ByVal Registro As String, ByVal Modelo As 
         End Select
         
         If Campos(1) = "C590" Then .vIPI = 0
-        .Chave = Modelo & .Cfop & .CSTICMS & .pICMS
+        .Chave = Modelo & .CFOP & .CSTICMS & .pICMS
         
         If Dicionario.Exists(.Chave) Then
         
@@ -321,7 +321,7 @@ Private Sub ExtrairDadosAnaliticosEFD(ByVal Registro As String, ByVal Modelo As 
                 
         End Select
         
-        Dicionario(Dicionario.Count + 1) = Array(Modelo, CInt(.Cfop), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), CDbl(.vICMS), _
+        Dicionario(Dicionario.Count + 1) = Array(Modelo, CInt(.CFOP), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), CDbl(.vICMS), _
                                                  CDbl(.vBCST), CDbl(.vICMSST), CDbl(.vRedBCICMS), CDbl(.vIPI), CDbl(.vIsentas), CDbl(.vOutras))
         
     End With
@@ -1357,7 +1357,7 @@ End Sub
 Private Function OperacoesGeradoresCredito()
 
 Dim Registros As Variant, Registro
-Dim CFOPS As String, Cfop
+Dim CFOPS As String, CFOP
 Dim Arq As String
     
     Arq = Util.SelecionarArquivo("txt")
@@ -1368,8 +1368,8 @@ Dim Arq As String
         
         If Registro Like "*|*" Then
             
-            Cfop = VBA.Split(Registro, "|")
-            CFOPS = CFOPS & """, """ & Cfop(0)
+            CFOP = VBA.Split(Registro, "|")
+            CFOPS = CFOPS & """, """ & CFOP(0)
             
         End If
         

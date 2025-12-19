@@ -17,7 +17,7 @@ Option Explicit
 
 Public ChaveAgrupamento As String
 Public CST_ICMS As String
-Public Cfop As String
+Public CFOP As String
 Public ALIQ_ICMS As String
 Public VL_OPR As Double
 Public VL_BC_ICMS As Double

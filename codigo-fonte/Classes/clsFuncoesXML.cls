@@ -627,7 +627,7 @@ Dim i As Long
                     .VL_DESC = ValidarValores(Produto, "prod/vDesc")
                     .IND_MOV = "0 - SIM"
                     .CST_ICMS = ExtrairCST_CSOSN_ICMS(Produto)
-                    .Cfop = ValidarValores(Produto, "prod/CFOP")
+                    .CFOP = ValidarValores(Produto, "prod/CFOP")
                     .COD_NAT = ""
                     .VL_BC_ICMS = ExtrairBaseICMS(Produto)
                     .ALIQ_ICMS = ExtrairAliquotaICMS(Produto)
@@ -724,7 +724,7 @@ Dim i As Long
                             
                         End If
                         
-                        .Cfop = AjustarCFOPEntrada(ValidarCFOPEntrada(.Cfop))
+                        .CFOP = AjustarCFOPEntrada(ValidarCFOPEntrada(.CFOP))
                         
                         Select Case True
                             
@@ -753,7 +753,7 @@ Dim i As Long
                                         
                     .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .NUM_ITEM)
                     dicDados(.CHV_REG) = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, .CHV_PAI, "'" & .NUM_ITEM, "'" & .COD_ITEM, .DESCR_COMPL, _
-                        CDbl(.Qtd), "'" & .UNID, CDbl(.VL_ITEM), CDbl(.VL_DESC), .IND_MOV, "'" & .CST_ICMS, CInt(.Cfop), .COD_NAT, _
+                        CDbl(.Qtd), "'" & .UNID, CDbl(.VL_ITEM), CDbl(.VL_DESC), .IND_MOV, "'" & .CST_ICMS, CInt(.CFOP), .COD_NAT, _
                         CDbl(.VL_BC_ICMS), CDbl(.ALIQ_ICMS), CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), CDbl(.ALIQ_ST), CDbl(.VL_ICMS_ST), _
                         .IND_APUR, "'" & .CST_IPI, "'" & .COD_ENQ, CDbl(.VL_BC_IPI), CDbl(.ALIQ_IPI), CDbl(.VL_IPI), "'" & .CST_PIS, _
                         CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), .QUANT_BC_PIS, .ALIQ_PIS_QUANT, CDbl(.VL_PIS), "'" & .CST_COFINS, _
@@ -877,7 +877,7 @@ Dim Campos As Variant
                 
                 .REG = "C175"
                 .ARQUIVO = CamposC100.ARQUIVO
-                .Cfop = ValidarValores(Produto, "prod/CFOP")
+                .CFOP = ValidarValores(Produto, "prod/CFOP")
                 .VL_OPER = ValidarValores(Produto, "prod/vItem")
                 .VL_DESC = ValidarValores(Produto, "imposto/ICMS//vDesc")
                 .CST_PIS = ValidacoesSPED.Fiscal.Enumeracoes.ValidarEnumeracao_CST_PIS_COFINS(VBA.Format(ValidarValores(Produto, "imposto/PIS//CST"), "00"))
@@ -895,7 +895,7 @@ Dim Campos As Variant
                 .COD_CTA = ""
                 .INFO_COMPL = ""
                 .CHV_PAI = CHV_PAI
-                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_PIS, .CST_COFINS, .ALIQ_PIS, .ALIQ_COFINS)
+                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_PIS, .CST_COFINS, .ALIQ_PIS, .ALIQ_COFINS)
                 
                 If .QUANT_BC_PIS = 0 Then .QUANT_BC_PIS = ""
                 If .ALIQ_PIS_QUANT = 0 Then .ALIQ_PIS_QUANT = ""
@@ -914,7 +914,7 @@ Dim Campos As Variant
                     
                 End If
                 
-                Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, CInt(.Cfop), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, CDbl(.VL_BC_PIS), _
+                Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, CInt(.CFOP), CDbl(.VL_OPER), CDbl(.VL_DESC), .CST_PIS, CDbl(.VL_BC_PIS), _
                            CDbl(.ALIQ_PIS), .QUANT_BC_PIS, .ALIQ_PIS_QUANT, CDbl(.VL_PIS), .CST_COFINS, CDbl(.VL_BC_COFINS), _
                            CDbl(.ALIQ_COFINS), .QUANT_BC_COFINS, .ALIQ_COFINS_QUANT, CDbl(.VL_COFINS), .COD_CTA, .INFO_COMPL)
                            
@@ -953,7 +953,7 @@ Dim VL_FCP_OP As Double, ALIQ_FCP#, VL_FCP_ST#, VL_PROD#, VL_FRETE#, VL_SEG#, VL
                 .REG = "C190"
                 .ARQUIVO = CamposC100.ARQUIVO
                 .CST_ICMS = fnExcel.FormatarTexto(ExtrairCST_CSOSN_ICMS(Produto))
-                .Cfop = ValidarValores(Produto, "prod/CFOP")
+                .CFOP = ValidarValores(Produto, "prod/CFOP")
                 .ALIQ_ICMS = ValidarPercentual(Produto, "imposto/ICMS//pICMS") + ALIQ_FCP
                 .VL_OPR = VL_PROD + VL_FRETE + VL_SEG + VL_OUTRAS - VL_DESC
                 .VL_BC_ICMS = ValidarValores(Produto, "imposto/ICMS//vBC")
@@ -964,13 +964,13 @@ Dim VL_FCP_OP As Double, ALIQ_FCP#, VL_FCP_ST#, VL_PROD#, VL_FRETE#, VL_SEG#, VL
                 .VL_IPI = ValidarValores(Produto, "imposto/IPI//vIPI")
                 .COD_OBS = ""
                 .CHV_PAI = CamposC100.CHV_REG
-                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
+                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_ICMS, .ALIQ_ICMS)
                 
                 'Calcula redução de base do ICMS caso exista
                 If .CST_ICMS Like "*20" Or .CST_ICMS Like "*70" Then .VL_RED_BC = .VL_OPR - .VL_BC_ICMS - .VL_ICMS_ST - .VL_IPI
                 
                 'Verifica se a nota fiscal é de emissão de terceiros para ajustar o CFOP
-                If CamposC100.IND_EMIT Like "1*" Then .Cfop = AjustarCFOPEntrada(ValidarCFOPEntrada(.Cfop))
+                If CamposC100.IND_EMIT Like "1*" Then .CFOP = AjustarCFOPEntrada(ValidarCFOPEntrada(.CFOP))
                     
                 If dicDados.Exists(.CHV_REG) Then
                     
@@ -985,7 +985,7 @@ Dim VL_FCP_OP As Double, ALIQ_FCP#, VL_FCP_ST#, VL_PROD#, VL_FRETE#, VL_SEG#, VL
                     
                 End If
                 
-                dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .CST_ICMS, .Cfop, CDbl(.ALIQ_ICMS), CDbl(.VL_OPR), _
+                dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .CST_ICMS, .CFOP, CDbl(.ALIQ_ICMS), CDbl(.VL_OPR), _
                     CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), CDbl(.VL_ICMS_ST), CDbl(.VL_RED_BC), CDbl(.VL_IPI), .COD_OBS)
                 
                 If (VL_FCP_OP + VL_FCP_ST) > 0 Then Call CriarRegistroC191(Produto, dicTitulosC191, dicDadosC191)
@@ -1098,10 +1098,10 @@ Dim Chave As String, CNPJEmit$
                 .UNID = VBA.UCase(ValidarTag(Produto, "prod/uCom"))
                 .VL_ITEM = ValidarValores(Produto, "prod/vProd")
                 .CST_ICMS = ExtrairCST_CSOSN_ICMS(Produto)
-                .Cfop = ValidarValores(Produto, "prod/CFOP")
+                .CFOP = ValidarValores(Produto, "prod/CFOP")
 
                 dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", .NUM_ITEM, _
-                    .COD_ITEM, CDbl(.Qtd), .UNID, CDbl(.VL_ITEM), "'" & .CST_ICMS, .Cfop)
+                    .COD_ITEM, CDbl(.Qtd), .UNID, CDbl(.VL_ITEM), "'" & .CST_ICMS, .CFOP)
                 
             End If
         
@@ -1125,14 +1125,14 @@ Dim Campos As Variant, Chave
                 .REG = "C850"
                 .ARQUIVO = CamposC800.ARQUIVO
                 .CST_ICMS = ExtrairCST_CSOSN_ICMS(Produto)
-                .Cfop = ValidarValores(Produto, "prod/CFOP")
+                .CFOP = ValidarValores(Produto, "prod/CFOP")
                 .ALIQ_ICMS = ValidarPercentual(Produto, "imposto/ICMS//pICMS")
                 .VL_OPR = ValidarValores(Produto, "prod/vItem")
                 .VL_BC_ICMS = ValidarValores(Produto, "prod/vItem")
                 .VL_ICMS = ValidarValores(Produto, "imposto/ICMS//vICMS")
                 .COD_OBS = ""
                 .CHV_PAI = CamposC800.CHV_REG
-                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
+                .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_ICMS, .ALIQ_ICMS)
             
                 If .VL_ICMS = 0 Then .VL_BC_ICMS = 0
                 If .VL_ICMS = "" Then .VL_ICMS = 0
@@ -1148,7 +1148,7 @@ Dim Campos As Variant, Chave
                 End If
                 
                 dicDados(.CHV_REG) = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, _
-                    .Cfop, CDbl(.ALIQ_ICMS), CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), .COD_OBS)
+                    .CFOP, CDbl(.ALIQ_ICMS), CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), .COD_OBS)
                 
             End If
         
@@ -1278,7 +1278,7 @@ Dim Campos As Variant
             
             .REG = "D190"
             .CST_ICMS = VBA.Format(ValidarTag(CTe, "//CST"), "000")
-            .Cfop = ValidarTag(CTe, "//CFOP")
+            .CFOP = ValidarTag(CTe, "//CFOP")
             .ALIQ_ICMS = ValidarPercentual(CTe, "//pICMS")
             .VL_OPR = ValidarValores(CTe, "//vRec")
             .VL_BC_ICMS = ValidarValores(CTe, "//vBC")
@@ -1287,10 +1287,10 @@ Dim Campos As Variant
             .COD_OBS = ""
             .CHV_PAI = CHV_PAI
                         
-            If IND_OPER = "0" Then .Cfop = AjustarCFOPEntrada(ValidarCFOPEntrada(.Cfop))
+            If IND_OPER = "0" Then .CFOP = AjustarCFOPEntrada(ValidarCFOPEntrada(.CFOP))
         
-            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
-            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, .Cfop, CDbl(.ALIQ_ICMS), _
+            .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_ICMS, .ALIQ_ICMS)
+            Campos = Array(.REG, ARQUIVO, .CHV_REG, .CHV_PAI, "", "'" & .CST_ICMS, .CFOP, CDbl(.ALIQ_ICMS), _
                            CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.VL_RED_BC), .COD_OBS)
                         
             dicDadosD190(.CHV_REG) = Campos
@@ -1321,13 +1321,13 @@ Dim i As Byte
         .SUB = ValidarTag(CTe, "//subserie")
         .NUM_DOC_INI = ValidarTag(CTe, "//nCT")
         .NUM_DOC_FIN = ValidarTag(CTe, "//nCT")
-        .Cfop = ValidarTag(CTe, "//CFOP")
+        .CFOP = ValidarTag(CTe, "//CFOP")
         .DT_REF = VBA.Format(VBA.Left(ValidarTag(CTe, "//dhEmi"), 10), "yyyy-mm-dd")
         .VL_DOC = ValidarValores(CTe, "//vRec")
         .VL_DESC = 0
         .CHV_PAI = CHV_PAI
         
-        Chave = fnSPED.GerarChaveRegistro(.COD_MOD, .SER, .COD_SIT, .Cfop, .DT_REF)
+        Chave = fnSPED.GerarChaveRegistro(.COD_MOD, .SER, .COD_SIT, .CFOP, .DT_REF)
         If dicDadosD200.Exists(Chave) Then
             
             'carrega campos do dicionário
@@ -1345,9 +1345,9 @@ Dim i As Byte
             
         End If
         
-        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .Cfop, .DT_REF)
+        .CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .COD_MOD, .COD_SIT, .SER, .SUB, .NUM_DOC_INI, .NUM_DOC_FIN, .CFOP, .DT_REF)
         Campos = Array(.REG, ARQUIVO, .CHV_REG, "", .CHV_PAI, .COD_MOD, .COD_SIT, "'" & .SER, .SUB, _
-            "'" & .NUM_DOC_INI, "'" & .NUM_DOC_FIN, .Cfop, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
+            "'" & .NUM_DOC_INI, "'" & .NUM_DOC_FIN, .CFOP, .DT_REF, CDbl(.VL_DOC), CDbl(.VL_DESC))
         
         dicDadosD200(Chave) = Campos
         
@@ -1527,12 +1527,16 @@ Dim ChaveSecundaria As String
         Case "NFe"
             ChavePrincipal = Util.ApenasNumeros(fnXML.ValidarTag(Doce, "//infProt/chNFe"))
             ChaveSecundaria = Util.ApenasNumeros(fnXML.ValidarTag(Doce, "//@Id"))
-            
-            If ChavePrincipal = "" Then ValidarChaveAcesso = ChaveSecundaria _
-                Else ValidarChaveAcesso = ChavePrincipal: Exit Function
-            
+                    
+        Case "NFCom"
+            ChavePrincipal = Util.ApenasNumeros(fnXML.ValidarTag(Doce, "//infProt/chNFCom"))
+            ChaveSecundaria = Util.ApenasNumeros(fnXML.ValidarTag(Doce, "//@Id"))
+        
     End Select
     
+    If ChavePrincipal = "" Then ValidarChaveAcesso = ChaveSecundaria _
+        Else ValidarChaveAcesso = ChavePrincipal: Exit Function
+
 End Function
 
 Public Function ColetarFornecedoresSN(ByRef dicFornecSN As Dictionary, ByVal Arqs As ArrayList)
@@ -1540,7 +1544,7 @@ Public Function ColetarFornecedoresSN(ByRef dicFornecSN As Dictionary, ByVal Arq
 Dim Produtos As IXMLDOMNodeList
 Dim Produto As IXMLDOMNode
 Dim NFe As New DOMDocument60
-Dim chNFe As String, CRT$, Cfop$, NITEM$, Chave$
+Dim chNFe As String, CRT$, CFOP$, NITEM$, Chave$
 Dim pCredSN As Double
 Dim Arq As Variant
     
@@ -1558,11 +1562,11 @@ Dim Arq As Variant
                 For Each Produto In Produtos
                     
                     NITEM = ValidarTag(Produto, "@nItem")
-                    Cfop = ValidarValores(Produto, "prod/CFOP")
+                    CFOP = ValidarValores(Produto, "prod/CFOP")
                     pCredSN = ValidarPercentual(Produto, "imposto/ICMS//pCredSN")
                     
                     Chave = chNFe & NITEM
-                    dicFornecSN(Chave) = Array(Cfop, pCredSN)
+                    dicFornecSN(Chave) = Array(CFOP, pCredSN)
                 
                 Next Produto
             
@@ -1603,13 +1607,13 @@ On Error GoTo Tratar:
                             .NITEM = ValidarTag(Produto, "@nItem")
                             .cProd = ValidarTag(Produto, "prod/cProd")
                             .cBarra = ValidarTag(Produto, "prod/cEAN")
-                            .Cfop = ValidarTag(Produto, "prod/CFOP")
+                            .CFOP = ValidarTag(Produto, "prod/CFOP")
                             .qCom = ValidarValores(Produto, "prod/qCom")
                             .uCom = ValidarTag(Produto, "prod/uCom")
                             .vUnit = ValidarValores(Produto, "prod/vUnCom")
                             .vProd = ValidarValores(Produto, "prod/vProd")
                             
-                            .Chave = .cProd & .Cfop & .uCom
+                            .Chave = .cProd & .CFOP & .uCom
                             
                             If dicReferencias.Exists(.cProd) Then .Referencia = dicReferencias(.cProd)(4)
                             
@@ -1627,14 +1631,14 @@ On Error GoTo Tratar:
                             
                             .Chave = .chNFe & .NITEM
                             
-                            Select Case VBA.Left(.Cfop, 1)
+                            Select Case VBA.Left(.CFOP, 1)
                             
                                 Case "1", "2", "3"
-                                    dicEntradasProdutos(.Chave) = Array("'" & .chNFe, .NITEM, "'" & .cProd, .xProd, .Referencia, .cBarra, .Cfop, CDbl(.qCom), .uCom, CDbl(.vUnit), CDbl(.vProd))
+                                    dicEntradasProdutos(.Chave) = Array("'" & .chNFe, .NITEM, "'" & .cProd, .xProd, .Referencia, .cBarra, .CFOP, CDbl(.qCom), .uCom, CDbl(.vUnit), CDbl(.vProd))
                                     
                                     
                                 Case "5", "6", "7"
-                                    dicSaidasProdutos(.Chave) = Array("'" & .chNFe, .NITEM, "'" & .cProd, .xProd, .Referencia, .cBarra, .Cfop, CDbl(.qCom), .uCom, CDbl(.vUnit), CDbl(.vProd))
+                                    dicSaidasProdutos(.Chave) = Array("'" & .chNFe, .NITEM, "'" & .cProd, .xProd, .Referencia, .cBarra, .CFOP, CDbl(.qCom), .uCom, CDbl(.vUnit), CDbl(.vProd))
                                         
                             End Select
                             
@@ -3078,32 +3082,32 @@ Dim CNPJToma As String
     
 End Function
 
-Public Function ValidarCFOPEntrada(ByRef Cfop As String) As String
+Public Function ValidarCFOPEntrada(ByRef CFOP As String) As String
     
     Select Case True
         
-        Case Cfop Like "5###"
-            ValidarCFOPEntrada = "1" & VBA.Right(Cfop, 3)
+        Case CFOP Like "5###"
+            ValidarCFOPEntrada = "1" & VBA.Right(CFOP, 3)
             
-        Case Cfop Like "6###"
-            ValidarCFOPEntrada = "2" & VBA.Right(Cfop, 3)
+        Case CFOP Like "6###"
+            ValidarCFOPEntrada = "2" & VBA.Right(CFOP, 3)
             
         Case Else
-            ValidarCFOPEntrada = Cfop
+            ValidarCFOPEntrada = CFOP
             
     End Select
     
 End Function
 
-Public Function AjustarCFOPEntrada(ByRef Cfop As String) As String
+Public Function AjustarCFOPEntrada(ByRef CFOP As String) As String
 
     Select Case True
         
-        Case Cfop Like "#404" Or Cfop Like "#405"
-            AjustarCFOPEntrada = VBA.Left(Cfop, 1) & "403"
+        Case CFOP Like "#404" Or CFOP Like "#405"
+            AjustarCFOPEntrada = VBA.Left(CFOP, 1) & "403"
 
         Case Else
-            AjustarCFOPEntrada = Cfop
+            AjustarCFOPEntrada = CFOP
             
     End Select
     

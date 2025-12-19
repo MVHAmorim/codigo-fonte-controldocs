@@ -199,7 +199,7 @@ Public Type CamposRegC181Contr
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_PIS As String
-    Cfop As String
+    CFOP As String
     VL_ITEM As String
     VL_DESC As String
     VL_BC_PIS As String
@@ -220,7 +220,7 @@ Public Type CamposRegC185Contr
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_COFINS As String
-    Cfop As String
+    CFOP As String
     VL_ITEM As String
     VL_DESC As String
     VL_BC_COFINS As String
@@ -314,7 +314,7 @@ Public Type CamposRegD200
     SUB As String
     NUM_DOC_INI As String
     NUM_DOC_FIN As String
-    Cfop As String
+    CFOP As String
     DT_REF As String
     VL_DOC As String
     VL_DESC As String

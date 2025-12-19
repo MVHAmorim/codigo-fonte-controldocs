@@ -37,11 +37,11 @@ Dim Inicio As Date
                 
                 .CHV_REG = Campos(dicTitulos("CHV_REG"))
                 .CHV_PAI = Campos(dicTitulos("CHV_PAI_FISCAL"))
-                .Cfop = Campos(dicTitulos("CFOP"))
+                .CFOP = Campos(dicTitulos("CFOP"))
                 .CST_COFINS = Campos(dicTitulos("CST_COFINS"))
                 .ALIQ_COFINS = Campos(dicTitulos("ALIQ_COFINS"))
                 
-                COD_ENFOQUE = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_COFINS, .ALIQ_COFINS)
+                COD_ENFOQUE = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_COFINS, .ALIQ_COFINS)
                 If dicC185.Exists(COD_ENFOQUE) Then
                     
                     For Each Chave In dicTitulos.Keys()

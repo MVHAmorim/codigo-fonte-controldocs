@@ -81,7 +81,7 @@ End Function
 
 Public Function ValidarCampo_TIPO_ITEM(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
 
-Dim Cfop As Integer, i%
+Dim CFOP As Integer, i%
 Dim TIPO_ITEM As String, INCONSISTENCIA$, SUGESTAO$
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCompraRevendaSemST As Boolean, vCompraRevendaComST As Boolean, _
@@ -91,16 +91,16 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     
     'Carrega informações do relatório
     TIPO_ITEM = Util.ApenasNumeros(Campos(dicTitulos("TIPO_ITEM") - i))
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     
     'Verifica informações dos CFOPS
-    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(Cfop)
-    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(Cfop)
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(Cfop)
-    vCompraCombustiveisConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
+    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(CFOP)
+    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(CFOP)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(CFOP)
+    vCompraCombustiveisConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
     'Operação sujeita a ST com CST_ICMS incorreto
     If TIPO_ITEM = "" Then
         

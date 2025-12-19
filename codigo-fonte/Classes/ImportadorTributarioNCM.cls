@@ -273,14 +273,14 @@ End Function
 
 Private Function AtualizarTributacaoPISCOFINS(ByRef Operacao As Variant, ByRef dicTitulos As Dictionary)
 
-Dim Cfop As String, Chave$
+Dim CFOP As String, Chave$
     
-    Cfop = Operacao(dicTitulos("CFOP"))
+    CFOP = Operacao(dicTitulos("CFOP"))
     
     Chave = COD_NCM & "|" & EX_IPI
     With tribNCM_PIS_COFINS
         
-        Select Case Cfop
+        Select Case CFOP
             
             Case Is < 4000
                 Operacao(dicTitulos("CST_PIS")) = dicDadosNCM(Chave)("CST_PIS_COFINS_ENT")
@@ -415,7 +415,7 @@ Dim Campos, Chave As String
 Dim arrLinha(1 To 7) As Variant
 Dim dictUnico As New Dictionary
 Dim arrRegistro As New ArrayList
-Dim Cfop As Variant, cstPis As String
+Dim CFOP As Variant, cstPis As String
 Dim cstEntrada As String, cstSaida As String
 Dim idxNCM As Long, idxEX_IPI As Long, idxCfop As Long, idxCST_PIS As Long
 Dim idxALIQ_PIS As Long, idxALIQ_COFINS As Long, idxNAT_PIS_COFINS As Long
@@ -435,17 +435,17 @@ Dim idxALIQ_PIS As Long, idxALIQ_COFINS As Long, idxNAT_PIS_COFINS As Long
         Dim natPadrao As String: natPadrao = Util.FormatarTexto(VBA.Format(Campos(idxNAT_PIS_COFINS), "000"))
         Dim aliqPisPadrao As Variant: aliqPisPadrao = fnExcel.FormatarPercentuais(Campos(idxALIQ_PIS))
         Dim aliqCofinsPadrao As Variant: aliqCofinsPadrao = fnExcel.FormatarPercentuais(Campos(idxALIQ_COFINS))
-        Cfop = Campos(idxCfop)
+        CFOP = Campos(idxCfop)
         cstPis = Campos(idxCST_PIS)
         cstEntrada = ""
         cstSaida = ""
 
-        If IsNumeric(Cfop) Then
-            If CLng(Cfop) < 4000 Then
+        If IsNumeric(CFOP) Then
+            If CLng(CFOP) < 4000 Then
                 If Trim(cstPis) <> "" Then
                     cstEntrada = Util.FormatarTexto(VBA.Format(Util.ApenasNumeros(cstPis), "00"))
                 End If
-            ElseIf CLng(Cfop) > 4000 Then
+            ElseIf CLng(CFOP) > 4000 Then
                 If Trim(cstPis) <> "" Then
                     cstSaida = Util.FormatarTexto(VBA.Format(Util.ApenasNumeros(cstPis), "00"))
                 End If

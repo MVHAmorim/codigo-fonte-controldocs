@@ -961,7 +961,7 @@ Public Type CamposRegC170
     VL_DESC As String
     IND_MOV As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     COD_NAT As String
     VL_BC_ICMS As String
     ALIQ_ICMS As String
@@ -1076,7 +1076,7 @@ Public Type CamposregC175_Contr
     CHV_PAI As String
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
-    Cfop As String
+    CFOP As String
     VL_OPER As String
     VL_DESC As String
     CST_PIS As String
@@ -1239,7 +1239,7 @@ Public Type CamposRegC185
     NUM_ITEM As String
     COD_ITEM As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
     UNID As String
@@ -1267,7 +1267,7 @@ Public Type CamposRegC186
     NUM_ITEM As String
     COD_ITEM As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     COD_MOT_REST_COMPL As String
     QUANT_CONV As String
     UNID As String
@@ -1295,7 +1295,7 @@ Public Type CamposRegC190
     CHV_PAI_CONTRIBUICOES As String
     COD_ENFOQUE As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -1459,7 +1459,7 @@ Public Type CamposRegC430
     VL_UNIT_ICMS_ST_CONV_COMPL As String
     VL_UNIT_FCP_ST_CONV_COMPL As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
                 
 End Type
 
@@ -1513,7 +1513,7 @@ Public Type CamposRegC470
     UNID As String
     VL_ITEM As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_PIS As String
     VL_COFINS As String
@@ -1543,7 +1543,7 @@ Public Type CamposRegC480
     VL_UNIT_ICMS_ST_CONV_COMPL As String
     VL_UNIT_FCP_ST_CONV_COMPL As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     
 End Type
 
@@ -1558,7 +1558,7 @@ Public Type CamposRegC490
     CHV_PAI_CONTRIBUICOES As String
     COD_ENFOQUE As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -1653,7 +1653,7 @@ Public Type CamposRegC590
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -1709,7 +1709,7 @@ Public Type CamposRegC810
     UNID As String
     VL_ITEM As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
 
 End Type
 
@@ -1747,7 +1747,7 @@ Public Type CamposRegC850
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -1817,7 +1817,7 @@ Public Type CamposRegC870
     Qtd As String
     UNID As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
 
 End Type
 
@@ -1854,7 +1854,7 @@ Public Type CamposRegC890
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -1981,7 +1981,7 @@ Public Type CamposRegD190
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -2074,7 +2074,7 @@ Public Type CamposRegD510
     VL_ITEM As String
     VL_DESC As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     VL_BC_ICMS As String
     ALIQ_ICMS As String
     VL_ICMS As String
@@ -2114,7 +2114,7 @@ Public Type CamposRegD590
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -2144,7 +2144,7 @@ Public Type CamposRegD700
     SER As String
     NUM_DOC As String
     DT_DOC As String
-    DT_E_S As String
+    DT_A_P As String
     VL_DOC As String
     VL_DESC As String
     VL_SERV As String
@@ -2179,7 +2179,7 @@ Public Type CamposRegD730
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
     CST_ICMS As String
-    Cfop As String
+    CFOP As String
     ALIQ_ICMS As String
     VL_OPR As String
     VL_BC_ICMS As String
@@ -2600,7 +2600,7 @@ Public Type CamposRegE510
     CHV_PAI As String
     CHV_PAI_FISCAL As String
     CHV_PAI_CONTRIBUICOES As String
-    Cfop As String
+    CFOP As String
     CST_IPI As String
     VL_CONT_IPI As String
     VL_BC_IPI As String

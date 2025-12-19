@@ -30,7 +30,7 @@ Public Type CamposApuracaoPISCOFINS
     TIPO_ITEM As String
     IND_MOV As String
     UF_PART As String
-    Cfop As Integer
+    CFOP As Integer
     VL_ITEM As Double
     VL_DESP As Double
     VL_DESC As Double
@@ -93,7 +93,7 @@ Dim i As Long
         .TIPO_ITEM = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("TIPO_ITEM") - i))
         .IND_MOV = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("IND_MOV") - i))
         .UF_PART = Util.RemoverAspaSimples(Campos(dicTitulosApuracaoPISCOFINS("UF_PART") - i))
-        .Cfop = Campos(dicTitulosApuracaoPISCOFINS("CFOP") - i)
+        .CFOP = Campos(dicTitulosApuracaoPISCOFINS("CFOP") - i)
         .VL_ITEM = fnExcel.ConverterValores(Campos(dicTitulosApuracaoPISCOFINS("VL_ITEM") - i), True, 2)
         .VL_DESP = fnExcel.ConverterValores(Campos(dicTitulosApuracaoPISCOFINS("VL_DESP") - i), True, 2)
         .VL_DESC = fnExcel.ConverterValores(Campos(dicTitulosApuracaoPISCOFINS("VL_DESC") - i), True, 2)
@@ -152,7 +152,7 @@ Dim i As Long
         Campos(dicTitulosApuracaoPISCOFINS("TIPO_ITEM") - i) = .TIPO_ITEM
         Campos(dicTitulosApuracaoPISCOFINS("IND_MOV") - i) = .IND_MOV
         Campos(dicTitulosApuracaoPISCOFINS("UF_PART") - i) = .UF_PART
-        Campos(dicTitulosApuracaoPISCOFINS("CFOP") - i) = .Cfop
+        Campos(dicTitulosApuracaoPISCOFINS("CFOP") - i) = .CFOP
         Campos(dicTitulosApuracaoPISCOFINS("VL_ITEM") - i) = .VL_ITEM
         Campos(dicTitulosApuracaoPISCOFINS("VL_DESP") - i) = .VL_DESP
         Campos(dicTitulosApuracaoPISCOFINS("VL_DESC") - i) = .VL_DESC

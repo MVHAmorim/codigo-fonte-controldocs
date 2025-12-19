@@ -139,7 +139,7 @@ Dim Inicio As Date
                 
                 .CHV_REG = Campos(dicTitulos("CHV_REG"))
                 .CHV_PAI = Campos(dicTitulos("CHV_PAI_CONTRIBUICOES"))
-                .Cfop = Campos(dicTitulos("CFOP"))
+                .CFOP = Campos(dicTitulos("CFOP"))
                 .CST_PIS = Campos(dicTitulos("CST_PIS"))
                 .CST_COFINS = Campos(dicTitulos("CST_COFINS"))
                 .ALIQ_PIS = Campos(dicTitulos("ALIQ_PIS"))
@@ -149,7 +149,7 @@ Dim Inicio As Date
 
                 .COD_CTA = Campos(dicTitulos("COD_CTA"))
                 
-                CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_PIS, .ALIQ_PIS, .ALIQ_PIS_QUANT, .CST_COFINS, .ALIQ_COFINS, .ALIQ_COFINS_QUANT, .COD_CTA)
+                CHV_REG = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_PIS, .ALIQ_PIS, .ALIQ_PIS_QUANT, .CST_COFINS, .ALIQ_COFINS, .ALIQ_COFINS_QUANT, .COD_CTA)
                 If dicC175.Exists(CHV_REG) Then
                     
                     'Soma valores valores do C175 para registros com a mesma chave

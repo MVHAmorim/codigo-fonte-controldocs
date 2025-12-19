@@ -122,7 +122,7 @@ Private Sub ExtrairDadosC170(ByVal Registro As String)
             
             .NUM_ITEM = CInt(fnExcel.ConverterValores(Campos(2), True, 0))
             .COD_ITEM = Campos(3)
-            .Cfop = CInt(fnExcel.ConverterValores(Campos(11), True, 0))
+            .CFOP = CInt(fnExcel.ConverterValores(Campos(11), True, 0))
             .CST_ICMS = fnExcel.FormatarTexto(Campos(10))
             .VL_BC_ICMS = fnExcel.ConverterValores(Campos(13), True, 2)
             .ALIQ_ICMS = fnExcel.FormatarPercentuais(Campos(14)) / 100
@@ -190,7 +190,7 @@ Private Function IncluirCamposICMSC170(ByRef Campos As Variant, ByVal Chave As S
     
     With infoICMSC170
         
-        Campos(dicTitulosC170("CFOP")) = .Cfop
+        Campos(dicTitulosC170("CFOP")) = .CFOP
         Campos(dicTitulosC170("CST_ICMS")) = .CST_ICMS
         Campos(dicTitulosC170("VL_BC_ICMS")) = .VL_BC_ICMS
         Campos(dicTitulosC170("ALIQ_ICMS")) = .ALIQ_ICMS
@@ -204,7 +204,7 @@ Private Sub ExtrairDadosICMSOperacao(ByVal Chave As String)
     
     With infoICMSC170
         
-        .Cfop = dicOperacoes(Chave)(0)
+        .CFOP = dicOperacoes(Chave)(0)
         .CST_ICMS = dicOperacoes(Chave)(1)
         .VL_BC_ICMS = dicOperacoes(Chave)(2)
         .ALIQ_ICMS = dicOperacoes(Chave)(3)

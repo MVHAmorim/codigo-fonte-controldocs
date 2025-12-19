@@ -139,14 +139,14 @@ Public Function ValidarCampo_TIPO_ITEM(ByRef Campos As Variant, ByRef dicTitulos
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim TIPO_ITEM As String, TIPO_ITEM_TRIB$
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     If LBound(Campos) = 0 Then i = 1
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     TIPO_ITEM = Campos(dicTitulosApuracao("TIPO_ITEM") - i)
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     If LBound(Campos) = 0 Then i = 1
     
@@ -156,7 +156,7 @@ Dim i As Byte
     Select Case True
         
         Case TIPO_ITEM <> TIPO_ITEM_TRIB
-            INCONSISTENCIA = "TIPO_ITEM divergente: " & TIPO_ITEM & " (informado) vs " & TIPO_ITEM_TRIB & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "TIPO_ITEM divergente: " & TIPO_ITEM & " (informado) vs " & TIPO_ITEM_TRIB & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar o TIPO_ITEM cadastrado na Tributação"
             
     End Select
@@ -170,13 +170,13 @@ Public Function ValidarCampo_IND_MOV(ByRef Campos As Variant, ByRef dicTitulosAp
     ByRef CamposTrib As Variant, ByRef dicTitulosTributacao As Dictionary)
     
 Dim IND_MOV As String, IND_MOV_TRIB$
-Dim INCONSISTENCIA As String, SUGESTAO$, Cfop$
+Dim INCONSISTENCIA As String, SUGESTAO$, CFOP$
 Dim i As Byte
     
     'Carregar campos do assistente de Apuração PIS/COFINS
     If LBound(Campos) = 0 Then i = 1
     IND_MOV = Util.ApenasNumeros(Campos(dicTitulosApuracao("IND_MOV") - i))
-    Cfop = Campos(dicTitulosApuracao("CFOP") - i)
+    CFOP = Campos(dicTitulosApuracao("CFOP") - i)
     
     'Carregar campos do assistente de Tributação PIS/COFINS
     If LBound(Campos) = 0 Then i = 1
@@ -185,7 +185,7 @@ Dim i As Byte
     Select Case True
         
         Case IND_MOV <> IND_MOV_TRIB
-            INCONSISTENCIA = "IND_MOV divergente: " & IND_MOV & " (informado) vs " & fnExcel.FormatarValores(IND_MOV_TRIB) & " (cadastrado) para a operação com CFOP " & Cfop
+            INCONSISTENCIA = "IND_MOV divergente: " & IND_MOV & " (informado) vs " & fnExcel.FormatarValores(IND_MOV_TRIB) & " (cadastrado) para a operação com CFOP " & CFOP
             SUGESTAO = "Aplicar o indicador de movimento cadastrado na Tributação"
             
     End Select

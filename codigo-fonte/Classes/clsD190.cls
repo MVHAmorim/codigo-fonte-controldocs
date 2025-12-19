@@ -40,11 +40,11 @@ Dim Inicio As Date
                 
                 .CHV_REG = Campos(dicTitulos("CHV_REG"))
                 .CHV_PAI = Campos(dicTitulos("CHV_PAI_FISCAL"))
-                .Cfop = Campos(dicTitulos("CFOP"))
+                .CFOP = Campos(dicTitulos("CFOP"))
                 .CST_ICMS = Campos(dicTitulos("CST_ICMS"))
                 .ALIQ_ICMS = Campos(dicTitulos("ALIQ_ICMS"))
                 
-                .COD_ENFOQUE = fnSPED.GerarChaveRegistro(.CHV_PAI, .Cfop, .CST_ICMS, .ALIQ_ICMS)
+                .COD_ENFOQUE = fnSPED.GerarChaveRegistro(.CHV_PAI, .CFOP, .CST_ICMS, .ALIQ_ICMS)
                 If dicD190.Exists(.COD_ENFOQUE) Then
                     
                     'Soma valores valores do D190 para registros com a mesma chave

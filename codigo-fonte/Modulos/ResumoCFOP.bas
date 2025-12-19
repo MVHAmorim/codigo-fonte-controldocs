@@ -53,7 +53,7 @@ Dim Campos
     
     With DadosDoce
     
-        .Cfop = Campos(3)
+        .CFOP = Campos(3)
         .CSTICMS = Campos(2)
         .pICMS = Util.FormatarValores(Campos(4)) / 100
         .vOperacao = Campos(5)
@@ -74,7 +74,7 @@ Dim Campos
         End Select
         
         If Campos(1) = "C590" Then .vIPI = 0
-        .Chave = Join(Array(.Cfop & .CSTICMS & .pICMS), "")
+        .Chave = Join(Array(.CFOP & .CSTICMS & .pICMS), "")
         
         If Dicionario.Exists(.Chave) Then
         
@@ -100,7 +100,7 @@ Dim Campos
                 
         End Select
         
-        Dicionario(.Chave) = Array(CInt(.Cfop), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), CDbl(.vICMS), _
+        Dicionario(.Chave) = Array(CInt(.CFOP), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), CDbl(.vICMS), _
                                     CDbl(.vBCST), CDbl(.vICMSST), CDbl(.vRedBCICMS), CDbl(.vIPI), CDbl(.vIsentas), CDbl(.vOutras))
         
     End With
@@ -115,7 +115,7 @@ Dim Campos
     
     With DadosDoce
     
-        .Cfop = Campos(3)
+        .CFOP = Campos(3)
         .CSTICMS = Campos(2)
         .pICMS = Util.FormatarValores(Campos(4)) / 100
         .vOperacao = Campos(5)
@@ -123,7 +123,7 @@ Dim Campos
         .vICMS = Campos(7)
         .vRedBCICMS = Campos(8)
         
-        .Chave = Modelo & .Cfop & .CSTICMS & .pICMS
+        .Chave = Modelo & .CFOP & .CSTICMS & .pICMS
         
         If Dicionario.Exists(.Chave) Then
         
@@ -146,7 +146,7 @@ Dim Campos
                 
         End Select
         
-        Dicionario(.Chave) = Array(CInt(.Cfop), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), _
+        Dicionario(.Chave) = Array(CInt(.CFOP), "'" & .CSTICMS, CDbl(.pICMS), CDbl(.vOperacao), CDbl(.bcICMS), _
                                     CDbl(.vICMS), 0, 0, CDbl(.vRedBCICMS), 0, CDbl(.vIsentas), CDbl(.vOutras))
         
     End With

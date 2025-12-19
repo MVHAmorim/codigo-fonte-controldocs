@@ -100,7 +100,7 @@ End Function
 
 Public Sub VerificarTributacao()
 
-Dim Cfop As String, CST_ICMS$, CST_PIS_COFINS$, CST_IPI$, CHV_TRIB$, OBS$
+Dim CFOP As String, CST_ICMS$, CST_PIS_COFINS$, CST_IPI$, CHV_TRIB$, OBS$
 Dim arrMsg As New ArrayList
 Dim arrOBS As New ArrayList
 Dim dicTributacao As New Dictionary
@@ -134,13 +134,13 @@ Dim Chave As Variant, Campos
             Campos = dicDadosC170(Chave)
             
                 .COD_ITEM = Campos(dicTitulosC170("COD_ITEM"))
-                .Cfop = Campos(dicTitulosC170("CFOP"))
+                .CFOP = Campos(dicTitulosC170("CFOP"))
                 .CST_ICMS = Campos(dicTitulosC170("CST_ICMS"))
                 .CST_IPI = Campos(dicTitulosC170("CST_IPI"))
                 .CST_PIS = Campos(dicTitulosC170("CST_PIS"))
                 .CST_COFINS = Campos(dicTitulosC170("CST_COFINS"))
                 
-                CHV_TRIB = fnSPED.MontarChaveRegistro(.COD_ITEM, .Cfop)
+                CHV_TRIB = fnSPED.MontarChaveRegistro(.COD_ITEM, .CFOP)
                 If dicTributacao.Exists(CHV_TRIB) Then
                     
                     CST_ICMS = dicTributacao(CHV_TRIB)(dicTitulos("CST_ICMS"))

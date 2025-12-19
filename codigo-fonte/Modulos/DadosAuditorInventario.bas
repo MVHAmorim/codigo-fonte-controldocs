@@ -19,7 +19,7 @@ Public Type CamposAuditoriaInventario
     COD_SIT As String
     DT_DOC As String
     COD_ITEM As String
-    Cfop As String
+    CFOP As String
     TIPO_ITEM As String
     QTD_COM As Double
     QTD_INV As Double
@@ -61,7 +61,7 @@ Dim i As Long
         .COD_SIT = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("COD_SIT") - i))
         .DT_DOC = fnExcel.FormatarData(Campos(dicTitulosAuditoriaInventario("DT_DOC") - i))
         .COD_ITEM = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("COD_ITEM") - i))
-        .Cfop = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("CFOP") - i))
+        .CFOP = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("CFOP") - i))
         .TIPO_ITEM = Util.RemoverAspaSimples(Campos(dicTitulosAuditoriaInventario("TIPO_ITEM") - i))
         .QTD_COM = fnExcel.ConverterValores(Campos(dicTitulosAuditoriaInventario("QTD_COM")), True, 2)
         .QTD_INV = fnExcel.ConverterValores(Campos(dicTitulosAuditoriaInventario("QTD_INV")), True, 2)
@@ -105,7 +105,7 @@ Dim i As Long
         Campos(dicTitulosAuditoriaInventario("COD_SIT") - i) = .COD_SIT
         Campos(dicTitulosAuditoriaInventario("DT_DOC") - i) = .DT_DOC
         Campos(dicTitulosAuditoriaInventario("COD_ITEM") - i) = .COD_ITEM
-        Campos(dicTitulosAuditoriaInventario("CFOP") - i) = .Cfop
+        Campos(dicTitulosAuditoriaInventario("CFOP") - i) = .CFOP
         Campos(dicTitulosAuditoriaInventario("TIPO_ITEM") - i) = .TIPO_ITEM
         Campos(dicTitulosAuditoriaInventario("QTD_COM") - i) = .QTD_COM
         Campos(dicTitulosAuditoriaInventario("QTD_INV") - i) = .QTD_INV

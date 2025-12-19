@@ -57,14 +57,14 @@ Dim Chave As Variant, ChaveE110, Campos
         
         For Each Chave In dicDadosC170.Keys
             
-            CamposC170.Cfop = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
+            CamposC170.CFOP = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
             CamposC170.COD_ITEM = dicDadosC170(Chave)(dicTitulosC170("COD_ITEM"))
             CamposC170.VL_ITEM = dicDadosC170(Chave)(dicTitulosC170("VL_ITEM"))
             CamposC170.VL_DESC = dicDadosC170(Chave)(dicTitulosC170("VL_DESC"))
             CamposC170.VL_ICMS = dicDadosC170(Chave)(dicTitulosC170("VL_ICMS"))
             CamposC170.CHV_PAI = dicDadosC170(Chave)(dicTitulosC170("CHV_PAI_FISCAL"))
             
-            If CamposC170.Cfop < 3000 Then
+            If CamposC170.CFOP < 3000 Then
                 
                 With CamposE113
                     
@@ -187,7 +187,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         For Each Chave In dicDadosC170.Keys
             
-            CamposC170.Cfop = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
+            CamposC170.CFOP = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
             CamposC170.NUM_ITEM = dicDadosC170(Chave)(dicTitulosC170("NUM_ITEM"))
             CamposC170.COD_ITEM = dicDadosC170(Chave)(dicTitulosC170("COD_ITEM"))
             CamposC170.VL_ITEM = dicDadosC170(Chave)(dicTitulosC170("VL_ITEM"))
@@ -195,7 +195,7 @@ Dim Chave As Variant, ChaveE110, Campos
             CamposC170.VL_ICMS = dicDadosC170(Chave)(dicTitulosC170("VL_ICMS"))
             CamposC170.CHV_PAI = dicDadosC170(Chave)(dicTitulosC170("CHV_PAI_FISCAL"))
             
-            If CamposC170.Cfop < 3000 Then
+            If CamposC170.CFOP < 3000 Then
                 
                 With CamposE113
                     
@@ -319,7 +319,7 @@ Dim Chave As Variant, ChaveE110, Campos
         
         For Each Chave In dicDadosC170.Keys
             
-            CamposC170.Cfop = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
+            CamposC170.CFOP = dicDadosC170(Chave)(dicTitulosC170("CFOP"))
             CamposC170.NUM_ITEM = dicDadosC170(Chave)(dicTitulosC170("NUM_ITEM"))
             CamposC170.COD_ITEM = dicDadosC170(Chave)(dicTitulosC170("COD_ITEM"))
             CamposC170.VL_ITEM = dicDadosC170(Chave)(dicTitulosC170("VL_ITEM"))
@@ -327,7 +327,7 @@ Dim Chave As Variant, ChaveE110, Campos
             CamposC170.VL_ICMS = dicDadosC170(Chave)(dicTitulosC170("VL_ICMS"))
             CamposC170.CHV_PAI = dicDadosC170(Chave)(dicTitulosC170("CHV_PAI_FISCAL"))
             
-            If CamposC170.Cfop < 3000 Then
+            If CamposC170.CFOP < 3000 Then
                 
                 With CamposE113
                     

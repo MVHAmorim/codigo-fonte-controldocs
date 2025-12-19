@@ -155,7 +155,7 @@ End Function
 
 Public Sub VerificarTributacaoPISCOFINS()
 
-Dim ChaveTrib As String, REG$, CFOP_CORRETO$, Cfop$, DESCR_ITEM$, NCM$, DT_REF$, Msg$
+Dim ChaveTrib As String, REG$, CFOP_CORRETO$, CFOP$, DESCR_ITEM$, NCM$, DT_REF$, Msg$
 Dim dicEstruturaTributaria As New Dictionary
 Dim Tributacao As New AssistenteTributario
 Dim dicDadosTributarios As New Dictionary
@@ -214,11 +214,11 @@ Dim Campos As Variant, CamposTrib
                 
                 If CFOP_CORRETO <> "" Then
                     
-                    Cfop = Campos(.dicTitulosApuracao("CFOP"))
+                    CFOP = Campos(.dicTitulosApuracao("CFOP"))
                     NCM = Campos(.dicTitulosApuracao("COD_NCM"))
                     DESCR_ITEM = Campos(.dicTitulosApuracao("DESCR_ITEM"))
                     
-                    Campos(.dicTitulosApuracao("INCONSISTENCIA")) = "CFOP (" & Cfop & ") incorreto para tributação do item: " & DESCR_ITEM & " (NCM: " & NCM & ")"
+                    Campos(.dicTitulosApuracao("INCONSISTENCIA")) = "CFOP (" & CFOP & ") incorreto para tributação do item: " & DESCR_ITEM & " (NCM: " & NCM & ")"
                     Campos(.dicTitulosApuracao("SUGESTAO")) = "Aplicar CFOP " & CFOP_CORRETO & " para a operação."
                     
                 Else
@@ -345,7 +345,7 @@ End Sub
 
 Public Sub AplicarTributacaoPISCOFINS()
 
-Dim REG As String, COD_INC_TRIB$, Cfop$, SUGESTAO$, DT_REF$
+Dim REG As String, COD_INC_TRIB$, CFOP$, SUGESTAO$, DT_REF$
 Dim CamposTrib As Variant, Campos, ChaveTrib
 Dim Tributacao As New AssistenteTributario
 Dim Apuracao As New clsAssistenteApuracao
@@ -413,8 +413,8 @@ Reprocessar:
                             Call ValidarRegrasTributariasPISCOFINS(Campos, .dicTitulosApuracao, CamposTrib, .dicTitulosTributacao)
                             
                         Case SUGESTAO Like "Aplicar CFOP * para a operação."
-                            Cfop = Util.ApenasNumeros(SUGESTAO)
-                            Campos(.dicTitulosApuracao("CFOP")) = Cfop
+                            CFOP = Util.ApenasNumeros(SUGESTAO)
+                            Campos(.dicTitulosApuracao("CFOP")) = CFOP
                             Call .LimparInconsistenciasSugestoes(Campos)
                             ChaveTrib = .GerarChaveTributacao(assApuracaoPISCOFINS, Campos)
                             DT_REF = .ExtrairDataReferencia(Campos)
@@ -550,7 +550,7 @@ Private Function IdentificarOperacoesIncorretas(ByRef Tributacao As AssistenteTr
     ByRef Plan As Worksheet, ByRef CamposApuracao As Variant) As String
 
 Dim CamposChave As Variant, Chave, Campos, Valor
-Dim Cfop As String, CFOPS_INCORRETOS$
+Dim CFOP As String, CFOPS_INCORRETOS$
 Dim dicAtual As Dictionary
     
     With Tributacao

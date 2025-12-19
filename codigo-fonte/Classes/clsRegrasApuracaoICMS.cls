@@ -46,7 +46,7 @@ Public Function VerificarCampoCONTRIBUINTE(ByRef Campos As Variant, ByRef dicTit
 Dim i As Integer
 Dim VL_ICMS As Double
 Dim vCONTRIBUINTE As Boolean, tCONTRIBUINTE As Boolean
-Dim CONTRIBUINTE As String, TIPO_PART$, COD_PART$, Cfop$, INCONSISTENCIA$, SUGESTAO$, CST_ICMS$
+Dim CONTRIBUINTE As String, TIPO_PART$, COD_PART$, CFOP$, INCONSISTENCIA$, SUGESTAO$, CST_ICMS$
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCompraCombustivelRevenda As Boolean, vCompraCombustivelConsumo As Boolean, _
     vCompraIndustrializacao As Boolean, vCompraRevendaComST As Boolean, vCompraRevenda As Boolean
@@ -58,48 +58,48 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     CONTRIBUINTE = Campos(dicTitulos("CONTRIBUINTE") - i)
     TIPO_PART = Campos(dicTitulos("TIPO_PART") - i)
     COD_PART = Campos(dicTitulos("COD_PART") - i)
-    Cfop = Campos(dicTitulos("CFOP") - i)
+    CFOP = Campos(dicTitulos("CFOP") - i)
     
     'Gera verificações sobre os dados do relatório
-    vCompraIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraIndustrializacao(Cfop)
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(Cfop)
-    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
-    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(Cfop)
-    vCompraRevenda = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(Cfop)
+    vCompraIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraIndustrializacao(CFOP)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(CFOP)
+    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
+    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(CFOP)
+    vCompraRevenda = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(CFOP)
     
-    If Cfop < 4000 And TIPO_PART = "PJ" And CONTRIBUINTE = "NÃO" Then
+    If CFOP < 4000 And TIPO_PART = "PJ" And CONTRIBUINTE = "NÃO" Then
         
         Select Case True
             
             Case vCompraRevenda And VL_ICMS > 0
-                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO CONTRIBUINTE em operação de compra para revenda (CFOP: " & Cfop & "), com aproveitamento de crédito do ICMS"
+                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO CONTRIBUINTE em operação de compra para revenda (CFOP: " & CFOP & "), com aproveitamento de crédito do ICMS"
                 SUGESTAO = "Informar ""SIM"" no campo CONTRIBUINTE"
                 
             Case vCompraIndustrializacao And VL_ICMS > 0
-                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO CONTRIBUINTE em operação de compra para revenda (CFOP: " & Cfop & "), com aproveitamento de crédito do ICMS"
+                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO CONTRIBUINTE em operação de compra para revenda (CFOP: " & CFOP & "), com aproveitamento de crédito do ICMS"
                 SUGESTAO = "Informar ""SIM"" no campo CONTRIBUINTE"
                 
             Case vCompraUsoConsumoSemST, vCompraUsoConsumoComST, vCompraAtivoImobilizadoSemST, vCompraAtivoImobilizadoComST, _
                 vCompraCombustivelRevenda, vCompraCombustivelConsumo, vCompraRevendaComST
-                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO Contribuinte em operação de compra (" & Cfop & ")"
+                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de NÃO Contribuinte em operação de compra (" & CFOP & ")"
                 SUGESTAO = "Informar ""SIM"" no campo CONTRIBUINTE"
                 
         End Select
         
-    ElseIf Cfop < 4000 And TIPO_PART = "PJ" And CONTRIBUINTE = "SIM" Then
+    ElseIf CFOP < 4000 And TIPO_PART = "PJ" And CONTRIBUINTE = "SIM" Then
         
         Select Case True
             
             Case vCompraRevenda And CST_ICMS Like "#00" And VL_ICMS = 0
-                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de CONTRIBUINTE em operação de compra para revenda (CFOP: " & Cfop & "), sem aproveitamento de crédito do ICMS e CST_ICMS (" & CST_ICMS & ")"
+                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de CONTRIBUINTE em operação de compra para revenda (CFOP: " & CFOP & "), sem aproveitamento de crédito do ICMS e CST_ICMS (" & CST_ICMS & ")"
                 SUGESTAO = "Informar ""NÃO"" no campo CONTRIBUINTE"
                 
-            Case vCompraIndustrializacao And Not Cfop Like "#4##" And CST_ICMS Like "#00" And VL_ICMS = 0
-                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de CONTRIBUINTE em operação de compra para industrialização (CFOP: " & Cfop & "), sem aproveitamento de crédito do ICMS e CST_ICMS (" & CST_ICMS & ")"
+            Case vCompraIndustrializacao And Not CFOP Like "#4##" And CST_ICMS Like "#00" And VL_ICMS = 0
+                INCONSISTENCIA = "Fornecedor (" & TIPO_PART & ") com status de CONTRIBUINTE em operação de compra para industrialização (CFOP: " & CFOP & "), sem aproveitamento de crédito do ICMS e CST_ICMS (" & CST_ICMS & ")"
                 SUGESTAO = "Informar ""NÃO"" no campo CONTRIBUINTE"
                 
         End Select
@@ -115,7 +115,7 @@ Public Function ValidarCampo_VL_ICMS(Campos As Variant, ByRef dicTitulos As Dict
 
 Dim i As Integer
 Dim VL_ICMS As Double, VL_BC_ICMS#, ALIQ_ICMS#, VL_ICMS_CALC#, DIFERENCA#
-Dim Cfop As String, CST_ICMS$, INCONSISTENCIA, SUGESTAO$, ST_SEM_LIBERACAO$
+Dim CFOP As String, CST_ICMS$, INCONSISTENCIA, SUGESTAO$, ST_SEM_LIBERACAO$
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCompraCombustivelRevenda As Boolean, vCompraCombustivelConsumo As Boolean, _
     vCompraRevendaComST As Boolean, vCompraIndustrializacao As Boolean
@@ -123,7 +123,7 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     'Carrega informações do relatório
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     ST_SEM_LIBERACAO = Campos(dicTitulos("ST_SEM_LIBERACAO") - i)
     CST_ICMS = Util.ApenasNumeros(Campos(dicTitulos("CST_ICMS") - i))
     VL_BC_ICMS = fnExcel.ConverterValores(Campos(dicTitulos("VL_BC_ICMS") - i))
@@ -134,17 +134,17 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     DIFERENCA = VBA.Round(VBA.Abs(VL_ICMS_CALC - VL_ICMS), 2)
     
     'Gera verificações sobre os dados do relatório
-    vCompraIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraIndustrializacao(Cfop)
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(Cfop)
-    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(Cfop)
-    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
-    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(Cfop)
+    vCompraIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraIndustrializacao(CFOP)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(CFOP)
+    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(CFOP)
+    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
+    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(CFOP)
     
     'Verifica operações com apropriação indevida do valor do ICMS
-    If VL_ICMS > 0 And Cfop < 4000 Then
+    If VL_ICMS > 0 And CFOP < 4000 Then
         
         Select Case True
             
@@ -190,7 +190,7 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
                 
         End Select
         
-    ElseIf VL_ICMS > 0 And Cfop > 4000 Then
+    ElseIf VL_ICMS > 0 And CFOP > 4000 Then
         
         Select Case True
             
@@ -222,14 +222,14 @@ Public Function ValidarCampo_ALIQ_ICMS(Campos As Variant, ByRef dicTitulos As Di
 
 Dim i As Integer
 Dim ALIQ_ICMS As Double, VL_ICMS#
-Dim Cfop As String, CST_ICMS$, INCONSISTENCIA, SUGESTAO$, ALIQ_ICMS_FORM$, VL_ICMS_FORM$
+Dim CFOP As String, CST_ICMS$, INCONSISTENCIA, SUGESTAO$, ALIQ_ICMS_FORM$, VL_ICMS_FORM$
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCompraCombustivelRevenda As Boolean, vCompraCombustivelConsumo As Boolean
 
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     'Carrega informações do relatório
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_ICMS = Util.ApenasNumeros(Campos(dicTitulos("CST_ICMS") - i))
     ALIQ_ICMS = fnExcel.FormatarValores(Campos(dicTitulos("ALIQ_ICMS") - i))
     VL_ICMS = fnExcel.FormatarValores(Campos(dicTitulos("VL_ICMS") - i))
@@ -237,12 +237,12 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     VL_ICMS_FORM = VBA.Format(VL_ICMS, "R$ #,#0.00")
     
     'Gera verificações sobre os dados do relatório
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(Cfop)
-    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(CFOP)
+    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
     
     'Verifica operações com Alíquota 0
     If ALIQ_ICMS = 0 Then
@@ -262,7 +262,7 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
         
             'Identifica apropriação indevida do ICMS em operação de aquisição para uso e consumo
             Case vCompraUsoConsumoComST Or vCompraUsoConsumoSemST
-                INCONSISTENCIA = "Alíquota maior que zero (ALIQ_ICMS = " & ALIQ_ICMS_FORM & ") em operação de compra para uso e consumo (CFOP = " & Cfop & ")"
+                INCONSISTENCIA = "Alíquota maior que zero (ALIQ_ICMS = " & ALIQ_ICMS_FORM & ") em operação de compra para uso e consumo (CFOP = " & CFOP & ")"
                 SUGESTAO = "Zerar Alíquota do ICMS"
 
         End Select
@@ -277,7 +277,7 @@ End Function
 Public Function ValidarCampo_VL_ICMS_ST(Campos As Variant, ByRef dicTitulos As Dictionary)
 
 Dim i As Integer
-Dim Cfop As String, INCONSISTENCIA$, SUGESTAO$, CST_ICMS$
+Dim CFOP As String, INCONSISTENCIA$, SUGESTAO$, CST_ICMS$
 Dim VL_ICMS_ST As Double
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCompraRevendaSemST As Boolean, vCompraRevendaComST As Boolean, _
@@ -286,26 +286,26 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     'Carrega informações do relatório
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_ICMS = Util.ApenasNumeros(Campos(dicTitulos("CST_ICMS") - i))
     VL_ICMS_ST = fnExcel.ConverterValores(Campos(dicTitulos("VL_ICMS_ST") - i))
 
     'Gera verificações sobre os dados do relatório
-    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(Cfop)
-    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(Cfop)
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraCombustiveisRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(Cfop)
-    vCompraCombustiveisConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
+    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(CFOP)
+    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(CFOP)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraCombustiveisRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(CFOP)
+    vCompraCombustiveisConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
     
     'Verifica operações em que o valor do ICMS_ST é maior que zero
     If VL_ICMS_ST > 0 Then
     
         Select Case True
             
-            Case Cfop Like "*910"
+            Case CFOP Like "*910"
                 INCONSISTENCIA = "O valor do campo VL_ICMS_ST deve ser somado ao campo VL_ITEM para operações de entrada em bonificação"
                 SUGESTAO = "Somar valor do campo VL_ICMS_ST ao campo VL_ITEM"
                 
@@ -342,7 +342,7 @@ Public Function ValidarCampo_CST_ICMS(Campos As Variant, ByRef dicTitulos As Dic
 
 Dim i As Integer
 Dim VL_ICMS As Double, VL_BC_ICMS#, VL_ITEM#, VL_DESC#, VL_ICMS_ST#
-Dim CST_ICMS As String, Cfop$, CST_tbA$, CST_tbB$, INCONSISTENCIA$, SUGESTAO$
+Dim CST_ICMS As String, CFOP$, CST_tbA$, CST_tbB$, INCONSISTENCIA$, SUGESTAO$
 Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompraAtivoImobilizadoSemST As Boolean, _
     vCompraAtivoImobilizadoComST As Boolean, vCSOSN As Boolean, vCompraCombustivelIndustrializacao As Boolean, _
     vCompraCombustivelRevenda As Boolean, vCompraCombustivelConsumo As Boolean, vCompraRevendaSemST As Boolean, _
@@ -352,7 +352,7 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     If LBound(Campos) = 0 Then i = 1 Else i = 0
     
     'Carrega informações do relatório
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     CST_ICMS = Util.ApenasNumeros(Campos(dicTitulos("CST_ICMS") - i))
     VL_ICMS = fnExcel.ConverterValores(Campos(dicTitulos("VL_ICMS") - i))
     VL_ICMS_ST = fnExcel.ConverterValores(Campos(dicTitulos("VL_ICMS_ST") - i))
@@ -365,18 +365,18 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
     CST_tbB = VBA.Right(CST_ICMS, 2)
     
     'Gera verificações sobre os dados do relatório
-    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(Cfop)
-    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(Cfop)
-    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(Cfop)
-    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(Cfop)
-    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(Cfop)
-    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(Cfop)
-    vCompraCombustivelIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraCombustiveisIndustrializacao(Cfop)
-    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(Cfop)
-    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(Cfop)
-    vEntradaBonificacao = ValidacoesCFOP.ValidarCFOPEntradaBonificacao(Cfop)
+    vCompraRevendaSemST = ValidacoesCFOP.ValidarCFOPCompraRevendaSemST(CFOP)
+    vCompraRevendaComST = ValidacoesCFOP.ValidarCFOPCompraRevendaComST(CFOP)
+    vCompraUsoConsumoSemST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoSemST(CFOP)
+    vCompraUsoConsumoComST = ValidacoesCFOP.ValidarCFOPCompraUsoConsumoComST(CFOP)
+    vCompraAtivoImobilizadoSemST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoSemST(CFOP)
+    vCompraAtivoImobilizadoComST = ValidacoesCFOP.ValidarCFOPCompraAtivoImobilizadoComST(CFOP)
+    vCompraCombustivelIndustrializacao = ValidacoesCFOP.ValidarCFOPCompraCombustiveisIndustrializacao(CFOP)
+    vCompraCombustivelRevenda = ValidacoesCFOP.ValidarCFOPCompraCombustiveisRevenda(CFOP)
+    vCompraCombustivelConsumo = ValidacoesCFOP.ValidarCFOPCompraCombustiveisConsumo(CFOP)
+    vEntradaBonificacao = ValidacoesCFOP.ValidarCFOPEntradaBonificacao(CFOP)
     vCSOSN = VBA.Len(CST_ICMS) = 4
-    vImportacao = ValidacoesCFOP.ValidarCFOPImportacao(Cfop)
+    vImportacao = ValidacoesCFOP.ValidarCFOPImportacao(CFOP)
     
     'Identifica operações sem informação do CST/ICMS
     If CST_ICMS = "" Then
@@ -612,7 +612,7 @@ Dim vCompraUsoConsumoSemST As Boolean, vCompraUsoConsumoComST As Boolean, vCompr
                 
         End Select
     
-    ElseIf VL_ICMS_ST = 0 And Cfop < 4000 Then
+    ElseIf VL_ICMS_ST = 0 And CFOP < 4000 Then
     
         Select Case True
             
@@ -633,16 +633,16 @@ End Function
 Public Function ValidarCampo_DT_ENT_SAI(ByRef Campos As Variant, ByRef dicTitulos As Dictionary)
 
 Dim i As Byte
-Dim DT_ENT_SAI As String, Cfop$, INCONSISTENCIA$, SUGESTAO$
+Dim DT_ENT_SAI As String, CFOP$, INCONSISTENCIA$, SUGESTAO$
     
     If LBound(Campos) = 0 Then i = 1
     
     DT_ENT_SAI = Campos(dicTitulos("DT_ENT_SAI") - i)
-    Cfop = Campos(dicTitulos("CFOP") - i)
+    CFOP = Campos(dicTitulos("CFOP") - i)
     
     Select Case True
         
-        Case Cfop < 4000 And DT_ENT_SAI = ""
+        Case CFOP < 4000 And DT_ENT_SAI = ""
             INCONSISTENCIA = "O campo DT_ENT_SAI não foi informado"
             SUGESTAO = "Informar uma data de entrada para o documento fiscal"
             

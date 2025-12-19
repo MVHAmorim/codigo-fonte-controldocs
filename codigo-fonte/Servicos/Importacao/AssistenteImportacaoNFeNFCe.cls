@@ -334,7 +334,7 @@ Dim Chave As String
             .VL_DESC = fnXML.ValidarValores(Produto, "prod/vDesc")
             .IND_MOV = "0 - SIM"
             .CST_ICMS = fnXML.ExtrairCST_CSOSN_ICMS(Produto)
-            .Cfop = fnXML.ValidarValores(Produto, "prod/CFOP")
+            .CFOP = fnXML.ValidarValores(Produto, "prod/CFOP")
             .COD_NAT = ""
             .VL_BC_ICMS = fnXML.ExtrairBaseICMS(Produto)
             .ALIQ_ICMS = fnXML.ExtrairAliquotaICMS(Produto)
@@ -376,7 +376,7 @@ Dim Chave As String
             
             Campos = Array(.REG, .ARQUIVO, .CHV_REG, .CHV_PAI_FISCAL, .CHV_PAI_CONTRIBUICOES, CInt(.NUM_ITEM), _
                 "'" & .COD_ITEM, .DESCR_COMPL, CDbl(.Qtd), "'" & .UNID, CDbl(.VL_ITEM), CDbl(.VL_DESC), _
-                .IND_MOV, "'" & .CST_ICMS, CInt(.Cfop), .COD_NAT, CDbl(.VL_BC_ICMS), CDbl(.ALIQ_ICMS), _
+                .IND_MOV, "'" & .CST_ICMS, CInt(.CFOP), .COD_NAT, CDbl(.VL_BC_ICMS), CDbl(.ALIQ_ICMS), _
                 CDbl(.VL_ICMS), CDbl(.VL_BC_ICMS_ST), CDbl(.ALIQ_ST), CDbl(.VL_ICMS_ST), .IND_APUR, _
                 "'" & .CST_IPI, "'" & .COD_ENQ, CDbl(.VL_BC_IPI), CDbl(.ALIQ_IPI), CDbl(.VL_IPI), _
                 "'" & .CST_PIS, CDbl(.VL_BC_PIS), CDbl(.ALIQ_PIS), .QUANT_BC_PIS, .ALIQ_PIS_QUANT, _
@@ -402,7 +402,7 @@ Dim i As Long
         
         If CamposC100.IND_EMIT Like "1*" Then
                 
-                .Cfop = fnXML.AjustarCFOPEntrada(fnXML.ValidarCFOPEntrada(.Cfop))
+                .CFOP = fnXML.AjustarCFOPEntrada(fnXML.ValidarCFOPEntrada(.CFOP))
                 .CST_IPI = assImportacao.AjustarCST_IPI(.CST_IPI)
                 
                 Chave = Util.RemoverAspaSimples(Util.FormatarCNPJ(DadosXML.CNPJ_EMITENTE) & .COD_ITEM & .UNID)

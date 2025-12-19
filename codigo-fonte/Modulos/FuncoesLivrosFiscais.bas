@@ -107,7 +107,7 @@ Dim Chave As String
             
             .REG = Campos(dicTitulosFilho("REG"))
             If dicDadosPai.Exists(Campos(dicTitulosFilho("CHV_PAI_FISCAL"))) Then .COD_MOD = dicDadosPai(Campos(dicTitulosFilho("CHV_PAI_FISCAL")))(dicTitulosPai("COD_MOD")) Else .COD_MOD = ""
-            .Cfop = VBA.Replace(Campos(dicTitulosFilho("CFOP")), "'", "")
+            .CFOP = VBA.Replace(Campos(dicTitulosFilho("CFOP")), "'", "")
             .CST_ICMS = fnExcel.FormatarTexto(Campos(dicTitulosFilho("CST_ICMS")))
             .ALIQ_ICMS = fnExcel.FormatarPercentuais(Campos(dicTitulosFilho("ALIQ_ICMS")))
             .VL_OPR = Util.ValidarValores(Campos(dicTitulosFilho("VL_OPR")))
@@ -128,7 +128,7 @@ Dim Chave As String
             'TODO: Criar lógica para trazer a UF da operação
             'If Not IsEmpty(dicTitulosFilho("UF")) Then .UF = Campos(dicTitulosFilho("UF")) Else .UF = dicDadosArq(Campos(dicTitulosFilho("ARQUIVO"))(DICTOTULOSARQ())
             
-            .CHV_REG = fnSPED.GerarChaveRegistro(.REG, .COD_MOD, .UF, .Cfop, .CST_ICMS, .ALIQ_ICMS)
+            .CHV_REG = fnSPED.GerarChaveRegistro(.REG, .COD_MOD, .UF, .CFOP, .CST_ICMS, .ALIQ_ICMS)
             If dicDadosRel.Exists(.CHV_REG) Then
                 
                 .VL_OPR = dicDadosRel(.CHV_REG)(dicTitulosRel("VL_OPR")) + CDbl(.VL_OPR)
@@ -144,7 +144,7 @@ Dim Chave As String
                 
             End If
             
-            dicDadosRel(.CHV_REG) = Array(.REG, "'" & .COD_MOD, .UF, CInt(.Cfop), .CST_ICMS, .ALIQ_ICMS, _
+            dicDadosRel(.CHV_REG) = Array(.REG, "'" & .COD_MOD, .UF, CInt(.CFOP), .CST_ICMS, .ALIQ_ICMS, _
                                           CDbl(.VL_OPR), CDbl(.VL_BC_ICMS), CDbl(.VL_ICMS), CDbl(.ALIQ_FCP), _
                                           CDbl(.VL_FCP), CDbl(.VL_BC_ICMS_ST), CDbl(.VL_ICMS_ST), CDbl(.VL_RED_BC), _
                                           CDbl(.VL_IPI), CDbl(.VL_ISENTAS), CDbl(.VL_OUTRAS))

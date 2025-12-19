@@ -696,7 +696,7 @@ Dim dicAuxiliarE530 As New Dictionary
 
 Dim VL_BC_IPI As Double, VL_CONT_IPI#, VL_IPI#, VL_ITEM#, VL_DESP#, VL_DESC#
 Dim Campos As Variant, Campos0000, CamposE001, CamposE510, CamposIPI, dicCampos, regCampo
-Dim CHV_0000 As String, CHV_E001$, CHV_E500$, ARQUIVO$, IND_APUR$, DT_INI$, DT_FIN$, DT_ENT_SAI$, DT_DOC$, Cfop$, CST_IPI$
+Dim CHV_0000 As String, CHV_E001$, CHV_E500$, ARQUIVO$, IND_APUR$, DT_INI$, DT_FIN$, DT_ENT_SAI$, DT_DOC$, CFOP$, CST_IPI$
     
     Inicio = Now()
     Application.StatusBar = "Gerando apuração do IPI, por favor aguarde..."
@@ -747,7 +747,7 @@ Dim CHV_0000 As String, CHV_E001$, CHV_E500$, ARQUIVO$, IND_APUR$, DT_INI$, DT_F
             CHV_E001 = fnSPED.ExtrairCampoDicionario(dicDadosE001, dicTitulosE001, ARQUIVO, "CHV_REG")
             
             'Extrair campos do assistente de tributação do IPI
-            Cfop = fnSPED.ExtrairCampoArray(Campos, dicTitulos, "CFOP")
+            CFOP = fnSPED.ExtrairCampoArray(Campos, dicTitulos, "CFOP")
             VL_ITEM = fnExcel.ConverterValores(fnSPED.ExtrairCampoArray(Campos, dicTitulos, "VL_ITEM"))
             VL_DESP = fnExcel.ConverterValores(fnSPED.ExtrairCampoArray(Campos, dicTitulos, "VL_DESP"))
             VL_DESC = fnExcel.ConverterValores(fnSPED.ExtrairCampoArray(Campos, dicTitulos, "VL_DESC"))
@@ -760,8 +760,8 @@ Dim CHV_0000 As String, CHV_E001$, CHV_E500$, ARQUIVO$, IND_APUR$, DT_INI$, DT_F
             DT_ENT_SAI = fnExcel.FormatarData(fnSPED.ExtrairCampoArray(Campos, dicTitulos, "DT_ENT_SAI"))
             IND_APUR = fnSPED.ExtrairCampoArray(Campos, dicTitulos, "IND_APUR")
             
-            CHV_E500 = GerarRegistroE500(dicAuxiliarE500, dicTitulosE500, ARQUIVO, CHV_E001, IND_APUR, Cfop, DT_INI, DT_FIN, DT_DOC, DT_ENT_SAI)
-            Call GerarRegistroE510(dicAuxiliarE510, dicTitulosE510, ARQUIVO, CHV_E500, Cfop, CST_IPI, VL_CONT_IPI, VL_BC_IPI, VL_IPI)
+            CHV_E500 = GerarRegistroE500(dicAuxiliarE500, dicTitulosE500, ARQUIVO, CHV_E001, IND_APUR, CFOP, DT_INI, DT_FIN, DT_DOC, DT_ENT_SAI)
+            Call GerarRegistroE510(dicAuxiliarE510, dicTitulosE510, ARQUIVO, CHV_E500, CFOP, CST_IPI, VL_CONT_IPI, VL_BC_IPI, VL_IPI)
             
         End If
         
@@ -796,13 +796,13 @@ Dim CHV_0000 As String, CHV_E001$, CHV_E500$, ARQUIVO$, IND_APUR$, DT_INI$, DT_F
 End Sub
 
 Private Function GerarRegistroE500(ByRef dicDadosE500 As Dictionary, ByRef dicTitulosE500 As Dictionary, _
-    ByVal ARQUIVO As String, ByVal CHV_PAI As String, ByVal IND_APUR As String, ByVal Cfop As String, _
+    ByVal ARQUIVO As String, ByVal CHV_PAI As String, ByVal IND_APUR As String, ByVal CFOP As String, _
     ByVal DT_INI As String, ByVal DT_FIN As String, ByVal DT_EMI As String, ByVal DT_ENT As String) As String
 
 Dim CHV_REG As String, DT_INI_SPED$, DT_FIN_SPED$, IND_APUR_SPED$
 Dim Campos As Variant
     
-    If IND_APUR Like "1*" Then Call GerarPeriodoDecendial(Cfop, DT_EMI, DT_ENT, DT_INI, DT_FIN)
+    If IND_APUR Like "1*" Then Call GerarPeriodoDecendial(CFOP, DT_EMI, DT_ENT, DT_INI, DT_FIN)
     
     DT_INI_SPED = VBA.Format(DT_INI, "ddmmyyyy")
     DT_FIN_SPED = VBA.Format(DT_FIN, "ddmmyyyy")
@@ -817,15 +817,15 @@ Dim Campos As Variant
     
 End Function
 
-Private Function GerarPeriodoDecendial(ByVal Cfop As Long, ByVal DT_EMI As String, _
+Private Function GerarPeriodoDecendial(ByVal CFOP As Long, ByVal DT_EMI As String, _
     ByVal DT_ENT As String, ByRef DT_INI As String, ByRef DT_FIN As String) As Variant
     
 Dim dia As Integer, DECENDIO As Integer
 Dim Data As String
     
     ' Determina a data base com base no CFOP
-    If Cfop > 4000 Then dia = Day(DT_EMI) Else dia = Day(DT_ENT)
-    If Cfop > 4000 Then Data = DT_EMI Else Data = DT_ENT
+    If CFOP > 4000 Then dia = Day(DT_EMI) Else dia = Day(DT_ENT)
+    If CFOP > 4000 Then Data = DT_EMI Else Data = DT_ENT
     
     ' Calcula o decêndio
     DECENDIO = Int((dia - 1) / 10) + 1
@@ -853,16 +853,16 @@ Dim Data As String
 End Function
 
 Private Function GerarRegistroE510(ByRef dicDadosE510 As Dictionary, ByRef dicTitulosE510 As Dictionary, _
-    ByVal ARQUIVO As String, ByVal CHV_PAI As String, ByVal Cfop As String, ByVal CST_IPI As String, _
+    ByVal ARQUIVO As String, ByVal CHV_PAI As String, ByVal CFOP As String, ByVal CST_IPI As String, _
     ByVal VL_CONT_IPI As Double, ByVal VL_BC_IPI As Double, ByVal VL_IPI As Double)
     
 Dim CHV_REG As String, Chave$, CST_IPI_SPED$
 Dim Campos As Variant
     
     CST_IPI_SPED = Util.ApenasNumeros(CST_IPI)
-    Chave = VBA.Join(Array(CHV_PAI, Cfop, CST_IPI_SPED))
-    CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, Cfop, CST_IPI_SPED)
-    Campos = Array("E510", ARQUIVO, CHV_REG, CHV_PAI, "", Cfop, CST_IPI, VL_CONT_IPI, VL_BC_IPI, VL_IPI)
+    Chave = VBA.Join(Array(CHV_PAI, CFOP, CST_IPI_SPED))
+    CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, CFOP, CST_IPI_SPED)
+    Campos = Array("E510", ARQUIVO, CHV_REG, CHV_PAI, "", CFOP, CST_IPI, VL_CONT_IPI, VL_BC_IPI, VL_IPI)
     
     Call Util.SomarValoresDicionario(dicDadosE510, Campos, CHV_REG)
     
@@ -874,7 +874,7 @@ Private Function GerarRegistroE520(ByRef dicDadosE520 As Dictionary, ByRef dicAu
     
 Dim Campos As Variant, Chave
 Dim arrChavesE520 As New ArrayList
-Dim CHV_REG As String, CHV_PAI$, Cfop$
+Dim CHV_REG As String, CHV_PAI$, CFOP$
 Dim VL_SD_ANT_IPI As Double, VL_DEB_IPI#, VL_CRED_IPI#, VL_OD_IPI#, VL_OC_IPI#, VL_SC_IPI#, VL_SD_IPI#, VL_IPI#
     
     For Each Chave In dicDadosE510.Keys()
@@ -882,9 +882,9 @@ Dim VL_SD_ANT_IPI As Double, VL_DEB_IPI#, VL_CRED_IPI#, VL_OD_IPI#, VL_OC_IPI#, 
         CHV_PAI = fnSPED.ExtrairCampoDicionario(dicDadosE510, dicTitulosE510, Chave, "CHV_PAI_FISCAL")
         CHV_REG = fnSPED.GerarChaveRegistro(CHV_PAI, "E520")
         VL_IPI = fnSPED.ExtrairCampoDicionario(dicDadosE510, dicTitulosE510, Chave, "VL_IPI")
-        Cfop = fnSPED.ExtrairCampoDicionario(dicDadosE510, dicTitulosE510, Chave, "CFOP")
+        CFOP = fnSPED.ExtrairCampoDicionario(dicDadosE510, dicTitulosE510, Chave, "CFOP")
 
-        Call ContabilizarValoresIPI(Cfop, VL_DEB_IPI, VL_CRED_IPI, VL_IPI)
+        Call ContabilizarValoresIPI(CFOP, VL_DEB_IPI, VL_CRED_IPI, VL_IPI)
         Campos = Array("E520", ARQUIVO, CHV_REG, CHV_PAI, "", VL_SD_ANT_IPI, VL_DEB_IPI, VL_CRED_IPI, VL_OD_IPI, VL_OC_IPI, VL_SC_IPI, VL_SD_IPI)
         
         Call Util.SomarValoresDicionario(dicAuxiliarE520, Campos, CHV_REG)
@@ -918,10 +918,10 @@ Dim VL_SD_ANT_IPI As Double
     
 End Function
 
-Private Function ContabilizarValoresIPI(ByVal Cfop As String, ByRef VL_DEB_IPI As Double, _
+Private Function ContabilizarValoresIPI(ByVal CFOP As String, ByRef VL_DEB_IPI As Double, _
     ByRef VL_CRED_IPI As Double, ByVal VL_IPI As Double) As Double
     
-    If Cfop > 4000 Then VL_DEB_IPI = VL_IPI Else VL_CRED_IPI = VL_IPI
+    If CFOP > 4000 Then VL_DEB_IPI = VL_IPI Else VL_CRED_IPI = VL_IPI
 
 End Function
 
@@ -994,7 +994,7 @@ Private Function LimparDicionarioE510(ByRef dicDadosE510 As Dictionary, ByRef di
 
 Dim arrCFOPs As New ArrayList
 Dim Campos As Variant, Chave
-Dim Cfop As String
+Dim CFOP As String
 Dim i As Byte
     
     Set arrCFOPs = Util.ListarValoresUnicosDicionario(dicAuxiliarE510, dicTitulos, "CFOP")
@@ -1004,8 +1004,8 @@ Dim i As Byte
         Campos = dicDadosE510(Chave)
         If LBound(Campos) = 0 Then i = 1
         
-        Cfop = Campos(dicTitulos("CFOP"))
-        If arrCFOPs.contains(Cfop) Then Call dicDadosE510.Remove(Chave)
+        CFOP = Campos(dicTitulos("CFOP"))
+        If arrCFOPs.contains(CFOP) Then Call dicDadosE510.Remove(Chave)
         
     Next Chave
     

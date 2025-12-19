@@ -9,7 +9,7 @@ Public Type InformacoesICMSC170SPEDFiscal
     CHV_NFE As String
     NUM_ITEM As Integer
     COD_ITEM As String
-    Cfop As String
+    CFOP As String
     CST_ICMS As String
     VL_BC_ICMS As Double
     ALIQ_ICMS As Double
@@ -30,7 +30,7 @@ Dim arrCampos As New ArrayList
 
     With infoICMSC170
         
-        arrCampos.Add .Cfop
+        arrCampos.Add .CFOP
         arrCampos.Add .CST_ICMS
         arrCampos.Add .VL_BC_ICMS
         arrCampos.Add .ALIQ_ICMS

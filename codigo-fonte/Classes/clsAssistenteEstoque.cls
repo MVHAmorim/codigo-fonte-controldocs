@@ -11,7 +11,7 @@ Option Explicit
 
 Public Sub GerarRelatorio()
 
-Dim CHV_REG As String, COD_ITEM$, UNID_COM$, UNID_INV$, CHV_REG_0200$, CHV_REG_C100$, CHV_REG_C170$, IND_OPER$, CHV_NFE$, REG$, ARQUIVO$, DT_OPER$, DESCR_ITEM$, COD_BARRA$, TIPO_ITEM$, IND_MOV$, UNID$, UND_INV$, Cfop$
+Dim CHV_REG As String, COD_ITEM$, UNID_COM$, UNID_INV$, CHV_REG_0200$, CHV_REG_C100$, CHV_REG_C170$, IND_OPER$, CHV_NFE$, REG$, ARQUIVO$, DT_OPER$, DESCR_ITEM$, COD_BARRA$, TIPO_ITEM$, IND_MOV$, UNID$, UND_INV$, CFOP$
 Dim FAT_CONV As Double, QTD_COM#, VL_ITEM#, QTD_INV#, VL_UNIT_INV#, VL_UNIT_COM#, Qtd#, VL_UNIT#
 Dim dicTitulosC170 As New Dictionary
 Dim dicTitulos0190 As New Dictionary
@@ -119,7 +119,7 @@ Dim Campos As Variant
             End If
                 
             IND_MOV = Campos(dicTitulosC170("IND_MOV"))
-            Cfop = Campos(dicTitulosC170("CFOP"))
+            CFOP = Campos(dicTitulosC170("CFOP"))
             VL_ITEM = Campos(dicTitulosC170("VL_ITEM"))
             QTD_COM = Campos(dicTitulosC170("QTD"))
             UNID_COM = Campos(dicTitulosC170("UNID"))
@@ -129,7 +129,7 @@ Dim Campos As Variant
                 
                 'Coleta dados do registro 0220
                 CHV_REG = fnSPED.GerarChaveRegistro(CStr(CHV_REG_0200), CStr(UNID_COM))
-                If dicDados0220.Exists(CHV_REG) And Cfop < 4000 Then
+                If dicDados0220.Exists(CHV_REG) And CFOP < 4000 Then
                     
                     FAT_CONV = fnExcel.ConverterValores(dicDados0220(CHV_REG)(dicTitulos0220("FAT_CONV")))
                     
@@ -144,7 +144,7 @@ Dim Campos As Variant
             
         End If
         
-        Campos = Array(REG, ARQUIVO, CHV_REG_C100, CHV_REG_C170, CHV_REG_0200, CHV_NFE, IND_OPER, DT_OPER, COD_ITEM, DESCR_ITEM, COD_BARRA, TIPO_ITEM, IND_MOV, Cfop, VL_ITEM, QTD_COM, UNID_COM, VL_UNIT_COM, FAT_CONV, QTD_INV, UNID_INV, VL_UNIT_INV, Empty, Empty)
+        Campos = Array(REG, ARQUIVO, CHV_REG_C100, CHV_REG_C170, CHV_REG_0200, CHV_NFE, IND_OPER, DT_OPER, COD_ITEM, DESCR_ITEM, COD_BARRA, TIPO_ITEM, IND_MOV, CFOP, VL_ITEM, QTD_COM, UNID_COM, VL_UNIT_COM, FAT_CONV, QTD_INV, UNID_INV, VL_UNIT_INV, Empty, Empty)
         Campos = AnalisarInconsistencias(Campos, dicTitulos)
         Call fnExcel.DefinirTipoCampos(Campos, dicTitulos)
         arrRelatorio.Add Campos
@@ -185,7 +185,7 @@ End Function
 
 Public Function AnalisarInconsistencias(ByVal Campos As Variant, ByRef dicTitulos As Dictionary) As Variant
 
-Dim Cfop As String, CST_ICMS$, TIPO_ITEM$, IND_MOV$, UND_COM$, UND_INV$, COD_ITEM$, DESCR_ITEM$, INCONSISTENCIA$, SUGESTAO$
+Dim CFOP As String, CST_ICMS$, TIPO_ITEM$, IND_MOV$, UND_COM$, UND_INV$, COD_ITEM$, DESCR_ITEM$, INCONSISTENCIA$, SUGESTAO$
 Dim FAT_CONV As Double
 Dim i As Integer
     
@@ -193,7 +193,7 @@ Dim i As Integer
     COD_ITEM = Util.RemoverAspaSimples(Campos(dicTitulos("COD_ITEM") - i))
     DESCR_ITEM = Util.RemoverAspaSimples(Campos(dicTitulos("DESCR_ITEM") - i))
     TIPO_ITEM = Util.ApenasNumeros(Campos(dicTitulos("TIPO_ITEM") - i))
-    Cfop = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
+    CFOP = Util.ApenasNumeros(Campos(dicTitulos("CFOP") - i))
     IND_MOV = Util.ApenasNumeros(Campos(dicTitulos("IND_MOV") - i))
     UND_COM = fnExcel.FormatarTexto(Campos(dicTitulos("UNID") - i))
     UND_INV = fnExcel.FormatarTexto(Campos(dicTitulos("UND_INV") - i))
